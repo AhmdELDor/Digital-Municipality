@@ -1,0 +1,26 @@
+import 'package:education_admin_portal/core/constants/app_colors.dart';
+import 'package:education_admin_portal/presentation/common_widgets/widgets/image.dart';
+import 'package:education_admin_portal/presentation/common_widgets/widgets/text.dart';
+
+import 'package:education_admin_portal/utils/extensions/responsive.dart';
+import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
+import 'package:responsive_grid/responsive_grid.dart';
+
+import '../../../../core/constants/app_assets.dart';
+import '../../../../core/constants/app_strings.dart';
+import '../../../app/app_route.dart';
+import '../../../app/theme_controller.dart';
+import '../../../common_widgets/common_text_view/auth_common_text.dart';
+import '../../../common_widgets/input_field/common_email_field.dart';
+import '../../../common_widgets/input_field/common_password_field.dart';
+import '../../../common_widgets/view_common_widget/common_card_decoration.dart';
+import '../../../common_widgets/view_common_widget/common_circular_loader.dart';
+import '../../../common_widgets/widgets/button.dart';
+import '../../../common_widgets/widgets/social_button_with_title.dart';
+import '../../../common_widgets/widgets/validations.dart';
+import 'controller/sign_in_controller.dart';
+
+part 'sign_in_view.dart';

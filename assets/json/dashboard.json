@@ -1,0 +1,206 @@
+{
+  "totalStudents": 19583,
+  "scholarship": 20,
+  "totalInstructors": 5983,
+  "totalCourses": 8891,
+  "monthlyRevenue": 9852654,
+  "newUsers": 20,
+  "activeUsers": 40,
+  "inactiveUsers": 40,
+  "class_approvals_list": [
+    {
+      "id": 1,
+      "name": "Photoshop Animation & After Effects Class",
+      "date": "15 Jun 2025",
+      "time": "09:30 AM",
+      "instructorName": "Jason Miller",
+      "instructorProfileImg": "https://media.imperiathemes.com/images/education_admin_portal/Kbn1YIAbM2EB6888b5dcb377f.png"
+
+    },
+    {
+      "id": 2,
+      "name": "Photoshop Animation & After Effects Class",
+      "date": "15 Jun 2025",
+      "time": "09:30 AM",
+      "instructorName": "Jason Miller",
+      "instructorProfileImg": "https://media.imperiathemes.com/images/education_admin_portal/Kbn1YIAbM2EB6888b5dcb377f.png"
+
+    } ,{
+      "id": 1,
+      "name": "Photoshop Animation & After Effects Class",
+      "date": "15 Jun 2025",
+      "time": "09:30 AM",
+      "instructorName": "Jason Miller",
+      "instructorProfileImg": "https://media.imperiathemes.com/images/education_admin_portal/Kbn1YIAbM2EB6888b5dcb377f.png"
+
+    },
+    {
+      "id": 2,
+      "name": "Photoshop Animation & After Effects Class",
+      "date": "15 Jun 2025",
+      "time": "09:30 AM",
+      "instructorName": "Jason Miller",
+      "instructorProfileImg": "https://media.imperiathemes.com/images/education_admin_portal/Kbn1YIAbM2EB6888b5dcb377f.png"
+
+    }
+  ],
+  "my_notes_list": [
+    {
+      "id": 1,
+      "name": "Artificial Intelligence Trends",
+      "backgroundImage": "https://media.imperiathemes.com/images/education_admin_portal/WwYktonumOSd68899fa9ec8ed.png",
+      "date": "30 Nov 2025",
+      "notesColor": "#73C29E",
+      "description": "Sed vel risus in justo volutpat varius. Sed vel orci eu lorem tristique varius. Aenean sit amet purus non leo interdum luctus. Ut aliquet dui a justo maximus, sit amet venenatis nulla imperdiet. Quisque cursus magna ac enim porttitor, ut gravida quam blandit."
+    },
+    {
+      "id": 2,
+      "name": "Sustainable Energy Solutions",
+      "backgroundImage": "https://media.imperiathemes.com/images/education_admin_portal/BNrXgDOowBZn68899fa9eb75f.png",
+      "notesColor": "#7CDBF2",
+      "date": "22 Jan 2025",
+      "description": "Vivamus vel nisi a libero consectetur mollis. Nulla facilisi. Sed finibus metus in eros dictum, vitae varius erat bibendum. Integer in dolor vel risus bibendum maximus a at justo."
+    },
+    {
+      "id": 3,
+      "name": "The Future of Remote Work",
+      "backgroundImage": "https://media.imperiathemes.com/images/education_admin_portal/SnJMh23L1JVg68899fa9ec45a.png",
+      "notesColor": "#B59EE9",
+      "date": "10 Feb 2025",
+      "description": "Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent ut lectus ac tortor euismod luctus. Sed at massa nec nunc tincidunt malesuada."
+    },
+
+    {
+      "id": 4,
+      "name": "Cybersecurity Concept",
+      "backgroundImage": "https://media.imperiathemes.com/images/education_admin_portal/ZncJJF2MNvIN689046227c1ff.png",
+      "date": "30 Nov 2025",
+      "notesColor": "#FFAAAA",
+      "description": "Sed vel risus in justo volutpat varius. Sed vel orci eu lorem tristique varius. Aenean sit amet purus non leo interdum luctus. Ut aliquet dui a justo maximus, sit amet venenatis nulla imperdiet. Quisque cursus magna ac enim porttitor, ut gravida quam blandit."
+    },
+    {
+      "id": 5,
+      "name": "Sustainable Energy Solutions",
+      "backgroundImage": "https://media.imperiathemes.com/images/education_admin_portal/wjGpbCzXa9tD68904c639bf05.png",
+      "notesColor": "#7CDBF2",
+      "date": "22 Jan 2025",
+      "description": "Vivamus vel nisi a libero consectetur mollis. Nulla facilisi. Sed finibus metus in eros dictum, vitae varius erat bibendum. Integer in dolor vel risus bibendum maximus a at justo."
+    },
+    {
+      "id": 6,
+      "name": "The Future of Remote Work",
+      "backgroundImage": "https://media.imperiathemes.com/images/education_admin_portal/EqdUhohngFhh689046227c9be.png",
+      "notesColor": "#B59EE9",
+      "date": "10 Feb 2025",
+      "description": "Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent ut lectus ac tortor euismod luctus. Sed at massa nec nunc tincidunt malesuada."
+    }
+  ],
+  "instructor_list": [
+    {
+      "id": 1,
+      "name": "Jason Miller",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/Kbn1YIAbM2EB6888b5dcb377f.png",
+      "qualification": "Master in After Effects & Photoshop",
+      "noOfStudents": 4.1,
+      "noOfCourses": 39,
+      "rate": 4.5,
+      "joining_date":"Joined 2 year ago"
+    },
+    {
+      "id": 2,
+      "name": "Jason Miller",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/HyMbzZW0CnEK6888b792422c6.png",
+      "qualification": "Master in After Effects & Photoshop",
+      "noOfStudents": 4.1,
+      "noOfCourses": 39,
+      "rate": 4.5,
+      "joining_date":"Joined 2 year ago"
+    },
+    {
+      "id": 3,
+      "name": "Jason Miller",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/N68u3kWsu8OB6888b816a712c.png",
+      "qualification": "Master in After Effects & Photoshop",
+      "noOfStudents": 4.1,
+      "noOfCourses": 39,
+      "rate": 4.5,
+      "joining_date":"Joined 2 year ago"
+    }
+  ],
+  "top_courses_list": [
+    {
+      "id": 1,
+      "name": "Canva using ChatGPT",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/XJzxX052aT1N6888b8b964926.png",
+      "courseCategory": "Graphic Designing",
+      "attendance": 4.1,
+      "instructorName": "Jason Miller"
+
+    },
+    {
+      "id": 2,
+      "name": "Figma Fundamentals",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/Yn8Kmo22dQDj6888b8d021b23.png",
+      "courseCategory": "UI/UX Course",
+      "attendance": 4.1,
+      "instructorName": "Jason Miller"
+
+    }
+  ],
+  "rank_list": [
+    {
+      "rank": 1,
+      "name": "Maria Gonzalez",
+      "points": 9000,
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/VGKU812CKdTT6888ba08a7e2e.png"
+    },
+    {
+      "rank": 2,
+      "name": "Sofia Patel",
+      "points": 6500,
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/CFekvdE52mID6888ba08a7359.png"
+    },
+    {
+      "rank": 3,
+      "name": "Adil Shaikh",
+      "points": 6000,
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/vHmLApR3XHHi6888ba08a78cf.png"
+    },
+    {
+      "rank": 4,
+      "name": "David Chen",
+      "points": 5000,
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/UdgJvYBlDPI96888ba08a7b92.png"
+    }
+  ],
+  "top_categories_list": [
+    {
+      "id": 1,
+      "name": "Designing",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/fgYEO1NaRV8G688a134171a66.png",
+      "noOfCourses": 93,
+      "noOfPeople": 4.1
+    },
+    {
+      "id": 2,
+      "name": "Cloud Computing",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/SDkvmklEwmUV688a134170f70.png",
+      "noOfCourses": 93,
+      "noOfPeople": 4.1
+    },
+    {
+      "id": 3,
+      "name": "Cybersecurity",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/fq1mPuSrlTln688a134171543.png",
+      "noOfCourses": 93,
+      "noOfPeople": 4.1
+    },
+    {
+      "id": 4,
+      "name": "Data Privacy",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/OcwFNabtqQKg688a1341717ef.png",
+      "noOfCourses": 93,
+      "noOfPeople": 4.1
+    }
+  ]
+}

@@ -66,6 +66,8 @@ class _CommonEmailFieldState extends InputFieldState<CommonEmailField> {
             : AppColors.headingsColor,
       ),
       decoration: InputDecoration(
+        contentPadding:
+        widget.contentPadding ?? EdgeInsets.fromLTRB(15, 15, 15, 15),
         counterText: "",
         focusedErrorBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Theme.of(context).colorScheme.error),
@@ -100,12 +102,12 @@ class _CommonEmailFieldState extends InputFieldState<CommonEmailField> {
         ),
         prefixIcon: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(left: 20, right: 5, top: 15, bottom: 15),
-                child: SvgImageFromAsset.square(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 7),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SvgImageFromAsset.square(
                   AppCommonIcon.emailIcon,
                   size: 20,
                   colorFilter: ColorFilter.mode(
@@ -114,20 +116,20 @@ class _CommonEmailFieldState extends InputFieldState<CommonEmailField> {
                         : AppColors.bodyTextColor,
                     BlendMode.srcIn,
                   ),
+                ),const Gap(5),
+                Container(
+                  height: 22,
+                  width: 1,
+                  color: Get.find<ThemeController>().isDarkMode
+                      ? AppColors.grey100Color
+                      :AppColors.headingsLightColor,
                 ),
-
-              ),
-              Container(
-                height: 24,
-                width: 1,
-                color: Get.find<ThemeController>().isDarkMode
-                    ? AppColors.grey100Color
-                    :AppColors.headingsLightColor,
-              ),
-              const Gap(5),
-            ],
+                const Gap(5),
+              ],
+            ),
           ),
         ),
+        prefixIconConstraints: BoxConstraints(maxWidth: 40,minWidth: 25,)
         // suffixIcon: Row(
         //   mainAxisSize: MainAxisSize.min,
         //   children: [

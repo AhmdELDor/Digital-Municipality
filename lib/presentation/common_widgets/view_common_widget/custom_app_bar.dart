@@ -13,6 +13,7 @@ import '../../app/theme_controller.dart';
 import '../input_field/common_search_field.dart';
 import '../widgets/button.dart';
 import '../widgets/common_divider.dart';
+import '../widgets/icon.dart';
 import '../widgets/text.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -20,12 +21,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final void Function()? onSearchTap;
   final FocusNode? searchFocusNode;
   final void Function() drawerOnTap;
+  final bool? showBackIcon;
   CustomAppBar({
     super.key,
     required this.searchController,
     this.onSearchTap,
     this.searchFocusNode,
-    required this.drawerOnTap,
+    required this.drawerOnTap, this.showBackIcon,
   });
   final bool isDarkMode = Get.find<ThemeController>().isDarkMode;
 
@@ -89,10 +91,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               Gap(16),
               notificationView(context),
               Gap(16),
-              SvgImageFromAsset(
-                CommonImageAssets.userProfileImg,
-                height: 40,
-                width: 40,
+              InkWell(
+                onTap: () {
+                  context.pop(AppRouteName.profileView);
+                },
+                child: SvgImageFromAsset(
+                  CommonImageAssets.userProfileImg,
+                  height: 40,
+                  width: 40,
+                ),
               ),
               Gap(8),
               userDataView(),
@@ -136,6 +143,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       child: Row(
         children: [
+          showBackIcon==true?BackIcon(
+            onPressed:() {
+             Navigator.pop(context);
+            },
+          ):
           InkWell(
             onTap: onTap,
             child: SvgImageFromAsset(
@@ -155,10 +167,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           Gap(10),
           notificationView(context),
           Gap(10),
-          SvgImageFromAsset(
-            CommonImageAssets.userProfileImg,
-            height: 32,
-            width: 32,
+          InkWell(
+            onTap: () {
+              context.push(AppRouteName.profileView);
+            },
+            child: SvgImageFromAsset(
+              CommonImageAssets.userProfileImg,
+              height: 32,
+              width: 32,
+            ),
           ),
         ],
       ),
@@ -171,7 +188,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       width: mobileView ? 32 : 125,
       child: PrimaryButton(
         height: mobileView ? 32 : 40,
-        onPressed: () {},
+        onPressed: () {
+          context.push(AppRouteName.addCourseView,);
+        },
         label: mobileView ? '' : DashboardViewStrings.newCourse,
         prefixIcon: Padding(
           padding:  EdgeInsets.only(left: mobileView?5:0),

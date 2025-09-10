@@ -3,6 +3,7 @@
   "name": "Graphic designing masterclass - Learn great design",
   "image": "https://media.imperiathemes.com/images/education_admin_portal/5vETTqOjZ16K68907cd1cfc68.png",
   "courseFees": 199.99,
+  "attendance": 3.5,
   "courseCategory": "Designing",
   "courseType": "Video Lecture",
   "language": "English",
@@ -255,5 +256,177 @@
       "image": "https://media.imperiathemes.com/images/education_app/N7irdYXoI2XD686e3283423fe.png",
       "name": "Support offline file download"
     }
+  ],
+  "attendanceList": [
+    {
+      "id": 1,
+      "name": "Robert Randsells",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/1DaxKYKMeQ7r68a440172a064.png",
+      "joining_date": "Joined 17 May 2025",
+      "rankPosition": "28"
+
+    },
+    {
+      "id": 2,
+      "name": "Jessica Shah",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/fqxYwiY6wLst68a4401725554.png",
+      "joining_date": "Joined 17 May 2025",
+      "rankPosition": "28"
+
+    },
+    {
+      "id": 3,
+      "name": "James Carter",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/jpdmMrzqhDyb68a44017296fa.png",
+      "joining_date": "Joined 1 July 2025",
+      "rankPosition": "28"
+
+    },
+    {
+      "id": 4,
+      "name": "Alice Thompson",
+      "image": "",
+      "joining_date": "Joined 1 July 2025",
+      "rankPosition": "28"
+
+    },
+    {
+      "id": 5,
+      "name": "Sophia Martinez",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/slrz7zHk0MeY68a4401729d69.png",
+      "joining_date": "Joined 10 August 2025",
+      "rankPosition": "28"
+
+    },
+    {
+      "id": 6,
+      "name": "Robert Randsells",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/fqxYwiY6wLst68a4401725554.png",
+      "joining_date": "Joined 10 August 2025",
+      "rankPosition": "28"
+
+    },
+    {
+      "id": 7,
+      "name": "Robert Randsells",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/1DaxKYKMeQ7r68a440172a064.png",
+      "joining_date": "Joined 17 May 2025",
+      "rankPosition": "28"
+
+    },
+    {
+      "id": 8,
+      "name": "Jessica Shah",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/fqxYwiY6wLst68a4401725554.png",
+      "joining_date": "Joined 17 May 2025",
+      "rankPosition": "28"
+
+    },
+    {
+      "id": 9,
+      "name": "James Carter",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/jpdmMrzqhDyb68a44017296fa.png",
+      "joining_date": "Joined 1 July 2025",
+      "rankPosition": "28"
+
+    },
+    {
+      "id": 10,
+      "name": "Alice Thompson",
+      "image": "",
+      "joining_date": "Joined 1 July 2025",
+      "rankPosition": "28"
+
+    },
+    {
+      "id": 11,
+      "name": "Sophia Martinez",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/slrz7zHk0MeY68a4401729d69.png",
+      "joining_date": "Joined 10 August 2025",
+      "rankPosition": "28"
+
+    },
+    {
+      "id": 12,
+      "name": "Robert Randsells",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/fqxYwiY6wLst68a4401725554.png",
+      "joining_date": "Joined 10 August 2025",
+      "rankPosition": "28"
+
+    }
+
+  ],
+  "reviewList": [
+    {
+      "id": 1,
+      "name": "Robert Randsells",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/1DaxKYKMeQ7r68a440172a064.png",
+      "review": "Lorem ipsum dolor sit amet consectetur. Commodo sed volutpat a quis.Lorem ipsum dolor sit amet consectetur. ",
+      "rate": 5
+    },
+    {
+      "id": 2,
+      "name": "Robert Randsells",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/slrz7zHk0MeY68a4401729d69.png",
+      "review": "Lorem ipsum dolor sit amet consectetur. Commodo sed volutpat a quis.Lorem ipsum dolor sit amet consectetur. ",
+      "rate": 4
+    },
+    {
+      "id": 3,
+      "name": "Jenna Timmons",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/yaFnH4c2DStV68a4401729b13.png",
+      "review": "Aliquam erat volutpat. Integer scelerisque orci ac metus pretium, in egestas libero luctus. ",
+      "rate": 5
+    } ,
+    {
+      "id": 4,
+      "name": "Robert Randsells",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/jpdmMrzqhDyb68a44017296fa.png",
+      "review": "Lorem ipsum dolor sit amet consectetur. Commodo sed volutpat a quis.Lorem ipsum dolor sit amet consectetur. ",
+      "rate": 5
+    },
+    {
+      "id": 5,
+      "name": "Robert Randsells",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/jpdmMrzqhDyb68a44017296fa.png",
+      "review": "Lorem ipsum dolor sit amet consectetur. Commodo sed volutpat a quis.Lorem ipsum dolor sit amet consectetur. ",
+      "rate": 4
+    },
+    {
+      "id": 6,
+      "name": "Robert Randsells",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/fqxYwiY6wLst68a4401725554.png",
+      "review": "Lorem ipsum dolor sit amet consectetur. Commodo sed volutpat a quis.Lorem ipsum dolor sit amet consectetur. ",
+      "rate": 5
+    } ,
+    {
+      "id": 7,
+      "name": "Robert Randsells",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/1DaxKYKMeQ7r68a440172a064.png",
+      "review": "Lorem ipsum dolor sit amet consectetur. Commodo sed volutpat a quis.Lorem ipsum dolor sit amet consectetur. ",
+      "rate": 5
+    },
+    {
+      "id": 8,
+      "name": "Robert Randsells",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/slrz7zHk0MeY68a4401729d69.png",
+      "review": "Lorem ipsum dolor sit amet consectetur. Commodo sed volutpat a quis.Lorem ipsum dolor sit amet consectetur. ",
+      "rate": 4
+    },
+    {
+      "id": 9,
+      "name": "Robert Randsells",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/yaFnH4c2DStV68a4401729b13.png",
+      "review": "Lorem ipsum dolor sit amet consectetur. Commodo sed volutpat a quis.Lorem ipsum dolor sit amet consectetur. ",
+      "rate": 5
+    },
+    {
+      "id": 10,
+      "name": "Robert Randsells",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/1DaxKYKMeQ7r68a440172a064.png",
+      "review": "Lorem ipsum dolor sit amet consectetur. Commodo sed volutpat a quis.Lorem ipsum dolor sit amet consectetur. ",
+      "rate": 5
+    }
+
   ]
 }

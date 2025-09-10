@@ -114,8 +114,8 @@ class _SignInViewState extends State<SignInView> {
                       ? const Center(child: CommonCircularLoader())
                       : PrimaryButton(
                           onPressed: () {
-                            //controller.submit(context);
-                            context.go(AppRouteName.dashboardView);
+                            controller.submit(context);
+                            //context.go(AppRouteName.dashboardView);
                           },
                           label: AppCommonStrings.btnSignIn,
                         );

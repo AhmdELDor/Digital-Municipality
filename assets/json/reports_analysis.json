@@ -1,0 +1,117 @@
+{
+  "summary": {
+    "totalStudents": {
+      "value": 59841,
+      "changePercent": 15,
+      "isPositive": true,
+      "logo": "https://media.imperiathemes.com/images/education_admin_portal/PLrvm896zust68b83b9defcaf.png"
+    },
+    "totalRevenue": {
+      "value": 3420,
+      "changePercent": -5,
+      "isPositive": false,
+      "logo": "https://media.imperiathemes.com/images/education_admin_portal/5JSdHba9IfqJ68b83bcf87c09.png"
+    },
+    "courseCompletionRate": {
+      "value": 67,
+      "changePercent": -10,
+      "isPositive": false,
+      "logo": "https://media.imperiathemes.com/images/education_admin_portal/Cxpeh9m2LBNH68b83beb56e15.png"
+    },
+    "activeInstructors": {
+      "value": 1248,
+      "changePercent": 20,
+      "isPositive": true,
+      "logo": "https://media.imperiathemes.com/images/education_admin_portal/EWmWTAY34vjZ68b83c1541c51.png"
+    },
+    "newUsersToday": {
+      "value": 558,
+      "changePercent": 20,
+      "isPositive": true,
+      "logo": "https://media.imperiathemes.com/images/education_admin_portal/Aa40d3IEC82w68b83c4a65343.png"
+    },
+    "activeCourses": {
+      "value": 5586,
+      "changePercent": 20,
+      "isPositive": true,
+      "logo": "https://media.imperiathemes.com/images/education_admin_portal/NU6N5QPhI1QR68b83c77b7ae3.png"
+    }
+  },
+  "courseCompletion": {
+    "currentRate": 75,
+    "last6MonthAverage": {
+      "value": 72,
+      "changePercent": 3,
+      "isPositive": true
+    },
+    "last3YearAverage": {
+      "value": 87,
+      "changePercent": -12,
+      "isPositive": false
+    }
+  },
+  "topCourses": [
+    {
+      "name": "Logo Design in Adobe Illustrator 10 Graphic Tools",
+      "avgTimeToComplete": "19 Days",
+      "completionRate": 89,
+      "compareLastMonth": {
+        "value": 20,
+        "isPositive": true
+      }
+    },
+    {
+      "name": "Logo Design in Adobe Illustrator 10 Graphic Tools",
+      "avgTimeToComplete": "23 Days",
+      "completionRate": 77,
+      "compareLastMonth": {
+        "value": -12,
+        "isPositive": false
+      }
+    },
+    {
+      "name": "Logo Design in Adobe Illustrator 10 Graphic Tools",
+      "avgTimeToComplete": "41 Days",
+      "completionRate": 65,
+      "compareLastMonth": {
+        "value": 3,
+        "isPositive": true
+      }
+    }
+  ],
+  "instructors": [
+    {
+      "id": 1,
+      "name": "Emily Johnson",
+      "email": "emily.johnson@example.com",
+      "phoneNo": "+91 55555 55555",
+      "assignedCourses": 93,
+      "completionRate": 87,
+      "rate": 4.5,
+      "totalCourses": 158,
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/OL6XbMyms64D68b937bbacfd6.png"
+    },
+    {
+      "id": 2,
+      "name": "Michael Smith",
+      "email": "michael.smith@example.com",
+      "phoneNo": "+91 68686 68686",
+      "assignedCourses": 105,
+      "completionRate": 86,
+      "rate": 4.7,
+      "totalCourses": 200,
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/OL6XbMyms64D68b937bbacfd6.png"
+    },
+    {
+      "id": 3,
+      "name": "Sarah Lee",
+      "email": "sarah.lee@example.com",
+      "phoneNo": "+91 77777 77777",
+      "assignedCourses": 78,
+      "completionRate": 85,
+      "rate": 4.2,
+      "totalCourses": 120,
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/OL6XbMyms64D68b937bbacfd6.png"
+    }
+  ]
+}

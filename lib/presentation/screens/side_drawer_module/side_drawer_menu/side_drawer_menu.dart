@@ -46,18 +46,18 @@ class _SideDrawerMenuState extends State<SideDrawerMenu> {
                   controller.drawerSelection(0);
                   context.go(AppRouteName.dashboardView);
                 },
-                activeImage: AppCommonIcon.activeHomeIcon
+                activeImage: AppCommonIcon.activeHomeIcon,
               ),
               Gap(20),
               commonDrawerView(
                 index: 1,
-                image:AppCommonIcon.approvalsIcon,
+                image: AppCommonIcon.approvalsIcon,
                 title: DashboardViewStrings.approvals,
                 onTap: () {
                   controller.drawerSelection(1);
                   context.go(AppRouteName.approvalsView);
                 },
-                  activeImage: AppCommonIcon.activeApprovalsIcon
+                activeImage: AppCommonIcon.activeApprovalsIcon,
               ),
               Gap(20),
               commonDrawerView(
@@ -66,9 +66,9 @@ class _SideDrawerMenuState extends State<SideDrawerMenu> {
                 title: DashboardViewStrings.courseManagement,
                 onTap: () {
                   controller.drawerSelection(2);
-                  context.go(AppRouteName.dashboardView);
+                  context.go(AppRouteName.courseManagementView);
                 },
-                  activeImage: AppCommonIcon.activeCourseManagementIcon
+                activeImage: AppCommonIcon.activeCourseManagementIcon,
               ),
               Gap(20),
               commonDrawerView(
@@ -77,123 +77,132 @@ class _SideDrawerMenuState extends State<SideDrawerMenu> {
                 title: DashboardViewStrings.classManagement,
                 onTap: () {
                   controller.drawerSelection(3);
-                  context.go(AppRouteName.dashboardView);
+                  context.go(AppRouteName.classManagementView);
                 },
-                  activeImage: AppCommonIcon.activeClassManagementIcon
+                activeImage: AppCommonIcon.activeClassManagementIcon,
               ),
               Gap(20),
               commonDrawerView(
                 index: 4,
-                image:  AppCommonIcon.instructorManagementIcon,
+                image: AppCommonIcon.instructorManagementIcon,
                 title: DashboardViewStrings.instructorManagement,
                 onTap: () {
                   controller.drawerSelection(4);
-                  context.go(AppRouteName.dashboardView);
+                  context.go(AppRouteName.instructorManagementView);
                 },
-                  activeImage: AppCommonIcon.activeInstructorManagementIcon
+                activeImage: AppCommonIcon.activeInstructorManagementIcon,
               ),
               Gap(20),
               commonDrawerView(
                 index: 5,
-                image:  AppCommonIcon.universityManagementIcon,
+                image: AppCommonIcon.universityManagementIcon,
                 title: DashboardViewStrings.universityManagement,
                 onTap: () {
                   controller.drawerSelection(5);
-                  context.go(AppRouteName.dashboardView);
+                  context.go(AppRouteName.universityManagementView);
                 },
-                  activeImage: AppCommonIcon.activeUniversityManagementIcon
+                activeImage: AppCommonIcon.activeUniversityManagementIcon,
               ),
               Gap(20),
               commonDrawerView(
                 index: 6,
-                image:  AppCommonIcon.categoryIcon,
+                image: AppCommonIcon.categoryIcon,
                 title: DashboardViewStrings.category,
                 onTap: () {
                   controller.drawerSelection(6);
-                  context.go(AppRouteName.dashboardView);
+                  context.go(AppRouteName.courseCategoryView);
                 },
-                  activeImage: AppCommonIcon.activeCategoryIcon
+                activeImage: AppCommonIcon.activeCategoryIcon,
               ),
               Gap(20),
               commonDrawerView(
                 index: 7,
-                image:  AppCommonIcon.quizIcon,
+                image: AppCommonIcon.quizIcon,
                 title: DashboardViewStrings.quiz,
                 onTap: () {
                   controller.drawerSelection(7);
-                  context.go(AppRouteName.dashboardView);
-                },activeImage: AppCommonIcon.activeQuizIcon
+                  context.go(AppRouteName.quizView);
+                },
+                activeImage: AppCommonIcon.activeQuizIcon,
               ),
               Gap(20),
               commonDrawerView(
                 index: 8,
-                image:AppCommonIcon.testIcon,
+                image: AppCommonIcon.testIcon,
                 title: DashboardViewStrings.test,
                 onTap: () {
                   controller.drawerSelection(8);
-                  context.go(AppRouteName.dashboardView);
-                },activeImage: AppCommonIcon.activeTestIcon
+                  context.go(AppRouteName.mainTestView);
+                },
+                activeImage: AppCommonIcon.activeTestIcon,
               ),
               Gap(20),
               commonDrawerView(
                 index: 9,
-                image:AppCommonIcon.studentManagementIcon,
+                image: AppCommonIcon.studentManagementIcon,
                 title: DashboardViewStrings.studentManagement,
                 onTap: () {
                   controller.drawerSelection(9);
-                  context.go(AppRouteName.dashboardView);
-                },activeImage: AppCommonIcon.activeStudentManagementIcon
+                  context.go(AppRouteName.studentManagementView);
+                },
+                activeImage: AppCommonIcon.activeStudentManagementIcon,
               ),
               Gap(20),
               commonDrawerView(
                 index: 10,
-                image:AppCommonIcon.financeManagementIcon,
+                image: AppCommonIcon.financeManagementIcon,
                 title: DashboardViewStrings.financeManagement,
                 onTap: () {
                   controller.drawerSelection(10);
-                  context.go(AppRouteName.dashboardView);
-                },activeImage: AppCommonIcon.activeFinanceManagementIcon
+                  context.go(AppRouteName.financeManagementView);
+                },
+                activeImage: AppCommonIcon.activeFinanceManagementIcon,
               ),
               Gap(20),
               commonDrawerView(
                 index: 11,
-                image:AppCommonIcon.reportsAndAnalyticsIcon,
+                image: AppCommonIcon.reportsAndAnalyticsIcon,
                 title: DashboardViewStrings.reportsAndAnalytics,
                 onTap: () {
                   controller.drawerSelection(11);
-                  context.go(AppRouteName.dashboardView);
-                },activeImage: AppCommonIcon.reportsAndAnalyticsIcon
+                  context.go(AppRouteName.reportsAnalysisView);
+                },
+                activeImage: AppCommonIcon.activeReportsAndAnalyticsIcon,
               ),
               Gap(20),
               commonDrawerView(
                 index: 12,
-                image:AppCommonIcon.certificateManagementIcon,
+                image: AppCommonIcon.certificateManagementIcon,
                 title: DashboardViewStrings.certificateManagement,
                 onTap: () {
                   controller.drawerSelection(12);
-                  context.go(AppRouteName.dashboardView);
-                },activeImage: AppCommonIcon.activeCertificateManagementIcon
+                  context.go(AppRouteName.certificateManagementView);
+                },
+                activeImage: AppCommonIcon.activeCertificateManagementIcon,
               ),
               Gap(20),
               commonDrawerView(
                 index: 13,
-                image:AppCommonIcon.userManagementIcon,
+                image: AppCommonIcon.userManagementIcon,
                 title: DashboardViewStrings.userManagement,
                 onTap: () {
                   controller.drawerSelection(13);
-                  context.go(AppRouteName.dashboardView);
-                },activeImage: AppCommonIcon.activeUserManagementIcon
+                  context.go(AppRouteName.userManagementView);
+                },
+                activeImage: AppCommonIcon.activeUserManagementIcon,
               ),
               Gap(20),
               commonDrawerView(
                 index: 14,
-                image:  AppCommonIcon.settingIcon,
+                image: AppCommonIcon.settingIcon,
                 title: DashboardViewStrings.setting,
                 onTap: () {
                   controller.drawerSelection(14);
-                  context.go(AppRouteName.dashboardView);
-                },activeImage: AppCommonIcon.activeSettingIcon
+                  context.go(AppRouteName.settingView);
+                },
+                activeImage: AppCommonIcon.activeSettingIcon,
               ),
+              Gap(20),
             ],
           ),
         ),
@@ -207,7 +216,6 @@ class _SideDrawerMenuState extends State<SideDrawerMenu> {
     required String title,
     required void Function() onTap,
     required String activeImage,
-
   }) {
     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
     return Obx(
@@ -249,25 +257,23 @@ class _SideDrawerMenuState extends State<SideDrawerMenu> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  controller.selectedDrawerIndex.value == index? SvgImageFromAsset(
-                    activeImage,
-                    height: 20,
-                    width: 20,
-
-                  ):
-                  SvgImageFromAsset(
-                    image,
-                    height: 20,
-                    width: 20,
-                    colorFilter: ColorFilter.mode(
-                      isDarkMode ? AppColors.white : AppColors.headingsColor,
-                      BlendMode.srcIn,
-                    ),
-                  ),
+                  controller.selectedDrawerIndex.value == index
+                      ? SvgImageFromAsset(activeImage, height: 20, width: 20)
+                      : SvgImageFromAsset(
+                          image,
+                          height: 20,
+                          width: 20,
+                          colorFilter: ColorFilter.mode(
+                            isDarkMode
+                                ? AppColors.white
+                                : AppColors.headingsColor,
+                            BlendMode.srcIn,
+                          ),
+                        ),
                   Gap(7),
                   CommonText.semiBold(
                     title,
-                    size: 15,
+                    size: 14,
                     fontWeight: controller.selectedDrawerIndex.value == index
                         ? FontWeight.w600
                         : FontWeight.w400,

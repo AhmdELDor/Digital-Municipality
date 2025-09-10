@@ -29,6 +29,7 @@ class _NotificationViewState extends State<NotificationView>
         drawerOnTap: () {
           _scaffoldKey.currentState?.openDrawer();
         },
+        showBackIcon: true,
       ),
       body: DefaultTabController(
         length: 3,

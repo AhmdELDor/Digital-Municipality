@@ -10,9 +10,7 @@ import '../widgets/text.dart';
 
 Widget authBackgroundImageView(BuildContext context) {
   bool isMobile = ResponsiveView.isMobile(context);
-  bool isTablet = ResponsiveView.isTablet(context);
-  bool isSmallDesktop = ResponsiveView.isSmallDesktop(context);
-  bool isDesktop = ResponsiveView.isDesktop(context); // general desktop
+
   return isMobile
       ? SizedBox()
       : Padding(

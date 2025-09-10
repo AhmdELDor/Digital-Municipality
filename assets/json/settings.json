@@ -1,0 +1,77 @@
+{
+  "platFormName": "EduLift",
+  "faq_list": [
+    {
+      "id": 1,
+      "question": "Lorem ipsum dolor sit amet consectetur. Ultrices vel nulla mauris nulla?",
+      "answer": "Lorem ipsum dolor sit amet consectetur. Enim non amet mi in fusce a elit. Tempus pretium nisi duis in magna ultricies auctor in. Pellentesque egestas semper id purus. Aliquam gravida lectus eget sapien tempus eu aliquam vestibulum. Blandit tristique ac id porttitor vitae justo. Velit venenatis ut urna viverra. Eu urna aliquet cum sollicitudin. "
+    },
+    {
+      "id": 2,
+      "question": "Lorem ipsum dolor sit amet consectetur. Ultrices vel nulla mauris nulla?",
+      "answer": "Lorem ipsum dolor sit amet consectetur. Enim non amet mi in fusce a elit. Tempus pretium nisi duis in magna ultricies auctor in. Pellentesque egestas semper id purus. Aliquam gravida lectus eget sapien tempus eu aliquam vestibulum. Blandit tristique ac id porttitor vitae justo. Velit venenatis ut urna viverra. Eu urna aliquet cum sollicitudin. "
+    },
+    {
+      "id": 3,
+      "question": "Lorem ipsum dolor sit amet consectetur. Ultrices vel nulla mauris nulla?",
+      "answer": "Lorem ipsum dolor sit amet consectetur. Enim non amet mi in fusce a elit. Tempus pretium nisi duis in magna ultricies auctor in. Pellentesque egestas semper id purus. Aliquam gravida lectus eget sapien tempus eu aliquam vestibulum. Blandit tristique ac id porttitor vitae justo. Velit venenatis ut urna viverra. Eu urna aliquet cum sollicitudin. "
+    },
+    {
+      "id": 4,
+      "question": "Lorem ipsum dolor sit amet consectetur. Ultrices vel nulla mauris nulla?",
+      "answer": "Lorem ipsum dolor sit amet consectetur. Enim non amet mi in fusce a elit. Tempus pretium nisi duis in magna ultricies auctor in. Pellentesque egestas semper id purus. Aliquam gravida lectus eget sapien tempus eu aliquam vestibulum. Blandit tristique ac id porttitor vitae justo. Velit venenatis ut urna viverra. Eu urna aliquet cum sollicitudin. "
+    },
+    {
+      "id": 5,
+      "question": "Lorem ipsum dolor sit amet consectetur. Ultrices vel nulla mauris nulla?",
+      "answer": "Lorem ipsum dolor sit amet consectetur. Enim non amet mi in fusce a elit. Tempus pretium nisi duis in magna ultricies auctor in. Pellentesque egestas semper id purus. Aliquam gravida lectus eget sapien tempus eu aliquam vestibulum. Blandit tristique ac id porttitor vitae justo. Velit venenatis ut urna viverra. Eu urna aliquet cum sollicitudin. "
+    }
+  ],
+  "privacy_policy_list": [
+    "Lorem ipsum dolor sit amet consectetur. Sollicitudin ultricies nisi cursus dictumst tortor mi mauris pellentesque. Odio a quam fermentum pellentesque semper ut habitasse eget. Posuere diam pulvinar elementum proin at ullamcorper. Lectus egestas luctus turpis nibh tincidunt nulla fermentum. Non malesuada erat lectus pretium sapien volutpat morbi varius arcu. Faucibus ipsum nibh id massa tincidunt tincidunt felis pretium non. Metus rutrum integer pharetra integer purus et viverra tellus dis. Feugiat neque orci convallis suscipit sapien felis massa. Turpis aliquet donec laoreet consectetur. Luctus eu fames urna in tempor neque sed nibh etiam. Leo faucibus scelerisque scelerisque donec purus tristique nec. Condimentum semper at nibh malesuada id pellentesque. Aenean bibendum vestibulum dolor elementum. Mauris ipsum nec eu ornare eu vestibulum magna nunc.",
+    "Lorem ipsum dolor sit amet consectetur. Sollicitudin ultricies nisi cursus dictumst tortor mi mauris pellentesque. Odio a quam fermentum pellentesque semper ut habitasse eget. Posuere diam pulvinar elementum proin at ullamcorper. Lectus egestas luctus turpis nibh tincidunt nulla fermentum. Non malesuada erat lectus pretium sapien volutpat morbi varius arcu. Faucibus ipsum nibh id massa tincidunt tincidunt felis pretium non. Metus rutrum integer pharetra integer purus et viverra tellus dis. Feugiat neque orci convallis suscipit sapien felis massa. Turpis aliquet donec laoreet consectetur. Luctus eu fames urna in tempor neque sed nibh etiam. Leo faucibus scelerisque scelerisque donec purus tristique nec. Condimentum semper at nibh malesuada id pellentesque. Aenean bibendum vestibulum dolor elementum. Mauris ipsum nec eu ornare eu vestibulum magna nunc."
+  ],
+  "contact_list": [
+    {
+      "id": 1,
+      "name": "Sarah Lee",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/OL6XbMyms64D68b937bbacfd6.png",
+      "email": "sarah.lee@example.com",
+      "phone_no": "+91 77777 77777",
+      "description": "Lorem ipsum dolor sit amet consectetur. Semper pharetra sit ac feugiat nec nibh. Consectetur urna sociis fermentum vel.Lorem ipsum dolor sit amet consect.Lorem ipsum dolor sit amet consectetur. Semper pharetra sit ac feugiat nec nibh. Consectetur urna sociis fermentum vel."
+    },
+    {
+      "id": 2,
+      "name": "James Smith",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/OL6XbMyms64D68b937bbacfd6.png",
+      "email": "james.smith@example.com",
+      "phone_no": "+44 12345 67890",
+      "description": "Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
+    },
+    {
+      "id": 3,
+      "name": "Emily Johnson",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/OL6XbMyms64D68b937bbacfd6.png",
+      "email": "emily.johnson@example.com",
+      "phone_no": "+1 234 567 8901",
+      "description": "Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit."
+    }
+  ],
+  "language_list": [
+    { "id": 1, "name": "English" },
+    { "id": 2, "name": "हिन्दी (Hindi)" },
+    { "id": 3, "name": "Español (Spanish)" },
+    { "id": 4, "name": "Français (French)" },
+    { "id": 5, "name": "Deutsch (German)" },
+    { "id": 6, "name": "中文 (Chinese)" },
+    { "id": 7, "name": "日本語 (Japanese)" },
+    { "id": 8, "name": "한국어 (Korean)" },
+    { "id": 9, "name": "Русский (Russian)" },
+    { "id": 10, "name": "Italiano (Italian)" },
+    { "id": 11, "name": "Português (Portuguese)" },
+    { "id": 12, "name": "العربية (Arabic)" },
+    { "id": 13, "name": "বাংলা (Bengali)" },
+    { "id": 14, "name": "اردو (Urdu)" },
+    { "id": 15, "name": "Türkçe (Turkish)" }
+  ]
+}

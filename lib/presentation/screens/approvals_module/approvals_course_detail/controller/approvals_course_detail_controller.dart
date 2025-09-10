@@ -9,11 +9,16 @@ import '../../../dashboard_module/dashboard/model/course_model.dart';
 class CourseApprovalsDetailController extends GetxController{
   Rx<CourseModel> data = CourseModel.empty().obs;
   var searchController = TextEditingController();
+  var feedbackController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+
 
   @override
   void onInit() {
     super.onInit();
     fetchApprovalCourseDetail();
+
+
   }
 
   void fetchApprovalCourseDetail() async {

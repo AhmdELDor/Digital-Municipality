@@ -13,7 +13,6 @@ class _NotesListViewState extends State<NotesListView> {
   @override
   Widget build(BuildContext context) {
     final notesList = GoRouterState.of(context).extra as List;
-    var mobileView = ResponsiveView.isMobile(context);
     return Scaffold(
       key: _scaffoldKey,
       drawer: const SizedBox(width: 270, child: SideDrawerMenu()),
@@ -22,6 +21,7 @@ class _NotesListViewState extends State<NotesListView> {
         drawerOnTap: () {
           _scaffoldKey.currentState?.openDrawer();
         },
+        showBackIcon: true,
 
       ),
       body: SafeArea(

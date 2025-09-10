@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import '../../app/theme_controller.dart';
 import '/core/constants/app_colors.dart';
 
-import '/core/themes/app_color_extension.dart';
 import '/utils/extensions/context_extensions.dart';
 import 'package:flutter/material.dart';
 
@@ -16,19 +15,48 @@ void showSuccessMessage({
   required String content,
   int? duration,
 }) {
-  final context = Get.context!;
+  // final context = Get.context!;
   ScaffoldMessenger.of(context).showSnackBar(
-    AlertMessage(
-      title: title,
-      description: content,
-      backgroundColor: context.appColor.success,
-      foregroundColor:
-          Get.find<ThemeController>().isDarkMode
-              ? AppColors.success500
-              : AppColors.success400,
-      duration: Duration(seconds: duration ?? 5),
 
+    SnackBar(
+      width: 300,
+      behavior: SnackBarBehavior.floating, // ✅ floating, not full width
+
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      backgroundColor: Get.find<ThemeController>().isDarkMode
+          ? AppColors.success500
+          : AppColors.success400,
+      duration: Duration(seconds: duration ?? 5),
+      content: SizedBox(
+        width: 90,
+        child: Row(
+          mainAxisSize: MainAxisSize.min, // ✅ shrink to fit
+          children: [
+            const Icon(Icons.check_circle, color: Colors.white),
+            const SizedBox(width: 8),
+            Flexible(
+              child: Text(
+                title,
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+      ),
     ),
+    // AlertMessage(
+    //   title: title,
+    //   description: content,
+    //   backgroundColor: context.appColor.success,
+    //   foregroundColor:
+    //       Get.find<ThemeController>().isDarkMode
+    //           ? AppColors.success500
+    //           : AppColors.success400,
+    //   duration: Duration(seconds: duration ?? 5),
+    //
+    // ),
   );
 }
 
@@ -62,12 +90,11 @@ Future<void> showErrorSheet({
     routeSettings: const RouteSettings(name: "/error_dialog"),
     barrierDismissible: false,
     barrierLabel: "error_dialog",
-    pageBuilder:
-        (context, animation, secondaryAnimation) =>
-            ErrorSheet(title: title, content: content, button: button),
+    pageBuilder: (context, animation, secondaryAnimation) =>
+        ErrorSheet(title: title, content: content, button: button),
     transitionDuration: const Duration(milliseconds: 300),
-    transitionBuilder:
-        (context, animation, secondaryAnimation, child) => SlideTransition(
+    transitionBuilder: (context, animation, secondaryAnimation, child) =>
+        SlideTransition(
           position: Tween(
             begin: const Offset(0, 1),
             end: const Offset(0, 0.0),
@@ -91,19 +118,17 @@ Future<T?> showAppDialog<T>({
     routeSettings: const RouteSettings(name: "/app_dialog"),
     barrierDismissible: barrierDismissible,
     barrierLabel: "app_dialog",
-    pageBuilder:
-        (context, animation, secondaryAnimation) => SafeArea(
-          child: AppDialog(
-            title: title,
-            content: content,
-            icon: icon,
-            positiveButton: positiveButton,
-            negativeButton: negativeButton,
-          ),
-        ),
+    pageBuilder: (context, animation, secondaryAnimation) => SafeArea(
+      child: AppDialog(
+        title: title,
+        content: content,
+        icon: icon,
+        positiveButton: positiveButton,
+        negativeButton: negativeButton,
+      ),
+    ),
     transitionDuration: const Duration(milliseconds: 100),
-    transitionBuilder:
-        (context, animation, secondaryAnimation, child) =>
-            FadeTransition(opacity: animation, child: child),
+    transitionBuilder: (context, animation, secondaryAnimation, child) =>
+        FadeTransition(opacity: animation, child: child),
   );
 }

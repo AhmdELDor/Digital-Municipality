@@ -5,6 +5,6 @@ import 'presentation/app/bootstrap.dart';
 void main() {
   bootstrap(() async {
     final ConnectivityHelper connectivityHelper = ConnectivityHelper();
-    return EducationApp(connectivityHelper: connectivityHelper);
+    return EducationAdminPortal(connectivityHelper: connectivityHelper);
   });
 }

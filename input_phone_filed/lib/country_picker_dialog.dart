@@ -87,6 +87,7 @@ class _CountryPickerDialogState extends State<CountryPickerDialog> {
     const defaultHorizontalPadding = 40.0;
     const defaultVerticalPadding = 24.0;
     return Dialog(
+
       insetPadding: EdgeInsets.symmetric(
         vertical: defaultVerticalPadding,
         horizontal: mediaWidth > (width + defaultHorizontalPadding * 2)
@@ -143,14 +144,14 @@ class _CountryPickerDialogState extends State<CountryPickerDialog> {
                           ListTile(
                             leading: kIsWeb
                                 ? Image.asset(
-                                    'assets/flags/${_filteredCountries[index].code.toLowerCase()}.png',
-                                    package: 'intl_phone_field',
-                                    width: 32,
-                                  )
+                              'packages/input_phone_filed/assets/flags/${_filteredCountries[index].code.toLowerCase()}.png',
+                              width: 32,
+                            )
                                 : Text(
-                                    _filteredCountries[index].flag,
-                                    style: const TextStyle(fontSize: 18),
-                                  ),
+                              _filteredCountries[index].flag,
+                              style: const TextStyle(fontSize: 18),
+                            ),
+
                             contentPadding: widget.style?.listTilePadding,
                             title: Text(
                               _filteredCountries[index].localizedName(

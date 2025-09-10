@@ -1,0 +1,15 @@
+{
+  "id": 1,
+  "name": "University of Cambridge",
+  "image": "https://media.imperiathemes.com/images/education_admin_portal/LRmgHE41Xkmu68909b8797b41.png",
+  "email": "unicambridge@info.ac.in",
+  "phoneNo":"+91 55555 55555",
+  "about":"Lorem ipsum dolor sit amet consectetur. Eu nulla nunc faucibus blandit sagittis. Vehicula sapien quis cursus iaculis.Lorem ipsum dolor sit amet consectetur. Eu nulla nunc faucibus blandit sagittis. Vehicula sapien quis cursus iaculis.",
+  "qualification": "Master in After Effects & Photoshop",
+  "instagramAccount": "https://ig.me/m/hellofindyourownway",
+  "faceBookAccount": "https://fb.me/m/liveyourdreams",
+  "youTubeChannel": "https://www.youtube.com/",
+  "identityProf": "Government Registration Certificate",
+  "qualificationProf": "Letter of Authorization",
+  "courseCompletionCertificateProf": "Course Completion Certificate"
+}

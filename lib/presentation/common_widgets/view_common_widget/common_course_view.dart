@@ -6,37 +6,353 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+
 import '../../../core/constants/app_assets.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../../utils/extensions/responsive.dart';
 import '../../app/theme_controller.dart';
-import '../../screens/approvals_module/approvals_module/widgets/all_dialog_box.dart';
+import '../../screens/approvals_module/approvals_course_view/widgets/course_approvals_menu_button.dart';
+import '../../screens/approvals_module/approvals_course_view/widgets/course_approvals_second_menu_button.dart';
 import '../../screens/dashboard_module/dashboard/model/course_model.dart';
-import '../../screens/dashboard_module/dashboard/widgets/add_note_dailog_box.dart';
-import '../../screens/dashboard_module/notification/widgets/notification_list_view.dart';
-import 'common_card_decoration.dart';
-import 'common_dialog_box.dart';
 
-class CommonCourseView extends StatefulWidget {
+class CommonCourseView extends StatelessWidget {
   final CourseModel course;
-  const CommonCourseView({super.key, required this.course});
+  final bool? showRate;
+  final bool? showSwitch;
+  final bool? showMenuButton;
+  final bool? differentView;
+  final bool? showCheckBox;
 
-  @override
-  State<CommonCourseView> createState() => _CommonCourseViewState();
-}
+  final void Function() viewCourseOnTap;
+  final void Function() declinedOnTap;
+  final void Function() deleteOnTap;
+  final void Function() editViewCourseOnTap;
+  final void Function()? deleteCourseOnTap;
+  final void Function()? editCourseOnTap;
+  const CommonCourseView({
+    super.key,
+    required this.course,
+    this.showRate,
+    this.showSwitch,
+    this.showMenuButton,
+    this.differentView,
+    this.showCheckBox,
+    required this.viewCourseOnTap,
+    required this.declinedOnTap,
+    required this.deleteOnTap,
+    required this.editViewCourseOnTap,
+     this.deleteCourseOnTap,
+     this.editCourseOnTap,
+  });
 
-class _CommonCourseViewState extends State<CommonCourseView> {
-  RxBool isSwitch = false.obs;
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
     var mobileView = ResponsiveView.isMobile(context);
     double spacing = 20;
     return Container(
-      decoration: commonCardDecoration(12),
+      //decoration: commonCardDecoration(12),
       margin: EdgeInsetsGeometry.only(bottom: 15),
-      child: mobileView
+      child: differentView == true
+          ? mobileView
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Stack(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(6),
+                              topRight: Radius.circular(6),
+                            ),
+                            child: commonCacheImage(
+                              course.image,
+                              ImagePlaceHolder.imagePlaceHolderDark,
+                              height: 170,
+                              width: double.infinity,
+                              //fit: BoxFit.contain
+                            ),
+                          ),
+                          Positioned(
+                            top: 10,
+                            right: 10,
+                            child: showMenuButton == true
+                                ? CourseApprovalsSecondMenuButton(
+                                    course: course,
+                                    editCourseOnTap: editCourseOnTap,
+                                    viewCourseOnTap: editViewCourseOnTap,
+                                    deleteCourseOnTap: deleteCourseOnTap,
+                                  )
+                                : CourseApprovalsMenuButton(
+                                    course: course,
+                                    viewCourseOnTap: viewCourseOnTap,
+                                    declinedOnTap: declinedOnTap,
+                                    deleteOnTap: deleteOnTap,
+                                  ),
+                          ),
+                        ],
+                      ),
+
+                      //   Gap(12),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: isDarkMode
+                              ? AppColors.mainDarkBgColor
+                              : AppColors.lightBgColor,
+                          border: Border(
+                            left: BorderSide(
+                              color: isDarkMode
+                                  ? AppColors.grey100Color
+                                  : AppColors.lightBorderColor,
+                              width: 1,
+                            ),
+                            bottom: BorderSide(
+                              color: isDarkMode
+                                  ? AppColors.grey100Color
+                                  : AppColors.lightBorderColor,
+                              width: 1,
+                            ),
+                            right: BorderSide(
+                              color: isDarkMode
+                                  ? AppColors.grey100Color
+                                  : AppColors.lightBorderColor,
+                              width: 1,
+                            ),
+                          ),
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(12),
+                            bottomRight: Radius.circular(12),
+                          ),
+                          // border: Border.all(color: isDarkMode ? AppColors.grey100Color :AppColors.lightBorderColor,width: 1),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Gap(12),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                              ),
+                              child: CommonText.medium(course.name, size: 15),
+                            ),
+                            Gap(7),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                              ),
+                              child: CommonText.regular(
+                                course.description,
+                                size: 13,
+                                color: isDarkMode
+                                    ? AppColors.bodyTextDarkColor
+                                    : AppColors.bodyTextColor,
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            Gap(7),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  CommonText.semiBold(
+                                    '\$${course.courseFees.toString()}',
+                                    size: 18,
+                                    color: AppColors.primary500,
+                                  ),
+                                  Gap(20),
+                                  SvgImageFromAsset(AppCommonIcon.starIcon),
+                                  Gap(7),
+                                  CommonText.semiBold(
+                                    course.rate.toString(),
+                                    size: 16,
+                                    color: AppColors.secondary500,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Gap(12),
+                            CommonDivider(),
+                            Gap(12),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                              ),
+                              child: horizontalDetailView(),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  )
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(12),
+                          bottomLeft: Radius.circular(12),
+                        ),
+                        child: commonCacheImage(
+                          course.image,
+                          ImagePlaceHolder.imagePlaceHolderDark,
+                          height: 200,
+                          width: 250,
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: isDarkMode
+                                ? AppColors.mainDarkBgColor
+                                : AppColors.lightBgColor,
+                            border: Border(
+                              top: BorderSide(
+                                color: isDarkMode
+                                    ? AppColors.grey100Color
+                                    : AppColors.lightBorderColor,
+                                width: 1,
+                              ),
+                              bottom: BorderSide(
+                                color: isDarkMode
+                                    ? AppColors.grey100Color
+                                    : AppColors.lightBorderColor,
+                                width: 1,
+                              ),
+                              right: BorderSide(
+                                color: isDarkMode
+                                    ? AppColors.grey100Color
+                                    : AppColors.lightBorderColor,
+                                width: 1,
+                              ),
+                            ),
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(12),
+                              bottomRight: Radius.circular(12),
+                            ),
+                            // border: Border.all(color: isDarkMode ? AppColors.grey100Color :AppColors.lightBorderColor,width: 1),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  top: 12,
+                                  left: spacing,
+                                  right: spacing,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          CommonText.medium(
+                                            course.name,
+                                            size: 18,
+                                          ),
+                                          Gap(5),
+
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              right: 90,
+                                            ),
+                                            child: CommonText.regular(
+                                              course.description,
+                                              size: 16,
+                                              color: isDarkMode
+                                                  ? AppColors.bodyTextDarkColor
+                                                  : AppColors.bodyTextColor,
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    showMenuButton == true
+                                        ? CourseApprovalsSecondMenuButton(
+                                            course: course,
+                                            editCourseOnTap:editCourseOnTap,
+                                            viewCourseOnTap:
+                                                editViewCourseOnTap,
+                                            deleteCourseOnTap: deleteCourseOnTap,
+                                          )
+                                        : CourseApprovalsMenuButton(
+                                            course: course,
+                                            viewCourseOnTap: viewCourseOnTap,
+                                            declinedOnTap: declinedOnTap,
+                                            deleteOnTap: deleteOnTap,
+                                          ),
+                                  ],
+                                ),
+                              ),
+                              Gap(12),
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: spacing,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    CommonText.semiBold(
+                                      '\$${course.courseFees.toString()}',
+                                      size: 20,
+                                      color: AppColors.primary500,
+                                    ),
+                                    Gap(20),
+                                    Row(
+                                      children: [
+                                        SvgImageFromAsset(
+                                          AppCommonIcon.starIcon,
+                                        ),
+                                        Gap(7),
+                                        CommonText.semiBold(
+                                          course.rate.toString(),
+                                          size: 16,
+                                          color: AppColors.secondary500,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Gap(12),
+                              CommonDivider(),
+
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: spacing,
+                                ),
+                                child: Row(
+                                  children: [
+                                    Expanded(child: horizontalDetailView()),
+                                    showSwitch == true
+                                        ? customSwitch()
+                                        : SizedBox(),
+                                  ],
+                                ),
+                              ),
+                              Gap(7),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+          : mobileView
           ? Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,9 +365,9 @@ class _CommonCourseViewState extends State<CommonCourseView> {
                         topRight: Radius.circular(6),
                       ),
                       child: commonCacheImage(
-                        widget.course.image,
+                        course.image,
                         ImagePlaceHolder.imagePlaceHolderDark,
-                        height: 165,
+                        height: 170,
                         width: double.infinity,
                         //fit: BoxFit.contain
                       ),
@@ -59,298 +375,518 @@ class _CommonCourseViewState extends State<CommonCourseView> {
                     Positioned(
                       top: 10,
                       right: 10,
-                      child: menuButton(widget.course),
+                      child: showMenuButton == true
+                          ? CourseApprovalsSecondMenuButton(
+                              course: course,
+                              editCourseOnTap: editCourseOnTap,
+                              viewCourseOnTap: editViewCourseOnTap,
+                              deleteCourseOnTap: deleteCourseOnTap,
+                            )
+                          : CourseApprovalsMenuButton(
+                              course: course,
+                              viewCourseOnTap: viewCourseOnTap,
+                              declinedOnTap: declinedOnTap,
+                              deleteOnTap: deleteOnTap,
+                            ),
                     ),
                   ],
                 ),
-                Gap(12),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 17),
-                  child: CommonText.medium(widget.course.name, size: 15),
-                ),
-                Gap(7),
 
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 17),
-                  child: CommonText.regular(
-                    widget.course.description,
-                    size: 13,
+                //   Gap(12),
+                Container(
+                  decoration: BoxDecoration(
                     color: isDarkMode
-                        ? AppColors.bodyTextDarkColor
-                        : AppColors.bodyTextColor,
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                Gap(7),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 17),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      CommonText.semiBold(
-                        '\$${widget.course.courseFees.toString()}',
-                        size: 18,
-                        color: AppColors.primary500,
+                        ? AppColors.mainDarkBgColor
+                        : AppColors.lightBgColor,
+                    border: Border(
+                      left: BorderSide(
+                        color: isDarkMode
+                            ? AppColors.grey100Color
+                            : AppColors.lightBorderColor,
+                        width: 1,
                       ),
-                      Gap(20),
-                      SvgImageFromAsset(AppCommonIcon.starIcon),
-                      Gap(7),
-                      CommonText.semiBold(
-                        widget.course.rate.toString(),
-                        size: 16,
-                        color: AppColors.secondary500,
+                      bottom: BorderSide(
+                        color: isDarkMode
+                            ? AppColors.grey100Color
+                            : AppColors.lightBorderColor,
+                        width: 1,
                       ),
-                      Gap(20),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(32),
-                        child: commonCacheImage(
-                          widget.course.instructorProfileImg,
-                          ImagePlaceHolder.imagePlaceHolderDark,
-                          height: 24,
-                          width: 24,
-                        ),
+                      right: BorderSide(
+                        color: isDarkMode
+                            ? AppColors.grey100Color
+                            : AppColors.lightBorderColor,
+                        width: 1,
                       ),
-                      Gap(7),
-                      Expanded(child: CommonText.regular('Admin', size: 13)),
-                      SizedBox(
-                        height: 17,
-                        width: 17,
-                        child: Obx(
-                          () => Transform.scale(
-                            scale: 0.8,
-                            child: CupertinoSwitch(
-                              value: isSwitch.value,
-                              onChanged: (value) {
-                                isSwitch.value = value;
-                              },
-                              activeTrackColor: AppColors.primary500,
-                              thumbColor: AppColors.white,
-                              inactiveThumbColor: AppColors.white,
-                              inactiveTrackColor: AppColors.background100,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Gap(7),
-                    ],
+                    ),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(12),
+                      bottomRight: Radius.circular(12),
+                    ),
+                    // border: Border.all(color: isDarkMode ? AppColors.grey100Color :AppColors.lightBorderColor,width: 1),
                   ),
-                ),
-                Gap(12),
-                CommonDivider(),
-                Gap(12),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 17,),
-                  child: horizontalDetailView(),
-                ),
-              ],
-            )
-          : Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(12),
-                    topRight: Radius.circular(12),
-                  ),
-                  child: commonCacheImage(
-                    widget.course.image,
-                    ImagePlaceHolder.imagePlaceHolderDark,
-                    height: 200,
-                    width: 250,
-                  ),
-                ),
-                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                          top: 12,
-                          left: spacing,
-                          right: spacing,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CommonText.medium(
-                                    widget.course.name,
-                                    size: 18,
-                                  ),
-                                  Gap(5),
-
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 90),
-                                    child: CommonText.regular(
-                                      widget.course.description,
-                                      size: 16,
-                                      color: isDarkMode
-                                          ? AppColors.bodyTextDarkColor
-                                          : AppColors.bodyTextColor,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            menuButton(widget.course),
-                          ],
-                        ),
-                      ),
                       Gap(12),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: spacing),
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: CommonText.medium(course.name, size: 15),
+                      ),
+                      Gap(7),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: CommonText.regular(
+                          course.description,
+                          size: 13,
+                          color: isDarkMode
+                              ? AppColors.bodyTextDarkColor
+                              : AppColors.bodyTextColor,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      Gap(7),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             CommonText.semiBold(
-                              '\$${widget.course.courseFees.toString()}',
-                              size: 20,
+                              '\$${course.courseFees.toString()}',
+                              size: 18,
                               color: AppColors.primary500,
+                            ),
+                            Gap(20),
+                            SvgImageFromAsset(AppCommonIcon.starIcon),
+                            Gap(7),
+                            CommonText.semiBold(
+                              course.rate.toString(),
+                              size: 16,
+                              color: AppColors.secondary500,
                             ),
                             Gap(20),
                             ClipRRect(
                               borderRadius: BorderRadius.circular(32),
                               child: commonCacheImage(
-                                widget.course.instructorProfileImg,
+                                course.instructorProfileImg,
                                 ImagePlaceHolder.imagePlaceHolderDark,
-                                height: 32,
-                                width: 32,
+                                height: 24,
+                                width: 24,
                               ),
                             ),
                             Gap(7),
-                            CommonText.regular(
-                              widget.course.instructorName,
-                              size: 17,
+                            Expanded(
+                              child: CommonText.regular('Admin', size: 13),
                             ),
+                            customSwitch(),
+                            Gap(7),
                           ],
                         ),
                       ),
                       Gap(12),
                       CommonDivider(),
-
+                      Gap(12),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: spacing),
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
                         child: horizontalDetailView(),
                       ),
                     ],
                   ),
                 ),
               ],
-            ),
-    );
-  }
-
-  Widget menuButton(CourseModel course) {
-    bool isDarkMode = Get.find<ThemeController>().isDarkMode;
-    var mobileView = ResponsiveView.isMobile(context);
-    return PopupMenuButton(
-      color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.lightBgColor,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
-      child: mobileView
-          ? Container(
-              height: 32,
-              width: 32,
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(color: AppColors.lightBorderColor),
-              ),
-              child: Center(
-                child: SvgImageFromAsset(
-                  AppCommonIcon.moreIcon,
-                  colorFilter: ColorFilter.mode(
-                    AppColors.white,
-                    BlendMode.srcIn,
+            )
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                showCheckBox == true
+                    ? Obx(
+                        () => Checkbox(
+                          value: course.isChecked.value,
+                          onChanged: (value) {
+                            course.isChecked.value = value!;
+                          },
+                        ),
+                      )
+                    : SizedBox(),
+                Gap(course.isChecked.value == true ? 10 : 0),
+                ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(12),
+                    bottomLeft: Radius.circular(12),
+                  ),
+                  child: commonCacheImage(
+                    course.image,
+                    ImagePlaceHolder.imagePlaceHolderDark,
+                    height: 200,
+                    width: 250,
                   ),
                 ),
-              ),
-            )
-          : commonPopTextView(AppCommonIcon.moreIcon),
-      padding: EdgeInsetsGeometry.zero,
-      menuPadding: EdgeInsetsGeometry.zero,
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: isDarkMode
+                          ? AppColors.mainDarkBgColor
+                          : AppColors.lightBgColor,
+                      border: Border(
+                        top: BorderSide(
+                          color: isDarkMode
+                              ? AppColors.grey100Color
+                              : AppColors.lightBorderColor,
+                          width: 1,
+                        ),
+                        bottom: BorderSide(
+                          color: isDarkMode
+                              ? AppColors.grey100Color
+                              : AppColors.lightBorderColor,
+                          width: 1,
+                        ),
+                        right: BorderSide(
+                          color: isDarkMode
+                              ? AppColors.grey100Color
+                              : AppColors.lightBorderColor,
+                          width: 1,
+                        ),
+                      ),
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(12),
+                        bottomRight: Radius.circular(12),
+                      ),
+                      // border: Border.all(color: isDarkMode ? AppColors.grey100Color :AppColors.lightBorderColor,width: 1),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                            top: 12,
+                            left: spacing,
+                            right: spacing,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    CommonText.medium(course.name, size: 18),
+                                    Gap(5),
 
-      itemBuilder: (context) => [
-        PopupMenuItem(
-          value: 1,
-          onTap: () {
-            //print( course.name);
-          },
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-            child: commonDeviceView(
-              AppCommonIcon.showPasswordIcon,
-              DashboardViewStrings.viewCourse,
-              null,
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 90),
+                                      child: CommonText.regular(
+                                        course.description,
+                                        size: 16,
+                                        color: isDarkMode
+                                            ? AppColors.bodyTextDarkColor
+                                            : AppColors.bodyTextColor,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              showMenuButton == true
+                                  ? CourseApprovalsSecondMenuButton(
+                                      course: course,
+                                      editCourseOnTap: editCourseOnTap,
+                                      viewCourseOnTap: editViewCourseOnTap,
+                                      deleteCourseOnTap: deleteCourseOnTap,
+                                    )
+                                  : CourseApprovalsMenuButton(
+                                      course: course,
+                                      viewCourseOnTap: viewCourseOnTap,
+                                      declinedOnTap: declinedOnTap,
+                                      deleteOnTap: deleteOnTap,
+                                    ),
+                            ],
+                          ),
+                        ),
+                        Gap(12),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: spacing),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              CommonText.semiBold(
+                                '\$${course.courseFees.toString()}',
+                                size: 20,
+                                color: AppColors.primary500,
+                              ),
+                              Gap(20),
+                              showRate == true
+                                  ? Row(
+                                      children: [
+                                        SvgImageFromAsset(
+                                          AppCommonIcon.starIcon,
+                                        ),
+                                        Gap(7),
+                                        CommonText.semiBold(
+                                          course.rate.toString(),
+                                          size: 16,
+                                          color: AppColors.secondary500,
+                                        ),
+                                      ],
+                                    )
+                                  : SizedBox(),
+                              Gap(20),
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(32),
+                                child: commonCacheImage(
+                                  course.instructorProfileImg,
+                                  ImagePlaceHolder.imagePlaceHolderDark,
+                                  height: 32,
+                                  width: 32,
+                                ),
+                              ),
+                              Gap(7),
+                              CommonText.regular(
+                                course.instructorName,
+                                size: 17,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Gap(12),
+                        CommonDivider(),
+
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: spacing),
+                          child: Row(
+                            children: [
+                              Expanded(child: horizontalDetailView()),
+                              showSwitch == true ? customSwitch() : SizedBox(),
+                            ],
+                          ),
+                        ),
+                        Gap(5),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ),
-        PopupMenuItem(
-          value: 2,
-          onTap: () {
-            commonDialogBox(
-              context: context,
-              child: SizedBox(
-                  width: 361,
-                  child: CourseApproveDialog()),
-            );
-           // Navigator.pop(context);
-          },
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-            child: commonDeviceView(
-              AppCommonIcon.approveIcon,
-              ApprovalsStrings.approve,
-              null,
-            ),
-          ),
-        ),
-        PopupMenuItem(
-          value: 3,
-          onTap: () {
-            commonDialogBox(
-              context: context,
-              child: SizedBox(
-                  width: 361,
-                  child: CourseDeclineDialog()),
-            );
-          },
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-            child: commonDeviceView(
-              AppCommonIcon.declineIcon,
-              ApprovalsStrings.decline,
-              null,
-            ),
-          ),
-        ),
-        PopupMenuItem(
-          value: 4,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-            child: commonDeviceView(
-              AppCommonIcon.deleteIcon,
-              ApprovalsStrings.delete,
-              null,
-            ),
-          ),
-        ),
-      ],
     );
   }
 
-  Widget horizontalDetailView() {
+  // Widget menuButton(CourseModel course,void Function()? onTap) {
+  //   bool isDarkMode = Get.find<ThemeController>().isDarkMode;
+  //   var mobileView = ResponsiveView.isMobile(context);
+  //   return PopupMenuButton(
+  //     color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.lightBgColor,
+  //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+  //     child: mobileView
+  //         ? Container(
+  //             height: 32,
+  //             width: 32,
+  //             decoration: BoxDecoration(
+  //               color: Colors.transparent,
+  //
+  //               borderRadius: BorderRadius.circular(5),
+  //               border: Border.all(color: AppColors.lightBorderColor),
+  //             ),
+  //             child: Center(
+  //               child: SvgImageFromAsset(
+  //                 AppCommonIcon.moreIcon,
+  //                 colorFilter: ColorFilter.mode(
+  //                   AppColors.white,
+  //                   BlendMode.srcIn,
+  //                 ),
+  //               ),
+  //             ),
+  //           )
+  //         : commonPopTextView(AppCommonIcon.moreIcon),
+  //     padding: EdgeInsetsGeometry.zero,
+  //     menuPadding: EdgeInsetsGeometry.zero,
+  //
+  //     itemBuilder: (context) => [
+  //       PopupMenuItem(
+  //         value: 1,
+  //         onTap: onTap,
+  //         // onTap: () {
+  //         //   context.go(
+  //         //     '${AppRouteName.approvalsView}/${AppRouteName.courseApprovalsDetailView}',
+  //         //     extra: {'data': course, 'title': 'view'},
+  //         //   );
+  //         // },
+  //         child: Padding(
+  //           padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+  //           child: commonDeviceView(
+  //             AppCommonIcon.showPasswordIcon,
+  //             DashboardViewStrings.viewCourse,
+  //             null,
+  //           ),
+  //         ),
+  //       ),
+  //       PopupMenuItem(
+  //         value: 2,
+  //         onTap: () {
+  //           commonDialogBox(
+  //             context: context,
+  //             child: SizedBox(
+  //               width: 560,
+  //               child: Padding(
+  //                 padding: const EdgeInsets.symmetric(
+  //                   vertical: 20,
+  //                   horizontal: 20,
+  //                 ),
+  //                 child: CourseApproveDialog(
+  //                   image: CommonImageAssets.courseApprove,
+  //                   title: CourseApproveDialogStrings
+  //                       .courseApproved,
+  //                   subtitle: CourseApproveDialogStrings
+  //                       .courseApprovedDes,
+  //                   buttonName: CourseApproveDialogStrings
+  //                       .goToCourse,
+  //                   onPressed: () {
+  //                     Navigator.of(
+  //                       context,
+  //                       rootNavigator: true,
+  //                     ).pop();
+  //                   },
+  //                 ),
+  //               ),
+  //             ),
+  //           );
+  //           // Navigator.pop(context);
+  //         },
+  //         child: Padding(
+  //           padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+  //           child: commonDeviceView(
+  //             AppCommonIcon.approveIcon,
+  //             ApprovalsStrings.approve,
+  //             null,
+  //           ),
+  //         ),
+  //       ),
+  //       PopupMenuItem(
+  //         value: 3,
+  //         onTap: () {
+  //           commonDialogBox(
+  //             context: context,
+  //             child: SizedBox(
+  //               width: 560,
+  //               child: Padding(
+  //                 padding: const EdgeInsets.symmetric(
+  //                   vertical: 20,
+  //                   horizontal: 20,
+  //                 ),
+  //                 child: CourseApproveDialog(
+  //                   image: CommonImageAssets.courseDecline,
+  //                   title: CourseApproveDialogStrings.courseDeclined,
+  //                   subtitle: CourseApproveDialogStrings.courseDeclinedDes,
+  //                   buttonName: CourseApproveDialogStrings.goToCourse,
+  //                   onPressed: () {},
+  //                 ),
+  //               ),
+  //             ),
+  //           );
+  //         },
+  //         child: Padding(
+  //           padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+  //           child: commonDeviceView(
+  //             AppCommonIcon.declineIcon,
+  //             ApprovalsStrings.decline,
+  //             null,
+  //           ),
+  //         ),
+  //       ),
+  //       PopupMenuItem(
+  //         value: 4,
+  //         child: Padding(
+  //           padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+  //           child: commonDeviceView(
+  //             AppCommonIcon.deleteIcon,
+  //             ApprovalsStrings.delete,
+  //             null,
+  //           ),
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 
+  // Widget editMenuButton(CourseModel course) {
+  //   bool isDarkMode = Get.find<ThemeController>().isDarkMode;
+  //   var mobileView = ResponsiveView.isMobile(context);
+  //   return PopupMenuButton(
+  //     color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.lightBgColor,
+  //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+  //     child: mobileView
+  //         ? Container(
+  //             height: 32,
+  //             width: 32,
+  //             decoration: BoxDecoration(
+  //               color: Colors.transparent,
+  //
+  //               borderRadius: BorderRadius.circular(5),
+  //               border: Border.all(color: AppColors.lightBorderColor),
+  //             ),
+  //             child: Center(
+  //               child: SvgImageFromAsset(
+  //                 AppCommonIcon.moreIcon,
+  //                 colorFilter: ColorFilter.mode(
+  //                   AppColors.white,
+  //                   BlendMode.srcIn,
+  //                 ),
+  //               ),
+  //             ),
+  //           )
+  //         : commonPopTextView(AppCommonIcon.moreIcon),
+  //     padding: EdgeInsetsGeometry.zero,
+  //     menuPadding: EdgeInsetsGeometry.zero,
+  //
+  //     itemBuilder: (context) => [
+  //       PopupMenuItem(
+  //         value: 1,
+  //         onTap: () {
+  //           //print( course.name);
+  //         },
+  //         child: Padding(
+  //           padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+  //           child: commonDeviceView(
+  //             AppCommonIcon.editIcon,
+  //             CourseManagementStrings.edit,
+  //             null,
+  //           ),
+  //         ),
+  //       ),
+  //       PopupMenuItem(
+  //         value: 2,
+  //         onTap: () {
+  //           // Navigator.pop(context);
+  //         },
+  //         child: Padding(
+  //           padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+  //           child: commonDeviceView(
+  //             AppCommonIcon.showPasswordIcon,
+  //             CourseManagementStrings.view,
+  //             null,
+  //           ),
+  //         ),
+  //       ),
+  //
+  //       PopupMenuItem(
+  //         value: 3,
+  //         child: Padding(
+  //           padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+  //           child: commonDeviceView(
+  //             AppCommonIcon.deleteIcon,
+  //             ApprovalsStrings.delete,
+  //             null,
+  //           ),
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
+
+  Widget horizontalDetailView() {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
 
@@ -358,11 +894,11 @@ class _CommonCourseViewState extends State<CommonCourseView> {
         padding: EdgeInsets.symmetric(vertical: 12),
         child: Row(
           children: [
-            commonDetail(CommonImageAssets.book, widget.course.courseCategory),
+            commonDetail(CommonImageAssets.book, course.courseCategory),
             Gap(12),
             verticalDivider(),
             Gap(12),
-            commonDetail(CommonImageAssets.language, widget.course.language),
+            commonDetail(CommonImageAssets.language, course.language),
             Gap(12),
             verticalDivider(),
             Gap(12),
@@ -372,19 +908,19 @@ class _CommonCourseViewState extends State<CommonCourseView> {
             Gap(12),
             commonDetail(
               CommonImageAssets.cap,
-              '${widget.course.noOfSession.toString()} Sessions',
+              '${course.noOfSession.toString()} Sessions',
             ),
             Gap(12),
             verticalDivider(),
             Gap(12),
             commonDetail(
               CommonImageAssets.video,
-              '${widget.course.noOfLectures.toString()} Lectures',
+              '${course.noOfLectures.toString()} Lectures',
             ),
             Gap(12),
             verticalDivider(),
             Gap(12),
-            commonDetail(AppCommonIcon.calenderIcon, widget.course.date),
+            commonDetail(AppCommonIcon.calenderIcon, course.date),
           ],
         ),
       ),
@@ -426,7 +962,37 @@ class _CommonCourseViewState extends State<CommonCourseView> {
       color: isDarkMode ? AppColors.grey100Color : AppColors.headingsLightColor,
     );
   }
+
+  Widget customSwitch() {
+    RxBool isSwitch = false.obs;
+    bool isDarkMode = Get.find<ThemeController>().isDarkMode;
+    return SizedBox(
+      height: 17,
+      width: 17,
+      child: Obx(
+        () => Transform.scale(
+          scale: 0.8,
+          child: CupertinoSwitch(
+            value: isSwitch.value,
+            onChanged: (value) {
+              isSwitch.value = value;
+            },
+            activeTrackColor: AppColors.primary500,
+            thumbColor: AppColors.white,
+            inactiveThumbColor: isDarkMode
+                ? AppColors.mainDarkBgColor
+                : AppColors.white,
+            inactiveTrackColor: isDarkMode
+                ? AppColors.greyDarkColor
+                : AppColors.background100,
+          ),
+        ),
+      ),
+    );
+  }
 }
+
+
 
 
 

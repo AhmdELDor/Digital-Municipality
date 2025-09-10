@@ -22,7 +22,7 @@ class AppCommonIcon extends AppAssets {
   static const rightIcon = "${AppAssets._commonIcon}ic_right_icon.svg";
   static const emailIcon = "${AppAssets._commonIcon}ic_mail.svg";
   static const passwordIcon = "${AppAssets._commonIcon}ic_password.svg";
-  static const arrowDownIcon = "${AppAssets._commonIcon}ic_arrow_down.svg";
+  static const arrowDownIcon = "${AppAssets._commonIcon}iic_down_arrow.svg";
   static const showPasswordIcon = "${AppAssets._commonIcon}ic_password_show.svg";
   static const hidePasswordIcon = "${AppAssets._commonIcon}ic_password_hide.svg";
   static const searchIcon = "${AppAssets._commonIcon}ic_search.svg";
@@ -86,8 +86,15 @@ class AppCommonIcon extends AppAssets {
   static const approveIcon = "${AppAssets._commonIcon}ic_approve.svg";
   static const declineIcon = "${AppAssets._commonIcon}ic_decline.svg";
   static const filterIcon = "${AppAssets._commonIcon}ic_filter.svg";
-
-
+  static const downloadIcon = "${AppAssets._commonIcon}ic_download.svg";
+  static const editIcon = "${AppAssets._commonIcon}ic_edit.svg";
+  static const userIcon = "${AppAssets._commonIcon}ic_user.svg";
+  static const downIcon = "${AppAssets._commonIcon}ic_down_arrow_icon.svg";
+  static const upArrowIcon = "${AppAssets._commonIcon}ic_up_arrow_icon.svg";
+  static const quizDeleteIcon = "${AppAssets._commonIcon}ic_quiz_delete_icon.svg";
+  static const menuIcon = "${AppAssets._commonIcon}ic_menu.svg";
+  static const positiveIcon = "${AppAssets._commonIcon}ic_positive.svg";
+  static const negativeIcon = "${AppAssets._commonIcon}ic_negative.svg";
 
 
 
@@ -126,8 +133,48 @@ class CommonImageAssets extends AppAssets {
   static const language = "${AppAssets._commonImage}language.svg";
   static const video = "${AppAssets._commonImage}video.svg";
   static const cap = "${AppAssets._commonImage}cap.svg";
-  static const courseApprove = "${AppAssets._commonImage}course_approve.png";
-  static const courseDecline = "${AppAssets._commonImage}course_decline.png";
+  static const courseApprove = "${AppAssets._commonImage}course_approve.svg";
+  static const courseDecline = "${AppAssets._commonImage}course_declined.svg";
+  static const pdf = "${AppAssets._commonImage}pdf.svg";
+  // static const instructorApproved = "${AppAssets._commonImage}instructor_approved.png";
+  // static const instructorDeclined = "${AppAssets._commonImage}instructor_declined.png";
+  static const universityApproved = "${AppAssets._commonImage}university_approve.png";
+
+  static const basicInformation = "${AppAssets._commonImage}basic_information.svg";
+  static const extraInFormation = "${AppAssets._commonImage}extra_information.svg";
+  static const curriculum = "${AppAssets._commonImage}curiculum.svg";
+
+  static const activeBasicInformation = "${AppAssets._commonImage}active_basic_infromation.svg";
+  static const activeExtraInFormation = "${AppAssets._commonImage}active_extra_information.svg";
+  static const activeCurriculum = "${AppAssets._commonImage}active_curricum.svg";
+  static const calender = "${AppAssets._commonImage}calender.svg";
+  static const deActive = "${AppAssets._commonImage}deactive.svg";
+  static const suspend = "${AppAssets._commonImage}suspend.svg";
+  static const inviteSent = "${AppAssets._commonImage}light_invite_sent.svg";
+  static const deActiveSecurity = "${AppAssets._commonImage}deactive_security.svg";
+  static const suspendImg = "${AppAssets._commonImage}suspend_img.svg";
+  static const instructorProfileDetailBg = "${AppAssets._commonImage}instructor_profile_detail_bg.png";
+  static const noOfStudents = "${AppAssets._commonImage}no_of_students.svg";
+  static const noOfCourses = "${AppAssets._commonImage}no_of_courses.svg";
+  static const noOfRating = "${AppAssets._commonImage}no_of_rating.svg";
+  static const categoryDelete = "${AppAssets._commonImage}category_delete.png";
+  static const viewLeaderBoard = "${AppAssets._commonImage}view_leaderboard.svg";
+  static const leaderboardPosition = "${AppAssets._commonImage}leaderboard_position.svg";
+  static const totalEarned = "${AppAssets._commonImage}total_earned.svg";
+  static const paymentHistory = "${AppAssets._commonImage}payment_history.svg";
+
+  static const totalEarning = "${AppAssets._commonImage}total_earning.svg";
+  static const courseSelling = "${AppAssets._commonImage}course_selling.svg";
+  static const courseEarning = "${AppAssets._commonImage}course_earning.svg";
+  static const instructorPayOut = "${AppAssets._commonImage}instructor_pay_out.svg";
+  static const certificateImg = "${AppAssets._commonImage}certificate_img.png";
+
+  static const customBranding = "${AppAssets._commonImage}custom_branding.svg";
+  static const faq = "${AppAssets._commonImage}faq.svg";
+  static const privacyPolicy = "${AppAssets._commonImage}privacy_policy.svg";
+  static const contactUs = "${AppAssets._commonImage}contact_us.svg";
+  static const userProfileBg = "${AppAssets._commonImage}user_profile_bg.png";
+  static const deleteCategory = "${AppAssets._commonImage}delete_category.svg";
 
 
 

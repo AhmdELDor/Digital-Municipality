@@ -1,37 +1,35 @@
 part of 'approvals_course_detail_imports.dart';
 
 class CourseApprovalsDetailView extends StatefulWidget {
-  const CourseApprovalsDetailView({super.key});
+  final CourseModel? course;
+  final String? title;
+  const CourseApprovalsDetailView({super.key, this.course, this.title});
 
   @override
   State<CourseApprovalsDetailView> createState() =>
       _CourseApprovalsDetailViewState();
 }
 
-class _CourseApprovalsDetailViewState extends State<CourseApprovalsDetailView>
-    with TickerProviderStateMixin {
-  late TabController tabController;
-  @override
-  void initState() {
-    super.initState();
-    tabController = TabController(length: 2, vsync: this);
-  }
+class _CourseApprovalsDetailViewState extends State<CourseApprovalsDetailView> {
 
+
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   CourseApprovalsDetailController controller = Get.put(
     CourseApprovalsDetailController(),
   );
-  @override
-  void dispose() {
-    tabController.dispose();
-    super.dispose();
-  }
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
-    var mobileView = ResponsiveView.isMobile(context);
-    final courseData = GoRouterState.of(context).extra as CourseModel;
-    bool isDarkMode = Get.find<ThemeController>().isDarkMode;
+    if (widget.course == null) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+    final tabCount = widget.title != null ? 4 : 2;
+    final isDarkMode = Get.find<ThemeController>().isDarkMode;
+    final mobileView = ResponsiveView.isMobile(context);
     return Scaffold(
       key: _scaffoldKey,
       drawer: const SizedBox(width: 270, child: SideDrawerMenu()),
@@ -42,178 +40,103 @@ class _CourseApprovalsDetailViewState extends State<CourseApprovalsDetailView>
         },
       ),
 
-        body: NestedScrollView(
+      body: DefaultTabController(
+        length: tabCount,
+        child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
-              SliverToBoxAdapter(child: _headerView()),
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: SliverTabBarDelegate(
-                  _tabBar(),
-                  backgroundColor: isDarkMode
-                      ? AppColors.mainDarkBgColor
-                      : AppColors.white,
+              SliverToBoxAdapter(child: _headerView(widget.title)),
+
+              if (mobileView)
+                SliverPersistentHeader(
+                  pinned: true,
+                  delegate: SliverTabBarDelegate(
+                    _tabBar(widget.title),
+                    backgroundColor: isDarkMode
+                        ? AppColors.mainDarkBgColor
+                        : AppColors.white,
+                  ),
                 ),
-              ),
             ];
           },
-          body: mobileView?_tabBarView():
-          SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: mobileView ? 0 : 20, vertical: 20),
-            child: ResponsiveGridRow(
-              children: [
-                ResponsiveGridCol(
-                  lg: 9,
-                  xs: 12,
-                  child: Container(
-                    margin: EdgeInsets.only(right: mobileView ? 0 : 20),
-                    decoration: mobileView
-                        ? null
-                        : BoxDecoration(
-                      color: isDarkMode
-                          ? AppColors.mainDarkBgColor
-                          : AppColors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(
-                        color: isDarkMode
-                            ? AppColors.grey100Color
-                            : AppColors.lightBorderColor,
-                        width: 1,
-                      ),
+          body: mobileView
+              ? _tabBarView(widget.title)
+              : SizedBox(
+                  height: 200,
+                  //color: Colors.yellow,
+                  child: SingleChildScrollView(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: mobileView ? 0 : 20,
+                      vertical: 20,
                     ),
-                    child: SizedBox(
-                      height: context.height,
-                      child:  _tabBarView(),
+                    child: ResponsiveGridRow(
+                      children: [
+                        ResponsiveGridCol(
+                          lg: 9,
+                          xs: 12,
+                          child: Container(
+                            height: context.height,
+                            margin: EdgeInsets.only(right: mobileView ? 0 : 20),
+                            decoration: mobileView
+                                ? null
+                                : BoxDecoration(
+                                    color: isDarkMode
+                                        ? AppColors.mainDarkBgColor
+                                        : AppColors.white,
+                                    borderRadius: BorderRadius.circular(20),
+                                    border: Border.all(
+                                      color: isDarkMode
+                                          ? AppColors.grey100Color
+                                          : AppColors.lightBorderColor,
+                                      width: 1,
+                                    ),
+                                  ),
+                            child: Column(
+                              children: [
+                                if (!mobileView)
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(20),
+                                      topRight: Radius.circular(20),
+                                    ),
+                                    child: _tabBar(widget.title),
+                                  ),
+                                Expanded(child: _tabBarView(widget.title)),
+                              ],
+                            ),
+                          ),
+                        ),
+                        ResponsiveGridCol(
+                          lg: 3,
+                          xs: 0,
+                          child: SizedBox(
+                            height: context.height,
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  _desktopUserView(widget.course),
+                                  Gap(30),
+                                  courseFeaturesView(),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                ResponsiveGridCol(
-                  lg: 3,
-                  xs: 0,
-                  child: SizedBox(
-                    height: context.height,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          _desktopUserView(courseData),
-                          Gap(20),
-                          courseFeaturesView(),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        )
-
-      // body: Padding(
-      //   padding: EdgeInsets.symmetric(
-      //     horizontal: mobileView ? 0 : 20,
-      //     vertical: 20,
-      //   ),
-      //   child: NestedScrollView(
-      //     headerSliverBuilder: (context, innerBoxIsScrolled) {
-      //       return [
-      //         SliverToBoxAdapter(
-      //           child: _headerView(),
-      //         ),
-      //
-      //         SliverPersistentHeader(
-      //           pinned: true,
-      //           delegate: SliverTabBarDelegate(
-      //             _tabBar(),
-      //             backgroundColor: isDarkMode
-      //                 ? AppColors.mainDarkBgColor
-      //                 : AppColors.white,
-      //           ),
-      //         ),
-      //       ];
-      //     },
-      //     body: SingleChildScrollView(
-      //       physics: NeverScrollableScrollPhysics(),
-      //       child: SafeArea(
-      //         child: ResponsiveGridRow(
-      //           children: [
-      //             ResponsiveGridCol(
-      //               lg: 9,
-      //               xs: 12,
-      //               child: Container(
-      //                 height: context.height,
-      //                 margin: EdgeInsetsGeometry.only(
-      //                   right: mobileView ? 0 : 20,
-      //                 ),
-      //                 decoration: mobileView
-      //                     ? null
-      //                     : BoxDecoration(
-      //                   color: isDarkMode
-      //                       ? AppColors.mainDarkBgColor
-      //                       : AppColors.white,
-      //                   borderRadius: BorderRadius.circular(20),
-      //                   border: Border.all(
-      //                     color: isDarkMode
-      //                         ? AppColors.grey100Color
-      //                         : AppColors.lightBorderColor,
-      //                     width: 1,
-      //                   ),
-      //                 ),
-      //                 child: ClipRRect(
-      //                   borderRadius: BorderRadius.circular(
-      //                     mobileView ? 0 : 20,
-      //                   ),
-      //                   child: Expanded(
-      //                     child: TabBarView(
-      //                       controller: tabController,
-      //                       children: [
-      //                         SingleChildScrollView(
-      //
-      //                             child: AboutCoursesView()),
-      //                         CurriculumView(),
-      //                       ],
-      //                     ),
-      //                   ),
-      //                 ),
-      //               ),
-      //             ),
-      //
-      //             ResponsiveGridCol(
-      //               lg: 3,
-      //               xs: 0,
-      //               child: SizedBox(
-      //                 height: context.height * 0.9,
-      //                 child: SingleChildScrollView(
-      //                   child: Obx(
-      //                         () => Column(
-      //                       mainAxisAlignment: MainAxisAlignment.start,
-      //                       crossAxisAlignment: CrossAxisAlignment.start,
-      //                       children: [
-      //                         _desktopUserView(courseData),
-      //                         Gap(20),
-      //                         courseFeaturesView(),
-      //                       ],
-      //                     ),
-      //                   ),
-      //                 ),
-      //               ),
-      //             ),
-      //           ],
-      //         ),
-      //       ),
-      //     ),
-      //   ),
-      // ),
+        ),
+      ),
     );
   }
 
-  _tabBar(){
+  _tabBar(String? title) {
     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
-    return  TabBar(
-      controller: tabController,
+    return TabBar(
+      //controller: tabController,
       labelColor: AppColors.lightPrimaryColor,
-      dividerColor: isDarkMode
-          ? AppColors.grey100Color
-          : AppColors.greyColor,
+      dividerColor: isDarkMode ? AppColors.grey100Color : AppColors.greyColor,
       unselectedLabelStyle: TextStyle(
         color: isDarkMode
             ? AppColors.bodyTextDarkColor
@@ -227,101 +150,212 @@ class _CourseApprovalsDetailViewState extends State<CourseApprovalsDetailView>
         fontSize: 16,
       ),
       indicator: BoxDecoration(
-        color: isDarkMode
-            ? AppColors.cardDarkBg2Color
-            : AppColors.primary50,
-        border: Border(
-          bottom: BorderSide(
-            color: AppColors.primary500,
-          ),
-        ),
+        color: isDarkMode ? AppColors.cardDarkBg2Color : AppColors.primary50,
+        border: Border(bottom: BorderSide(color: AppColors.primary500)),
+        // borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight:Radius.circular(20) )
       ),
       padding: EdgeInsets.zero,
       indicatorSize: TabBarIndicatorSize.tab,
       tabs: [
-        Tab(
-          text:
-          CourseApprovalsDetailStrings.aboutCourse,
-        ),
-        Tab(
-          text: CourseApprovalsDetailStrings.curriculum,
-        ),
+        Tab(text: CourseApprovalsDetailStrings.aboutCourse),
+        Tab(text: CourseApprovalsDetailStrings.curriculum),
+        if (title != null) Tab(text: CourseApprovalsDetailStrings.attendees),
+        if (title != null) Tab(text: CourseApprovalsDetailStrings.reviews),
       ],
     );
   }
-  _tabBarView(){
+
+  Widget _tabBarView(String? title) {
     return SafeArea(
       child: TabBarView(
-        controller: tabController,
-        children: [
-          // Make this scrollable
-          SingleChildScrollView(child: AboutCoursesView()),
-          SingleChildScrollView(child: CurriculumView()),
-        ],
+        children: title != null
+            ? [
+                SingleChildScrollView(child: AboutCoursesView()),
+                SingleChildScrollView(child: CurriculumView()),
+                SingleChildScrollView(child: AttendeesView()),
+                SingleChildScrollView(child: ReviewsView()),
+              ]
+            : [
+                SingleChildScrollView(child: AboutCoursesView()),
+                SingleChildScrollView(child: CurriculumView()),
+              ],
       ),
     );
   }
-_headerView(){
-  var mobileView = ResponsiveView.isMobile(context);
+
+  _headerView(String? title) {
+    var mobileView = ResponsiveView.isMobile(context);
     return Column(
       children: [
         mobileView
             ? Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
-              child: CommonSearchField(
-                        controller: controller.searchController,
-                        hintText: DashboardViewStrings.searchAnything,
-                      ),
-            )
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 20,
+                ),
+                child: CommonSearchField(
+                  controller: controller.searchController,
+                  hintText: DashboardViewStrings.searchAnything,
+                ),
+              )
             : SizedBox(),
 
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Row(
-            children: [
-              Expanded(
-                child: CommonText.semiBold(
-                  CourseApprovalsDetailStrings.courseApprovals,
-                  size: mobileView?15:17,
-                  fontWeight: mobileView?FontWeight.w500:FontWeight.w600,
-                ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: CommonText.semiBold(
+                      title == 'category'
+                          ? ViewCourseCategoryStrings.viewCourse
+                          : CourseApprovalsDetailStrings.courseApprovals,
+                      size: mobileView ? 15 : 17,
+                      fontWeight: mobileView
+                          ? FontWeight.w500
+                          : FontWeight.w600,
+                    ),
+                  ),
+                  title == 'category'
+                      ? SizedBox()
+                      : SizedBox(
+                          width: mobileView ? 72 : 120,
+                          child: PrimaryButton(
+                            height: mobileView ? 32 : 36,
+                            backgroundColor: AppColors.error500,
+                            onPressed: () {
+                              commonDialogBox(
+                                context: context,
+                                child: SizedBox(
+                                  width: 560,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 20,
+                                      horizontal: 20,
+                                    ),
+                                    child: FeedBackInstructorDialog(
+                                      feedbackController:
+                                          controller.feedbackController,
+                                      formKey: controller.formKey,
+
+                                      onPressed: () {
+                                        final isValid = controller
+                                            .formKey
+                                            .currentState!
+                                            .validate();
+                                        FocusScope.of(
+                                          context,
+                                        ).unfocus(); // ✅ safer than Get.focusScope
+
+                                        if (!isValid) return;
+
+                                        controller.formKey.currentState!.save();
+                                        Navigator.of(
+                                          context,
+                                          rootNavigator: true,
+                                        ).pop();
+                                        commonDialogBox(
+                                          context: context,
+                                          child: SizedBox(
+                                            width: 560,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                    vertical: 20,
+                                                    horizontal: 20,
+                                                  ),
+                                              child: CourseApproveDialog(
+                                                image: CommonImageAssets
+                                                    .courseDecline,
+                                                title:
+                                                    CourseApproveDialogStrings
+                                                        .courseDeclined,
+                                                subtitle:
+                                                    CourseApproveDialogStrings
+                                                        .courseDeclinedDes,
+                                                buttonName:
+                                                    CourseApproveDialogStrings
+                                                        .continueAndDecline,
+                                                onPressed: () {
+                                                  Navigator.of(
+                                                    context,
+                                                    rootNavigator: true,
+                                                  ).pop();
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                            label: ApprovalsStrings.decline,
+                            textSize: mobileView ? 14 : 16,
+                            textWeight: FontWeight.w400,
+                          ),
+                        ),
+                  Gap(10),
+                  title == 'category'
+                      ? SizedBox()
+                      : SizedBox(
+                          width: mobileView ? 77 : 120,
+                          child: PrimaryButton(
+                            height: mobileView ? 32 : 36,
+                            backgroundColor: AppColors.success500,
+                            onPressed: () {
+                              commonDialogBox(
+                                context: context,
+                                child: SizedBox(
+                                  width: 560,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 20,
+                                      horizontal: 20,
+                                    ),
+                                    child: CourseApproveDialog(
+                                      image: CommonImageAssets.courseApprove,
+                                      title: CourseApproveDialogStrings
+                                          .courseApproved,
+                                      subtitle: CourseApproveDialogStrings
+                                          .courseApprovedDes,
+                                      buttonName:
+                                          CourseApproveDialogStrings.goToCourse,
+                                      onPressed: () {},
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                            label: ApprovalsStrings.approve,
+                            textSize: mobileView ? 14 : 16,
+                            textWeight: FontWeight.w400,
+                          ),
+                        ),
+                ],
               ),
-              SizedBox(
-                width: mobileView ? 72 : 120,
-                child: PrimaryButton(
-                  height: mobileView ? 32 : 36,
-                  backgroundColor: AppColors.error500,
-                  onPressed: () {},
-                  label: ApprovalsStrings.decline,
-                  textSize: mobileView ? 14 : 16,
-                  textWeight: FontWeight.w400,
-                ),
-              ),
-              Gap(10),
-              SizedBox(
-                width: mobileView ? 77 : 120,
-                child: PrimaryButton(
-                  height: mobileView ? 32 : 36,
-                  backgroundColor: AppColors.success500,
-                  onPressed: () {},
-                  label: ApprovalsStrings.decline,
-                  textSize: mobileView ? 14 : 16,
-                  textWeight: FontWeight.w400,
-                ),
-              ),
-            ],
-          ),
+            ),
+
+            CommonDivider(),
+          ],
         ),
         Gap(20),
         mobileView ? _deviceUserView() : SizedBox(),
         Gap(mobileView ? 20 : 0),
       ],
     );
-}
-  _desktopUserView(CourseModel courseData) {
+  }
+
+  _desktopUserView(CourseModel? courseData) {
+    if (courseData == null) return SizedBox();
     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
     return Obx(
-      () =>  Container(
+      () => Container(
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         decoration: BoxDecoration(
           color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.white,
@@ -355,12 +389,13 @@ _headerView(){
               size: 20,
               color: AppColors.primary500,
             ),
-            Gap(15),
+            Gap(10),
           ],
         ),
       ),
     );
   }
+
   _deviceUserView() {
     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
     return Obx(
@@ -427,5 +462,3 @@ _headerView(){
     );
   }
 }
-
-

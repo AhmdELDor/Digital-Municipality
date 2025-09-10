@@ -50,7 +50,7 @@ class _CommonOtpFieldState extends State<CommonOtpField> {
         final pinTheme = PinTheme(
           width: 48,
           height: 48,
-          margin: EdgeInsets.symmetric(horizontal: mobileView?5:12),
+          margin: EdgeInsets.symmetric(horizontal: mobileView?2:12),
           decoration: BoxDecoration(
 
             borderRadius: BorderRadius.circular(6),

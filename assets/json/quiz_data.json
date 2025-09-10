@@ -1,0 +1,122 @@
+{
+  "coursesList": [
+    {
+      "id": 1,
+      "name": "Quiz for Designers"
+    },
+    {
+      "id": 2,
+      "name": "Quiz for Developers"
+    },
+    {
+      "id": 3,
+      "name": "Quiz for Marketers"
+    }
+
+
+  ],
+  "categoryList": [
+    {
+      "id": 1,
+      "name": "Development"
+    },
+    {
+      "id": 2,
+      "name": "Design"
+    },
+    {
+      "id": 3,
+      "name": "Business"
+    }
+
+
+  ],
+  "statusList": [
+    {
+      "id": 1,
+      "name": "In-Progress"
+    },
+    {
+      "id": 2,
+      "name": "Completed"
+    },
+    {
+      "id": 3,
+      "name": "Pending"
+    }
+
+
+  ],
+  "usersList": [
+    {
+      "id": 1,
+      "name": "Instructor"
+    },
+    {
+      "id": 2,
+      "name": "Admin"
+    }
+  ],
+  "quiz_list": [
+    {
+      "id": 1,
+      "name": "Quiz for Designers",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/kJcQYyvu5ULl68ae92e6d3ece.png",
+      "tag": "Adobe After Effects Course",
+      "course": "Designing",
+      "totalQuestions": 25,
+      "totalAttendees": 4.1,
+      "answerChangeable": "Yes"
+    },
+    {
+      "id": 2,
+      "name": "Quiz for Developers",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/kohYtcsU74LR68ae92e6d4ffb.png",
+      "tag": "JavaScript Fundamentals",
+      "course": "Coding",
+      "totalQuestions": 25,
+      "totalAttendees": 4.1,
+      "answerChangeable": "No"
+    },
+    {
+      "id": 3,
+      "name": "Quiz for Marketers",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/GWSGemnChAhJ68ae92e6d5441.png",
+      "tag": "Social Media Strategies",
+      "course": "Coding",
+      "totalQuestions": 25,
+      "totalAttendees": 4.1,
+      "answerChangeable": "Yes"
+    },
+    {
+      "id": 4,
+      "name": "Quiz for Designers",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/kJcQYyvu5ULl68ae92e6d3ece.png",
+      "tag": "Adobe After Effects Course",
+      "course": "Designing",
+      "totalQuestions": 25,
+      "totalAttendees": 4.1,
+      "answerChangeable": "Yes"
+    },
+    {
+      "id": 5,
+      "name": "Quiz for Marketers",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/kohYtcsU74LR68ae92e6d4ffb.png",
+      "tag": "Social Media Strategies",
+      "course": "Coding",
+      "totalQuestions": 25,
+      "totalAttendees": 4.1,
+      "answerChangeable": "Yes"
+    },
+    {
+      "id": 6,
+      "name": "Quiz for Developers",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/GWSGemnChAhJ68ae92e6d5441.png",
+      "tag": "JavaScript Fundamentals",
+      "course": "Coding",
+      "totalQuestions": 25,
+      "totalAttendees": 4.1,
+      "answerChangeable": "No"
+    }
+  ]
+}

@@ -1,4 +1,6 @@
+import 'package:education_admin_portal/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class CircularLoader extends StatelessWidget {
   final double? loaderSize;
@@ -23,4 +25,15 @@ class CircularLoader extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<void> commonToastMsg(String msgText) async {
+  await Fluttertoast.showToast(
+    msg: msgText,
+    toastLength: Toast.LENGTH_LONG,
+    timeInSecForIosWeb: 1,
+    backgroundColor: AppColors.primary500,
+    textColor: AppColors.white,
+    fontSize: 16.0,
+  );
 }

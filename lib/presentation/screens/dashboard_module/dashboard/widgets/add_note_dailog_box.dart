@@ -10,6 +10,7 @@ import '../../../../../core/constants/app_strings.dart';
 import '../../../../app/theme_controller.dart';
 import '../../../../common_widgets/input_field/common_password_field.dart';
 import '../../../../common_widgets/input_field/common_text_field.dart';
+import '../../../../common_widgets/view_common_widget/common_dialog_box.dart';
 import '../../../../common_widgets/widgets/validations.dart';
 
 class AddNoteDialogBox extends StatefulWidget {
@@ -278,12 +279,7 @@ class _LogOutDialogBoxState extends State<LogOutDialogBox> {
           children: [
             Align(
               alignment: Alignment.centerRight,
-              child: InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: SvgImageFromAsset(AppCommonIcon.closeIcon),
-              ),
+              child: commonCloseIcon(context)
             ),
             Gap(20),
             SvgImageFromAsset(CommonImageAssets.logOut,height: 48,width: 48,),

@@ -101,7 +101,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
       ),
       decoration: InputDecoration(
         contentPadding:
-            widget.contentPadding ?? EdgeInsets.fromLTRB(12, 12, 12, 16),
+            widget.contentPadding ?? EdgeInsets.fromLTRB(15, 15, 15, 15),
         counterText: "",
         focusedErrorBorder: OutlineInputBorder(
           borderSide:
@@ -179,17 +179,58 @@ class _CommonTextFieldState extends State<CommonTextField> {
         ),
         suffixIcon: widget.suffixIcon != null
             ? SizedBox(
-
-              child: Row(
+                child: Row(
                   mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [widget.suffixIcon ?? const SizedBox.shrink()],
                 ),
-            )
+              )
             : const SizedBox.shrink(),
       ),
       onTap: widget.onTap,
       onChanged: widget.onChange,
     );
   }
+}
+
+commonInputDecoration(String hintText, BuildContext context) {
+  return InputDecoration(
+    contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 15),
+    counterText: "",
+    focusedErrorBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: Theme.of(context).colorScheme.error),
+      borderRadius: ShapeBorderRadius.small,
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: ShapeBorderRadius.small,
+      borderSide: BorderSide(
+        color: Get.find<ThemeController>().isDarkMode
+            ? AppColors.grey100Color
+            : AppColors.headingsLightColor,
+        width: 1,
+      ),
+    ),
+    errorBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: Theme.of(context).colorScheme.error),
+      borderRadius: ShapeBorderRadius.small,
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: Theme.of(context).colorScheme.primary),
+      borderRadius: ShapeBorderRadius.small,
+    ),
+    //fillColor: widget.fillColor ?? Theme.of(context).colorScheme.surface,
+    fillColor: Colors.transparent,
+    errorStyle: TextStyle(
+      color: Theme.of(context).colorScheme.error,
+      fontWeight: FontWeight.w700,
+    ),
+    hintText: hintText,
+    hintStyle: TextStyle(
+      color: Get.find<ThemeController>().isDarkMode
+          ? AppColors.bodyTextDarkColor
+          : AppColors.bodyTextColor,
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
+    ),
+  );
 }

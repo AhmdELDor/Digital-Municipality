@@ -494,12 +494,11 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
                 // ],
                 if (widget.showCountryFlag) ...[
                   kIsWeb
-                      ? Container()
-                  // Image.asset(
-                  //         'assets/flags/${_selectedCountry.code.toLowerCase()}.png',
-                  //         package: 'intl_phone_field',
-                  //         width: 32,
-                  //       )
+                      ?
+                  Image.asset(
+                          'packages/input_phone_filed/assets/flags/${_selectedCountry.code.toLowerCase()}.png',
+                    width: 32,
+                        )
                       : Text(
                     _selectedCountry.name.substring(0, 2).toUpperCase(),
                          // style:  TextStyle(fontSize: 13,fontWeight: FontWeight.w400,color: Colors.red,),

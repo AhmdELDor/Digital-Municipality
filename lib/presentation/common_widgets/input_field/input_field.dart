@@ -18,7 +18,7 @@ abstract class InputField extends StatefulWidget {
   final GlobalKey<FormFieldState>? fieldKey;
   final  ValueChanged<String>? onFieldSubmitted;
   final Color?fillColor;
-
+  final EdgeInsetsGeometry? contentPadding;
   const InputField({
     super.key,
     this.fieldKey,
@@ -29,7 +29,7 @@ abstract class InputField extends StatefulWidget {
     this.textInputAction,
     this.hintText,
     this.labelText,
-    this.onFieldSubmitted, this.fillColor,
+    this.onFieldSubmitted, this.fillColor, this.contentPadding,
   });
 
   @override

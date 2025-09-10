@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_grid/responsive_grid.dart';
-
 import '../../../../core/constants/app_strings.dart';
-import '../../../../utils/extensions/responsive.dart';
 import '../../../common_widgets/view_common_widget/common_notes_view.dart';
 import '../../../common_widgets/view_common_widget/custom_app_bar.dart';
 import '../../../common_widgets/widgets/text.dart';

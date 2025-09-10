@@ -1,0 +1,36 @@
+{
+   "id": 1,
+    "first_name": "Emily",
+    "last_name": "Parker",
+    "email": "emilyparker.admin@gmail.com",
+    "phone": "+91 55555 55555",
+    "user_profile_img": "https://media.imperiathemes.com/images/education_admin_portal/MQdg8pRswENA68bae02be6adb.png",
+    "joined_date": "12 Jun 2017",
+    "user_role": "Super Admin",
+    "location": {
+      "country": "India",
+      "city": "Ahmedabad",
+      "postal_code": "380001"
+    },
+    "statistics": {
+      "total_revenue": {
+        "value": 3420,
+        "changePercent": -5,
+        "isPositive": false,
+        "logo": "https://media.imperiathemes.com/images/education_admin_portal/5JSdHba9IfqJ68b83bcf87c09.png"
+      },
+      "total_students": {
+        "value": 59841,
+        "changePercent": 15,
+        "isPositive": true,
+        "logo": "https://media.imperiathemes.com/images/education_admin_portal/PLrvm896zust68b83b9defcaf.png"
+      },
+      "new_users_today": {
+        "value": 558,
+        "changePercent": 20,
+        "isPositive": true,
+        "logo": "https://media.imperiathemes.com/images/education_admin_portal/Aa40d3IEC82w68b83c4a65343.png"
+      }
+    }
+
+}

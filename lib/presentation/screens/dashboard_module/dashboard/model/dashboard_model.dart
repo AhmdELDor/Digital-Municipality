@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:education_admin_portal/presentation/screens/dashboard_module/dashboard/model/rank_model.dart';
 import 'course_model.dart';
-import 'category_model.dart';
+import 'course_category_model.dart';
 import 'class_approval_model.dart';
 import 'instructor_model.dart';
 import 'notes_model.dart';
@@ -20,7 +20,7 @@ class DashboardDataModel {
   List<InstructorModel> instructorList;
   List<CourseModel> topCoursesList;
   List<RankModel> rankList;
-  List<CategoryModel> topCategoriesList;
+  List<CourseCategoryModel> topCategoriesList;
 
   DashboardDataModel({
     required this.totalStudents,
@@ -94,7 +94,7 @@ class DashboardDataModel {
             [],
         topCategoriesList:
             (json['top_categories_list'] as List<dynamic>?)
-                ?.map((e) => CategoryModel.fromJson(e))
+                ?.map((e) => CourseCategoryModel.fromJson(e))
                 .toList() ??
             [],
       );

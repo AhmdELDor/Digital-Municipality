@@ -140,8 +140,8 @@ notificationView(NotificationModel notification, BuildContext context) {
 commonPopTextView(String image) {
   bool isDarkMode = Get.find<ThemeController>().isDarkMode;
   return Container(
-    height: 32,
-    width: 32,
+    height: 36,
+    width: 36,
     decoration: BoxDecoration(
       color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.lightBgColor,
       borderRadius: BorderRadius.circular(6),

@@ -40,6 +40,7 @@ class AppColors {
   static const Color error300 = Color(0xFFFCA5A5);
   static const Color error400 = Color(0xFFF87171);
   static const Color error500 = Color(0xFFEF4444);
+  static const Color error600 = Color(0xFFDC2626);
 
   static const Color headingsColor = Color(0xFF1F2937);
   static const Color headingsLightColor = Color(0xFFE5E7EB);
@@ -83,6 +84,24 @@ class AppColors {
   static const Color purple600 = Color(0xFF8E56FD);
 
   static const Color pink600 = Color(0xFFE22C3F);
+  static const Color calenderViewColor = Color(0xFFF8FBFF);
+
+  static const Color circleOne = Color(0xFFF4EEFF);
+  static const Color circleTwo = Color(0xFFEADFFF);
+  static const Color circleThree = Color(0xFFD1BBFD);
+  static const Color circleFour = Color(0xFF8E56FD);
+
+  static const Color darkCircleOne = Color(0xFF3B2960);
+  static const Color darkCircleTwo = Color(0xFF4E3978);
+  static const Color darkCircleThree = Color(0xFF6B50A1);
+  static const Color orangeColor = Color(0xFFF09916);
+  static const Color darkPinkColor = Color(0xFFD51B52);
+  static const Color textDisabledColor = Color(0xFF85888E);
+
+
+
+
+
 
 
 

@@ -1,7 +1,12 @@
 import 'dart:convert';
-import '../../../approvals_module/approvals_module/model/course_curriculum_model.dart';
-import '../../../approvals_module/approvals_module/model/course_feature_list_model.dart';
 
+import 'package:education_admin_portal/presentation/screens/dashboard_module/dashboard/model/instructor_model.dart';
+import 'package:education_admin_portal/presentation/screens/dashboard_module/dashboard/model/user_model.dart';
+import 'package:get/get.dart';
+
+import '../../../approvals_module/approvals_course_view/model/course_curriculum_model.dart';
+import '../../../approvals_module/approvals_course_view/model/course_feature_list_model.dart';
+import '../../../reports_analysis_module/reports_analysis_view/model/change_metric_model.dart';
 
 class CourseModel {
   int id = 0;
@@ -17,13 +22,22 @@ class CourseModel {
   int noOfSession = 0;
   String instructorProfileImg = '';
   String courseCategory = '';
-  double attendance=0.0;
+  double attendance = 0.0;
   String language = '';
   String courseType = '';
   List<String> learningOutComesList = [];
   String requirements = '';
   List<CourseCurriculumModel> courseCurriculumList = [];
   List<CourseFeatureListModel> courseFeatureList = [];
+  List<InstructorModel> attendanceList = [];
+  List<UserModel> reviewList = [];
+  RxBool isChecked = false.obs;
+  String status = '';
+   String avgTimeToComplete='';
+   int completionRate=0;
+   ChangeMetric? compareLastMonth;
+
+
   CourseModel.empty();
   CourseModel({
     required this.id,
@@ -46,6 +60,12 @@ class CourseModel {
     required this.courseCurriculumList,
     required this.courseFeatureList,
     required this.attendance,
+    required this.attendanceList,
+    required this.reviewList,
+    required this.isChecked,
+    required this.status, required this.avgTimeToComplete,
+    required this.completionRate,
+    required this.compareLastMonth,
   });
   factory CourseModel.fromRawJson(String str) =>
       CourseModel.fromJson(json.decode(str));
@@ -86,6 +106,23 @@ class CourseModel {
               ?.map((e) => CourseFeatureListModel.fromJson(e))
               .toList() ??
           [],
+      attendanceList:
+          (json['attendanceList'] as List<dynamic>?)
+              ?.map((e) => InstructorModel.fromJson(e))
+              .toList() ??
+          [],
+      reviewList:
+          (json['reviewList'] as List<dynamic>?)
+              ?.map((e) => UserModel.fromJson(e))
+              .toList() ??
+          [],
+      isChecked: false.obs,
+      status: json['status'] ?? '',
+      avgTimeToComplete: json["avgTimeToComplete"] ?? "",
+      completionRate: json["completionRate"] ?? 0,
+      compareLastMonth: json["compareLastMonth"] != null
+          ? ChangeMetric.fromJson(json["compareLastMonth"])
+          : null, // ✅ safe null handling
     );
   }
 }

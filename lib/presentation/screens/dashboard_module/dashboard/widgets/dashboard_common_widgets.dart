@@ -12,6 +12,7 @@ import '../../../../../utils/extensions/responsive.dart';
 import '../../../../app/app_route.dart';
 import '../../../../app/theme_controller.dart';
 import '../../../../common_widgets/view_common_widget/common_card_decoration.dart';
+import '../../../../common_widgets/view_common_widget/common_circle_add_button.dart';
 import '../../../../common_widgets/view_common_widget/common_dialog_box.dart';
 import '../../../../common_widgets/view_common_widget/common_notes_view.dart';
 import '../../../../common_widgets/widgets/button.dart';
@@ -505,7 +506,6 @@ Widget classApprovalsCardView(ClassApprovalModel data) {
 
 //my notes
 Widget myNotesView(BuildContext context) {
-  bool isDarkMode = Get.find<ThemeController>().isDarkMode;
   var mobileView = ResponsiveView.isMobile(context);
   DashboardController controller = Get.put(DashboardController());
   return Container(
@@ -531,38 +531,18 @@ Widget myNotesView(BuildContext context) {
                     context: context,
                     child: SizedBox(
                       width: 361,
-                      child: AddNoteDialogBox(
-                        titleController: controller.noteTitleController,
-                        noteController: controller.noteController,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                        child: AddNoteDialogBox(
+                          titleController: controller.noteTitleController,
+                          noteController: controller.noteController,
 
+                        ),
                       ),
                     ),
                   );
                 },
-                child: Container(
-                  height: 36,
-                  width: 36,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: isDarkMode
-                          ? AppColors.grey100Color
-                          : AppColors.lightBorderColor,
-                      width: 1,
-                    ),
-                    borderRadius: BorderRadius.circular(7),
-                  ),
-                  child: Center(
-                    child: SvgImageFromAsset(
-                      AppCommonIcon.circleAddIcon,
-                      colorFilter: ColorFilter.mode(
-                        isDarkMode
-                            ? AppColors.bodyTextDarkColor
-                            : AppColors.bodyTextColor,
-                        BlendMode.srcIn,
-                      ),
-                    ),
-                  ),
-                ),
+                child: CommonCircleAddButton()
               ),
             ],
           ),
@@ -843,22 +823,18 @@ Widget userSummeryView(BuildContext context) {
                             innerRadius: '60%',
                             dataLabelSettings: DataLabelSettings(
                               isVisible: true,
-                              builder:
-                                  (
-                                    data,
-                                    point,
-                                    series,
-                                    pointIndex,
-                                    seriesIndex,
-                                  ) {
-                                    final UserSummeryChartData chartData = data;
-                                    return CommonText.semiBold(
-                                      '${chartData.y}%',
-                                      color: AppColors.white,
-                                      size: 12,
-                                    );
-                                  },
+                              labelIntersectAction: LabelIntersectAction.none, // allow overlap
+                              labelPosition: ChartDataLabelPosition.inside,
+                              builder: (data, point, series, pointIndex, seriesIndex) {
+                                final chartData = data as UserSummeryChartData;
+                                return CommonText.semiBold(
+                                  '${chartData.y}%',
+                                  color: AppColors.white,
+                                  size: 12,
+                                );
+                              },
                             ),
+
                           ),
                         ],
                       ),
@@ -1218,7 +1194,6 @@ Widget buildLeaderBoardCard(BuildContext context) {
 }
 
 Widget rankView() {
-  bool isDarkMode = Get.find<ThemeController>().isDarkMode;
   DashboardController controller = Get.put(DashboardController());
   final rank1 = controller.dashboardData.value.rankList.firstWhere(
     (e) => e.rank == 1,
@@ -1311,24 +1286,13 @@ Widget commonView({
   required String name,
   required String courses,
 }) {
-  bool isDarkMode = Get.find<ThemeController>().isDarkMode;
   return Column(
     children: [
-      Container(
+      commonCacheImage(
+        image,
+        ImagePlaceHolder.imagePlaceHolderDark,
         height: 60,
         width: 60,
-        decoration: BoxDecoration(
-          color: isDarkMode ? AppColors.greyDarkColor : AppColors.background100,
-          shape: BoxShape.circle,
-        ),
-        child: Center(
-          child: commonCacheImage(
-            image,
-            ImagePlaceHolder.imagePlaceHolderDark,
-            height: 32,
-            width: 32,
-          ),
-        ),
       ),
       Gap(10),
       CommonText.medium(name, size: 15),

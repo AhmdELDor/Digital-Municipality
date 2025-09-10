@@ -9,50 +9,51 @@ import '../../core/themes/app_themes.dart';
 
 import 'app_route.dart';
 
-class EducationApp extends StatefulWidget {
+class EducationAdminPortal extends StatefulWidget {
   final ConnectivityHelper connectivityHelper;
 
-  const EducationApp({super.key, required this.connectivityHelper});
+  const EducationAdminPortal({super.key, required this.connectivityHelper});
 
   @override
-  State<EducationApp> createState() => _EducationAppState();
+  State<EducationAdminPortal> createState() => _EducationAdminPortalState();
 }
 
-class _EducationAppState extends State<EducationApp> {
+class _EducationAdminPortalState extends State<EducationAdminPortal> {
   final themeController = Get.put(ThemeController());
   final RxBool hasInternet = true.obs;
 
   late StreamSubscription internetSub;
-  @override
-  void initState() {
-    //widget.connectivityHelper.initialize() ;
-    super.initState();
-    widget.connectivityHelper.initialize();
+  // @override
+  // void initState() {
+  //   //widget.connectivityHelper.initialize() ;
+  //   super.initState();
+  //   widget.connectivityHelper.initialize();
+  //
+  //   internetSub = widget.connectivityHelper.onConnectivityChanged.listen((
+  //     connected,
+  //   ) {
+  //     hasInternet.value = connected;
+  //     if (!connected) {
+  //       //Get.toNamed(AppRouteName.noInternetView,);
+  //     } else {
+  //       Get.back();
+  //     }
+  //   });
+  //   // initFirebase();
+  // }
 
-    internetSub = widget.connectivityHelper.onConnectivityChanged.listen((
-      connected,
-    ) {
-      hasInternet.value = connected;
-      if (!connected) {
-        //Get.toNamed(AppRouteName.noInternetView,);
-      } else {
-        Get.back();
-      }
-    });
-    // initFirebase();
-  }
-
-  @override
-  void dispose() {
-    widget.connectivityHelper.dispose();
-    internetSub.cancel();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   widget.connectivityHelper.dispose();
+  //   internetSub.cancel();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
     return  MaterialApp.router(
       debugShowCheckedModeBanner: false,
+
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: themeController.isDarkMode

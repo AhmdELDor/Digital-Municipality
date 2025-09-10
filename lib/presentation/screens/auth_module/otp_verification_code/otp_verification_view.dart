@@ -52,6 +52,7 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
   }
   Widget otpVerifyView(){
     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
+    var mobileView = ResponsiveView.isMobile(context);
     return Column(
       //mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,8 +64,8 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
         ),
         Gap(30),
         Container(
-          decoration: isDarkMode?AppCommonShadow.commonDarkBoxShadow:AppCommonShadow.commonBoxShadow,
-          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+          decoration:mobileView?null: isDarkMode?AppCommonShadow.commonDarkBoxShadow:AppCommonShadow.commonBoxShadow,
+          padding:  EdgeInsets.symmetric(horizontal: mobileView?5:25, vertical: 25),
           child: Form(
             key: controller.formKey,
             child: Column(

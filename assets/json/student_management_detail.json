@@ -1,0 +1,84 @@
+{
+  "contact_information":{
+    "name": "Sophhie Lee",
+    "email": "sophhielee123@gmail.com",
+    "phoneNo": "+91 55555 55555"
+
+  },
+ "leaderBoardPosition":589,
+ "totalEarnedCoins":2566,
+ "totalCourse":93,
+ "completedCourse":90,
+ "ongoingCourses":3,
+  "courses_list": [
+    {
+      "id": 1,
+      "name": "Logo Design in Adobe Illustrator 10 graphic tools",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/J5mIr74dJGUg68b18b4971d17.png",
+      "description": "Lorem ipsum dolor sit amet consectetur. Sagittis phasellus faucibus amet imperdiet.Lorem ipsum dolor sit amet consectetur. Sagittis phasellus.",
+      "courseFees": 199.99,
+      "rate": 4.5,
+      "status": "Completed"
+    },
+    {
+      "id": 2,
+      "name": "Logo Design in Adobe Illustrator 10 graphic tools",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/J5mIr74dJGUg68b18b4971d17.png",
+      "description": "Lorem ipsum dolor sit amet consectetur. Sagittis phasellus faucibus amet imperdiet.Lorem ipsum dolor sit amet consectetur. Sagittis phasellus.",
+      "courseFees": 199.99,
+      "rate": 4.5,
+      "status": "Ongoing"
+    },
+    {
+      "id": 3,
+      "name": "Logo Design in Adobe Illustrator 10 graphic tools",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/J5mIr74dJGUg68b18b4971d17.png",
+      "description": "Lorem ipsum dolor sit amet consectetur. Sagittis phasellus faucibus amet imperdiet.Lorem ipsum dolor sit amet consectetur. Sagittis phasellus.",
+      "courseFees": 199.99,
+      "rate": 4.5,
+      "status": "Ongoing"
+    },
+    {
+      "id": 4,
+      "name": "Logo Design in Adobe Illustrator 10 graphic tools",
+      "image": "https://media.imperiathemes.com/images/education_admin_portal/J5mIr74dJGUg68b18b4971d17.png",
+      "description": "Lorem ipsum dolor sit amet consectetur. Sagittis phasellus faucibus amet imperdiet.Lorem ipsum dolor sit amet consectetur. Sagittis phasellus.",
+      "courseFees": 199.99,
+      "rate": 4.5,
+      "status": "Completed"
+    }
+
+  ],
+  "payment_history_list": [
+    {
+      "courseId": 1,
+      "courseImage": "https://media.imperiathemes.com/images/education_admin_portal/J5mIr74dJGUg68b18b4971d17.png",
+      "courseName": "Logo Design in Adobe Illustrator 10 Graphic Tools",
+      "courseFees":199.99,
+      "paymentDate":"12 Jun 2025",
+      "coins":50,
+      "paymentMethod":"Pay Pal",
+      "status":"Paid"
+    },
+    {
+      "courseId": 2,
+      "courseImage": "https://media.imperiathemes.com/images/education_admin_portal/J5mIr74dJGUg68b18b4971d17.png",
+      "courseName": "Logo Design in Adobe Illustrator 10 Graphic Tools",
+      "courseFees":299.99,
+      "paymentDate":"15 Jun 2025",
+      "coins":100,
+      "paymentMethod":"Credit Card",
+      "status":"Cancel"
+    },
+    {
+      "courseId": 3,
+      "courseImage": "https://media.imperiathemes.com/images/education_admin_portal/J5mIr74dJGUg68b18b4971d17.png",
+      "courseName": "Logo Design in Adobe Illustrator 10 Graphic Tools",
+      "courseFees":199.99,
+      "paymentDate":"20 Jun 2025",
+      "coins":150,
+      "paymentMethod":"Razor Pay",
+      "status":"Paid"
+    }
+  ]
+}

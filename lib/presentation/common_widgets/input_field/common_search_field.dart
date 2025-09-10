@@ -47,7 +47,6 @@ class CommonSearchField extends StatefulWidget {
 class _CommonSearchFieldState extends State<CommonSearchField> {
   @override
   void initState() {
-
     super.initState();
   }
 
@@ -71,9 +70,8 @@ class _CommonSearchFieldState extends State<CommonSearchField> {
       textCapitalization: TextCapitalization.sentences,
       textInputAction: TextInputAction.search,
       decoration: InputDecoration(
-
         counterText: "",
-        contentPadding: EdgeInsets.symmetric(horizontal: 15),
+        contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         focusedErrorBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Theme.of(context).colorScheme.error),
           borderRadius: ShapeBorderRadius.small,
@@ -114,7 +112,7 @@ class _CommonSearchFieldState extends State<CommonSearchField> {
           borderRadius: ShapeBorderRadius.small,
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color:  Theme.of(context).colorScheme.primary),
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.primary),
           borderRadius: ShapeBorderRadius.small,
         ),
         fillColor: Colors.transparent,
@@ -125,7 +123,7 @@ class _CommonSearchFieldState extends State<CommonSearchField> {
               ? AppColors.bodyTextDarkColor
               : AppColors.bodyTextColor,
           fontSize: 14,
-          fontWeight: FontWeight.w400
+          fontWeight: FontWeight.w400,
         ),
         prefixIconConstraints: const BoxConstraints(minWidth: 20),
         prefixIcon: Row(

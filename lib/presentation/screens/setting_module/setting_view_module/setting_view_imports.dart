@@ -1,0 +1,29 @@
+import 'package:education_admin_portal/presentation/screens/setting_module/setting_view_module/widgets/add_faq_view.dart';
+import 'package:education_admin_portal/presentation/screens/setting_module/setting_view_module/widgets/add_privacy_policy.dart';
+import 'package:education_admin_portal/presentation/screens/setting_module/setting_view_module/widgets/common_view.dart';
+import 'package:education_admin_portal/presentation/screens/setting_module/setting_view_module/widgets/contact_us_view.dart';
+import 'package:education_admin_portal/presentation/screens/setting_module/setting_view_module/widgets/custom_branding_view.dart';
+import 'package:education_admin_portal/presentation/screens/setting_module/setting_view_module/widgets/delete_privacy_policy_view.dart';
+import 'package:education_admin_portal/presentation/screens/setting_module/setting_view_module/widgets/edit_privacy_policy_view.dart';
+import 'package:education_admin_portal/presentation/screens/setting_module/setting_view_module/widgets/faq_view.dart';
+import 'package:education_admin_portal/presentation/screens/setting_module/setting_view_module/widgets/privacy_policy.dart';
+import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:get/get.dart';
+
+import '../../../../core/constants/app_assets.dart';
+import '../../../../core/constants/app_colors.dart';
+import '../../../../core/constants/app_strings.dart';
+import '../../../../utils/extensions/responsive.dart';
+import '../../../app/theme_controller.dart';
+import '../../../common_widgets/common_text_view/common_header_text.dart';
+import '../../../common_widgets/input_field/common_search_field.dart';
+import '../../../common_widgets/view_common_widget/common_circle_add_button.dart';
+import '../../../common_widgets/view_common_widget/common_dialog_box.dart';
+import '../../../common_widgets/view_common_widget/custom_app_bar.dart';
+import '../../../common_widgets/widgets/common_divider.dart';
+import '../../../common_widgets/widgets/image.dart';
+import '../../side_drawer_module/side_drawer_menu/side_drawer_imports.dart';
+import 'controller/setting_view_controller.dart';
+
+part 'setting_view.dart';

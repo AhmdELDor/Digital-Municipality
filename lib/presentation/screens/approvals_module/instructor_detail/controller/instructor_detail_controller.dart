@@ -9,6 +9,8 @@ import '../../../dashboard_module/dashboard/model/instructor_model.dart';
 class InstructorDetailController extends GetxController{
   var searchController = TextEditingController();
   Rx<InstructorModel> data = InstructorModel.empty().obs;
+  var feedbackController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   @override
   void onInit() {
     super.onInit();

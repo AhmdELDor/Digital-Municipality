@@ -1,0 +1,32 @@
+import 'package:education_admin_portal/core/constants/app_colors.dart';
+import 'package:education_admin_portal/presentation/common_widgets/widgets/common_cache_image.dart';
+import 'package:education_admin_portal/presentation/common_widgets/widgets/image.dart';
+import 'package:education_admin_portal/presentation/common_widgets/widgets/text.dart';
+import 'package:education_admin_portal/presentation/screens/university_management_module/university_management_view/widgets/add_university_view.dart';
+import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
+import 'package:responsive_grid/responsive_grid.dart';
+
+import '../../../../core/constants/app_assets.dart';
+import '../../../../core/constants/app_strings.dart';
+import '../../../../utils/extensions/responsive.dart';
+import '../../../app/app_route.dart';
+import '../../../app/theme_controller.dart';
+import '../../../common_widgets/alerts/alerts.dart';
+import '../../../common_widgets/common_text_view/common_header_text.dart';
+import '../../../common_widgets/input_field/common_search_field.dart';
+import '../../../common_widgets/view_common_widget/common_circle_add_button.dart';
+import '../../../common_widgets/view_common_widget/common_dialog_box.dart';
+import '../../../common_widgets/view_common_widget/custom_app_bar.dart';
+import '../../../common_widgets/widgets/common_divider.dart';
+import '../../approvals_module/approvals_course_view/model/university_model.dart';
+import '../../approvals_module/approvals_course_view/widgets/common_delete_dialog_box.dart';
+import '../../approvals_module/approvals_course_view/widgets/common_no_result_found.dart';
+import '../../dashboard_module/notification/widgets/notification_list_view.dart';
+import '../../instructor_management_module/instructor_management_view/widgets/add_instructor_view.dart';
+import '../../side_drawer_module/side_drawer_menu/side_drawer_imports.dart';
+import 'controller/university_management_view_controller.dart';
+
+part 'university_management_view.dart';

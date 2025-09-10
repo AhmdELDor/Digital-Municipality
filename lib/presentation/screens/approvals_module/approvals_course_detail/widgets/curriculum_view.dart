@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 import '../../../../../core/constants/app_colors.dart';
+import '../../../../../utils/extensions/responsive.dart';
 import '../../../../app/theme_controller.dart';
 import '../../../../common_widgets/widgets/text.dart';
 import '../controller/approvals_course_detail_controller.dart';
@@ -21,6 +22,7 @@ class _CurriculumViewState extends State<CurriculumView> {
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
+    var mobileView = ResponsiveView.isMobile(context);
     return SingleChildScrollView(
       child: ListView.builder(
         itemCount: controller.data.value.courseCurriculumList.length,
@@ -50,24 +52,27 @@ class _CurriculumViewState extends State<CurriculumView> {
       
                   title: Row(
                     children: [
-                      Expanded(
-                        child: CommonText.medium(
-                          data.title,
-                          size: 16,
-                          color: isDarkMode
-                              ? AppColors.headingsLightColor
-                              : AppColors.primary500,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                        ),
+                      CommonText.regular(
+                        data.title,
+                        size: 17,
+                        // color: isDarkMode
+                        //     ? AppColors.headingsLightColor
+                        //     : AppColors.primary500,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
                       ),
-                      // CommonText.regular(
-                      //   '(0${data.lecturesList.length} Lectures)',
-                      //   size: 14,
-                      //   color: isDarkMode
-                      //       ? AppColors.bodyTextDarkColor
-                      //       : AppColors.bodyTextColor,
-                      // ),
+                      mobileView?SizedBox(): Gap(10),
+                      mobileView?SizedBox():Container(
+                        height: 43,
+                        width: 1,
+                        color: isDarkMode?AppColors.grey100Color:AppColors.headingsLightColor,
+                      ),
+                      mobileView?SizedBox():  Gap(10),
+                      mobileView?SizedBox(): CommonText.regular(
+                        '(0${data.lecturesList.length} Lectures)',
+                        size: 17,
+
+                      ),
                     ],
                   ),
       

@@ -11,8 +11,6 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
   ChangePasswordController controller = Get.put(ChangePasswordController());
   @override
   Widget build(BuildContext context) {
-    const double horizontalSpacing = 20;
-    bool isDarkMode = Get.find<ThemeController>().isDarkMode;
     var mobileView = ResponsiveView.isMobile(context);
     return Scaffold(
       appBar: CommonAppbar(),
@@ -42,6 +40,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
   }
   Widget resetPasswordView(){
     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
+    var mobileView = ResponsiveView.isMobile(context);
     return Column(
       //mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,10 +50,10 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
           alignment: Alignment.center,
           child: SvgImageFromAsset(CommonImageAssets.appLogo),
         ),
-        Gap(30),
+        Gap(35),
         Container(
-          decoration: isDarkMode?AppCommonShadow.commonDarkBoxShadow:AppCommonShadow.commonBoxShadow,
-          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+          decoration: mobileView?null: isDarkMode?AppCommonShadow.commonDarkBoxShadow:AppCommonShadow.commonBoxShadow,
+          padding:  EdgeInsets.symmetric(horizontal: mobileView?10:25, vertical: 25),
           child: Form(
             key: controller.formKey,
             child: Column(

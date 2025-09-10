@@ -11,7 +11,6 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
   ForgotPasswordController controller = Get.put(ForgotPasswordController());
   @override
   Widget build(BuildContext context) {
-    bool isDarkMode = Get.find<ThemeController>().isDarkMode;
     var mobileView = ResponsiveView.isMobile(context);
     return Scaffold(
       appBar: CommonAppbar(),
@@ -43,6 +42,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
 
   Widget forgotPasswordView() {
     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
+    var mobileView = ResponsiveView.isMobile(context);
     return Column(
       //mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +54,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
         ),
         Gap(30),
         Container(
-          decoration: isDarkMode?AppCommonShadow.commonDarkBoxShadow:AppCommonShadow.commonBoxShadow,
+          decoration: mobileView?null:isDarkMode?AppCommonShadow.commonDarkBoxShadow:AppCommonShadow.commonBoxShadow,
           padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
           child: Form(
             key: controller.formKey,
@@ -78,7 +78,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                   validator: validateEmail,
                 ),
 
-                Gap(30),
+                Gap(35),
                 Obx(() {
                   return controller.isLoading.value
                       ? const Center(child: CommonCircularLoader())

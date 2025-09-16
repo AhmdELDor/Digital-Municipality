@@ -11,6 +11,7 @@ import '../../../../common_widgets/common_text_view/auth_common_text.dart';
 import '../../../../common_widgets/input_field/common_date_picker.dart';
 import '../../../../common_widgets/input_field/common_text_field.dart';
 import '../../../../common_widgets/view_common_widget/common_dialog_box.dart';
+import '../../../../common_widgets/view_common_widget/custom_dropdown_button.dart';
 import '../../../../common_widgets/widgets/common_divider.dart';
 import '../../../../common_widgets/widgets/validations.dart';
 import '../../../dashboard_module/dashboard/model/course_model.dart';
@@ -46,7 +47,7 @@ class _AddPaymentViewState extends State<AddPaymentView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CommonText.semiBold(
-                    FinanceManagementStrings.addPaymentMethod,
+                    FinanceManagementStrings.addPayment,
                     size: 18,
                   ),
                   commonCloseIcon(context),
@@ -63,33 +64,44 @@ class _AddPaymentViewState extends State<AddPaymentView> {
                   CommonText.medium(FinanceManagementStrings.course, size: 15),
                   Gap(10),
                   Obx(() {
-                    return DropdownButtonFormField<CourseModel>(
+                    return AlwaysDownDropdown<CourseModel>(
+                      hintText: "Select",
+                      items: controller.data.value.coursesList,
                       value: controller.selectedCourse.value,
-                      items: controller.data.value.coursesList
-                          .map(
-                            (course) => DropdownMenuItem(
-                              value: course,
-                              child: CommonText.regular(
-                                course.name,
-                                size: 14,
-                                color: isDarkMode
-                                    ? AppColors.bodyTextDarkColor
-                                    : AppColors.bodyTextColor,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          )
-                          .toList(),
                       onChanged: (val) {
-                        if (val != null) {
-                          controller.selectedCourse.value = val;
-                        }
+                        controller.selectedCourse.value = val;
                       },
-                      decoration: commonInputDecoration(
-                        FinanceManagementStrings.select,
-                        context,
-                      ),
+                      itemAsString: (item) => item.name,
+                      //validator: (val) => val == null ? "Payment Method" : null,
                     );
+
+                    //   DropdownButtonFormField<CourseModel>(
+                    //   value: controller.selectedCourse.value,
+                    //   items: controller.data.value.coursesList
+                    //       .map(
+                    //         (course) => DropdownMenuItem(
+                    //           value: course,
+                    //           child: CommonText.regular(
+                    //             course.name,
+                    //             size: 14,
+                    //             color: isDarkMode
+                    //                 ? AppColors.bodyTextDarkColor
+                    //                 : AppColors.bodyTextColor,
+                    //             fontWeight: FontWeight.w400,
+                    //           ),
+                    //         ),
+                    //       )
+                    //       .toList(),
+                    //   onChanged: (val) {
+                    //     if (val != null) {
+                    //       controller.selectedCourse.value = val;
+                    //     }
+                    //   },
+                    //   decoration: commonInputDecoration(
+                    //     FinanceManagementStrings.select,
+                    //     context,
+                    //   ),
+                    // );
                   }),
       
                   Gap(25),
@@ -109,33 +121,44 @@ class _AddPaymentViewState extends State<AddPaymentView> {
                   commonHeader(FinanceManagementStrings.paymentMethod),
                   Gap(10),
                   Obx(() {
-                    return DropdownButtonFormField<PaymentMethodModel>(
+                    return AlwaysDownDropdown<PaymentMethodModel>(
+                      hintText: "Select",
+                      items: controller.data.value.paymentMethodsList,
                       value: controller.selectedPaymentMethod.value,
-                      items: controller.data.value.paymentMethodsList
-                          .map(
-                            (course) => DropdownMenuItem(
-                              value: course,
-                              child: CommonText.regular(
-                                course.name,
-                                size: 14,
-                                color: isDarkMode
-                                    ? AppColors.bodyTextDarkColor
-                                    : AppColors.bodyTextColor,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          )
-                          .toList(),
                       onChanged: (val) {
-                        if (val != null) {
-                          controller.selectedPaymentMethod.value = val;
-                        }
+                        controller.selectedPaymentMethod.value = val;
                       },
-                      decoration: commonInputDecoration(
-                        FinanceManagementStrings.select,
-                        context,
-                      ),
+                      itemAsString: (item) => item.name,
+                      //validator: (val) => val == null ? "Payment Method" : null,
                     );
+
+                    //   DropdownButtonFormField<PaymentMethodModel>(
+                    //   value: controller.selectedPaymentMethod.value,
+                    //   items: controller.data.value.paymentMethodsList
+                    //       .map(
+                    //         (course) => DropdownMenuItem(
+                    //           value: course,
+                    //           child: CommonText.regular(
+                    //             course.name,
+                    //             size: 14,
+                    //             color: isDarkMode
+                    //                 ? AppColors.bodyTextDarkColor
+                    //                 : AppColors.bodyTextColor,
+                    //             fontWeight: FontWeight.w400,
+                    //           ),
+                    //         ),
+                    //       )
+                    //       .toList(),
+                    //   onChanged: (val) {
+                    //     if (val != null) {
+                    //       controller.selectedPaymentMethod.value = val;
+                    //     }
+                    //   },
+                    //   decoration: commonInputDecoration(
+                    //     FinanceManagementStrings.select,
+                    //     context,
+                    //   ),
+                    // );
                   }),
                   Gap(25),
                   Row(
@@ -226,33 +249,44 @@ class _AddPaymentViewState extends State<AddPaymentView> {
                             commonHeader(FinanceManagementStrings.status),
                             Gap(10),
                             Obx(() {
-                              return DropdownButtonFormField<StatusModel>(
+                              return AlwaysDownDropdown<StatusModel>(
+                                hintText: "Select",
+                                items: controller.data.value.statusList,
                                 value: controller.selectedStatus.value,
-                                items: controller.data.value.statusList
-                                    .map(
-                                      (course) => DropdownMenuItem(
-                                        value: course,
-                                        child: CommonText.regular(
-                                          course.name,
-                                          size: 14,
-                                          color: isDarkMode
-                                              ? AppColors.bodyTextDarkColor
-                                              : AppColors.bodyTextColor,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    )
-                                    .toList(),
                                 onChanged: (val) {
-                                  if (val != null) {
-                                    controller.selectedStatus.value = val;
-                                  }
+                                  controller.selectedStatus.value = val;
                                 },
-                                decoration: commonInputDecoration(
-                                  FinanceManagementStrings.select,
-                                  context,
-                                ),
+                                itemAsString: (item) => item.name,
+                                //validator: (val) => val == null ? "Payment Method" : null,
                               );
+
+                              //   DropdownButtonFormField<StatusModel>(
+                              //   value: controller.selectedStatus.value,
+                              //   items: controller.data.value.statusList
+                              //       .map(
+                              //         (course) => DropdownMenuItem(
+                              //           value: course,
+                              //           child: CommonText.regular(
+                              //             course.name,
+                              //             size: 14,
+                              //             color: isDarkMode
+                              //                 ? AppColors.bodyTextDarkColor
+                              //                 : AppColors.bodyTextColor,
+                              //             fontWeight: FontWeight.w400,
+                              //           ),
+                              //         ),
+                              //       )
+                              //       .toList(),
+                              //   onChanged: (val) {
+                              //     if (val != null) {
+                              //       controller.selectedStatus.value = val;
+                              //     }
+                              //   },
+                              //   decoration: commonInputDecoration(
+                              //     FinanceManagementStrings.select,
+                              //     context,
+                              //   ),
+                              // );
                             }),
                           ],
                         ),
@@ -277,7 +311,12 @@ class _AddPaymentViewState extends State<AddPaymentView> {
                       Gap(15),
                       Expanded(
                         child: PrimaryButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(
+                              context,
+                              rootNavigator: true,
+                            ).pop();
+                          },
                           label: FinanceManagementStrings.addPayment,
                           textSize: 16,
                           textWeight: FontWeight.w500,

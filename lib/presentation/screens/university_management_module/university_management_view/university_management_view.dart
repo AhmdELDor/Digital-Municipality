@@ -43,7 +43,10 @@ class _UniversityManagementViewState extends State<UniversityManagementView> {
                     )
                   : SizedBox(),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 20,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -67,13 +70,16 @@ class _UniversityManagementViewState extends State<UniversityManagementView> {
                                 FocusScope.of(
                                   context,
                                 ).unfocus(); // ✅ safer than Get.focusScope
-        
+
                                 if (!isValid) return;
-        
+
                                 controller.formKey.currentState!.save();
                                 // ✅ Close previous dialog safely
-                                Navigator.of(context, rootNavigator: true).pop();
-        
+                                Navigator.of(
+                                  context,
+                                  rootNavigator: true,
+                                ).pop();
+
                                 commonDialogBox(
                                   context: context,
                                   child: SizedBox(
@@ -84,10 +90,16 @@ class _UniversityManagementViewState extends State<UniversityManagementView> {
                                           .invitationSent,
                                       subtitle: UniversityInviteSentStrings
                                           .invitationSentDes,
-                                      buttonBackgroundColor: AppColors.primary500,
+                                      buttonBackgroundColor:
+                                          AppColors.primary500,
                                       buttonName:
                                           InviteSendStrings.backToDashboard,
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.of(
+                                          context,
+                                          rootNavigator: true,
+                                        ).pop();
+                                      },
                                     ),
                                   ),
                                 );
@@ -100,27 +112,28 @@ class _UniversityManagementViewState extends State<UniversityManagementView> {
                   ],
                 ),
               ),
-        
+
               CommonDivider(),
               Gap(20),
               Obx(
-                () =>  controller.universityList.isEmpty
+                () => controller.universityList.isEmpty
                     ? Center(child: CommonNoResultFound())
-                    :Padding(
-                  padding: EdgeInsets.only(left: 20),
-                  child: ResponsiveGridRow(
-                    children: List.generate(controller.universityList.length, (
-                      index,
-                    ) {
-                      final data = controller.universityList[index];
-                      return ResponsiveGridCol(
-                        lg: 3,
-                        xs: 12,
-                        child: universityView(data,index),
-                      );
-                    }),
-                  ),
-                ),
+                    : Padding(
+                        padding: EdgeInsets.only(left: 20),
+                        child: ResponsiveGridRow(
+                          children: List.generate(
+                            controller.universityList.length,
+                            (index) {
+                              final data = controller.universityList[index];
+                              return ResponsiveGridCol(
+                                lg: 3,
+                                xs: 12,
+                                child: universityView(data, index),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
               ),
             ],
           ),
@@ -129,7 +142,7 @@ class _UniversityManagementViewState extends State<UniversityManagementView> {
     );
   }
 
-  Widget universityView(UniversityModel data,int index) {
+  Widget universityView(UniversityModel data, int index) {
     var mobileView = ResponsiveView.isMobile(context);
     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
     return Container(
@@ -171,7 +184,7 @@ class _UniversityManagementViewState extends State<UniversityManagementView> {
                   width: double.infinity,
                 ),
               ),
-              Positioned(top: 10, right: 10, child: menuButton(data,index)),
+              Positioned(top: 10, right: 10, child: menuButton(data, index)),
             ],
           ),
           Gap(12),
@@ -202,11 +215,12 @@ class _UniversityManagementViewState extends State<UniversityManagementView> {
     );
   }
 
-  menuButton(UniversityModel data,int index) {
+  menuButton(UniversityModel data, int index) {
     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
     return PopupMenuButton(
       color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.lightBgColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+      position: PopupMenuPosition.under,
       child: Container(
         height: 30,
         width: 30,
@@ -307,33 +321,21 @@ class _UniversityManagementViewState extends State<UniversityManagementView> {
               child: SizedBox(
                 width: 560,
                 child: CommonDeleteDialogBox(
-                  tittle: CourseApproveDialogStrings
-                      .deleteUniversity,
-                  subtitle: CourseApproveDialogStrings
-                      .deleteUniversityDes,
+                  tittle: CourseApproveDialogStrings.deleteUniversity,
+                  subtitle: CourseApproveDialogStrings.deleteUniversityDes,
                   doneOnPressed: () {
                     //Navigator.pop(context); // close dialog
 
-                    if (index <
-                        controller
-                            .universityList
-                            .length) {
-                      controller
-                          .universityList
-                          .removeAt(index);
+                    if (index < controller.universityList.length) {
+                      controller.universityList.removeAt(index);
                       controller.universityList
                           .refresh(); // ✅ refresh reactive state
                     }
-                    Navigator.of(
-                      context,
-                      rootNavigator: true,
-                    ).pop();
-
+                    Navigator.of(context, rootNavigator: true).pop();
 
                     showSuccessMessage(
                       context: context,
-                      title:
-                      'University Deleted Successfully',
+                      title: 'University Deleted Successfully',
                       content: '',
                     );
                   },

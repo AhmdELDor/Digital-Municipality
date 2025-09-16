@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-
 import '../../../../../core/constants/app_assets.dart';
 import '../../../../../core/constants/app_colors.dart';
 import '../../../../../core/constants/app_strings.dart';
@@ -21,7 +20,7 @@ import '../controller/today_class_controller.dart';
 Widget usersDropDown() {
   TodayClassController controller = Get.put(TodayClassController());
   return Obx(
-    () => CustomDropdownFormField<String>(
+    () => AlwaysDownDropdown<String>(
       hintText: "Select",
       items: controller.usersList,
       value: controller.selectedUser.value.isEmpty
@@ -30,7 +29,7 @@ Widget usersDropDown() {
       onChanged: (val) {
         controller.selectedUser.value = val ?? '';
       },
-      validator: (val) => val == null || val.isEmpty ? "Please select" : null,
+      //validator: (val) => val == null || val.isEmpty ? "Please select" : null,
     ),
   );
 }
@@ -38,7 +37,7 @@ Widget usersDropDown() {
 Widget courseCategoryDropDown() {
   TodayClassController controller = Get.put(TodayClassController());
   return Obx(
-    () => CustomDropdownFormField<String>(
+    () => AlwaysDownDropdown<String>(
       hintText: "Course",
       items: controller.courseList,
       value: controller.selectedCourse.value.isEmpty
@@ -47,7 +46,7 @@ Widget courseCategoryDropDown() {
       onChanged: (val) {
         controller.selectedCourse.value = val ?? '';
       },
-      validator: (val) => val == null || val.isEmpty ? "Course" : null,
+      //validator: (val) => val == null || val.isEmpty ? "Course" : null,
     ),
   );
 }
@@ -57,10 +56,9 @@ Widget menuButton(BuildContext context) {
   return PopupMenuButton(
     color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.lightBgColor,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
-
     padding: EdgeInsetsGeometry.zero,
     menuPadding: EdgeInsetsGeometry.zero,
-
+    position: PopupMenuPosition.under,
     itemBuilder: (context) => [
       PopupMenuItem(
         value: 1,
@@ -110,7 +108,7 @@ Widget todayClassView(ClassModel data, BuildContext context) {
   bool isDarkMode = Get.find<ThemeController>().isDarkMode;
   var mobileView = ResponsiveView.isMobile(context);
   return Container(
-    margin: EdgeInsets.only(right: 20, bottom: 20),
+    margin: EdgeInsets.only(right:mobileView?0: 20, bottom: 20),
     decoration: commonCardDecoration(12),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,

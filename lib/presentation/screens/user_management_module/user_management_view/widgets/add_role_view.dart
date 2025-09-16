@@ -83,11 +83,14 @@ class _AddRoleViewState extends State<AddRoleView> {
                         () => SizedBox(
                           width: double.infinity,
                           child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
                             child: DataTable(
                               border: TableBorder.all(
-                                color: AppColors.headingsLightColor,
+                                borderRadius: BorderRadius.circular(12),
+                                color: isDarkMode?AppColors.grey100Color:AppColors.headingsLightColor,
                                 width: 1,
                               ),
+                              
                               columnSpacing: 30,
                               columns: [
                                 DataColumn(
@@ -120,7 +123,7 @@ class _AddRoleViewState extends State<AddRoleView> {
                               //   color: Colors.yellow
                               // ),
                               headingRowHeight: 36,
-                              headingRowColor: WidgetStateColor.resolveWith((states) => AppColors.lightBgColor,),
+                              headingRowColor: WidgetStateColor.resolveWith((states) => isDarkMode?AppColors.mainDarkBgColor:AppColors.lightBgColor,),
                               rows: controller.permissions.map((p) {
                                 return DataRow(
                                   cells: [

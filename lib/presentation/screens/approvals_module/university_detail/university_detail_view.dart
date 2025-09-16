@@ -24,6 +24,7 @@ class _UniversityDetailViewState extends State<UniversityDetailView> {
         drawerOnTap: () {
           _scaffoldKey.currentState?.openDrawer();
         },
+        showBackIcon: true,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -250,35 +251,43 @@ class _UniversityDetailViewState extends State<UniversityDetailView> {
                                     commonCacheImage(
                                       controller.data.value.image,
                                       ImagePlaceHolder.imagePlaceHolderDark,
-                                      height: 100,
-                                      width: 100,
+                                      height: mobileView ? 60 : 100,
+                                      width: mobileView ? 60 : 100,
                                     ),
                                     Gap(20),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        CommonText.semiBold(
-                                          instructorData.name,
-                                          size: 20,
-                                          color: AppColors.white,
-                                        ),
-                                        Gap(12),
-                                        CommonText.regular(
-                                          controller.data.value.email,
-                                          size: 15,
-                                          color: AppColors.white,
-                                        ),
-                                        Gap(12),
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          CommonText.semiBold(
+                                            instructorData.name,
+                                            size: mobileView ? 16 : 20,
+                                            color: AppColors.white,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          Gap(12),
+                                          CommonText.regular(
+                                            controller.data.value.email,
+                                            size: mobileView ? 14 : 15,
+                                            color: AppColors.white,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          Gap(12),
 
-                                        CommonText.regular(
-                                          controller.data.value.phoneNo,
-                                          size: 15,
-                                          color: AppColors.white,
-                                        ),
-                                      ],
+                                          CommonText.regular(
+                                            controller.data.value.phoneNo,
+                                            size: mobileView ? 14 : 15,
+                                            color: AppColors.white,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -461,23 +470,29 @@ class _UniversityDetailViewState extends State<UniversityDetailView> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     _commonLeadingText(
-                      InstructorDetailViewStrings.identityProof,
+                      'Course Completion Certificate ',
                     ),
                     Gap(12),
                     Row(
                       children: [
-                        CommonText.medium(
-                          controller.data.value.identityProf,
-                          size: 16,
+                        Expanded(
+                          child: CommonText.medium(
+                            'Course Completion Certificate ',
+                            size: 16,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                         Gap(20),
                         SvgImageFromAsset(CommonImageAssets.pdf),
                         Gap(3),
                         Expanded(
                           child: CommonText.regular(
-                            'Drivinglicence.pdf',
+                            'Compl....pdf',
                             size: 14,
                             color: AppColors.bodyTextColor,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         SvgImageFromAsset(AppCommonIcon.downloadIcon),
@@ -549,7 +564,6 @@ class _UniversityDetailViewState extends State<UniversityDetailView> {
                 showVerifyButton: false,
                 decoration: TextDecoration.underline,
                 onTap: () {
-
                   _launchURL(controller.data.value.faceBookAccount);
                 },
               )
@@ -595,23 +609,25 @@ class _UniversityDetailViewState extends State<UniversityDetailView> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     _commonLeadingText(
-                      InstructorDetailViewStrings.identityProof,
+                      'Government Registration Certificate',
                     ),
                     Gap(12),
                     Row(
                       children: [
-                        CommonText.medium(
-                          controller.data.value.identityProf,
-                          size: 16,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                        Expanded(
+                          child: CommonText.medium(
+                            controller.data.value.identityProf,
+                            size: 16,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                         Gap(20),
                         SvgImageFromAsset(CommonImageAssets.pdf),
                         Gap(3),
                         Expanded(
                           child: CommonText.regular(
-                            'Drivinglicence.pdf',
+                            controller.data.value.identityProf,
                             size: 14,
                             color: AppColors.bodyTextColor,
                             maxLines: 1,

@@ -52,14 +52,16 @@ class _CurriculumViewState extends State<CurriculumView> {
       
                   title: Row(
                     children: [
-                      CommonText.regular(
-                        data.title,
-                        size: 17,
-                        // color: isDarkMode
-                        //     ? AppColors.headingsLightColor
-                        //     : AppColors.primary500,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
+                      Expanded(
+                        child: CommonText.regular(
+                          data.title,
+                          size: 17,
+                          // color: isDarkMode
+                          //     ? AppColors.headingsLightColor
+                          //     : AppColors.primary500,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
                       ),
                       mobileView?SizedBox(): Gap(10),
                       mobileView?SizedBox():Container(

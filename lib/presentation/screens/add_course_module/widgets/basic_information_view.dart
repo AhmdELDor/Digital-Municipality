@@ -75,7 +75,7 @@ class _BasicInformationViewState extends State<BasicInformationView> {
         commonRequiredHeaderText(AddCoursesStrings.instructor),
         Gap(15),
         Obx(
-          () => CustomCourseDropdownFormField<String>(
+          () => AlwaysDownDropdown<String>(
             hintText: AddCoursesStrings.selectInstructor,
             items: controller.usersList,
             value: controller.selectedUser.value.isEmpty
@@ -84,15 +84,15 @@ class _BasicInformationViewState extends State<BasicInformationView> {
             onChanged: (val) {
               controller.selectedUser.value = val ?? '';
             },
-            validator: (val) =>
-                val == null || val.isEmpty ? "Select instructor" : null,
+            // validator: (val) =>
+            //     val == null || val.isEmpty ? "Select instructor" : null,
           ),
         ),
         Gap(15),
         commonRequiredHeaderText(AddCoursesStrings.assessmentTest),
         Gap(15),
         Obx(
-          () => CustomCourseDropdownFormField<String>(
+          () => AlwaysDownDropdown<String>(
             hintText: AddCoursesStrings.select,
             items: controller.assessmentTestList,
             value: controller.selectedAssessment.value.isEmpty
@@ -101,8 +101,7 @@ class _BasicInformationViewState extends State<BasicInformationView> {
             onChanged: (val) {
               controller.selectedAssessment.value = val ?? '';
             },
-            validator: (val) =>
-                val == null || val.isEmpty ? AddCoursesStrings.select : null,
+           // validator: (val) => val == null || val.isEmpty ? AddCoursesStrings.select : null,
           ),
         ),
         Gap(25),
@@ -164,7 +163,7 @@ class _BasicInformationViewState extends State<BasicInformationView> {
                   commonRequiredHeaderText(AddCoursesStrings.instructor),
                   Gap(10),
                   Obx(
-                    () => CustomCourseDropdownFormField<String>(
+                    () => AlwaysDownDropdown<String>(
                       hintText: AddCoursesStrings.selectInstructor,
                       items: controller.usersList,
                       value: controller.selectedUser.value.isEmpty
@@ -173,9 +172,9 @@ class _BasicInformationViewState extends State<BasicInformationView> {
                       onChanged: (val) {
                         controller.selectedUser.value = val ?? '';
                       },
-                      validator: (val) => val == null || val.isEmpty
-                          ? "Select instructor"
-                          : null,
+                      // validator: (val) => val == null || val.isEmpty
+                      //     ? "Select instructor"
+                      //     : null,
                     ),
                   ),
                 ],
@@ -189,7 +188,7 @@ class _BasicInformationViewState extends State<BasicInformationView> {
                   commonRequiredHeaderText(AddCoursesStrings.assessmentTest),
                   Gap(10),
                   Obx(
-                    () => CustomCourseDropdownFormField<String>(
+                    () => AlwaysDownDropdown<String>(
                       hintText: AddCoursesStrings.select,
                       items: controller.assessmentTestList,
                       value: controller.selectedAssessment.value.isEmpty
@@ -198,9 +197,9 @@ class _BasicInformationViewState extends State<BasicInformationView> {
                       onChanged: (val) {
                         controller.selectedAssessment.value = val ?? '';
                       },
-                      validator: (val) => val == null || val.isEmpty
-                          ? AddCoursesStrings.select
-                          : null,
+                      // validator: (val) => val == null || val.isEmpty
+                      //     ? AddCoursesStrings.select
+                      //     : null,
                     ),
                   ),
                 ],
@@ -228,7 +227,7 @@ class _BasicInformationViewState extends State<BasicInformationView> {
         commonRequiredHeaderText(AddCoursesStrings.name),
         Gap(10),
         CommonTextField(
-          hintText: AddNoteStrings.enterTitle,
+          hintText: AddCoursesStrings.enterCourseName,
           controller: controller.courseNameController,
           textInputAction: TextInputAction.next,
           validator: (value) {
@@ -246,7 +245,7 @@ class _BasicInformationViewState extends State<BasicInformationView> {
         commonRequiredHeaderText(AddCoursesStrings.category),
         Gap(10),
         Obx(
-          () => CustomCourseDropdownFormField<String>(
+          () => AlwaysDownDropdown<String>(
             hintText: "Select",
             items: controller.categoryList,
             value: controller.selectedCategory.value.isEmpty
@@ -255,7 +254,7 @@ class _BasicInformationViewState extends State<BasicInformationView> {
             onChanged: (val) {
               controller.selectedCategory.value = val ?? '';
             },
-            validator: (val) => val == null || val.isEmpty ? "Select" : null,
+            //validator: (val) => val == null || val.isEmpty ? "Select" : null,
           ),
         ),
       ],
@@ -344,7 +343,7 @@ class _BasicInformationViewState extends State<BasicInformationView> {
         commonRequiredHeaderText(AddCoursesStrings.courseType),
         Gap(10),
         Obx(
-          () => CustomCourseDropdownFormField<String>(
+          () => AlwaysDownDropdown<String>(
             hintText: "Select",
             items: controller.categoryList,
             value: controller.selectedCourseType.value.isEmpty
@@ -353,7 +352,7 @@ class _BasicInformationViewState extends State<BasicInformationView> {
             onChanged: (val) {
               controller.selectedCourseType.value = val ?? '';
             },
-            validator: (val) => val == null || val.isEmpty ? "Select" : null,
+            //validator: (val) => val == null || val.isEmpty ? "Select" : null,
           ),
         ),
       ],
@@ -367,7 +366,7 @@ class _BasicInformationViewState extends State<BasicInformationView> {
         commonRequiredHeaderText(AddCoursesStrings.language),
         Gap(10),
         Obx(
-          () => CustomCourseDropdownFormField<String>(
+          () => AlwaysDownDropdown<String>(
             hintText: "Select",
             items: controller.languageList,
             value: controller.selectedLanguage.value.isEmpty
@@ -376,7 +375,7 @@ class _BasicInformationViewState extends State<BasicInformationView> {
             onChanged: (val) {
               controller.selectedLanguage.value = val ?? '';
             },
-            validator: (val) => val == null || val.isEmpty ? "Select" : null,
+            //validator: (val) => val == null || val.isEmpty ? "Select" : null,
           ),
         ),
       ],
@@ -494,13 +493,16 @@ class _BasicInformationViewState extends State<BasicInformationView> {
 }
 
 Widget commonRequiredHeaderText(String title) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.start,
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: [
-      CommonText.medium(title, size: 15),
-      Gap(3),
-      CommonText.medium('*', size: 15, color: AppColors.error500),
-    ],
+  return SingleChildScrollView(
+    scrollDirection: Axis.horizontal,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        CommonText.medium(title, size: 15),
+        Gap(3),
+        CommonText.medium('*', size: 15, color: AppColors.error500),
+      ],
+    ),
   );
 }

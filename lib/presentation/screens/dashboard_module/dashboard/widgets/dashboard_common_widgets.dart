@@ -530,7 +530,7 @@ Widget myNotesView(BuildContext context) {
                   commonDialogBox(
                     context: context,
                     child: SizedBox(
-                      width: 361,
+                      width: 560,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                         child: AddNoteDialogBox(
@@ -568,10 +568,10 @@ Widget myNotesView(BuildContext context) {
                       xs: 12,
                       child: Padding(
                         padding: EdgeInsets.only(
-                          right: 15,
+                          right: 20,
                           bottom: 15,
                           left: mobileView
-                              ? 15
+                              ? 20
                               : index == 0
                               ? 12
                               : 0,
@@ -1088,7 +1088,7 @@ Widget buildLeaderBoardCard(BuildContext context) {
   DashboardController controller = Get.put(DashboardController());
   var mobileView = ResponsiveView.isMobile(context);
   return Container(
-    margin: EdgeInsets.only(right: mobileView ? 0 : 3),
+    margin: EdgeInsets.only(right: mobileView ? 0 : 4),
     height: mobileView ? null : 367,
 
     decoration: commonCardDecoration(12),

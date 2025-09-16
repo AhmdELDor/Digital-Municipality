@@ -164,49 +164,7 @@ class _InstructorViewState extends State<InstructorView> {
     );
   }
 
-  // menuButton() {
-  //   return PopupMenuButton(
-  //     color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.lightBgColor,
-  //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
-  //     child: commonPopTextView(AppCommonIcon.moreIcon),
-  //
-  //     itemBuilder: (context) => [
-  //       PopupMenuItem(
-  //         value: 1,
-  //         child: Padding(
-  //           padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-  //           child: commonDeviceView(
-  //             AppCommonIcon.approveIcon,
-  //             ApprovalsStrings.approve,
-  //             null,
-  //           ),
-  //         ),
-  //       ),
-  //       PopupMenuItem(
-  //         value: 2,
-  //         child: Padding(
-  //           padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-  //           child: commonDeviceView(
-  //             AppCommonIcon.declineIcon,
-  //             ApprovalsStrings.decline,
-  //             null,
-  //           ),
-  //         ),
-  //       ),
-  //       PopupMenuItem(
-  //         value: 3,
-  //         child: Padding(
-  //           padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-  //           child: commonDeviceView(
-  //             AppCommonIcon.deleteIcon,
-  //             ApprovalsStrings.delete,
-  //             null,
-  //           ),
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
+
 
   Widget commonDetail(String image, title) {
     return Padding(

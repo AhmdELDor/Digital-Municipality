@@ -155,6 +155,10 @@ class _InviteSentViewViewState extends State<CommonDialogView> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Align(
+            alignment: Alignment.centerRight,
+              child: commonCloseIcon(context)),
+          Gap(20),
           SvgImageFromAsset(widget.image),
           Gap(20),
           CommonText.medium(widget.title, size: 19),

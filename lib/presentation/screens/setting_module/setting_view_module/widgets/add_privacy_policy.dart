@@ -1,3 +1,4 @@
+import 'package:education_admin_portal/presentation/common_widgets/view_common_widget/common_dialog_box.dart';
 import 'package:education_admin_portal/presentation/common_widgets/widgets/common_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -30,9 +31,15 @@ class _AddPrivacyPolicyState extends State<AddPrivacyPolicy> {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-            child: CommonText.semiBold(
-              SettingViewStrings.addPrivacyPolicy,
-              size: 18,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CommonText.semiBold(
+                  SettingViewStrings.addPrivacyPolicy,
+                  size: 18,
+                ),
+                commonCloseIcon(context),
+              ],
             ),
           ),
 

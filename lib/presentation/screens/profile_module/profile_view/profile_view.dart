@@ -60,7 +60,7 @@ class _ProfileViewState extends State<ProfileView> {
                   child: Container(
                     height: mobileView?null:140,
                     width: double.infinity,
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
@@ -433,6 +433,7 @@ class _ProfileViewState extends State<ProfileView> {
                     isDarkMode: isDarkMode,
                     data: controller.data.value.statistics.profileTotalRevenue,
                     name: ReportsAnalysis.totalRevenue,
+                    leading: '\$',
                     gradient: isDarkMode
                         ? profileTotalRevenueDarkGradient()
                         : profileTotalRevenueGradient(),
@@ -721,12 +722,12 @@ class _ProfileViewState extends State<ProfileView> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        CommonText.medium(
+        CommonText.regular(
           title,
           size: 14,
           color: isDarkMode
               ? AppColors.bodyTextDarkColor
-              : AppColors.headingsColor,
+              : AppColors.bodyTextColor,
         ),
         Gap(7),
         CommonText.medium(subtitle, size: 14),

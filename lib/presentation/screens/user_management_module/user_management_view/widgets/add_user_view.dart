@@ -83,14 +83,13 @@ class _AddUserViewState extends State<AddUserView> {
                                 'Name is Required',
                               );
                             },
-
                           ),
 
                           Gap(25),
                           commonHeader(UserManagementStrings.role),
                           Gap(10),
                           Obx(
-                                () => CustomCourseDropdownFormField<String>(
+                            () => AlwaysDownDropdown<String>(
                               hintText: "Select",
                               items: controller.roleList,
                               value: controller.selectedRole.value.isEmpty
@@ -99,7 +98,7 @@ class _AddUserViewState extends State<AddUserView> {
                               onChanged: (val) {
                                 controller.selectedRole.value = val ?? '';
                               },
-                              validator: (val) => val == null || val.isEmpty ? "Select" : null,
+                              //validator: (val) => val == null || val.isEmpty ? "Select" : null,
                             ),
                           ),
 
@@ -109,7 +108,7 @@ class _AddUserViewState extends State<AddUserView> {
                           CommonEmailField(
                             labelText: AppCommonStrings.email,
                             autofillHints: const [AutofillHints.email],
-                            controller:controller.emailController,
+                            controller: controller.emailController,
                             textInputAction: TextInputAction.done,
                             hintText: AddInstructorStrings.enterEmail,
                             validator: validateEmail,
@@ -118,8 +117,9 @@ class _AddUserViewState extends State<AddUserView> {
                           Gap(25),
                           commonHeader(UserManagementStrings.phoneNo),
                           Gap(10),
-                          CommonMobileField( hintText: UserManagementStrings.enterMobileNo,),
-
+                          CommonMobileField(
+                            hintText: UserManagementStrings.enterMobileNo,
+                          ),
 
                           Gap(25),
                           commonHeader(UserManagementStrings.image),
@@ -129,13 +129,18 @@ class _AddUserViewState extends State<AddUserView> {
                             controller: controller.imageController,
                             textInputAction: TextInputAction.next,
                             validator: (value) {
-                              return validateEmptyValue(value, 'This Field is Required');
+                              return validateEmptyValue(
+                                value,
+                                'This Field is Required',
+                              );
                             },
                             suffixIcon: Padding(
                               padding: const EdgeInsets.only(right: 12),
                               child: InkWell(
                                 onTap: () {
-                                  controller.pickFileCommon(controller.imageController);
+                                  controller.pickFileCommon(
+                                    controller.imageController,
+                                  );
                                 },
                                 child: Container(
                                   width: 73,
@@ -143,7 +148,9 @@ class _AddUserViewState extends State<AddUserView> {
                                   decoration: BoxDecoration(
                                     color: isDarkMode
                                         ? AppColors.greyDarkColor
-                                        : AppColors.lightBorderColor.withValues(alpha: 0.40),
+                                        : AppColors.lightBorderColor.withValues(
+                                            alpha: 0.40,
+                                          ),
                                     border: Border.all(
                                       color: isDarkMode
                                           ? AppColors.grey100Color

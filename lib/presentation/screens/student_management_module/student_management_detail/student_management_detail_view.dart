@@ -229,7 +229,7 @@ class _StudentManagementDetailViewState
                         buildCourseList(courses, context),
                         buildCourseList(completed, context),
                         buildCourseList(ongoing, context),
-                        paymentListView(mobileView),
+                        paymentListView(mobileView,false),
                       ],
                     ),
                   ),

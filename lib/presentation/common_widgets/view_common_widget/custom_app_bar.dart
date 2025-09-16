@@ -10,11 +10,15 @@ import '../../../core/constants/app_strings.dart';
 import '../../../utils/extensions/responsive.dart';
 import '../../app/app_route.dart';
 import '../../app/theme_controller.dart';
+import '../../screens/auth_module/change_password/change_password_view_imports.dart';
+import '../../screens/auth_module/sign_out/sign_out_imports.dart';
+import '../../screens/dashboard_module/notification/widgets/notification_list_view.dart';
 import '../input_field/common_search_field.dart';
 import '../widgets/button.dart';
 import '../widgets/common_divider.dart';
 import '../widgets/icon.dart';
 import '../widgets/text.dart';
+import 'common_dialog_box.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final TextEditingController searchController;
@@ -93,7 +97,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               Gap(16),
               InkWell(
                 onTap: () {
-                  context.pop(AppRouteName.profileView);
+                  context.push(AppRouteName.profileView);
                 },
                 child: SvgImageFromAsset(
                   CommonImageAssets.userProfileImg,
@@ -104,17 +108,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               Gap(8),
               userDataView(),
               Gap(8),
-              SvgImageFromAsset(
+              MenuButton(image: SvgImageFromAsset(
                 AppCommonIcon.downArrowIcon,
                 height: 10,
                 width: 10,
                 colorFilter: ColorFilter.mode(
-                  isDarkMode
-                      ? AppColors.bodyTextDarkColor
-                      : AppColors.bodyTextColor,
+                  isDarkMode ? AppColors.bodyTextDarkColor : AppColors.bodyTextColor,
                   BlendMode.srcIn,
                 ),
-              ),
+              ),),
+
             ],
           ),
         ),
@@ -167,16 +170,22 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           Gap(10),
           notificationView(context),
           Gap(10),
-          InkWell(
-            onTap: () {
-              context.push(AppRouteName.profileView);
-            },
-            child: SvgImageFromAsset(
-              CommonImageAssets.userProfileImg,
-              height: 32,
-              width: 32,
-            ),
-          ),
+          MenuButton(image:
+          SvgImageFromAsset(
+            CommonImageAssets.userProfileImg,
+            height: 32,
+            width: 32,
+          ),),
+          // InkWell(
+          //   onTap: () {
+          //     context.push(AppRouteName.profileView);
+          //   },
+          //   child: SvgImageFromAsset(
+          //     CommonImageAssets.userProfileImg,
+          //     height: 32,
+          //     width: 32,
+          //   ),
+          // ),
         ],
       ),
     );
@@ -302,6 +311,112 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               : AppColors.greyTextColor,
         ),
       ],
+    );
+  }
+}
+
+
+
+class MenuButton extends StatefulWidget {
+  final Widget image;
+  const MenuButton({super.key, required this.image});
+
+  @override
+  State<MenuButton> createState() => _MenuButtonState();
+}
+
+class _MenuButtonState extends State<MenuButton> {
+  @override
+  Widget build(BuildContext context) {
+    bool isDarkMode = Get.find<ThemeController>().isDarkMode;
+
+    return PopupMenuButton(
+      color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.lightBgColor,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+      padding: EdgeInsetsGeometry.zero,
+      menuPadding: EdgeInsetsGeometry.zero,
+      position: PopupMenuPosition.under,
+      itemBuilder: (context) => [
+        PopupMenuItem(
+          value: 1,
+          onTap: () {
+            context.push(AppRouteName.profileView);
+          },
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+            child: commonDeviceView(
+              AppCommonIcon.editIcon,
+              ProfileViewStrings.myProfile,
+              null,
+            ),
+
+          ),
+        ),
+        PopupMenuItem(
+          value: 2,
+          onTap: () {
+            commonDialogBox(
+              context: context,
+              child: SizedBox(
+                width: 560,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 20,
+                    horizontal: 20,
+                  ),
+                  child: ChangePasswordView(),
+                ),
+              ),
+            );
+          },
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+            child: commonDeviceView(
+              AppCommonIcon.changePasswordIcon,
+              ChangesPasswordStrings.changePassword,
+              null,
+            ),
+
+          ),
+        ),
+        PopupMenuItem(
+          value: 3,
+          onTap: () {
+            commonDialogBox(
+              context: context,
+              child: SizedBox(
+                width: 460,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 20,
+                    horizontal: 20,
+                  ),
+                  child: SignOutView(),
+                ),
+              ),
+            );
+          },
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+            child: commonDeviceView(
+              AppCommonIcon.logOutIcon,
+              LogOutStrings.signOut,
+              null,
+            ),
+
+          ),
+        ),
+      ],
+      child: widget.image
+      // SvgImageFromAsset(
+      //   AppCommonIcon.downArrowIcon,
+      //   height: 10,
+      //   width: 10,
+      //   colorFilter: ColorFilter.mode(
+      //     isDarkMode ? AppColors.bodyTextDarkColor : AppColors.bodyTextColor,
+      //     BlendMode.srcIn,
+      //   ),
+      // ),
     );
   }
 }

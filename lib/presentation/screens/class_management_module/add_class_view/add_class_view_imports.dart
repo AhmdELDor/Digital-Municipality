@@ -2,6 +2,7 @@ import 'package:education_admin_portal/presentation/screens/class_management_mod
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_strings.dart';

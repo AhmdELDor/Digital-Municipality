@@ -60,7 +60,7 @@ class _UniversityManagementDetailViewState
                           child: SizedBox(
                             width: 560,
                             child: AddDetailView(
-                              title: '',
+                              title: UniversityViewStrings.addUniversity,
                               nameController: controller.nameController,
                               emailController: controller.emailController,
                               formKey: controller.formKey,
@@ -134,6 +134,12 @@ class _UniversityManagementDetailViewState
                         ],
                       ),
                       Gap(20),
+                     mobileView? CommonText.regular(
+                        UniversityDialogStrings.courseCompletionCertificate,
+                        size: 15,
+
+                      ):SizedBox(),
+                      Gap(mobileView?15:0),
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                         decoration: BoxDecoration(
@@ -150,17 +156,26 @@ class _UniversityManagementDetailViewState
                         ),
                         child: Row(
                           children: [
-                            SvgImageFromAsset(CommonImageAssets.pdf),
-                            Gap(12),
+                            mobileView?SizedBox():
                             Expanded(
                               child: CommonText.regular(
-                                controller.data.value.courseCertificate,
+                                UniversityDialogStrings.courseCompletionCertificate,
                                 size: 16,
-                                color: isDarkMode
-                                    ? AppColors.bodyTextDarkColor
-                                    : AppColors.headingsColor,
+
                               ),
                             ),
+
+                          
+                            SvgImageFromAsset(CommonImageAssets.pdf),
+                            Gap(12),
+                            CommonText.regular(
+                              controller.data.value.courseCertificate,
+                              size: 16,
+                              color: isDarkMode
+                                  ? AppColors.bodyTextDarkColor
+                                  : AppColors.headingsColor,
+                            ),
+                            mobileView?Spacer():Gap(40),
                             SvgImageFromAsset(AppCommonIcon.downloadIcon),
                           ],
                         ),

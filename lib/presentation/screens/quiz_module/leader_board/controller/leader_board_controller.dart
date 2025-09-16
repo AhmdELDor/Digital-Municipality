@@ -40,7 +40,9 @@ class LeaderBoardController extends GetxController {
   final ranges = [
     "< 1000",
     "1000 - 1500",
-    "1500 - 3000",
+    "1500 - 2000",
+    "2000 - 2500",
+    "2500 - 3000",
     "> 3000",
   ];
 

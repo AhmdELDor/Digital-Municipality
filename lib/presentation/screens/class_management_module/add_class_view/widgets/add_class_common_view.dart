@@ -39,7 +39,7 @@ Widget selectCourseView() { AddClassController controller = Get.put(AddClassCont
       commonRequiredHeaderText(AddClassStrings.course),
       Gap(10),
       Obx(
-            () => CustomCourseDropdownFormField<String>(
+            () => AlwaysDownDropdown<String>(
           hintText: "Select",
           items: controller.categoryList,
           value: controller.selectedCategory.value.isEmpty
@@ -48,7 +48,7 @@ Widget selectCourseView() { AddClassController controller = Get.put(AddClassCont
           onChanged: (val) {
             controller.selectedCategory.value = val ?? '';
           },
-          validator: (val) => val == null || val.isEmpty ? "Select" : null,
+         // validator: (val) => val == null || val.isEmpty ? "Select" : null,
         ),
       ),
     ],
@@ -90,22 +90,20 @@ Widget selectTime(BuildContext context) {
       CommonTextField(
         hintText: AddClassStrings.enterTime,
         controller: controller.timeController,
+        onTap: () {
+          controller.pickTime(context);
+        },
         suffixIcon: Padding(
           padding: const EdgeInsets.only(right: 12),
-          child: InkWell(
-            onTap: () {
-              controller.pickTime(context);
-            },
-            child: SvgImageFromAsset(
-              AppCommonIcon.clockIcon,
-              height: 16,
-              width: 16,
-              colorFilter: ColorFilter.mode(
-                isDarkMode
-                    ? AppColors.bodyTextDarkColor
-                    : AppColors.bodyTextColor,
-                BlendMode.srcIn,
-              ),
+          child: SvgImageFromAsset(
+            AppCommonIcon.clockIcon,
+            height: 16,
+            width: 16,
+            colorFilter: ColorFilter.mode(
+              isDarkMode
+                  ? AppColors.bodyTextDarkColor
+                  : AppColors.bodyTextColor,
+              BlendMode.srcIn,
             ),
           ),
         ),
@@ -166,11 +164,12 @@ Widget imageVideoView() {
 }
 Widget selectInstructorView() { AddClassController controller = Get.put(AddClassController());
   return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       commonRequiredHeaderText(AddCoursesStrings.instructor),
       Gap(10),
       Obx(
-            () => CustomCourseDropdownFormField<String>(
+            () => AlwaysDownDropdown<String>(
           hintText: AddCoursesStrings.selectInstructor,
           items: controller.usersList,
           value: controller.selectedUser.value.isEmpty
@@ -179,8 +178,7 @@ Widget selectInstructorView() { AddClassController controller = Get.put(AddClass
           onChanged: (val) {
             controller.selectedUser.value = val ?? '';
           },
-          validator: (val) =>
-          val == null || val.isEmpty ? "Select instructor" : null,
+         // validator: (val) => val == null || val.isEmpty ? "Select instructor" : null,
         ),
       ),
     ],
@@ -190,6 +188,7 @@ Widget descriptionController(BuildContext context) {
   AddClassController controller = Get.put(AddClassController());
   var mobileView = ResponsiveView.isMobile(context);
   return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       commonRequiredHeaderText(AddCoursesStrings.description),
       Gap(10),

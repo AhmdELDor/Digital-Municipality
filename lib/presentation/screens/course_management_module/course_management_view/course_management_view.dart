@@ -237,13 +237,15 @@ class _CourseManagementViewState extends State<CourseManagementView> {
                       Gap(20),
                       Expanded(child: statusDropDown()),
                       Gap(20),
-                      Expanded(child: createdByDropDown()),
-                      Gap(20),
-
                       Expanded(
                         child: customDatePicker(controller.dateController),
                       ),
                       Gap(20),
+                      Expanded(child: createdByDropDown()),
+                      Gap(20),
+
+
+
                       InkWell(
                         onTap: () {
                           controller.clearSelections();
@@ -323,6 +325,7 @@ class _CourseManagementViewState extends State<CourseManagementView> {
                       extra: {'data': course},
                     );
                   },
+                  showSwitch: true,
 
 
                 );
@@ -729,7 +732,7 @@ class _CourseManagementViewState extends State<CourseManagementView> {
 
   Widget usersDropDown() {
     return Obx(
-      () => CustomDropdownFormField<String>(
+      () => AlwaysDownDropdown<String>(
         hintText: "Select",
         items: controller.usersList,
         value: controller.selectedUser.value.isEmpty
@@ -738,14 +741,14 @@ class _CourseManagementViewState extends State<CourseManagementView> {
         onChanged: (val) {
           controller.selectedUser.value = val ?? '';
         },
-        validator: (val) => val == null || val.isEmpty ? "Please select" : null,
+        //validator: (val) => val == null || val.isEmpty ? "Please select" : null,
       ),
     );
   }
 
   Widget statusDropDown() {
     return Obx(
-      () => CustomDropdownFormField<String>(
+      () => AlwaysDownDropdown<String>(
         hintText: "Status",
         items: controller.statusList,
         value: controller.selectedStatus.value.isEmpty
@@ -754,14 +757,14 @@ class _CourseManagementViewState extends State<CourseManagementView> {
         onChanged: (val) {
           controller.selectedStatus.value = val ?? '';
         },
-        validator: (val) => val == null || val.isEmpty ? "Status" : null,
+       // validator: (val) => val == null || val.isEmpty ? "Status" : null,
       ),
     );
   }
 
   Widget createdByDropDown() {
     return Obx(
-      () => CustomDropdownFormField<String>(
+      () => AlwaysDownDropdown<String>(
         hintText: "Created by",
         items: controller.createdByList,
         value: controller.createdBy.value.isEmpty
@@ -770,7 +773,7 @@ class _CourseManagementViewState extends State<CourseManagementView> {
         onChanged: (val) {
           controller.createdBy.value = val ?? '';
         },
-        validator: (val) => val == null || val.isEmpty ? "Created by" : null,
+        //validator: (val) => val == null || val.isEmpty ? "Created by" : null,
       ),
     );
   }
@@ -778,7 +781,7 @@ class _CourseManagementViewState extends State<CourseManagementView> {
   Widget customDatePicker(TextEditingController? dateController) {
     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
     return CommonDatePicker(
-      hintText: ApprovalsStrings.requestDate,
+      hintText: TodayClassManagementStrings.date,
       controller: dateController,
       suffixIcon: SvgImageFromAsset(
         AppCommonIcon.calenderIcon,

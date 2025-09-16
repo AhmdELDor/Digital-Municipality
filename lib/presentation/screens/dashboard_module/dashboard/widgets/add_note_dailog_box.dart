@@ -40,13 +40,14 @@ class _AddNoteDialogBoxState extends State<AddNoteDialogBox> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CommonText.medium(AddNoteStrings.addNote, size: 14),
+                CommonText.semiBold(AddNoteStrings.addNote, size: 14),
                 InkWell(
                   onTap: () {
                     Navigator.pop(context);
                   },
-                  child: SvgImageFromAsset(AppCommonIcon.clockIcon),
+                  child: SvgImageFromAsset(AppCommonIcon.closeIcon),
                 ),
               ],
             ),

@@ -47,7 +47,15 @@ class _AddClassViewState extends State<AddClassView> {
             CommonDivider(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              child: mobileView ? deviceView() : _desktopView(),
+              child: ResponsiveGridRow(
+                children: [
+                  ResponsiveGridCol(
+                    lg: 10,
+                    xs: 12,
+                    child: mobileView ? deviceView() : _desktopView(),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -186,7 +194,6 @@ class _AddClassViewState extends State<AddClassView> {
                 Gap(15),
                 descriptionController(context),
                 Gap(25),
-
               ],
             ),
           ),

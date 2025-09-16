@@ -89,7 +89,7 @@ Widget filterView(void Function()? onTap,String length){
 Widget usersDropDown(){
   ApprovalsViewController controller = Get.put(ApprovalsViewController());
   return Obx(
-    () =>  CustomDropdownFormField<String>(
+    () =>  AlwaysDownDropdown<String>(
       hintText: "Select",
       items: controller.usersList,
       value: controller.selectedUser.value.isEmpty
@@ -98,16 +98,16 @@ Widget usersDropDown(){
       onChanged: (val) {
         controller.selectedUser.value = val ?? '';
       },
-      validator: (val) => val == null || val.isEmpty
-          ? "Please select"
-          : null,
+      // validator: (val) => val == null || val.isEmpty
+      //     ? "Please select"
+      //     : null,
     ),
   );
 }
 Widget courseCategoryDropDown(){
   ApprovalsViewController controller = Get.put(ApprovalsViewController());
   return Obx(
-    () =>  CustomDropdownFormField<String>(
+    () =>  AlwaysDownDropdown<String>(
       hintText: "Category",
       items:
       controller.data.value.courseCategoryList,
@@ -122,9 +122,9 @@ Widget courseCategoryDropDown(){
         controller.selectedCourseCategory.value =
             val ?? '';
       },
-      validator: (val) => val == null || val.isEmpty
-          ? "Category"
-          : null,
+      // validator: (val) => val == null || val.isEmpty
+      //     ? "Category"
+      //     : null,
     ),
   );
 }
@@ -132,7 +132,7 @@ Widget courseCategoryDropDown(){
 Widget languageDropDown(){
   ApprovalsViewController controller = Get.put(ApprovalsViewController());
   return Obx(
-    () =>  CustomDropdownFormField<String>(
+    () =>  AlwaysDownDropdown<String>(
       hintText: "Language",
       items: controller.data.value.languageList,
       value:
@@ -143,9 +143,9 @@ Widget languageDropDown(){
         controller.selectedLanguage.value =
             val ?? '';
       },
-      validator: (val) => val == null || val.isEmpty
-          ? "Language"
-          : null,
+      // validator: (val) => val == null || val.isEmpty
+      //     ? "Language"
+      //     : null,
     ),
   );
 }
@@ -153,7 +153,7 @@ Widget languageDropDown(){
 Widget priceRangeDropDown(){
   ApprovalsViewController controller = Get.put(ApprovalsViewController());
   return  Obx(
-    () =>  CustomDropdownFormField<double>(
+    () =>  AlwaysDownDropdown<double>(
       hintText: "Price Range",
       items: controller.data.value.priceRangeList,
       value: controller.selectedPrice.value == 0.0
@@ -162,8 +162,7 @@ Widget priceRangeDropDown(){
       onChanged: (val) {
         controller.selectedPrice.value = val ?? 0.0;
       },
-      validator: (val) =>
-      val == null ? "Price Range" : null,
+     // validator: (val) => val == null ? "Price Range" : null,
     ),
   );
 }
@@ -190,7 +189,7 @@ Widget customDatePicker(TextEditingController? dateController){
 Widget instructorUsersDropDown(){
   ApprovalsViewController controller = Get.put(ApprovalsViewController());
   return Obx(
-        () =>  CustomDropdownFormField<String>(
+        () =>  AlwaysDownDropdown<String>(
           hintText: "Select",
           items: controller.usersList,
           value: controller.selectedInstructorUser.value.isEmpty
@@ -199,15 +198,14 @@ Widget instructorUsersDropDown(){
           onChanged: (val) {
             controller.selectedInstructorUser.value = val ?? '';
           },
-          validator: (val) =>
-          val == null || val.isEmpty ? "Please select" : null,
+          //validator: (val) => val == null || val.isEmpty ? "Please select" : null,
         ),
   );
 }
 Widget identityProofTypeDropDown(){
   ApprovalsViewController controller = Get.put(ApprovalsViewController());
   return Obx(
-        () =>  CustomDropdownFormField<String>(
+        () =>  AlwaysDownDropdown<String>(
           hintText: "Identity Proof Type",
           items: controller.data.value.identityProofList,
           value: controller.identityProofType.value.isEmpty
@@ -216,16 +214,16 @@ Widget identityProofTypeDropDown(){
           onChanged: (val) {
             controller.identityProofType.value = val ?? '';
           },
-          validator: (val) => val == null || val.isEmpty
-              ? "Identity Proof Type"
-              : null,
+          // validator: (val) => val == null || val.isEmpty
+          //     ? "Identity Proof Type"
+          //     : null,
         ),
   );
 }
 Widget qualificationProofTypeDropDown(){
   ApprovalsViewController controller = Get.put(ApprovalsViewController());
   return Obx(
-        () => CustomDropdownFormField<String>(
+        () => AlwaysDownDropdown<String>(
           hintText: "Qualification Proof Type",
           items: controller.data.value.identityProofList,
           value: controller.qualificationProofType.value.isEmpty
@@ -234,9 +232,9 @@ Widget qualificationProofTypeDropDown(){
           onChanged: (val) {
             controller.qualificationProofType.value = val ?? '';
           },
-          validator: (val) => val == null || val.isEmpty
-              ? "Qualification Proof Type"
-              : null,
+          // validator: (val) => val == null || val.isEmpty
+          //     ? "Qualification Proof Type"
+          //     : null,
         ),
   );
 }
@@ -245,7 +243,7 @@ Widget qualificationProofTypeDropDown(){
 Widget registrationProofTypeDropDown(){
   ApprovalsViewController controller = Get.put(ApprovalsViewController());
   return Obx(
-        () => CustomDropdownFormField<String>(
+        () => AlwaysDownDropdown<String>(
           hintText: "Registration Proof Type",
           items: controller.data.value.registrationProofList,
           value: controller.registrationProofType.value.isEmpty
@@ -254,9 +252,9 @@ Widget registrationProofTypeDropDown(){
           onChanged: (val) {
             controller.registrationProofType.value = val ?? '';
           },
-          validator: (val) => val == null || val.isEmpty
-              ? "Registration Proof Type"
-              : null,
+          // validator: (val) => val == null || val.isEmpty
+          //     ? "Registration Proof Type"
+          //     : null,
         ),
   );
 }

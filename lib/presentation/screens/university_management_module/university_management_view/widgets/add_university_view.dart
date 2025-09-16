@@ -91,6 +91,8 @@ class _AddUniversityViewState extends State<AddUniversityView> {
                       child: OutlineButton(
                         onPressed: () {
                           Navigator.pop(context);
+                          widget.nameController.clear();
+                          widget.emailController.clear();
                         },
                         label: AppCommonStrings.btnCancel,
                         borderSide: BorderSide(color: AppColors.primary500),

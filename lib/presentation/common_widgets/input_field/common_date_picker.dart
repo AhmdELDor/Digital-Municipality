@@ -340,6 +340,7 @@ class CommonClassDatePicker extends StatefulWidget {
   final DateTime? firstDate;
   final DateTime? lastDate;
   final DateTime? currentDate;
+  final Color? fillColor;
   final void Function(String date) onDatePicked;
 final EdgeInsetsGeometry? contentPadding;
   const CommonClassDatePicker({
@@ -357,7 +358,7 @@ final EdgeInsetsGeometry? contentPadding;
     this.initialDate,
     this.firstDate,
     this.lastDate,
-    this.currentDate, this.contentPadding,
+    this.currentDate, this.contentPadding, this.fillColor,
   });
 
   @override
@@ -397,7 +398,7 @@ class _CommonClassDatePickerState extends State<CommonClassDatePicker> {
           vertical: 12,
         ),
         filled: true,
-        fillColor: isDarkMode?AppColors.mainDarkBgColor:AppColors.lightBgColor,
+        fillColor: widget.fillColor??(isDarkMode?AppColors.mainDarkBgColor:AppColors.lightBgColor),
         counterText: "",
         focusedErrorBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Theme.of(context).colorScheme.error),

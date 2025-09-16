@@ -54,12 +54,12 @@ notificationView(NotificationModel notification, BuildContext context) {
     mainAxisAlignment: MainAxisAlignment.start,
     children: [
       CircleAvatar(
-        radius: notification.read == true ? 0 : 3,
+        radius:  3,
         backgroundColor: notification.read == true
-            ? Colors.transparent
+            ?isDarkMode?AppColors.grey100Color:AppColors.headingsLightColor
             : AppColors.success500,
       ),
-      Gap(notification.read == true ? 0 : 12),
+      Gap(12),
       Expanded(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,12 +79,13 @@ notificationView(NotificationModel notification, BuildContext context) {
       ),
       mobileView
           ? PopupMenuButton(
+
               color: isDarkMode
                   ? AppColors.mainDarkBgColor
                   : AppColors.lightBgColor,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(9),
-              ),
+              ),position: PopupMenuPosition.under,
               child: commonPopTextView(AppCommonIcon.moreIcon),
 
               itemBuilder: (context) => [

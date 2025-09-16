@@ -136,7 +136,7 @@ class _FaqViewState extends State<FaqView> {
 
       padding: EdgeInsetsGeometry.zero,
       menuPadding: EdgeInsetsGeometry.zero,
-
+      position: PopupMenuPosition.under,
       itemBuilder: (context) => [
         PopupMenuItem(
           value: 1,

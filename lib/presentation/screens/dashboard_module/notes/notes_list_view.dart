@@ -13,6 +13,7 @@ class _NotesListViewState extends State<NotesListView> {
   @override
   Widget build(BuildContext context) {
     final notesList = GoRouterState.of(context).extra as List;
+    //var mobileView = ResponsiveView.isMobile(context);
     return Scaffold(
       key: _scaffoldKey,
       drawer: const SizedBox(width: 270, child: SideDrawerMenu()),
@@ -40,7 +41,7 @@ class _NotesListViewState extends State<NotesListView> {
               ),
 
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
+                padding: const EdgeInsets.only(left: 20),
                 child: ResponsiveGridRow(
                   children: List.generate(
                     notesList.length,
@@ -50,7 +51,11 @@ class _NotesListViewState extends State<NotesListView> {
                         lg: 4, // 3 cards = 4 columns each on 12-grid
                         xs: 12,
                         child: Padding(
-                          padding: const EdgeInsets.all(15),
+                          padding: EdgeInsets.only(
+                            right: 25,
+                            bottom: 25,
+
+                          ),
                           child: CommonNotesView(note: data),
                         ),
                       );

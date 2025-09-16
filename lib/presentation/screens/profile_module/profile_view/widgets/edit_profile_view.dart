@@ -43,7 +43,7 @@ class _EditProfileViewState extends State<EditProfileView> {
         CommonDivider(),
         Gap(20),
         SizedBox(
-          height: context.height * 0.7,
+          height: context.height * 0.5,
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -68,7 +68,8 @@ class _EditProfileViewState extends State<EditProfileView> {
                     commonHeader(ProfileViewStrings.role),
                     Gap(10),
                     Obx(
-                      () => CustomDropdownFormField<String>(
+                      () => AlwaysDownDropdown<String>(
+                        color: Colors.transparent,
                         hintText: "Select",
                         items: controller.roleList,
                         value: controller.selectedRole.value,
@@ -76,7 +77,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                           controller.selectedRole.value = val!;
                         },
 
-                        validator: (val) => val == null ? "Select" : null,
+                       //validator: (val) => val == null ? "Select" : null,
                       ),
                     ),
                     Gap(20),
@@ -92,7 +93,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                               commonHeader(ProfileViewStrings.country),
                               Gap(10),
                               Obx(
-                                () => CustomDropdownFormField<String>(
+                                () => AlwaysDownDropdown<String>(color: Colors.transparent,
                                   hintText: "Select",
                                   items: controller.countryList,
                                   value: controller.selectedCountry.value,
@@ -100,8 +101,8 @@ class _EditProfileViewState extends State<EditProfileView> {
                                     controller.selectedCountry.value = val!;
                                   },
 
-                                  validator: (val) =>
-                                      val == null ? "Select" : null,
+                                  // validator: (val) =>
+                                  //     val == null ? "Select" : null,
                                 ),
                               ),
                             ],
@@ -117,7 +118,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                               commonHeader(ProfileViewStrings.city),
                               Gap(10),
                               Obx(
-                                () => CustomDropdownFormField<String>(
+                                () => AlwaysDownDropdown<String>(color: Colors.transparent,
                                   hintText: "Select",
                                   items: controller.cityList,
                                   value: controller.selectedCity.value,
@@ -125,8 +126,8 @@ class _EditProfileViewState extends State<EditProfileView> {
                                     controller.selectedCity.value = val!;
                                   },
 
-                                  validator: (val) =>
-                                      val == null ? "Select" : null,
+                                  // validator: (val) =>
+                                  //     val == null ? "Select" : null,
                                 ),
                               ),
                             ],
@@ -246,30 +247,35 @@ class _EditProfileViewState extends State<EditProfileView> {
           ),
         ),
         Gap(25),
-        Row(
-          children: [
-            Expanded(
-              child: OutlineButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                label: AppCommonStrings.btnCancel,
-                borderSide: BorderSide(color: AppColors.primary500),
-                textColor: AppColors.primary500,
-                textSize: 16,
-                textWeight: FontWeight.w500,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
+          child: Row(
+            children: [
+              Expanded(
+                child: OutlineButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  label: AppCommonStrings.btnCancel,
+                  borderSide: BorderSide(color: AppColors.primary500),
+                  textColor: AppColors.primary500,
+                  textSize: 16,
+                  textWeight: FontWeight.w500,
+                ),
               ),
-            ),
-            Gap(15),
-            Expanded(
-              child: PrimaryButton(
-                onPressed: () {},
-                label: UserManagementStrings.update,
-                textSize: 16,
-                textWeight: FontWeight.w500,
+              Gap(15),
+              Expanded(
+                child: PrimaryButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  label: UserManagementStrings.update,
+                  textSize: 16,
+                  textWeight: FontWeight.w500,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
 
 

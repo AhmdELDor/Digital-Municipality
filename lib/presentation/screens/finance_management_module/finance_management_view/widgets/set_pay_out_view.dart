@@ -113,7 +113,7 @@ class _SetPayOutViewState extends State<SetPayOutView> {
         authHeader(FinanceManagementStrings.occurrence),
         Gap(10),
         Obx(
-          () => CustomDropdownFormField<OccurrenceModel>(
+          () => AlwaysDownDropdown<OccurrenceModel>(
             hintText: "Select",
             items: controller.data.value.occurrenceList,
             value: controller.selectedSetOccurrence.value,
@@ -121,7 +121,7 @@ class _SetPayOutViewState extends State<SetPayOutView> {
               controller.selectedSetOccurrence.value = val;
             },
             itemAsString: (item) => item.name,
-            validator: (val) => val == null ? "Select" : null,
+            //validator: (val) => val == null ? "Select" : null,
           ),
         ),
       ],
@@ -136,7 +136,7 @@ class _SetPayOutViewState extends State<SetPayOutView> {
         commonHeader(FinanceManagementStrings.everyMonths),
         Gap(10),
         CommonTextField(
-          hintText: FinanceManagementStrings.select,
+          hintText: AddClassStrings.selectDate,
           controller: controller.everyMonthDateController,
           textInputAction: TextInputAction.next,
           suffixIcon: Padding(
@@ -180,40 +180,51 @@ class _SetPayOutViewState extends State<SetPayOutView> {
   }
 
   Widget paymentMethodView() {
-    bool isDarkMode = Get.find<ThemeController>().isDarkMode;
+    //bool isDarkMode = Get.find<ThemeController>().isDarkMode;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         commonHeader(FinanceManagementStrings.paymentMethod),
         Gap(10),
         Obx(() {
-          return DropdownButtonFormField<PaymentMethodModel>(
+          return AlwaysDownDropdown<PaymentMethodModel>(
+            hintText: "Select",
+            items: controller.data.value.paymentMethodsList,
             value: controller.payOutPaymentMethod.value,
-            items: controller.data.value.paymentMethodsList
-                .map(
-                  (course) => DropdownMenuItem(
-                    value: course,
-                    child: CommonText.regular(
-                      course.name,
-                      size: 14,
-                      color: isDarkMode
-                          ? AppColors.bodyTextDarkColor
-                          : AppColors.bodyTextColor,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                )
-                .toList(),
             onChanged: (val) {
-              if (val != null) {
-                controller.payOutPaymentMethod.value = val;
-              }
+              controller.payOutPaymentMethod.value = val;
             },
-            decoration: commonInputDecoration(
-              FinanceManagementStrings.select,
-              context,
-            ),
+            itemAsString: (item) => item.name,
+            //validator: (val) => val == null ? "Payment Method" : null,
           );
+
+          //   DropdownButtonFormField<PaymentMethodModel>(
+          //   value: controller.payOutPaymentMethod.value,
+          //   items: controller.data.value.paymentMethodsList
+          //       .map(
+          //         (course) => DropdownMenuItem(
+          //           value: course,
+          //           child: CommonText.regular(
+          //             course.name,
+          //             size: 14,
+          //             color: isDarkMode
+          //                 ? AppColors.bodyTextDarkColor
+          //                 : AppColors.bodyTextColor,
+          //             fontWeight: FontWeight.w400,
+          //           ),
+          //         ),
+          //       )
+          //       .toList(),
+          //   onChanged: (val) {
+          //     if (val != null) {
+          //       controller.payOutPaymentMethod.value = val;
+          //     }
+          //   },
+          //   decoration: commonInputDecoration(
+          //     FinanceManagementStrings.select,
+          //     context,
+          //   ),
+          // );
         }),
       ],
     );

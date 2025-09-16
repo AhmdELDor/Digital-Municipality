@@ -3,11 +3,13 @@ import 'package:education_admin_portal/presentation/common_widgets/widgets/widge
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../core/constants/app_assets.dart';
 import '../../../../../core/constants/app_colors.dart';
 import '../../../../../core/constants/app_strings.dart';
 import '../../../../../utils/extensions/responsive.dart';
+import '../../../../app/app_route.dart';
 import '../../../../app/theme_controller.dart';
 import '../../../../common_widgets/view_common_widget/common_card_decoration.dart';
 import '../../../../common_widgets/widgets/common_cache_image.dart';
@@ -228,7 +230,12 @@ class _InstructorManagementDetailViewState
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
             child: PrimaryButton(
               height: 36,
-              onPressed: () {},
+              onPressed: () {
+                context.go(
+                  '${AppRouteName.instructorManagementView}/${AppRouteName.instructorManagementDetailView}',
+                  extra: widget.data,
+                );
+              },
               label: ApprovalsStrings.viewProfile,
               textSize: 15,
               textWeight: FontWeight.w500,

@@ -204,7 +204,7 @@ class _CustomBrandingViewState extends State<CustomBrandingView> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
@@ -217,7 +217,7 @@ class _CustomBrandingViewState extends State<CustomBrandingView> {
                       shape: BoxShape.circle,
                     ),
                     child: Center(
-                      child: SvgImageFromAsset(CommonImageAssets.appLogo),
+                      child: SvgImageFromAsset(CommonImageAssets.appLogo,height: 50,width: 33,),
                     ),
                   ),
 

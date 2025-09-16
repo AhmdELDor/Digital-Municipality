@@ -99,7 +99,7 @@ class _ReportsAnalysisViewState extends State<ReportsAnalysisView> {
                                           .value
                                           .summary
                                           .totalRevenue,
-                                      name: ReportsAnalysis.totalRevenue,
+                                      name: ReportsAnalysis.totalRevenue,leading: '\$',
                                       gradient: isDarkMode
                                           ? totalRevenueDarkGradient()
                                           : totalRevenueGradient(),
@@ -126,6 +126,7 @@ class _ReportsAnalysisViewState extends State<ReportsAnalysisView> {
                                       gradient: isDarkMode
                                           ? courseCompletionDarkGradient()
                                           : courseCompletionGradient(),
+                                      trailing: '%',
                                       mobileView: mobileView,
                                       margin: EdgeInsetsGeometry.only(
                                         right: mobileView ? 0 : 20,

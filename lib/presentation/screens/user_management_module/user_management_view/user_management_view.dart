@@ -31,55 +31,61 @@ class _UserManagementViewState extends State<UserManagementView> {
               final TabController tabController = DefaultTabController.of(
                 context,
               );
-        
+
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   mobileView
                       ? Padding(
-                    padding: const EdgeInsets.only(
-                      left: 20,
-                      right: 20,
-                      top: 20,
-                    ),
-                    child: CommonSearchField(
-                      controller: controller.searchController,
-                      hintText: DashboardViewStrings.searchAnything,
-                    ),
-                  )
+                          padding: const EdgeInsets.only(
+                            left: 20,
+                            right: 20,
+                            top: 20,
+                          ),
+                          child: CommonSearchField(
+                            controller: controller.searchController,
+                            hintText: DashboardViewStrings.searchAnything,
+                          ),
+                        )
                       : SizedBox(),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 20,
+                    ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        commonHeaderText(title: UserManagementStrings.userManagement),
+                        commonHeaderText(
+                          title: UserManagementStrings.userManagement,
+                        ),
                         CommonCircleAddButton(
                           onTap: () {
-                            tabController.index==0?
-                            commonDialogBox(
-                              context: context,
-                              child: SizedBox(
-                                width: mobileView ? null : 560,
-                                child: AddUserView(),
-                              ),
-                            ): commonDialogBox(
-                              context: context,
-                              child: SizedBox(
-                                width: mobileView ? null : 560,
-                                child: AddRoleView(),
-                              ),
-                            );
+                            tabController.index == 0
+                                ? commonDialogBox(
+                                    context: context,
+                                    child: SizedBox(
+                                      width: mobileView ? null : 560,
+                                      child: AddUserView(),
+                                    ),
+                                  )
+                                : commonDialogBox(
+                                    context: context,
+                                    child: SizedBox(
+                                      width: mobileView ? null : 560,
+                                      child: AddRoleView(),
+                                    ),
+                                  );
                           },
                         ),
                       ],
                     ),
                   ),
-        
+
                   CommonDivider(),
                   Gap(20),
-                  tabBarView(tabController,isDarkMode, mobileView),
+                  tabBarView(tabController, isDarkMode, mobileView),
                   Expanded(
                     child: TabBarView(
                       children: [
@@ -96,14 +102,13 @@ class _UserManagementViewState extends State<UserManagementView> {
               );
             },
           ),
-        
         ),
       ),
     );
   }
 
   Widget tabBarView(
-     TabController tabController,
+    TabController tabController,
     bool isDarkMode,
     bool mobileView,
   ) {
@@ -209,7 +214,7 @@ class _UserManagementViewState extends State<UserManagementView> {
                           //       )
                           //     : SizedBox(),
                           Gap(mobileView ? 20 : 0),
-                         menuButton(),
+                          menuButton(),
                         ],
                       ),
                     ),
@@ -244,7 +249,10 @@ class _UserManagementViewState extends State<UserManagementView> {
                     ),
 
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 15,
+                        vertical: 15,
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -260,14 +268,13 @@ class _UserManagementViewState extends State<UserManagementView> {
                             ),
                           ),
                           commonSwitch(
-                                          value: data.isSwitch.value,
-                                          onChanged: (value) {
-                                            setState(() {
-                                              data.isSwitch.value = value;
-                                            });
-                                          },
-                                        ),
-
+                            value: data.isSwitch.value,
+                            onChanged: (value) {
+                              setState(() {
+                                data.isSwitch.value = value;
+                              });
+                            },
+                          ),
                         ],
                       ),
                     ),
@@ -278,7 +285,6 @@ class _UserManagementViewState extends State<UserManagementView> {
                     //         padding: const EdgeInsets.symmetric(horizontal: 15),
                     //         child: CommonDivider(),
                     //       ),
-
 
                     // Gap(mobileView ? 0 : 15),
                     // mobileView
@@ -397,7 +403,7 @@ class _UserManagementViewState extends State<UserManagementView> {
       color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.lightBgColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
       child: commonPopTextView(AppCommonIcon.moreIcon),
-
+      position: PopupMenuPosition.under,
       itemBuilder: (context) => [
         PopupMenuItem(
           value: 1,
@@ -405,8 +411,8 @@ class _UserManagementViewState extends State<UserManagementView> {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
             child: commonDeviceView(
-              AppCommonIcon.showPasswordIcon,
-              CourseManagementStrings.view,
+              AppCommonIcon.editIcon,
+              CourseManagementStrings.edit,
               null,
             ),
           ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:responsive_grid/responsive_grid.dart';
-
 import '../../../../../core/constants/app_assets.dart';
 import '../../../../../core/constants/app_colors.dart';
 import '../../../../../core/constants/app_strings.dart';
@@ -261,7 +260,7 @@ class _AddInstructorPayOutState extends State<AddInstructorPayOut> {
         authHeader(FinanceManagementStrings.instructor),
         Gap(10),
         Obx(
-          () => CustomDropdownFormField<UserModel>(
+          () => AlwaysDownDropdown<UserModel>(
             hintText: "Select instructor",
             items: controller.data.value.instructorList,
             value: controller.selectedInstructor.value,
@@ -269,7 +268,7 @@ class _AddInstructorPayOutState extends State<AddInstructorPayOut> {
               controller.selectedInstructor.value = val;
             },
             itemAsString: (item) => item.name,
-            validator: (val) => val == null ? "Select instructor" : null,
+            //validator: (val) => val == null ? "Select instructor" : null,
           ),
         ),
       ],
@@ -285,7 +284,7 @@ class _AddInstructorPayOutState extends State<AddInstructorPayOut> {
         authHeader(FinanceManagementStrings.occurrence),
         Gap(10),
         Obx(
-          () => CustomDropdownFormField<OccurrenceModel>(
+          () => AlwaysDownDropdown<OccurrenceModel>(
             hintText: "Select",
             items: controller.data.value.occurrenceList,
             value: controller.selectedOccurrence.value,
@@ -293,7 +292,7 @@ class _AddInstructorPayOutState extends State<AddInstructorPayOut> {
               controller.selectedOccurrence.value = val;
             },
             itemAsString: (item) => item.name,
-            validator: (val) => val == null ? "Select" : null,
+            //validator: (val) => val == null ? "Select" : null,
           ),
         ),
       ],
@@ -337,7 +336,7 @@ class _AddInstructorPayOutState extends State<AddInstructorPayOut> {
       children: [
         authHeader(FinanceManagementStrings.paymentMethod),
         Gap(10),
-        CustomDropdownFormField<PaymentMethodModel>(
+        AlwaysDownDropdown<PaymentMethodModel>(
           hintText: "Payment Method",
           items: controller.data.value.paymentMethodsList,
           value: controller.selectedInstructorPaymentMethod.value,
@@ -345,7 +344,7 @@ class _AddInstructorPayOutState extends State<AddInstructorPayOut> {
             controller.selectedInstructorPaymentMethod.value = val;
           },
           itemAsString: (item) => item.name,
-          validator: (val) => val == null ? "Payment Method" : null,
+          //validator: (val) => val == null ? "Payment Method" : null,
         ),
       ],
     );
@@ -411,7 +410,7 @@ class _AddInstructorPayOutState extends State<AddInstructorPayOut> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        authHeader(FinanceManagementStrings.amount),
+        authHeader(FinanceManagementStrings.paymentAmount),
         Gap(10),
         CommonTextField(
           hintText: FinanceManagementStrings.enterPaymentAmount,
@@ -449,7 +448,7 @@ class _AddInstructorPayOutState extends State<AddInstructorPayOut> {
       children: [
         authHeader(FinanceManagementStrings.paymentStatus),
         Gap(10),
-        CustomDropdownFormField<StatusModel>(
+        AlwaysDownDropdown<StatusModel>(
           hintText: "Status",
           items: controller.data.value.statusList,
           value: controller.selectedInstructorStatus.value,
@@ -457,7 +456,7 @@ class _AddInstructorPayOutState extends State<AddInstructorPayOut> {
             controller.selectedInstructorStatus.value = val;
           },
           itemAsString: (item) => item.name,
-          validator: (val) => val == null ? "Status" : null,
+          //validator: (val) => val == null ? "Status" : null,
         ),
       ],
     );

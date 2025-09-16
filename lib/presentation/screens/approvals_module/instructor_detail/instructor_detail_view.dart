@@ -24,6 +24,7 @@ class _InstructorDetailViewState extends State<InstructorDetailView> {
         drawerOnTap: () {
           _scaffoldKey.currentState?.openDrawer();
         },
+        showBackIcon: true,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -191,7 +192,7 @@ class _InstructorDetailViewState extends State<InstructorDetailView> {
                       child: Container(
                         padding: EdgeInsets.symmetric(
                           horizontal: mobileView ? 0 : 15,
-                          vertical: 15,
+                          vertical: 5,
                         ),
                         decoration: mobileView
                             ? BoxDecoration()
@@ -245,35 +246,43 @@ class _InstructorDetailViewState extends State<InstructorDetailView> {
                                     commonCacheImage(
                                       controller.data.value.image,
                                       ImagePlaceHolder.imagePlaceHolderDark,
-                                      height: 100,
-                                      width: 100,
+                                      height: mobileView ? 60 : 100,
+                                      width: mobileView ? 60 : 100,
                                     ),
                                     Gap(20),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        CommonText.semiBold(
-                                          instructorData.name,
-                                          size: 20,
-                                          color: AppColors.white,
-                                        ),
-                                        Gap(12),
-                                        CommonText.regular(
-                                          controller.data.value.email,
-                                          size: 15,
-                                          color: AppColors.white,
-                                        ),
-                                        Gap(12),
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          CommonText.semiBold(
+                                            instructorData.name,
+                                            size: mobileView ? 16 : 20,
+                                            color: AppColors.white,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          Gap(12),
+                                          CommonText.regular(
+                                            controller.data.value.email,
+                                            size: mobileView ? 14 : 15,
+                                            color: AppColors.white,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          Gap(12),
 
-                                        CommonText.regular(
-                                          controller.data.value.phoneNo,
-                                          size: 15,
-                                          color: AppColors.white,
-                                        ),
-                                      ],
+                                          CommonText.regular(
+                                            controller.data.value.phoneNo,
+                                            size: mobileView ? 14 : 15,
+                                            color: AppColors.white,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -551,8 +560,10 @@ class _InstructorDetailViewState extends State<InstructorDetailView> {
                         Expanded(
                           child: CommonText.regular(
                             'Drivinglicence.pdf',
-                            size: 14,
+                            size:mobileView?12: 14,
                             color: AppColors.bodyTextColor,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         SvgImageFromAsset(AppCommonIcon.downloadIcon),
@@ -604,7 +615,7 @@ class _InstructorDetailViewState extends State<InstructorDetailView> {
                       children: [
                         CommonText.medium(
                           controller.data.value.qualificationProf,
-                          size: 16,
+                          size: mobileView?14:16,
                         ),
                         Gap(20),
                         SvgImageFromAsset(CommonImageAssets.pdf),
@@ -612,10 +623,13 @@ class _InstructorDetailViewState extends State<InstructorDetailView> {
                         Expanded(
                           child: CommonText.regular(
                             'Universitydegree.pdf',
-                            size: 14,
+                            size:mobileView?12: 14,
                             color: AppColors.bodyTextColor,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
+                        Gap(2),
                         SvgImageFromAsset(AppCommonIcon.downloadIcon),
                       ],
                     ),

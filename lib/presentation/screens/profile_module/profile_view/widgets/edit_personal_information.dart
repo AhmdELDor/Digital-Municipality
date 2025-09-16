@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-
 import '../../../../../core/constants/app_assets.dart';
 import '../../../../../core/constants/app_colors.dart';
 import '../../../../../core/constants/app_strings.dart';
@@ -53,7 +52,7 @@ class _EditPersonalInformationState extends State<EditPersonalInformation> {
         CommonDivider(),
         Gap(20),
         SizedBox(
-          height: context.height * 0.7,
+          height: context.height * 0.5,
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -85,6 +84,7 @@ class _EditPersonalInformationState extends State<EditPersonalInformation> {
                             ],
                           ),
                         ),
+                        Gap(20),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,6 +114,7 @@ class _EditPersonalInformationState extends State<EditPersonalInformation> {
                     CommonClassDatePicker(
                       hintText: AddClassStrings.selectDate,
                       controller: controller.joiningDateController,
+                      fillColor: Colors.transparent,
                       suffixIcon: SvgImageFromAsset(
                         AppCommonIcon.calenderIcon,
                         height: 16,
@@ -149,7 +150,7 @@ class _EditPersonalInformationState extends State<EditPersonalInformation> {
                     commonHeader(ProfileViewStrings.userRole),
                     Gap(10),
                     Obx(
-                          () => CustomDropdownFormField<String>(
+                          () => AlwaysDownDropdown<String>(
                         hintText: "Select",
                         items: controller.roleList,
                         value: controller.selectedRole.value,
@@ -157,7 +158,7 @@ class _EditPersonalInformationState extends State<EditPersonalInformation> {
                           controller.selectedRole.value = val!;
                         },
 
-                        validator: (val) => val == null ? "Select" : null,
+                        //validator: (val) => val == null ? "Select" : null,
                       ),
                     ),
                     
@@ -168,30 +169,35 @@ class _EditPersonalInformationState extends State<EditPersonalInformation> {
           ),
         ),
         Gap(25),
-        Row(
-          children: [
-            Expanded(
-              child: OutlineButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                label: AppCommonStrings.btnCancel,
-                borderSide: BorderSide(color: AppColors.primary500),
-                textColor: AppColors.primary500,
-                textSize: 16,
-                textWeight: FontWeight.w500,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
+          child: Row(
+            children: [
+              Expanded(
+                child: OutlineButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  label: AppCommonStrings.btnCancel,
+                  borderSide: BorderSide(color: AppColors.primary500),
+                  textColor: AppColors.primary500,
+                  textSize: 16,
+                  textWeight: FontWeight.w500,
+                ),
               ),
-            ),
-            Gap(15),
-            Expanded(
-              child: PrimaryButton(
-                onPressed: () {},
-                label: UserManagementStrings.update,
-                textSize: 16,
-                textWeight: FontWeight.w500,
+              Gap(15),
+              Expanded(
+                child: PrimaryButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  label: UserManagementStrings.update,
+                  textSize: 16,
+                  textWeight: FontWeight.w500,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     );

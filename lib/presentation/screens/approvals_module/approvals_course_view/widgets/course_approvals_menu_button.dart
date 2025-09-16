@@ -58,6 +58,7 @@ class _CourseApprovalsMenuButtonState extends State<CourseApprovalsMenuButton> {
           : commonPopTextView(AppCommonIcon.moreIcon),
       padding: EdgeInsetsGeometry.zero,
       menuPadding: EdgeInsetsGeometry.zero,
+      position: PopupMenuPosition.under,
 
       itemBuilder: (context) => [
         PopupMenuItem(

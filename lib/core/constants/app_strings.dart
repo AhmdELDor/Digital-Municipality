@@ -71,8 +71,8 @@ class SignInStrings extends AppStrings {
   static const signInToYourAccount = "Sign in to Your Account";
   static const signInToYourAccountDes =
       "Enter your credentials to Sign in successfully";
-  static const enterEmailId = "enter email id";
-  static const enterPassword = "enter password";
+  static const enterEmailId = "Enter email id";
+  static const enterPassword = "Enter password";
   static const rememberMe = "Remember me";
   static const forGotPassword = "Forgot password?";
   static const or = "or";
@@ -163,7 +163,7 @@ class AddNoteStrings extends AppStrings {
   static const title = "Title";
   static const enterTitle = "Enter title";
   static const note = "Note";
-  static const enterNote = "enter note...";
+  static const enterNote = "Enter note...";
   static const saveNote = "Save Note";
 
 
@@ -172,18 +172,19 @@ class AddNoteStrings extends AppStrings {
 class ChangesPasswordStrings extends AppStrings {
   static const changePassword = "Change Password";
   static const currentPassword = "Current Password";
-  static const enterPassword = "enter password";
+  static const enterPassword = "Enter password";
   static const newPassword = "New Password";
-  static const enterNewPassword = "enter new password";
+  static const enterNewPassword = "Enter new password";
   static const confirmPassword = "Confirm Password";
 
 
 
 }
 class LogOutStrings extends AppStrings {
-  static const confirmLogout = "Confirm Sign out";
-  static const confirmLogoutDes = "You are exiting the secure Super Admin area. Proceed with sign out?";
+  static const confirmLogout = "Confirm Signout";
+  static const confirmLogoutDes = "You are exiting the secure Super Admin area. Proceed with signout?";
   static const stayHere = "Stay Here";
+  static const signOut = "Sign Out";
 
 }
 class NotificationStrings extends AppStrings {
@@ -249,7 +250,7 @@ class CourseApproveDialogStrings extends AppStrings {
   static const String continueAndDecline= "Continue & Decline";
   static const String feedbackToInstructor= "Feedback to Instructor";
   static const String feedback= "Feedback";
-  static const String feedbackDes= "enter feedback to instructor...";
+  static const String feedbackDes= "Enter feedback to instructor...";
   static const String deleteCourse = "Delete Course";
   static const String deleteCourseDes = "Are you sure you want to delete this course? This action can not be undone.";
   static const String deleteInstructor = "Delete Instructor";
@@ -260,6 +261,7 @@ class CourseApproveDialogStrings extends AppStrings {
 }
 
 class InstructorDetailViewStrings extends AppStrings {
+  static const String instructorProfile = "Instructor Profile";
   static const String instructorApprovals = "Instructor Approvals";
   static const String emailId = "Email ID";
   static const String mobileNo = "Mobile No.";
@@ -293,7 +295,7 @@ class UniversityDialogStrings extends AppStrings{
   static const String universityDeclinedDes = "University has been declined & University will be notified shortly about the status";
   static const String goToUniversity = "Go to University";
   static const String feedBackToUniversity = "Feedback to University";
-  static const String feedBackToUniversityHint = "enter feedback to university...";
+  static const String feedBackToUniversityHint = "Enter feedback to university...";
 
 
 }
@@ -533,6 +535,8 @@ class TestStrings extends AppStrings{
   static const String viewQuiz = "View Quiz";
   static const String addTest = "Add Test";
   static const String viewTest = "View Test";
+  static const String testStatus = "Test Status";
+  static const String createTest = "Create Test";
 }
 class LeaderBoardStrings extends AppStrings{
   static const String leaderboard = "Leaderboard";
@@ -604,7 +608,7 @@ class FinanceManagementStrings extends AppStrings{
   static const String setPayOutText = "Set Pay Out";
   static const String everyMonths = "Every Month’s";
   static const String totalRevenue = "% of Total Revenue detucted";
-  static const String enterPercent = "enter %";
+  static const String enterPercent = "Enter %";
   static const String addPayOut = "Add Pay Out";
 
 

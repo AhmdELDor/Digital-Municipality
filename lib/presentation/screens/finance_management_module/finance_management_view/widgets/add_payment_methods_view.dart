@@ -128,7 +128,12 @@ class _AddPaymentMethodViewState extends State<AddPaymentMethodView> {
                       Gap(15),
                       Expanded(
                         child: PrimaryButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(
+                              context,
+                              rootNavigator: true,
+                            ).pop();
+                          },
                           label: FinanceManagementStrings.addPaymentMethod,
                           textSize: 16,
                           textWeight: FontWeight.w500,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import '../../../../core/constants/app_assets.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../utils/extensions/responsive.dart';
@@ -10,7 +9,6 @@ import '../../../common_widgets/input_field/common_text_field.dart';
 import '../../../common_widgets/view_common_widget/custom_dropdown_button.dart';
 import '../../../common_widgets/widgets/button.dart';
 import '../../../common_widgets/widgets/common_divider.dart';
-import '../../../common_widgets/widgets/image.dart';
 import '../../../common_widgets/widgets/validations.dart';
 import '../controller/add_course_controller.dart';
 import 'basic_information_view.dart';
@@ -29,22 +27,17 @@ class _CourseCurriculumViewState extends State<CourseCurriculumView> {
   Widget build(BuildContext context) {
     var mobileView = ResponsiveView.isMobile(context);
     return SingleChildScrollView(
-      child: mobileView
-          ? mobileDetailView()
-          : desktopView(),
+      child: mobileView ? mobileDetailView() : desktopView(),
     );
   }
 
-
-  Widget mobileDetailView(){
+  Widget mobileDetailView() {
     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
     return Column(
       children: [
         Container(
           decoration: BoxDecoration(
-            color: isDarkMode
-                ? AppColors.mainDarkBgColor
-                : AppColors.white,
+            color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.white,
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
               color: isDarkMode
@@ -88,16 +81,15 @@ class _CourseCurriculumViewState extends State<CourseCurriculumView> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: sessionTitleView(controller.sessionNoTwoTitleController),
-              ),Gap(15),
+              ),
+              Gap(15),
             ],
           ),
         ),
         Gap(25),
         Container(
           decoration: BoxDecoration(
-            color: isDarkMode
-                ? AppColors.mainDarkBgColor
-                : AppColors.white,
+            color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.white,
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
               color: isDarkMode
@@ -115,9 +107,7 @@ class _CourseCurriculumViewState extends State<CourseCurriculumView> {
                   horizontal: 15,
                   vertical: 12,
                 ),
-                child: commonAddButtonView(
-                  DashboardViewStrings.lectureDetail,
-                ),
+                child: commonAddButtonView(DashboardViewStrings.lectureDetail),
               ),
               CommonDivider(height: 2),
               Gap(15),
@@ -164,14 +154,13 @@ class _CourseCurriculumViewState extends State<CourseCurriculumView> {
                 child: durationOfVideo(),
               ),
               Gap(15),
-
-
             ],
           ),
         ),
       ],
     );
   }
+
   Widget desktopView() {
     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
     return Column(
@@ -249,7 +238,8 @@ class _CourseCurriculumViewState extends State<CourseCurriculumView> {
                       child: PrimaryButton(
                         height: 42,
                         onPressed: () {},
-                        label: AddCoursesStrings.previous,
+                        borderRadius: 9,
+                        label: AppCommonStrings.btnCancel,
                         textSize: 16,
                         textWeight: FontWeight.w500,
                         backgroundColor: isDarkMode
@@ -263,13 +253,15 @@ class _CourseCurriculumViewState extends State<CourseCurriculumView> {
                       ),
                     ),
                     Gap(25),
-                    SizedBox(width: 160,
+                    SizedBox(
+                      width: 160,
                       child: PrimaryButton(
                         height: 42,
                         onPressed: () {},
                         label: AppCommonStrings.btnSave,
                         textSize: 16,
                         textWeight: FontWeight.w500,
+                        borderRadius: 9,
                       ),
                     ),
                   ],
@@ -347,16 +339,19 @@ class _CourseCurriculumViewState extends State<CourseCurriculumView> {
                           width: 1,
                         ),
                         textColor: AppColors.primary500,
+                        borderRadius: 9,
                       ),
                     ),
                     Gap(25),
-                    SizedBox(width: 160,
+                    SizedBox(
+                      width: 160,
                       child: PrimaryButton(
                         height: 42,
                         onPressed: () {},
-                        label: AppCommonStrings.btnSave,
+                        label: AddCoursesStrings.addCourse,
                         textSize: 16,
                         textWeight: FontWeight.w500,
+                        borderRadius: 9,
                       ),
                     ),
                   ],
@@ -378,7 +373,7 @@ class _CourseCurriculumViewState extends State<CourseCurriculumView> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             commonRequiredHeaderText(AddCoursesStrings.sessionNo),
-            SvgImageFromAsset(AppCommonIcon.deleteIcon),
+           // SvgImageFromAsset(AppCommonIcon.deleteIcon),
           ],
         ),
         Gap(10),
@@ -419,7 +414,7 @@ class _CourseCurriculumViewState extends State<CourseCurriculumView> {
         commonRequiredHeaderText(AddCoursesStrings.session),
         Gap(10),
         Obx(
-          () => CustomCourseDropdownFormField<String>(
+          () => AlwaysDownDropdown<String>(
             hintText: "Select",
             items: controller.sessionList,
             value: controller.selectedSession.value.isEmpty
@@ -428,8 +423,8 @@ class _CourseCurriculumViewState extends State<CourseCurriculumView> {
             onChanged: (val) {
               controller.selectedSession.value = val ?? '';
             },
-            validator: (val) =>
-                val == null || val.isEmpty ? "Select session" : null,
+            // validator: (val) =>
+            //     val == null || val.isEmpty ? "Select session" : null,
           ),
         ),
       ],
@@ -456,21 +451,31 @@ class _CourseCurriculumViewState extends State<CourseCurriculumView> {
               children: [
                 InkWell(
                   onTap: () {
-                    int current = int.tryParse(controller.srNoController.text) ?? 0;
+                    int current =
+                        int.tryParse(controller.srNoController.text) ?? 0;
                     current++;
                     controller.srNoController.text = current.toString();
                   },
-                  child: const Icon(Icons.keyboard_arrow_up,color: AppColors.bodyTextColor,size: 20,),
+                  child: const Icon(
+                    Icons.keyboard_arrow_up,
+                    color: AppColors.bodyTextColor,
+                    size: 20,
+                  ),
                 ),
                 InkWell(
                   onTap: () {
-                    int current = int.tryParse(controller.srNoController.text) ?? 0;
+                    int current =
+                        int.tryParse(controller.srNoController.text) ?? 0;
                     if (current > 0) {
                       current--; // don’t go below 0
                     }
                     controller.srNoController.text = current.toString();
                   },
-                  child: const Icon(Icons.keyboard_arrow_down,color: AppColors.bodyTextColor,size: 20,),
+                  child: const Icon(
+                    Icons.keyboard_arrow_down,
+                    color: AppColors.bodyTextColor,
+                    size: 20,
+                  ),
                 ),
               ],
             ),
@@ -524,7 +529,7 @@ class _CourseCurriculumViewState extends State<CourseCurriculumView> {
         commonRequiredHeaderText(AddCoursesStrings.session),
         Gap(10),
         Obx(
-          () => CustomCourseDropdownFormField<String>(
+          () => AlwaysDownDropdown<String>(
             hintText: "Select",
             items: controller.secondSessionList,
             value: controller.selectedSecondSession.value.isEmpty
@@ -533,8 +538,8 @@ class _CourseCurriculumViewState extends State<CourseCurriculumView> {
             onChanged: (val) {
               controller.selectedSecondSession.value = val ?? '';
             },
-            validator: (val) =>
-                val == null || val.isEmpty ? "Select session" : null,
+            // validator: (val) =>
+            //     val == null || val.isEmpty ? "Select session" : null,
           ),
         ),
       ],
@@ -561,21 +566,31 @@ class _CourseCurriculumViewState extends State<CourseCurriculumView> {
               children: [
                 InkWell(
                   onTap: () {
-                    int current = int.tryParse(controller.srNoSecondController.text) ?? 0;
+                    int current =
+                        int.tryParse(controller.srNoSecondController.text) ?? 0;
                     current++;
                     controller.srNoSecondController.text = current.toString();
                   },
-                  child: const Icon(Icons.keyboard_arrow_up,color: AppColors.bodyTextColor,size: 20,),
+                  child: const Icon(
+                    Icons.keyboard_arrow_up,
+                    color: AppColors.bodyTextColor,
+                    size: 20,
+                  ),
                 ),
                 InkWell(
                   onTap: () {
-                    int current = int.tryParse(controller.srNoSecondController.text) ?? 0;
+                    int current =
+                        int.tryParse(controller.srNoSecondController.text) ?? 0;
                     if (current > 0) {
                       current--; // don’t go below 0
                     }
                     controller.srNoSecondController.text = current.toString();
                   },
-                  child: const Icon(Icons.keyboard_arrow_down,color: AppColors.bodyTextColor,size: 20,),
+                  child: const Icon(
+                    Icons.keyboard_arrow_down,
+                    color: AppColors.bodyTextColor,
+                    size: 20,
+                  ),
                 ),
               ],
             ),
@@ -620,7 +635,4 @@ class _CourseCurriculumViewState extends State<CourseCurriculumView> {
       ],
     );
   }
-
-
-
 }

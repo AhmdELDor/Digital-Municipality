@@ -13,6 +13,7 @@ import '../../../../common_widgets/widgets/common_divider.dart';
 import '../../../../common_widgets/widgets/image.dart';
 import '../../../../common_widgets/widgets/text.dart';
 import '../../../dashboard_module/dashboard/model/course_model.dart';
+import '../../../dashboard_module/notification/widgets/notification_list_view.dart';
 import '../controller/student_management_detail_controller.dart';
 import '../model/payment_history_model.dart';
 
@@ -362,7 +363,7 @@ Widget commonStatisticsView(String title, subtitle, bool mobileView) {
   );
 }
 
-Widget paymentView(PaymentHistoryModel data, bool mobileView) {
+Widget paymentView(PaymentHistoryModel data, bool mobileView,bool showMenu) {
   bool isDarkMode = Get.find<ThemeController>().isDarkMode;
   return Container(
     decoration: commonCardDecoration(12),
@@ -408,11 +409,12 @@ Widget paymentView(PaymentHistoryModel data, bool mobileView) {
                   ],
                 ),
               ),
+              showMenu==true? menuButton():SizedBox()
+
             ],
           ),
         ),
         CommonDivider(),
-
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
           child: Column(
@@ -436,6 +438,8 @@ Widget paymentView(PaymentHistoryModel data, bool mobileView) {
                 ],
               ),
               Gap(12),
+              CommonDivider(),
+              Gap(12),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -453,6 +457,8 @@ Widget paymentView(PaymentHistoryModel data, bool mobileView) {
                 ],
               ),
               Gap(12),
+              CommonDivider(),
+              Gap(12),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -469,6 +475,8 @@ Widget paymentView(PaymentHistoryModel data, bool mobileView) {
                   ),
                 ],
               ),
+              Gap(12),
+              CommonDivider(),
               Gap(12),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -496,8 +504,41 @@ Widget paymentView(PaymentHistoryModel data, bool mobileView) {
     ),
   );
 }
+menuButton() {
+  bool isDarkMode = Get.find<ThemeController>().isDarkMode;
+  return PopupMenuButton(
+    color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.lightBgColor,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+    child: commonPopTextView(AppCommonIcon.moreIcon),
+    position: PopupMenuPosition.under,
+    itemBuilder: (context) => [
+      PopupMenuItem(
+        value: 1,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+          child: commonDeviceView(
+            AppCommonIcon.editIcon,
+            CourseManagementStrings.edit,
+            null,
+          ),
+        ),
+      ),
 
-Widget paymentListView(bool mobileView) {
+      PopupMenuItem(
+        value: 2,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+          child: commonDeviceView(
+            AppCommonIcon.deleteIcon,
+            ApprovalsStrings.delete,
+            null,
+          ),
+        ),
+      ),
+    ],
+  );
+}
+Widget paymentListView(bool mobileView,bool showMenu) {
   StudentManagementDetailController controller = Get.put(
     StudentManagementDetailController(),
   );
@@ -507,7 +548,7 @@ Widget paymentListView(bool mobileView) {
         index,
       ) {
         final data = controller.data.value.paymentHistoryList[index];
-        return ResponsiveGridCol(lg: 4, child: paymentView(data, mobileView));
+        return ResponsiveGridCol(lg: 4, child: paymentView(data, mobileView,showMenu));
       }),
     ),
   );

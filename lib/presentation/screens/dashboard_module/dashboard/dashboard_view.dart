@@ -200,6 +200,8 @@ class _DashboardViewState extends State<DashboardView> {
                           ],
                         )
                       : Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Expanded(
                               flex: 8,

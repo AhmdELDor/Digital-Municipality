@@ -123,10 +123,9 @@ class _CourseCategoryViewState extends State<CourseCategoryView> {
     return PopupMenuButton(
       color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.lightBgColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
-
       padding: EdgeInsetsGeometry.zero,
       menuPadding: EdgeInsetsGeometry.zero,
-
+      position: PopupMenuPosition.under,
       itemBuilder: (context) => [
         PopupMenuItem(
           value: 1,

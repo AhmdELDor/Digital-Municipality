@@ -47,7 +47,7 @@ Widget authBackgroundImageView(BuildContext context) {
                   ),
                   Gap(20),
                   CommonText.regular(
-                    SignInStrings.simplifyYourManagementDes,
+                    '"${SignInStrings.simplifyYourManagementDes}"',
                     size: 16,
                     color: AppColors.white,
                     textAlign: TextAlign.start,

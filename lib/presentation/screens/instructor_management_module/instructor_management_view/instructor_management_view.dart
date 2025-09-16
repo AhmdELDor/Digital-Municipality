@@ -93,7 +93,13 @@ class _InstructorManagementViewState extends State<InstructorManagementView> {
                                           AppColors.primary500,
                                       buttonName:
                                           InviteSendStrings.backToDashboard,
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.of(
+                                          context,
+                                          rootNavigator: true,
+                                        ).pop();
+
+                                      },
                                     ),
                                   ),
                                 );

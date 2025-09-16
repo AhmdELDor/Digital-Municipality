@@ -24,11 +24,13 @@ Widget commonReportsCardView({
   required String name,
   required LinearGradient gradient,
   required bool mobileView,
-  required EdgeInsetsGeometry margin
+  required EdgeInsetsGeometry margin,
+  String? leading,
+  String? trailing,
 }) {
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-    margin: margin ,
+    margin: margin,
     decoration: BoxDecoration(
       border: Border.all(
         color: isDarkMode
@@ -54,7 +56,14 @@ Widget commonReportsCardView({
               color: isDarkMode ? AppColors.white : null,
             ),
             Gap(3),
-            Expanded(child: CommonText.light(name, size: 16,maxLines: 1,overflow: TextOverflow.ellipsis,)),
+            Expanded(
+              child: CommonText.light(
+                name,
+                size: 16,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
           ],
         ),
         Gap(40),
@@ -64,7 +73,18 @@ Widget commonReportsCardView({
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CommonText.medium(data.value.toString(), size: 18),
+                  CommonText.medium(
+                    '${leading ?? ''}${data.value}${trailing ?? ''}',
+                    size: 18,
+                  ),
+
+                  // CommonText.medium(
+                  //   leading == null
+                  //       ? data.value.toString()
+                  //       : '$leading${data.value.toString()},':
+                  //       trailing==null?data.value.toString():'${data.value.toString()}',
+                  //   size: 18,
+                  // ),
                   Gap(3),
                   CommonText.light(
                     ReportsAnalysis.comparingLastMonth,
@@ -284,13 +304,12 @@ Widget instructorPerformanceReport(InstructorModel data) {
   bool isDarkMode = Get.find<ThemeController>().isDarkMode;
   return Container(
     decoration: commonCardDecoration(12),
-    margin: EdgeInsetsGeometry.only(left: 20,bottom: 20),
+    margin: EdgeInsetsGeometry.only(left: 20, bottom: 20),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -344,11 +363,11 @@ Widget instructorPerformanceReport(InstructorModel data) {
         CommonDivider(),
 
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: Row(
-             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              leadingTitle(ReportsAnalysis.assignedCourses,),
+              leadingTitle(ReportsAnalysis.assignedCourses),
               trailingTitle(data.assignedCourses.toString()),
             ],
           ),
@@ -357,18 +376,18 @@ Widget instructorPerformanceReport(InstructorModel data) {
         CommonDivider(),
 
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Expanded(child: leadingTitle(ReportsAnalysis.avgStudentRating,)),
-              SvgImageFromAsset(AppCommonIcon.starIcon,height: 12,width: 12,),
+              Expanded(child: leadingTitle(ReportsAnalysis.avgStudentRating)),
+              SvgImageFromAsset(AppCommonIcon.starIcon, height: 12, width: 12),
               Gap(3),
               CommonText.medium(
                 data.rate.toString(),
                 size: 16,
-                color:AppColors.secondary500 ,
-              )
+                color: AppColors.secondary500,
+              ),
             ],
           ),
         ),
@@ -376,16 +395,15 @@ Widget instructorPerformanceReport(InstructorModel data) {
         CommonDivider(),
 
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              leadingTitle(ReportsAnalysis.totalCourses,),
+              leadingTitle(ReportsAnalysis.totalCourses),
               trailingTitle(data.totalCourses.toString()),
             ],
           ),
         ),
-
       ],
     ),
   );
@@ -399,11 +417,7 @@ Widget leadingTitle(String title) {
     color: isDarkMode ? AppColors.bodyTextDarkColor : AppColors.bodyTextColor,
   );
 }
+
 Widget trailingTitle(String title) {
-
-  return CommonText.regular(
-    title,
-    size: 15,
-
-  );
+  return CommonText.regular(title, size: 15);
 }

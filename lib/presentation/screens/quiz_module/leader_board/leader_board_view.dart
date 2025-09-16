@@ -382,14 +382,14 @@ Widget leaderView(LeaderBoardModel data){
 }
   Widget coinsDropDown() {
     return Obx(
-      () => CustomDropdownFormField<String>(
+      () => AlwaysDownDropdown<String>(
         hintText: "Coins Range",
         items: controller.ranges,
         value: controller.selectedRange.value,
         onChanged: (value) {
           controller.selectedRange.value = value;
         },
-        validator: (val) => val == null || val.isEmpty ? "Coins Range" : null,
+       // validator: (val) => val == null || val.isEmpty ? "Coins Range" : null,
       ),
     );
   }

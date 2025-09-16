@@ -1,46 +1,169 @@
 part of 'add_quiz_imports.dart';
 
 class AddQuizView extends StatefulWidget {
-  const AddQuizView({super.key});
+  final QuizModel? quizData;
+  final TestModel? testData;
+  final String? title;
+  const AddQuizView({super.key, this.quizData, this.testData, this.title});
 
   @override
   State<AddQuizView> createState() => _AddQuizViewState();
 }
 
 class _AddQuizViewState extends State<AddQuizView> {
+  @override
+  void initState() {
+    super.initState();
+    print("=====title======");
+    print(widget.title);
+    print(widget.quizData);
+    print(widget.testData);
+  }
   AddQuizController controller = Get.put((AddQuizController()));
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+
   @override
   Widget build(BuildContext context) {
     var mobileView = ResponsiveView.isMobile(context);
     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
 
-    //final extras = GoRouterState.of(context).extra as Map<String, dynamic>?;
-
-    final args = GoRouterState.of(context).extra as Map?;
-    final data = args?['data'];
-    final title = args?['title'] ?? "Default Title";
-
-    // fill controllers once
-    if (data != null) {
-      controller.fillData(data);
+    if (widget.quizData != null) {
+      controller.fillData(widget.quizData);
+    } else {
+      () {
+        controller.fillData(widget.testData);
+      };
     }
 
     return Scaffold(
       key: _scaffoldKey,
       drawer: const SizedBox(width: 270, child: SideDrawerMenu()),
       appBar: CustomAppBar(
+        showBackIcon: true,
         searchController: controller.searchController,
         drawerOnTap: () {
           _scaffoldKey.currentState?.openDrawer();
         },
       ),
       body: SafeArea(
-        child: mobileView?Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
+        child: mobileView
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 20,
+                            ),
+                            child: CommonText.medium(
+                              widget.testData != null
+                                  ? TestStrings.addTest
+                                  : widget.quizData != null
+                                  ? AddQuizStrings.addQuiz
+                                  : widget.title == 'Test'
+                                  ? TestStrings.addTest
+                                  : AddQuizStrings.addQuiz,
+                              size: 18,
+                            ),
+                          ),
+                          CommonDivider(),
+                          Gap(20),
+                          deviceView(isDarkMode),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Gap(15),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Obx(() {
+                      return controller.selectedType.value ==
+                              "Multiple Choice Question"
+                          ? Row(
+                              children: [
+                                Expanded(
+                                  child: PrimaryButton(
+                                    height: 42,
+                                    onPressed: () {
+                                      controller.questionIndex.value--;
+                                    },
+                                    label: AddCoursesStrings.previous,
+                                    textSize: 16,
+                                    textWeight: FontWeight.w500,
+                                    backgroundColor: isDarkMode
+                                        ? AppColors.mainDarkBgColor
+                                        : AppColors.lightBgColor,
+                                    borderSide: BorderSide(
+                                      color: AppColors.primary500,
+                                      width: 1,
+                                    ),
+                                    textColor: AppColors.primary500,
+                                  ),
+                                ),
+                                Gap(25),
+                                Expanded(
+                                  child: PrimaryButton(
+                                    height: 42,
+                                    onPressed: () {
+                                      controller.saveAndNext();
+                                    },
+                                    label: AddCoursesStrings.saveAndNext,
+                                    textSize: 16,
+                                    textWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            )
+                          : Row(
+                              children: [
+                                Expanded(
+                                  child: PrimaryButton(
+                                    height: 42,
+                                    onPressed: () {},
+                                    label: AddCoursesStrings.previous,
+                                    textSize: 16,
+                                    textWeight: FontWeight.w500,
+                                    backgroundColor: isDarkMode
+                                        ? AppColors.mainDarkBgColor
+                                        : AppColors.lightBgColor,
+                                    borderSide: BorderSide(
+                                      color: AppColors.primary500,
+                                      width: 1,
+                                    ),
+                                    textColor: AppColors.primary500,
+                                  ),
+                                ),
+                                Gap(25),
+                                Expanded(
+                                  child: PrimaryButton(
+                                    height: 42,
+                                    onPressed: () {
+                                      controller.saveAndNext();
+                                    },
+                                    label: widget.testData != null
+                                        ? TestStrings.createTest
+                                        : widget.quizData != null
+                                        ? QuizStrings.createQuiz
+                                        : widget.title == 'Test'
+                                        ? TestStrings.createTest
+                                        : QuizStrings.createQuiz,
+                                    textSize: 16,
+                                    textWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            );
+                    }),
+                  ),
+                ],
+              )
+            : SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -50,296 +173,153 @@ class _AddQuizViewState extends State<AddQuizView> {
                         vertical: 20,
                       ),
                       child: CommonText.medium(
-                        title == 'Quiz'
+                        widget.testData != null
+                            ? TestStrings.addTest
+                            : widget.quizData != null
                             ? AddQuizStrings.addQuiz
-                            : TestStrings.addTest,
+                            : widget.title == 'Test'
+                            ? TestStrings.addTest
+                            : AddQuizStrings.addQuiz,
                         size: 18,
                       ),
                     ),
                     CommonDivider(),
                     Gap(20),
-                    deviceView(isDarkMode),
-
-                  ],
-                ),
-              ),
-            ),
-           Gap(15),
-           Padding(
-             padding: const EdgeInsets.symmetric(horizontal: 15),
-             child: Obx(() {
-               return  controller.selectedType.value == "multiple"
-                   ? Row(
-                 children: [
-                   Expanded(
-                     child: PrimaryButton(
-                       height: 42,
-                       onPressed: () {
-                         controller.questionIndex.value--;
-                       },
-                       label: AddCoursesStrings.previous,
-                       textSize: 16,
-                       textWeight: FontWeight.w500,
-                       backgroundColor: isDarkMode
-                           ? AppColors.mainDarkBgColor
-                           : AppColors.lightBgColor,
-                       borderSide: BorderSide(
-                         color: AppColors.primary500,
-                         width: 1,
-                       ),
-                       textColor: AppColors.primary500,
-                     ),
-                   ),
-                   Gap(25),
-                   Expanded(
-                     child: PrimaryButton(
-                       height: 42,
-                       onPressed: () {
-                         controller.saveAndNext();
-                       },
-                       label: AddCoursesStrings.saveAndNext,
-                       textSize: 16,
-                       textWeight: FontWeight.w500,
-                     ),
-                   ),
-                 ],
-               )
-                   : Row(
-                 children: [
-                   Expanded(
-                     child: PrimaryButton(
-                       height: 42,
-                       onPressed: () {},
-                       label: AddCoursesStrings.previous,
-                       textSize: 16,
-                       textWeight: FontWeight.w500,
-                       backgroundColor: isDarkMode
-                           ? AppColors.mainDarkBgColor
-                           : AppColors.lightBgColor,
-                       borderSide: BorderSide(
-                         color: AppColors.primary500,
-                         width: 1,
-                       ),
-                       textColor: AppColors.primary500,
-                     ),
-                   ),
-                   Gap(25),
-                   Expanded(
-                     child: PrimaryButton(
-                       height: 42,
-                       onPressed: () {
-                         controller.saveAndNext();
-                       },
-                       label: QuizStrings.createQuiz,
-                       textSize: 16,
-                       textWeight: FontWeight.w500,
-                     ),
-                   ),
-                 ],
-               );
-             },),
-           )
-            
-          ],
-        ):SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 20,
-                ),
-                child: CommonText.medium(
-                  title == 'Test'
-
-                      ? TestStrings.addTest:AddQuizStrings.addQuiz,
-                  size: 18,
-                ),
-              ),
-              CommonDivider(),
-              Gap(20),
-              desktopView(isDarkMode),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 20,
-                ),
-                child: ResponsiveGridRow(
-                  children: [
-                    ResponsiveGridCol(
-                      lg: 9,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: isDarkMode
-                              ? AppColors.mainDarkBgColor
-                              : AppColors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: isDarkMode
-                                ? AppColors.grey100Color
-                                : AppColors.lightBorderColor,
-                            width: 1,
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 12,
-                                vertical: 12,
-                              ),
+                    desktopView(isDarkMode),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 20,
+                      ),
+                      child: ResponsiveGridRow(
+                        children: [
+                          ResponsiveGridCol(
+                            lg: 9,
+                            child: Container(
                               decoration: BoxDecoration(
                                 color: isDarkMode
-                                    ? AppColors.cardDarkBg2Color
-                                    : AppColors.lightBgColor,
-                                borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(20),
-                                  topLeft: Radius.circular(20),
+                                    ? AppColors.mainDarkBgColor
+                                    : AppColors.white,
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(
+                                  color: isDarkMode
+                                      ? AppColors.grey100Color
+                                      : AppColors.lightBorderColor,
+                                  width: 1,
                                 ),
                               ),
-                              child: Row(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Obx(
-                                        () => CommonText.regular(
-                                      "Question ${controller.questionIndex.value}",
-                                      size: 16,
-                                    ),
-                                  ),
-
-                                  Gap(30),
-
                                   Container(
-                                    // width: 190,
-                                    height: 35,
                                     padding: EdgeInsets.symmetric(
-                                      horizontal: 10,
+                                      horizontal: 12,
+                                      vertical: 12,
                                     ),
                                     decoration: BoxDecoration(
                                       color: isDarkMode
-                                          ? AppColors.greyDarkColor
-                                          : AppColors.lightBorderColor,
-                                      borderRadius: BorderRadius.circular(
-                                        6,
-                                      ),
-                                      border: Border.all(
-                                        color: isDarkMode
-                                            ? AppColors.grey100Color
-                                            : AppColors.lightBorderColor,
+                                          ? AppColors.cardDarkBg2Color
+                                          : AppColors.lightBgColor,
+                                      borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(20),
+                                        topLeft: Radius.circular(20),
                                       ),
                                     ),
-                                    child: Obx(
-                                          () => DropdownButtonHideUnderline(
-                                        child: DropdownButton<String>(
-                                          icon: SvgImageFromAsset(
-                                            AppCommonIcon.arrowDownIcon,
+                                    child: Row(
+                                      children: [
+                                        Obx(
+                                          () => CommonText.regular(
+                                            "Question ${controller.questionIndex.value}",
+                                            size: 16,
                                           ),
-                                          value:
-                                          controller
-                                              .selectedType
-                                              .value
-                                              .isEmpty
-                                              ? null
-                                              : controller
-                                              .selectedType
-                                              .value,
-                                          hint: CommonText.medium(
-                                            "Select Question Type",
-                                            size: 13,
+                                        ),
+
+                                        Gap(30),
+
+                                        SizedBox(
+                                          width: 250,
+
+                                          child: Obx(
+                                            () => AlwaysDownDropdown<String>(
+                                              color: Colors.transparent,
+                                              borderRadius: 6,
+                                              hintText: "Select",
+                                              items:
+                                                  controller.selectedTypeList,
+                                              value:
+                                                  controller
+                                                      .selectedType
+                                                      .value
+                                                      .isEmpty
+                                                  ? null
+                                                  : controller
+                                                        .selectedType
+                                                        .value,
+                                              onChanged: (val) {
+                                                controller.selectedType.value =
+                                                    val ?? "";
+                                              },
+                                              // validator: (val) => val == null || val.isEmpty
+                                              //     ? "Please select"
+                                              //     : null,
+                                            ),
                                           ),
-                                          items: [
-                                            DropdownMenuItem(
-                                              value: "multiple",
-                                              child: CommonText.medium(
-                                                "Multiple Choice Question",
-                                                size: 15,
-                                                color: isDarkMode
-                                                    ? AppColors
-                                                    .bodyTextDarkColor
-                                                    : AppColors
-                                                    .bodyTextColor,
+                                        ),
+
+                                        Spacer(),
+
+                                        Container(
+                                          height: 30,
+                                          width: 30,
+                                          decoration: BoxDecoration(
+                                            color: isDarkMode
+                                                ? AppColors.error500
+                                                : AppColors.error100,
+                                            borderRadius: BorderRadius.circular(
+                                              7,
+                                            ),
+                                          ),
+                                          child: Center(
+                                            child: SvgImageFromAsset(
+                                              AppCommonIcon.quizDeleteIcon,
+                                              height: 20,
+                                              width: 20,
+                                              colorFilter: ColorFilter.mode(
+                                                isDarkMode
+                                                    ? AppColors.white
+                                                    : AppColors.error500,
+                                                BlendMode.srcIn,
                                               ),
                                             ),
-                                            DropdownMenuItem(
-                                              value: "ab",
-                                              child: CommonText.medium(
-                                                "A/B Answer",
-                                                size: 15,
-                                                color: isDarkMode
-                                                    ? AppColors
-                                                    .bodyTextDarkColor
-                                                    : AppColors
-                                                    .bodyTextColor,
-                                              ),
-                                            ),
-                                          ],
-                                          onChanged: (val) {
-                                            controller
-                                                .selectedType
-                                                .value =
-                                                val ?? "";
-                                          },
+                                          ),
                                         ),
-                                      ),
+                                      ],
                                     ),
                                   ),
+                                  CommonDivider(),
 
-                                  Spacer(),
-
-                                  Container(
-                                    height: 30,
-                                    width: 30,
-                                    decoration: BoxDecoration(
-                                      color: isDarkMode
-                                          ? AppColors.error500
-                                          : AppColors.error100,
-                                      borderRadius: BorderRadius.circular(
-                                        7,
-                                      ),
-                                    ),
-                                    child: Center(
-                                      child: SvgImageFromAsset(
-                                        AppCommonIcon.quizDeleteIcon,
-                                        height: 20,
-                                        width: 20,
-                                        colorFilter: ColorFilter.mode(
-                                          isDarkMode
-                                              ? AppColors.white
-                                              : AppColors.error500,
-                                          BlendMode.srcIn,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                  Obx(() {
+                                    if (controller.selectedType.value ==
+                                        "Multiple Choice Question") {
+                                      return multipleQuestionsView();
+                                    } else if (controller.selectedType.value ==
+                                        "A/B Answer") {
+                                      return singleOptionsView();
+                                    } else {
+                                      return SizedBox(); // Empty initially
+                                    }
+                                  }),
                                 ],
                               ),
                             ),
-                            CommonDivider(),
-
-                            Obx(() {
-                              if (controller.selectedType.value ==
-                                  "multiple") {
-                                return multipleQuestionsView();
-                              } else if (controller.selectedType.value ==
-                                  "ab") {
-                                return singleOptionsView();
-                              } else {
-                                return SizedBox(); // Empty initially
-                              }
-                            }),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
               ),
-            ],
-          ),
-        )
-
       ),
     );
   }
@@ -765,7 +745,21 @@ class _AddQuizViewState extends State<AddQuizView> {
                   onPressed: () {
                     controller.saveAndNext();
                   },
-                  label: QuizStrings.createQuiz,
+
+                  label: widget.testData != null
+                      ? TestStrings.createTest
+                      : widget.quizData != null
+                      ? QuizStrings.createQuiz
+                      : widget.title == 'Test'
+                      ? TestStrings.createTest
+                      : QuizStrings.createQuiz,
+                  // label: widget.testData != null
+                  //     ? TestStrings.createTest
+                  //     : widget.quizData != null
+                  //     ? QuizStrings.createQuiz
+                  //     : widget.title == 'Quiz'
+                  //     ? QuizStrings.createQuiz
+                  //     : TestStrings.createTest,
                   textSize: 16,
                   textWeight: FontWeight.w500,
                 ),
@@ -810,7 +804,8 @@ class _AddQuizViewState extends State<AddQuizView> {
         commonRequiredHeaderText(AddCoursesStrings.category),
         Gap(10),
         Obx(
-          () => CustomCourseDropdownFormField<String>(
+          () => AlwaysDownDropdown<String>(
+            color: Colors.transparent,
             hintText: "Select",
             items: controller.categoryList,
             value: controller.selectedCategory.value.isEmpty
@@ -819,7 +814,7 @@ class _AddQuizViewState extends State<AddQuizView> {
             onChanged: (val) {
               controller.selectedCategory.value = val ?? '';
             },
-            validator: (val) => val == null || val.isEmpty ? "Select" : null,
+            //validator: (val) => val == null || val.isEmpty ? "Select" : null,
           ),
         ),
       ],
@@ -833,7 +828,8 @@ class _AddQuizViewState extends State<AddQuizView> {
         commonRequiredHeaderText(AddCoursesStrings.language),
         Gap(10),
         Obx(
-          () => CustomCourseDropdownFormField<String>(
+          () => AlwaysDownDropdown<String>(
+            color: Colors.transparent,
             hintText: "Select",
             items: controller.languageList,
             value: controller.selectedLanguage.value.isEmpty
@@ -842,7 +838,7 @@ class _AddQuizViewState extends State<AddQuizView> {
             onChanged: (val) {
               controller.selectedLanguage.value = val ?? '';
             },
-            validator: (val) => val == null || val.isEmpty ? "Select" : null,
+            //validator: (val) => val == null || val.isEmpty ? "Select" : null,
           ),
         ),
       ],
@@ -926,7 +922,8 @@ class _AddQuizViewState extends State<AddQuizView> {
         commonRequiredHeaderText(AddQuizStrings.course),
         Gap(10),
         Obx(
-          () => CustomCourseDropdownFormField<String>(
+          () => AlwaysDownDropdown<String>(
+            color: Colors.transparent,
             hintText: "Select",
             items: controller.coursesList,
             value: controller.selectedCourses.value.isEmpty
@@ -935,7 +932,7 @@ class _AddQuizViewState extends State<AddQuizView> {
             onChanged: (val) {
               controller.selectedCourses.value = val ?? '';
             },
-            validator: (val) => val == null || val.isEmpty ? "Select" : null,
+            //validator: (val) => val == null || val.isEmpty ? "Select" : null,
           ),
         ),
       ],
@@ -1306,7 +1303,6 @@ class _AddQuizViewState extends State<AddQuizView> {
 
                             Gap(30),
 
-
                             Spacer(),
 
                             Container(
@@ -1343,71 +1339,29 @@ class _AddQuizViewState extends State<AddQuizView> {
                         child: commonRequiredHeaderText('Question Type'),
                       ),
                       Gap(15),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Container(
-                          width: double.infinity,
-                          height: 50,
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          decoration: BoxDecoration(
-                            // color: isDarkMode
-                            //     ? AppColors.greyDarkColor
-                            //     : AppColors.lightBorderColor,
-                            borderRadius: BorderRadius.circular(6),
-                            border: Border.all(
-                              color: isDarkMode
-                                  ? AppColors.grey100Color
-                                  : AppColors.lightBorderColor,
-                            ),
-                          ),
-                          child: Obx(
-                            () => DropdownButtonHideUnderline(
-                              child: DropdownButton<String>(
-                                icon: SvgImageFromAsset(
-                                  AppCommonIcon.arrowDownIcon,
-                                ),
-                                value: controller.selectedType.value.isEmpty
-                                    ? null
-                                    : controller.selectedType.value,
-                                hint: CommonText.medium(
-                                  "Select Question Type",
-                                  size: 13,
-                                ),
-                                items: [
-                                  DropdownMenuItem(
-                                    value: "multiple",
-                                    child: CommonText.medium(
-                                      "Multiple Choice Question",
-                                      size: 15,
-                                      color: isDarkMode
-                                          ? AppColors.bodyTextDarkColor
-                                          : AppColors.bodyTextColor,
-                                    ),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: "ab",
-                                    child: CommonText.medium(
-                                      "A/B Answer",
-                                      size: 15,
-                                      color: isDarkMode
-                                          ? AppColors.bodyTextDarkColor
-                                          : AppColors.bodyTextColor,
-                                    ),
-                                  ),
-                                ],
-                                onChanged: (val) {
-                                  controller.selectedType.value = val ?? "";
-                                },
-                              ),
-                            ),
-                          ),
+                      Obx(
+                        () => AlwaysDownDropdown<String>(
+                          color: isDarkMode
+                              ? AppColors.greyDarkColor
+                              : AppColors.lightBorderColor,
+                          borderRadius: 6,
+                          hintText: "Select",
+                          items: controller.selectedTypeList,
+                          value: controller.selectedType.value.isEmpty
+                              ? null
+                              : controller.selectedType.value,
+                          onChanged: (val) {
+                            controller.selectedType.value = val ?? "";
+                          },
                         ),
                       ),
                       Gap(15),
                       Obx(() {
-                        if (controller.selectedType.value == "multiple") {
+                        if (controller.selectedType.value ==
+                            "Multiple Choice Question") {
                           return deviceMultipleQuestionsView(isDarkMode);
-                        } else if (controller.selectedType.value == "ab") {
+                        } else if (controller.selectedType.value ==
+                            "A/B Answer") {
                           return deviceSingleQuestionsView(isDarkMode);
                         } else {
                           return SizedBox(); // Empty initially
@@ -1419,79 +1373,6 @@ class _AddQuizViewState extends State<AddQuizView> {
               ],
             ),
           ),
-          // controller.selectedType.value == "multiple"
-          //     ? Row(
-          //         children: [
-          //           SizedBox(
-          //             width: 160,
-          //             child: PrimaryButton(
-          //               height: 42,
-          //               onPressed: () {
-          //                 controller.questionIndex.value--;
-          //               },
-          //               label: AddCoursesStrings.previous,
-          //               textSize: 16,
-          //               textWeight: FontWeight.w500,
-          //               backgroundColor: isDarkMode
-          //                   ? AppColors.mainDarkBgColor
-          //                   : AppColors.lightBgColor,
-          //               borderSide: BorderSide(
-          //                 color: AppColors.primary500,
-          //                 width: 1,
-          //               ),
-          //               textColor: AppColors.primary500,
-          //             ),
-          //           ),
-          //           Gap(25),
-          //           SizedBox(
-          //             width: 160,
-          //             child: PrimaryButton(
-          //               height: 42,
-          //               onPressed: () {
-          //                 controller.saveAndNext();
-          //               },
-          //               label: AddCoursesStrings.saveAndNext,
-          //               textSize: 16,
-          //               textWeight: FontWeight.w500,
-          //             ),
-          //           ),
-          //         ],
-          //       )
-          //     : Row(
-          //         children: [
-          //           SizedBox(
-          //             width: 160,
-          //             child: PrimaryButton(
-          //               height: 42,
-          //               onPressed: () {},
-          //               label: AddCoursesStrings.previous,
-          //               textSize: 16,
-          //               textWeight: FontWeight.w500,
-          //               backgroundColor: isDarkMode
-          //                   ? AppColors.mainDarkBgColor
-          //                   : AppColors.lightBgColor,
-          //               borderSide: BorderSide(
-          //                 color: AppColors.primary500,
-          //                 width: 1,
-          //               ),
-          //               textColor: AppColors.primary500,
-          //             ),
-          //           ),
-          //           Gap(25),
-          //           SizedBox(
-          //             width: 160,
-          //             child: PrimaryButton(
-          //               height: 42,
-          //               onPressed: () {
-          //                 controller.saveAndNext();
-          //               },
-          //               label: QuizStrings.createQuiz,
-          //               textSize: 16,
-          //               textWeight: FontWeight.w500,
-          //             ),
-          //           ),
-          //         ],
-          //       ),
         ],
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:education_admin_portal/presentation/common_widgets/alerts/alerts.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -129,10 +130,10 @@ class UserManagementController extends GetxController {
 
   void saveRole(BuildContext context) {
     final roleName = roleController.text.trim();
-    if (roleName.isEmpty) {
-      Get.snackbar("Error", "Please enter a role name");
-      return;
-    }
+    // if (roleName.isEmpty) {
+    //   showErrorMessage(context: context,content: '',title: "Error Please enter a role name", );
+    //   return;
+    // }
     debugPrint("✅ Role: $roleName");
     debugPrint("✅ Permissions: $permissionMatrix");
     Navigator.pop(context);

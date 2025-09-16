@@ -202,7 +202,7 @@ class _StudentManagementViewState extends State<StudentManagementView> {
       color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.lightBgColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
       child: commonPopTextView(AppCommonIcon.moreIcon),
-
+      position: PopupMenuPosition.under,
       itemBuilder: (context) => [
         PopupMenuItem(
           value: 1,

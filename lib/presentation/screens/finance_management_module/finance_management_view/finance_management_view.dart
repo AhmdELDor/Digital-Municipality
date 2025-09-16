@@ -135,7 +135,7 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
                                     child: dashboardOverView(
                                       title: FinanceManagementStrings
                                           .instructorPayOut,
-                                      image: CommonImageAssets.monthlyRevenueLogo,
+                                      image: CommonImageAssets.instructorPayOut,
                                       total: controller
                                           .data
                                           .value
@@ -239,6 +239,7 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
         return TabBar(
           controller: tabController,
           labelColor: AppColors.primary500,
+
           dividerColor: Colors.transparent,
           padding: EdgeInsets.zero,
           unselectedLabelStyle: TextStyle(
@@ -254,8 +255,8 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
             fontSize: 16,
           ),
           indicatorSize: TabBarIndicatorSize.tab,
-          isScrollable:mobileView?false:true,
-          tabAlignment: mobileView?null:TabAlignment.start,
+          isScrollable:true,
+          tabAlignment: TabAlignment.start,
           indicator: BoxDecoration(
             color: isDarkMode
                 ? AppColors.cardDarkBg2Color
@@ -263,6 +264,7 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
             border: Border(bottom: BorderSide(color: AppColors.primary500)),
             // borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight:Radius.circular(20) )
           ),
+
           tabs: [
             Tab(text: FinanceManagementStrings.paymentMethods),
             Tab(text: FinanceManagementStrings.paymentReceived),
@@ -678,7 +680,7 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
                   return ResponsiveGridCol(
                     lg: 4,
                     xs: 12,
-                    child: paymentView(data, mobileView),
+                    child: paymentView(data, mobileView,true),
                   );
                 },
               ),
@@ -884,6 +886,8 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
                   ],
                 ),
                 Gap(12),
+                CommonDivider(),
+                Gap(12),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -901,6 +905,9 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
                   ],
                 ),
                 Gap(12),
+                CommonDivider(),
+                Gap(12),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -915,6 +922,9 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
                   ],
                 ),
                 Gap(12),
+                CommonDivider(),
+                Gap(12),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -929,6 +939,9 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
                   ],
                 ),
                 Gap(12),
+                CommonDivider(),
+                Gap(12),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -964,7 +977,7 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
       color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.lightBgColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
       child: commonPopTextView(AppCommonIcon.moreIcon),
-
+      position: PopupMenuPosition.under,
       itemBuilder: (context) => [
         PopupMenuItem(
           value: 1,
@@ -995,7 +1008,7 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
 
   //course dropdown
   Widget coursesDropDown() {
-    return CustomDropdownFormField<CourseModel>(
+    return AlwaysDownDropdown<CourseModel>(
       hintText: "Course",
       items: controller.data.value.coursesList,
       value: controller.selectedCourse.value,
@@ -1003,11 +1016,11 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
         controller.selectedCourse.value = val;
       },
       itemAsString: (item) => item.name,
-      validator: (val) => val == null ? "Course" : null,
+      //validator: (val) => val == null ? "Course" : null,
     );
   }
   Widget occurrenceDropDown() {
-    return CustomDropdownFormField<OccurrenceModel>(
+    return AlwaysDownDropdown<OccurrenceModel>(
       hintText: "Occurrence",
       items: controller.data.value.occurrenceList,
       value: controller.selectedOccurrenceValue.value,
@@ -1015,13 +1028,13 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
         controller.selectedOccurrenceValue.value = val;
       },
       itemAsString: (item) => item.name,
-      validator: (val) => val == null ? "Occurrence" : null,
+      //validator: (val) => val == null ? "Occurrence" : null,
     );
   }
 
   //payment method drop down
   Widget paymentMethodDropDown() {
-    return CustomDropdownFormField<PaymentMethodModel>(
+    return AlwaysDownDropdown<PaymentMethodModel>(
       hintText: "Payment Method",
       items: controller.data.value.paymentMethodsList,
       value: controller.selectedPaymentMethod.value,
@@ -1029,13 +1042,13 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
         controller.selectedPaymentMethod.value = val;
       },
       itemAsString: (item) => item.name,
-      validator: (val) => val == null ? "Payment Method" : null,
+      //validator: (val) => val == null ? "Payment Method" : null,
     );
   }
 
   //status drop down
   Widget statusDropDown() {
-    return CustomDropdownFormField<StatusModel>(
+    return AlwaysDownDropdown<StatusModel>(
       hintText: "Status",
       items: controller.data.value.statusList,
       value: controller.selectedStatus.value,
@@ -1043,14 +1056,14 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
         controller.selectedStatus.value = val;
       },
       itemAsString: (item) => item.name,
-      validator: (val) => val == null ? "Status" : null,
+     // validator: (val) => val == null ? "Status" : null,
     );
   }
 
   //users drop down
   Widget usersDropDown() {
     return Obx(
-      () => CustomDropdownFormField<UserModel>(
+      () => AlwaysDownDropdown<UserModel>(
         hintText: "Select",
         items: controller.data.value.usersList,
         value: controller.selectedUser.value,
@@ -1058,7 +1071,7 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
           controller.selectedUser.value = val;
         },
         itemAsString: (item) => item.name,
-        validator: (val) => val == null ? "Please select" : null,
+        //validator: (val) => val == null ? "Please select" : null,
       ),
     );
   }
@@ -1084,7 +1097,7 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
 
   //payment received dropdown
   Widget coursesPaymentDropDown() {
-    return CustomDropdownFormField<CourseModel>(
+    return AlwaysDownDropdown<CourseModel>(
       hintText: "Course",
       items: controller.data.value.coursesList,
       value: controller.selectedPaymentCourse.value,
@@ -1092,13 +1105,13 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
         controller.selectedPaymentCourse.value = val;
       },
       itemAsString: (item) => item.name,
-      validator: (val) => val == null ? "Course" : null,
+      //validator: (val) => val == null ? "Course" : null,
     );
   }
 
   //payment method drop down
   Widget receivedPaymentMethodDropDown() {
-    return CustomDropdownFormField<PaymentMethodModel>(
+    return AlwaysDownDropdown<PaymentMethodModel>(
       hintText: "Payment Method",
       items: controller.data.value.paymentMethodsList,
       value: controller.selectedPaymentMethodReceived.value,
@@ -1106,13 +1119,13 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
         controller.selectedPaymentMethodReceived.value = val;
       },
       itemAsString: (item) => item.name,
-      validator: (val) => val == null ? "Payment Method" : null,
+      //validator: (val) => val == null ? "Payment Method" : null,
     );
   }
 
   //status drop down
   Widget statusPaymentDropDown() {
-    return CustomDropdownFormField<StatusModel>(
+    return AlwaysDownDropdown<StatusModel>(
       hintText: "Status",
       items: controller.data.value.statusList,
       value: controller.selectedPaymentStatus.value,
@@ -1120,14 +1133,14 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
         controller.selectedPaymentStatus.value = val;
       },
       itemAsString: (item) => item.name,
-      validator: (val) => val == null ? "Status" : null,
+      //validator: (val) => val == null ? "Status" : null,
     );
   }
 
   //users drop down
   Widget usersPaymentDropDown() {
     return Obx(
-      () => CustomDropdownFormField<UserModel>(
+      () => AlwaysDownDropdown<UserModel>(
         hintText: "Select",
         items: controller.data.value.usersList,
         value: controller.selectedPaymentUser.value,
@@ -1135,7 +1148,7 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
           controller.selectedPaymentUser.value = val;
         },
         itemAsString: (item) => item.name,
-        validator: (val) => val == null ? "Please select" : null,
+        //validator: (val) => val == null ? "Please select" : null,
       ),
     );
   }
@@ -1146,7 +1159,6 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
     return CommonDatePicker(
       hintText: AddClassStrings.date,
       initialDate: DateTime.now(),
-
       controller: controller.datePaymentController,
       suffixIcon: SvgImageFromAsset(
         AppCommonIcon.calenderIcon,

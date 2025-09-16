@@ -52,7 +52,8 @@ class _AddLanguageViewState extends State<AddLanguageView> {
                 commonHeader(SettingViewStrings.question),
                 Gap(10),
                 Obx(
-                  () => CustomCourseDropdownFormField<LanguageModel>(
+                  () => AlwaysDownDropdown<LanguageModel>(
+                    color: Colors.transparent,
                     hintText: "Select",
                     items: controller.setting.value.languageList,
                     value: controller.selectedLanguage.value,

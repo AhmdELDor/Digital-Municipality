@@ -29,64 +29,68 @@ class CourseApprovalsSecondMenuButton extends StatelessWidget {
     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
     var mobileView = ResponsiveView.isMobile(context);
 
-    return PopupMenuButton<int>(
-      color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.lightBgColor,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
-      onSelected: (value) {
-        // Use GetX navigation to avoid context errors
-        if (value == 1) {
-          editCourseOnTap?.call();
-        } else if (value == 2) {
-          viewCourseOnTap?.call();
-        } else if (value == 3) {
-          deleteCourseOnTap?.call();
-        }
-      },
-      child: mobileView
-          ? Container(
-        height: 32,
-        width: 32,
-        decoration: BoxDecoration(
-          color: Colors.transparent,
-          borderRadius: BorderRadius.circular(5),
-          border: Border.all(color: AppColors.lightBorderColor),
-        ),
-        child: Center(
-          child: SvgImageFromAsset(
-            AppCommonIcon.moreIcon,
-            colorFilter: const ColorFilter.mode(
-              AppColors.white,
-              BlendMode.srcIn,
+    return Padding(
+      padding: const EdgeInsets.only(top: 30),
+      child: PopupMenuButton<int>(
+        color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.lightBgColor,
+        position: PopupMenuPosition.under,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+        onSelected: (value) {
+          // Use GetX navigation to avoid context errors
+          if (value == 1) {
+            editCourseOnTap?.call();
+          } else if (value == 2) {
+            viewCourseOnTap?.call();
+          } else if (value == 3) {
+            deleteCourseOnTap?.call();
+          }
+        },
+        child: mobileView
+            ? Container(
+          height: 32,
+          width: 32,
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(5),
+            border: Border.all(color: AppColors.lightBorderColor),
+          ),
+          child: Center(
+            child: SvgImageFromAsset(
+              AppCommonIcon.moreIcon,
+              colorFilter: const ColorFilter.mode(
+                AppColors.white,
+                BlendMode.srcIn,
+              ),
             ),
           ),
-        ),
-      )
-          : commonPopTextView(AppCommonIcon.moreIcon),
-      padding: EdgeInsets.zero,
-      menuPadding: EdgeInsets.zero,
-      itemBuilder: (context) => [
-        PopupMenuItem<int>(
-          value: 1,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-            child: commonDeviceView(AppCommonIcon.editIcon, CourseManagementStrings.edit, null),
+        )
+            : commonPopTextView(AppCommonIcon.moreIcon),
+        padding: EdgeInsets.zero,
+        menuPadding: EdgeInsets.zero,
+        itemBuilder: (context) => [
+          PopupMenuItem<int>(
+            value: 1,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+              child: commonDeviceView(AppCommonIcon.editIcon, CourseManagementStrings.edit, null),
+            ),
           ),
-        ),
-        PopupMenuItem<int>(
-          value: 2,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-            child: commonDeviceView(AppCommonIcon.showPasswordIcon, CourseManagementStrings.view, null),
+          PopupMenuItem<int>(
+            value: 2,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+              child: commonDeviceView(AppCommonIcon.showPasswordIcon, CourseManagementStrings.view, null),
+            ),
           ),
-        ),
-        PopupMenuItem<int>(
-          value: 3,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-            child: commonDeviceView(AppCommonIcon.deleteIcon, ApprovalsStrings.delete, null),
+          PopupMenuItem<int>(
+            value: 3,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+              child: commonDeviceView(AppCommonIcon.deleteIcon, ApprovalsStrings.delete, null),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

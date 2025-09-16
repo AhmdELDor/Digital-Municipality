@@ -88,7 +88,8 @@ class _AddCourseViewState extends State<AddCourseView>
                                   CommonImageAssets.basicInformation,
                                   CommonImageAssets.activeBasicInformation,
                                   context,
-                                  isSelected: controller.selectedIndex.value == 0,
+                                  isSelected:
+                                      controller.selectedIndex.value == 0,
                                 ),
                               ),
                             ),
@@ -99,7 +100,8 @@ class _AddCourseViewState extends State<AddCourseView>
                                   CommonImageAssets.extraInFormation,
                                   CommonImageAssets.activeExtraInFormation,
                                   context,
-                                  isSelected: controller.selectedIndex.value == 1,
+                                  isSelected:
+                                      controller.selectedIndex.value == 1,
                                 ),
                               ),
                             ),
@@ -110,7 +112,8 @@ class _AddCourseViewState extends State<AddCourseView>
                                   CommonImageAssets.curriculum,
                                   CommonImageAssets.activeCurriculum,
                                   context,
-                                  isSelected: controller.selectedIndex.value == 2,
+                                  isSelected:
+                                      controller.selectedIndex.value == 2,
                                 ),
                               ),
                             ),
@@ -144,52 +147,154 @@ class _AddCourseViewState extends State<AddCourseView>
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 25),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 15,
+                          vertical: 25,
+                        ),
                         child: Obx(
-                              () =>controller.selectedIndex.value == 2?SizedBox():  Row(
-                            children: [
-                              SizedBox(
-                                width: 160,
-                                child: PrimaryButton(
-                                  height: 42,
-                                  onPressed: () {
-                                    if (controller.selectedIndex.value > 0) {
-                                      tabController.animateTo(controller.selectedIndex.value - 1);
-                                    }
-                                  },
-                                  label: AddCoursesStrings.previous,
-                                  textSize: 16,
-                                  textWeight: FontWeight.w500,
-                                  backgroundColor: isDarkMode
-                                      ? AppColors.mainDarkBgColor
-                                      : AppColors.lightBgColor,
-                                  borderSide: BorderSide(
-                                    color: AppColors.primary500,
-                                    width: 1,
-                                  ),
-                                  textColor: AppColors.primary500,
+                          () => controller.selectedIndex.value == 2
+                              ? SizedBox()
+                              : Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 160,
+                                      child: PrimaryButton(
+                                        height: 42,
+                                        onPressed: () {
+                                          if (controller.selectedIndex.value >
+                                              0) {
+                                            tabController.animateTo(
+                                              controller.selectedIndex.value -
+                                                  1,
+                                            );
+                                          }
+                                        },
+                                        label: AddCoursesStrings.previous,
+                                        textSize: 16,
+                                        textWeight: FontWeight.w500,
+                                        backgroundColor: isDarkMode
+                                            ? AppColors.mainDarkBgColor
+                                            : AppColors.lightBgColor,
+                                        borderSide: BorderSide(
+                                          color: AppColors.primary500,
+                                          width: 1,
+                                        ),
+                                        textColor: AppColors.primary500,
+                                      ),
+                                    ),
+                                    Gap(25),
+                                    SizedBox(
+                                      width: 160,
+                                      child: PrimaryButton(
+                                        height: 42,
+                                        onPressed: () {
+                                          if (controller.selectedIndex.value <
+                                              2) {
+                                            tabController.animateTo(
+                                              controller.selectedIndex.value +
+                                                  1,
+                                            );
+                                          }
+                                        },
+                                        label:
+                                            controller.selectedIndex.value == 2
+                                            ? AddCoursesStrings.addCourse
+                                            : AddCoursesStrings.saveAndNext,
+                                        textSize: 16,
+                                        textWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              Gap(25),
-                              SizedBox(
-                                width: 160,
-                                child: PrimaryButton(
-                                  height: 42,
-                                  onPressed: () {
-                                    if (controller.selectedIndex.value < 2) {
-                                      tabController.animateTo(controller.selectedIndex.value + 1);
-                                    }
-                                  },
-                                  label: controller.selectedIndex.value==2?AddCoursesStrings.addCourse:AddCoursesStrings.saveAndNext,
-                                  textSize: 16,
-                                  textWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
-                          ),
                         ),
                       ),
                     ],
+                  ),
+                ),
+              ),
+              ResponsiveGridCol(
+                lg: 3,
+                xs: 0,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: Obx(
+                    () =>  Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            if (controller.selectedIndex.value > 0) {
+                              tabController.animateTo(
+                                controller.selectedIndex.value - 1,
+                              );
+                            }
+                          },
+                          child: Container(
+                            height: 32,
+                            width: 32,
+                            decoration: BoxDecoration(
+                              color: isDarkMode
+                                  ? AppColors.mainDarkBgColor
+                                  : AppColors.lightBgColor,
+                              border: Border.all(
+                                color: isDarkMode
+                                    ? AppColors.grey100Color
+                                    : AppColors.lightBorderColor,
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(7),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Icon(
+                                Icons.arrow_back_ios,
+                                color: controller.selectedIndex.value == 0
+                                    ? isDarkMode
+                                          ? AppColors.bodyTextDarkColor
+                                          : AppColors.bodyTextColor.withValues(alpha: 0.35)
+                                    :AppColors.bodyTextColor,
+                                size: 17,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Gap(7),
+                        InkWell(
+                          onTap: () {
+                            if (controller.selectedIndex.value < 2) {
+                              tabController.animateTo(
+                                controller.selectedIndex.value + 1,
+                              );
+                            }
+                          },
+                          child: Container(
+                            height: 32,
+                            width: 32,
+                            decoration: BoxDecoration(
+                              color: isDarkMode
+                                  ? AppColors.mainDarkBgColor
+                                  : AppColors.lightBgColor,
+                              border: Border.all(
+                                color: isDarkMode
+                                    ? AppColors.grey100Color
+                                    : AppColors.lightBorderColor,
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(7),
+                            ),
+                            child: Center(
+                              child: Icon(
+                                Icons.arrow_forward_ios,
+                                color: isDarkMode
+                                    ? AppColors.bodyTextDarkColor
+                                    : AppColors.bodyTextColor,
+                                size: 17,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -280,7 +385,7 @@ class _AddCourseViewState extends State<AddCourseView>
                       color: controller.selectedIndex.value == 0
                           ? isDarkMode
                                 ? AppColors.bodyTextDarkColor
-                                : AppColors.bodyTextColor
+                                : AppColors.bodyTextColor.withValues(alpha: 0.35)
                           : AppColors.bodyTextColor,
                       size: 17,
                     ),
@@ -342,14 +447,16 @@ class _AddCourseViewState extends State<AddCourseView>
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: Obx(
-            () =>  Row(
+            () => Row(
               children: [
                 Expanded(
                   child: PrimaryButton(
                     height: 42,
                     onPressed: () {
                       if (controller.selectedIndex.value > 0) {
-                        tabController.animateTo(controller.selectedIndex.value - 1);
+                        tabController.animateTo(
+                          controller.selectedIndex.value - 1,
+                        );
                       }
                     },
                     label: AddCoursesStrings.previous,
@@ -371,10 +478,14 @@ class _AddCourseViewState extends State<AddCourseView>
                     height: 42,
                     onPressed: () {
                       if (controller.selectedIndex.value < 2) {
-                        tabController.animateTo(controller.selectedIndex.value + 1);
+                        tabController.animateTo(
+                          controller.selectedIndex.value + 1,
+                        );
                       }
                     },
-                    label: controller.selectedIndex.value==2?AddCoursesStrings.addCourse:AddCoursesStrings.saveAndNext,
+                    label: controller.selectedIndex.value == 2
+                        ? AddCoursesStrings.addCourse
+                        : AddCoursesStrings.saveAndNext,
                     textSize: 16,
                     textWeight: FontWeight.w500,
                   ),
@@ -383,7 +494,6 @@ class _AddCourseViewState extends State<AddCourseView>
             ),
           ),
         ),
-
       ],
     );
   }

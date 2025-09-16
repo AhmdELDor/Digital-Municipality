@@ -19,7 +19,7 @@ class _ResetPasswordSuccessfullyState extends State<ResetPasswordSuccessfully> {
           children: [
             Image.asset(CommonImageAssets.resetPasswordSuccessfully,height: 216,),
             Gap(60),
-            CommonText.regular(
+            CommonText.semiBold(
               ResetPasswordSuccessfullyStrings.passwordResetSuccessfully,
               size: 18,
               height: 1.0,

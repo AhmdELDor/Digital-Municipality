@@ -27,52 +27,70 @@ class _InstructorManagementDetailViewState
         drawerOnTap: () {
           _scaffoldKey.currentState?.openDrawer();
         },
+        showBackIcon: true,
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        child: Obx(
+          () =>  SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                ResponsiveGridRow(
-                  children: [
-                    ResponsiveGridCol(
-                      lg: 3,
-                      xs: 12,
-                      child: Padding(
-                        padding:  EdgeInsets.only(right:mobileView?0: 15,bottom: mobileView?25:0),
-                        child: contactInformationView(detail),
-                      ),
-                    ),
-                    ResponsiveGridCol(
-                      lg: 3,xs: 12,
-                      child: Padding(
-                        padding:  EdgeInsets.only(right:mobileView?0: 15,bottom: mobileView?15:0),
-                        child: verificationDocuments(),
-                      ),
-                    ),
-                    ResponsiveGridCol(
-                      lg: 3,xs: 12,
-                      child: Padding(
-                        padding:  EdgeInsets.only(right: mobileView?0:15,bottom: mobileView?15:0),
-                        child: otherInformation(),
-                      ),
-                    ),
-                    ResponsiveGridCol(lg: 3,xs: 12, child: statisticsView()),
-                  ],
+                Gap(15),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: CommonText.medium(
+                    InstructorDetailViewStrings.instructorProfile,
+                    size: 17,
+                  ),
                 ),
                 Gap(15),
-                CommonText.medium(
-                  InstructorManagementDetailStrings.courses,
-                  size: 17,
+                CommonDivider(),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  child: ResponsiveGridRow(
+                    children: [
+                      ResponsiveGridCol(
+                        lg: 3,
+                        xs: 12,
+                        child: Padding(
+                          padding:  EdgeInsets.only(right:mobileView?0: 15,bottom: mobileView?25:0),
+                          child: contactInformationView(detail),
+                        ),
+                      ),
+                      ResponsiveGridCol(
+                        lg: 3,xs: 12,
+                        child: Padding(
+                          padding:  EdgeInsets.only(right:mobileView?0: 15,bottom: mobileView?15:0),
+                          child: verificationDocuments(),
+                        ),
+                      ),
+                      ResponsiveGridCol(
+                        lg: 3,xs: 12,
+                        child: Padding(
+                          padding:  EdgeInsets.only(right: mobileView?0:15,bottom: mobileView?15:0),
+                          child: otherInformation(),
+                        ),
+                      ),
+                      ResponsiveGridCol(lg: 3,xs: 12, child: statisticsView()),
+                    ],
+                  ),
                 ),
-                Gap(15),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: CommonText.medium(
+                    InstructorManagementDetailStrings.courses,
+                    size: 17,
+                  ),
+                ),
+
                 ListView.builder(
                   itemCount: controller.data.value.coursesList.length,
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   itemBuilder: (context, index) {
                     final data = controller.data.value.coursesList[index];
                     return InkWell(
@@ -228,7 +246,7 @@ class _InstructorManagementDetailViewState
               ),
             ),
             mobileView?SizedBox(): CommonDivider(),
-            Gap(15),
+            Gap(25),
             ListView.builder(
               itemCount: controller.data.value.verificationDocuments.length,
               shrinkWrap: true,
@@ -243,7 +261,7 @@ class _InstructorManagementDetailViewState
 
                   ),
                   // height: 112,
-                  margin: EdgeInsetsGeometry.only(bottom: 15),
+                  margin: EdgeInsetsGeometry.only(bottom: mobileView?15:20),
                   padding: EdgeInsets.symmetric(vertical:  mobileView?15:25,horizontal: mobileView?15:0),
                   child: mobileView?Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -259,7 +277,8 @@ class _InstructorManagementDetailViewState
                             : AppColors.bodyTextColor,
                       ),
                     ],
-                  ):Column(
+                  ):
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

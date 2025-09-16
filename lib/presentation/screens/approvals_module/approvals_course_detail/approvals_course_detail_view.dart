@@ -11,21 +11,15 @@ class CourseApprovalsDetailView extends StatefulWidget {
 }
 
 class _CourseApprovalsDetailViewState extends State<CourseApprovalsDetailView> {
-
-
-
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   CourseApprovalsDetailController controller = Get.put(
     CourseApprovalsDetailController(),
   );
 
-
   @override
   Widget build(BuildContext context) {
     if (widget.course == null) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
     final tabCount = widget.title != null ? 4 : 2;
     final isDarkMode = Get.find<ThemeController>().isDarkMode;
@@ -35,6 +29,7 @@ class _CourseApprovalsDetailViewState extends State<CourseApprovalsDetailView> {
       drawer: const SizedBox(width: 270, child: SideDrawerMenu()),
       appBar: CustomAppBar(
         searchController: controller.searchController,
+        showBackIcon: true,
         drawerOnTap: () {
           _scaffoldKey.currentState?.openDrawer();
         },
@@ -133,6 +128,7 @@ class _CourseApprovalsDetailViewState extends State<CourseApprovalsDetailView> {
 
   _tabBar(String? title) {
     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
+    final mobileView = ResponsiveView.isMobile(context);
     return TabBar(
       //controller: tabController,
       labelColor: AppColors.lightPrimaryColor,
@@ -142,12 +138,12 @@ class _CourseApprovalsDetailViewState extends State<CourseApprovalsDetailView> {
             ? AppColors.bodyTextDarkColor
             : AppColors.bodyTextColor,
         fontWeight: FontWeight.w500,
-        fontSize: 16,
+        fontSize: mobileView?15:16,
       ),
       labelStyle: TextStyle(
         color: AppColors.lightPrimaryColor,
         fontWeight: FontWeight.w600,
-        fontSize: 16,
+        fontSize: mobileView?15:16,
       ),
       indicator: BoxDecoration(
         color: isDarkMode ? AppColors.cardDarkBg2Color : AppColors.primary50,
@@ -156,6 +152,8 @@ class _CourseApprovalsDetailViewState extends State<CourseApprovalsDetailView> {
       ),
       padding: EdgeInsets.zero,
       indicatorSize: TabBarIndicatorSize.tab,
+      isScrollable: true,
+      tabAlignment:TabAlignment.start ,
       tabs: [
         Tab(text: CourseApprovalsDetailStrings.aboutCourse),
         Tab(text: CourseApprovalsDetailStrings.curriculum),
@@ -212,6 +210,8 @@ class _CourseApprovalsDetailViewState extends State<CourseApprovalsDetailView> {
                     child: CommonText.semiBold(
                       title == 'category'
                           ? ViewCourseCategoryStrings.viewCourse
+                          : title == 'view'
+                          ? ViewCourseCategoryStrings.viewCourse
                           : CourseApprovalsDetailStrings.courseApprovals,
                       size: mobileView ? 15 : 17,
                       fontWeight: mobileView
@@ -220,6 +220,8 @@ class _CourseApprovalsDetailViewState extends State<CourseApprovalsDetailView> {
                     ),
                   ),
                   title == 'category'
+                      ? SizedBox()
+                      : title == 'view'
                       ? SizedBox()
                       : SizedBox(
                           width: mobileView ? 72 : 120,
@@ -278,7 +280,7 @@ class _CourseApprovalsDetailViewState extends State<CourseApprovalsDetailView> {
                                                         .courseDeclinedDes,
                                                 buttonName:
                                                     CourseApproveDialogStrings
-                                                        .continueAndDecline,
+                                                        .goToCourse,
                                                 onPressed: () {
                                                   Navigator.of(
                                                     context,
@@ -303,7 +305,9 @@ class _CourseApprovalsDetailViewState extends State<CourseApprovalsDetailView> {
                   Gap(10),
                   title == 'category'
                       ? SizedBox()
-                      : SizedBox(
+                      : title == 'view'
+                      ? SizedBox()
+                      :SizedBox(
                           width: mobileView ? 77 : 120,
                           child: PrimaryButton(
                             height: mobileView ? 32 : 36,
@@ -384,12 +388,31 @@ class _CourseApprovalsDetailViewState extends State<CourseApprovalsDetailView> {
             Gap(20),
             CommonDivider(),
             Gap(20),
-            CommonText.semiBold(
-              controller.data.value.courseFees.toString(),
-              size: 20,
-              color: AppColors.primary500,
+            Row(
+              children: [
+                Expanded(
+                  child: CommonText.semiBold(
+                    controller.data.value.courseFees.toString(),
+                    size: 20,
+                    color: AppColors.primary500,
+                  ),
+                ),
+                SvgImageFromAsset(AppCommonIcon.starIcon),
+                Gap(3),
+                CommonText.semiBold('4.5', size: 18,color: AppColors.secondary500,),
+
+              ],
             ),
-            Gap(10),
+            Gap(20),
+            CommonDivider(),
+            Gap(20),
+            CommonText.regular(
+              '${controller.data.value.attendance.toString()} K Attendees',
+              size: 15,
+              color: isDarkMode
+                  ? AppColors.bodyTextDarkColor
+                  : AppColors.bodyTextColor,
+            ),
           ],
         ),
       ),

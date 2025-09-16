@@ -22,7 +22,7 @@ class AppCommonIcon extends AppAssets {
   static const rightIcon = "${AppAssets._commonIcon}ic_right_icon.svg";
   static const emailIcon = "${AppAssets._commonIcon}ic_mail.svg";
   static const passwordIcon = "${AppAssets._commonIcon}ic_password.svg";
-  static const arrowDownIcon = "${AppAssets._commonIcon}iic_down_arrow.svg";
+  // static const arrowDownIcon = "${AppAssets._commonIcon}iic_down_arrow.svg";
   static const showPasswordIcon = "${AppAssets._commonIcon}ic_password_show.svg";
   static const hidePasswordIcon = "${AppAssets._commonIcon}ic_password_hide.svg";
   static const searchIcon = "${AppAssets._commonIcon}ic_search.svg";
@@ -95,6 +95,8 @@ class AppCommonIcon extends AppAssets {
   static const menuIcon = "${AppAssets._commonIcon}ic_menu.svg";
   static const positiveIcon = "${AppAssets._commonIcon}ic_positive.svg";
   static const negativeIcon = "${AppAssets._commonIcon}ic_negative.svg";
+  static const changePasswordIcon = "${AppAssets._commonIcon}ic_change_password.svg";
+  static const logOutIcon = "${AppAssets._commonIcon}ic_log_out.svg";
 
 
 
@@ -175,7 +177,7 @@ class CommonImageAssets extends AppAssets {
   static const contactUs = "${AppAssets._commonImage}contact_us.svg";
   static const userProfileBg = "${AppAssets._commonImage}user_profile_bg.png";
   static const deleteCategory = "${AppAssets._commonImage}delete_category.svg";
-
+  static const logOutImg = "${AppAssets._commonImage}confirm_log_out.svg";
 
 
 }

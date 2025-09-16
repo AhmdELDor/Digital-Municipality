@@ -44,7 +44,7 @@ class ProfileViewController extends GetxController {
   List<String> countryList = ['India', 'Australia', 'Japan', 'Russia', 'China'];
   List<String> cityList = ['Ahmedabad', 'Surat', 'Rajkot', 'Mumbai', 'Pune'];
 
-  final RxString selectedRole = ''.obs;
+  final RxString selectedRole = 'Super Admin'.obs;
   final RxString selectedCountry = ''.obs;
   final RxString selectedCity = ''.obs;
 

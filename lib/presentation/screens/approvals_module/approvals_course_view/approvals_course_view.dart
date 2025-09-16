@@ -365,7 +365,7 @@ class _ApprovalsViewState extends State<ApprovalsView>
                                                         .courseDeclinedDes,
                                                 buttonName:
                                                     CourseApproveDialogStrings
-                                                        .continueAndDecline,
+                                                        .goToCourse,
                                                 onPressed: () {
                                                   Navigator.of(
                                                     context,

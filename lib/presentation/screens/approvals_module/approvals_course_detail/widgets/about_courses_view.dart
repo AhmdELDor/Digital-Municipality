@@ -382,15 +382,12 @@ courseFeaturesView() {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: commonCacheImage(
-                        data.image,
-                        ImagePlaceHolder.imagePlaceHolderDark,
-                        height: 20,
-                        width: 20,
-                        //fit: BoxFit.fill
-                      ),
+                    commonCacheImage(
+                      data.image,
+                      ImagePlaceHolder.imagePlaceHolderDark,
+                      height: 20,
+                      width: 20,
+                      //fit: BoxFit.fill
                     ),
                     Gap(12),
                     CommonText.regular(

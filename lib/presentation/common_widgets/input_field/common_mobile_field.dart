@@ -98,7 +98,7 @@ class _CommonMobileFieldState extends State<CommonMobileField> {
 
       },
       dropdownIcon: SvgImageFromAsset(
-        AppCommonIcon.arrowDownIcon,
+        AppCommonIcon.downArrowIcon,
         colorFilter: ColorFilter.mode(AppColors.greyColor, BlendMode.srcIn),
       ),
     );

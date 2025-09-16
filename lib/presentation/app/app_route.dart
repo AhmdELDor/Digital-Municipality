@@ -1,4 +1,6 @@
+import 'package:education_admin_portal/presentation/screens/quiz_module/quiz_main_view/model/quiz_model.dart';
 import 'package:education_admin_portal/presentation/screens/quiz_module/quiz_main_view/quiz_view_imports.dart';
+import 'package:education_admin_portal/presentation/screens/test_module/main_test_view/model/test_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../screens/add_course_module/add_course_view_imports.dart';
@@ -199,11 +201,51 @@ class AppRoute {
             pageBuilder: (context, state) =>
                 NoTransitionPage(child: QuizMainView()),
             routes: [
+              // GoRoute(
+              //   path: AppRouteName.addQuiz,
+              //   pageBuilder: (context, state) {
+              //     final extra = state.extra as Map<String, dynamic>?;
+              //
+              //
+              //     return NoTransitionPage(
+              //       child: AddQuizView(
+              //         quizData: (extra?['data'] is QuizModel) ? extra?['data'] as QuizModel : null,
+              //         testData: (extra?['data'] is TestModel) ? extra?['data'] as TestModel : null,
+              //         title: extra?['title'] as String?,
+              //       ),
+              //     );
+              //   },
+              //   // pageBuilder: (context, state) =>
+              //   //     NoTransitionPage(child: AddQuizView()),
+              // ),
               GoRoute(
-                path: AppRouteName.addQuiz,
-                pageBuilder: (context, state) =>
-                    NoTransitionPage(child: AddQuizView()),
+                path:AppRouteName.addQuiz,
+                pageBuilder: (context, state) {
+                  final extra = state.extra;
+
+                  QuizModel? quizData;
+                  TestModel? testData;
+                  String? title;
+
+                  if (extra is Map<String, dynamic>) {
+                    if (extra['data'] is QuizModel) {
+                      quizData = extra['data'] as QuizModel;
+                    } else if (extra['data'] is TestModel) {
+                      testData = extra['data'] as TestModel;
+                    }
+                    title = extra['title'] as String?;
+                  }
+
+                  return NoTransitionPage(
+                    child: AddQuizView(
+                      quizData: quizData,
+                      testData: testData,
+                      title: title,
+                    ),
+                  );
+                },
               ),
+
               GoRoute(
                 path: AppRouteName.viewQuiz,
                 pageBuilder: (context, state) =>

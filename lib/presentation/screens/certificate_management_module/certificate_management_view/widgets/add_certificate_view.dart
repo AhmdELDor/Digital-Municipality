@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-
 import '../../../../../core/constants/app_assets.dart';
 import '../../../../../core/constants/app_colors.dart';
 import '../../../../../core/constants/app_strings.dart';
@@ -168,7 +167,7 @@ class _AddCertificateViewState extends State<AddCertificateView> {
                             labelText: CertificateManagementStrings.enterStudentName,
                             controller: controller.studentNamedController,
                             textInputAction: TextInputAction.next,
-                            hintText: CourseCategoryStrings.select,
+                            hintText:CertificateManagementStrings.enterStudentName,
                             validator: (value) {
                               return validateEmptyValue(value, 'Student Name is Required');
                             },
@@ -178,7 +177,7 @@ class _AddCertificateViewState extends State<AddCertificateView> {
                           commonHeader(CertificateManagementStrings.course),
                           Gap(10),
                           Obx(
-                            () => CustomCourseDropdownFormField<String>(
+                            () => AlwaysDownDropdown<String>(
                               hintText: "Select",
                               items: controller.courseList,
                               value: controller.selectedCourse.value.isEmpty
@@ -187,7 +186,7 @@ class _AddCertificateViewState extends State<AddCertificateView> {
                               onChanged: (val) {
                                 controller.selectedCourse.value = val ?? '';
                               },
-                              validator: (val) => val == null || val.isEmpty ? "Select" : null,
+                              //validator: (val) => val == null || val.isEmpty ? "Select" : null,
                             ),
                           ),
       

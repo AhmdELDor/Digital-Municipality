@@ -9,6 +9,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 import '../../../../../core/constants/app_strings.dart';
+import '../../../../../utils/extensions/responsive.dart';
 import '../../../../app/theme_controller.dart';
 import '../../../../common_widgets/alerts/alerts.dart';
 import '../../../../common_widgets/view_common_widget/common_dialog_box.dart';
@@ -27,6 +28,7 @@ class _ContactUsViewState extends State<ContactUsView> {
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
+    var mobileView = ResponsiveView.isMobile(context);
     return Padding(
       padding: const EdgeInsets.only(left: 20,top: 20),
       child: ResponsiveGridRow(
@@ -35,10 +37,12 @@ class _ContactUsViewState extends State<ContactUsView> {
         ) {
           final data = controller.setting.value.contactList[index];
           return ResponsiveGridCol(
-            xs: 4,
+            lg: 4,
+            xs: 12,
+
             child: Container(
-              height: 306,
-              margin: EdgeInsetsGeometry.only(right: 20),
+              height: mobileView?null:306,
+              margin: EdgeInsetsGeometry.only(right: 20,bottom: 20),
               decoration: BoxDecoration(
                 color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.white,
                 borderRadius: BorderRadius.circular(12),
@@ -174,12 +178,16 @@ class _ContactUsViewState extends State<ContactUsView> {
                       horizontal: 12,
                       vertical: 15,
                     ),
-                    child: CommonText.regular(
-                      data.description,
-                      size: 16,
-                      color: isDarkMode
-                          ? AppColors.bodyTextDarkColor
-                          : AppColors.bodyTextColor,
+                    child: Expanded(
+                      child: CommonText.regular(
+                        data.description,
+                        size: 16,
+                        color: isDarkMode
+                            ? AppColors.bodyTextDarkColor
+                            : AppColors.bodyTextColor,
+                        maxLines: 7,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                   ),
                 ],

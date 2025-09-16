@@ -45,7 +45,7 @@ class _EditAddressViewState extends State<EditAddressView> {
         CommonDivider(),
         Gap(20),
         SizedBox(
-          height: context.height * 0.7,
+          height: context.height * 0.4,
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -58,7 +58,8 @@ class _EditAddressViewState extends State<EditAddressView> {
                    commonHeader(ProfileViewStrings.country),
                    Gap(10),
                    Obx(
-                         () => CustomDropdownFormField<String>(
+                         () => AlwaysDownDropdown<String>(
+                           color: Colors.transparent,
                        hintText: "Select",
                        items: controller.countryList,
                        value: controller.selectedCountry.value,
@@ -66,27 +67,31 @@ class _EditAddressViewState extends State<EditAddressView> {
                          controller.selectedCountry.value = val!;
                        },
 
-                       validator: (val) =>
-                       val == null ? "Select" : null,
+                       // validator: (val) =>
+                       // val == null ? "Select" : null,
                      ),
                    ),
                    Gap(20),
+                   commonHeader(ProfileViewStrings.city),
+                   Gap(10),
                    Obx(
-                         () => CustomDropdownFormField<String>(
+                         () => AlwaysDownDropdown<String>(
                        hintText: "Select",
+                           color: Colors.transparent,
                        items: controller.cityList,
                        value: controller.selectedCity.value,
                        onChanged: (val) {
                          controller.selectedCity.value = val!;
                        },
-
-                       validator: (val) =>
-                       val == null ? "Select" : null,
+                           // validator: (val) =>
+                       // val == null ? "Select" : null,
                      ),
                    ),
                    Gap(20),
+                   commonHeader(ProfileViewStrings.postalCode),
+                   Gap(10),
                    CommonTextField(
-                     hintText: ProfileViewStrings.name,
+                     hintText: ProfileViewStrings.postalCode,
                      controller: controller.postalCodeController,
                      textInputAction: TextInputAction.next,
                      validator: (value) {
@@ -101,30 +106,33 @@ class _EditAddressViewState extends State<EditAddressView> {
           ),
         ),
         Gap(25),
-        Row(
-          children: [
-            Expanded(
-              child: OutlineButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                label: AppCommonStrings.btnCancel,
-                borderSide: BorderSide(color: AppColors.primary500),
-                textColor: AppColors.primary500,
-                textSize: 16,
-                textWeight: FontWeight.w500,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
+          child: Row(
+            children: [
+              Expanded(
+                child: OutlineButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  label: AppCommonStrings.btnCancel,
+                  borderSide: BorderSide(color: AppColors.primary500),
+                  textColor: AppColors.primary500,
+                  textSize: 16,
+                  textWeight: FontWeight.w500,
+                ),
               ),
-            ),
-            Gap(15),
-            Expanded(
-              child: PrimaryButton(
-                onPressed: () {},
-                label: UserManagementStrings.update,
-                textSize: 16,
-                textWeight: FontWeight.w500,
+              Gap(15),
+              Expanded(
+                child: PrimaryButton(
+                  onPressed: () {},
+                  label: UserManagementStrings.update,
+                  textSize: 16,
+                  textWeight: FontWeight.w500,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     );

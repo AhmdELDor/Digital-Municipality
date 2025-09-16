@@ -47,38 +47,40 @@ class _NotificationViewState extends State<NotificationView>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CommonText.medium(
-                          NotificationStrings.notification,
-                          size: 18,
-                        ),
-                        Obx(
-                          () => CommonText.regular(
-                            '${controller.notificationList.where((e) => !e.read).length} unread notification',
-                            size: 14,
-                            color: isDarkMode
-                                ? AppColors.bodyTextDarkColor
-                                : AppColors.bodyTextColor,
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CommonText.medium(
+                            NotificationStrings.notification,
+                            size: 18,
                           ),
-                        ),
-                      ],
+                          Obx(
+                            () => CommonText.regular(
+                              'You’ve ${controller.notificationList.where((e) => !e.read).length} unread notification',
+                              size: 14,
+                              color: isDarkMode
+                                  ? AppColors.bodyTextDarkColor
+                                  : AppColors.bodyTextColor,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     SizedBox(
-                      width: 152,
+                      width:mobileView?110: 152,
                       child: PrimaryButton(
                         height: 40,
                         backgroundColor: isDarkMode
                             ? AppColors.mainDarkBgColor
                             : AppColors.primary50,
-                        textSize: 15,
+                        textSize:mobileView?12: 15,
                         textWeight: FontWeight.w600,
                         borderSide: BorderSide(color: AppColors.primary500),
                         onPressed: () {},
                         label: NotificationStrings.markASAllRead,
-                        textColor: AppColors.primary500,
+                        textColor: isDarkMode?AppColors.white:AppColors.primary500,
                       ),
                     ),
                   ],

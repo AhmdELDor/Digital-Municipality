@@ -32,7 +32,7 @@ Widget commonCacheImage(
     errorWidget: (_, __, ___) {
       return placeholderWidget(placeHolder);
     },
-    imageUrl: '$url',
+    imageUrl: url,
     height: height,
     width: width,
     color: color,

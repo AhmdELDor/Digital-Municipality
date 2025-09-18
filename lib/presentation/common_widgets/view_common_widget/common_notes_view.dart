@@ -55,35 +55,14 @@ class _CommonNotesViewState extends State<CommonNotesView> {
           child: Divider(color: hexToColor(widget.note.notesColor)),),
         Positioned(
           left: 10,
-          bottom: 10,
+          top: 70,
           right: 10,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     Expanded(
-              //       child: CommonText.medium(
-              //         widget. note.name,
-              //         size: 16,
-              //         color: AppColors.white,
-              //         overflow: TextOverflow.ellipsis,
-              //       ),
-              //     ),
-              //     CommonText.medium(widget.note.date, size: 13, color: AppColors.white),
-              //   ],
-              // ),
-              // Gap(15),
-              // Divider(color: hexToColor(widget.note.notesColor)),
-              // Gap(15),
-              CommonText.medium(
-                widget.note.description,
-                size: 13,
-                color: AppColors.white,
-                maxLines: 5,
-              ),
-            ],
+          child:  CommonText.medium(
+            widget.note.description,
+            size: 13,
+            color: AppColors.white,
+            maxLines: 5,
+            textAlign: TextAlign.start,
           ),
         ),
       ],

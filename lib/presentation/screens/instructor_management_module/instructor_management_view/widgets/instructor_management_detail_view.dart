@@ -216,8 +216,7 @@ class _InstructorManagementDetailViewState
                           ],
                         ),
                       ),
-
-                      Expanded(child: courseDetailList()),
+                      courseDetailList(),
                     ],
                   ),
                 ),

@@ -49,7 +49,7 @@ class _AddLanguageViewState extends State<AddLanguageView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                commonHeader(SettingViewStrings.question),
+                commonHeader(CourseApprovalsDetailStrings.language),
                 Gap(10),
                 Obx(
                   () => AlwaysDownDropdown<LanguageModel>(
@@ -58,7 +58,7 @@ class _AddLanguageViewState extends State<AddLanguageView> {
                     items: controller.setting.value.languageList,
                     value: controller.selectedLanguage.value,
                     onChanged: (val) {
-                      controller.selectedLanguage.value;
+                      controller.selectedLanguage.value=val;
                     },
                     itemAsString: (item) => item.name,
 

@@ -37,6 +37,7 @@ class _ViewQuizState extends State<ViewQuiz> {
         drawerOnTap: () {
           _scaffoldKey.currentState?.openDrawer();
         },
+        showBackIcon: true,
       ),
       body: SafeArea(
         child: SingleChildScrollView(

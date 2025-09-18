@@ -326,6 +326,21 @@ class CommonCourseView extends StatelessWidget {
                                         ),
                                       ],
                                     ),
+                                    Gap(20),
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(32),
+                                      child: commonCacheImage(
+                                        course.instructorProfileImg,
+                                        ImagePlaceHolder.imagePlaceHolderDark,
+                                        height: 32,
+                                        width: 32,
+                                      ),
+                                    ),
+                                    Gap(7),
+                                    CommonText.regular(
+                                      course.instructorName,
+                                      size: 17,
+                                    ),
                                   ],
                                 ),
                               ),
@@ -674,217 +689,7 @@ class CommonCourseView extends StatelessWidget {
     );
   }
 
-  // Widget menuButton(CourseModel course,void Function()? onTap) {
-  //   bool isDarkMode = Get.find<ThemeController>().isDarkMode;
-  //   var mobileView = ResponsiveView.isMobile(context);
-  //   return PopupMenuButton(
-  //     color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.lightBgColor,
-  //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
-  //     child: mobileView
-  //         ? Container(
-  //             height: 32,
-  //             width: 32,
-  //             decoration: BoxDecoration(
-  //               color: Colors.transparent,
-  //
-  //               borderRadius: BorderRadius.circular(5),
-  //               border: Border.all(color: AppColors.lightBorderColor),
-  //             ),
-  //             child: Center(
-  //               child: SvgImageFromAsset(
-  //                 AppCommonIcon.moreIcon,
-  //                 colorFilter: ColorFilter.mode(
-  //                   AppColors.white,
-  //                   BlendMode.srcIn,
-  //                 ),
-  //               ),
-  //             ),
-  //           )
-  //         : commonPopTextView(AppCommonIcon.moreIcon),
-  //     padding: EdgeInsetsGeometry.zero,
-  //     menuPadding: EdgeInsetsGeometry.zero,
-  //
-  //     itemBuilder: (context) => [
-  //       PopupMenuItem(
-  //         value: 1,
-  //         onTap: onTap,
-  //         // onTap: () {
-  //         //   context.go(
-  //         //     '${AppRouteName.approvalsView}/${AppRouteName.courseApprovalsDetailView}',
-  //         //     extra: {'data': course, 'title': 'view'},
-  //         //   );
-  //         // },
-  //         child: Padding(
-  //           padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-  //           child: commonDeviceView(
-  //             AppCommonIcon.showPasswordIcon,
-  //             DashboardViewStrings.viewCourse,
-  //             null,
-  //           ),
-  //         ),
-  //       ),
-  //       PopupMenuItem(
-  //         value: 2,
-  //         onTap: () {
-  //           commonDialogBox(
-  //             context: context,
-  //             child: SizedBox(
-  //               width: 560,
-  //               child: Padding(
-  //                 padding: const EdgeInsets.symmetric(
-  //                   vertical: 20,
-  //                   horizontal: 20,
-  //                 ),
-  //                 child: CourseApproveDialog(
-  //                   image: CommonImageAssets.courseApprove,
-  //                   title: CourseApproveDialogStrings
-  //                       .courseApproved,
-  //                   subtitle: CourseApproveDialogStrings
-  //                       .courseApprovedDes,
-  //                   buttonName: CourseApproveDialogStrings
-  //                       .goToCourse,
-  //                   onPressed: () {
-  //                     Navigator.of(
-  //                       context,
-  //                       rootNavigator: true,
-  //                     ).pop();
-  //                   },
-  //                 ),
-  //               ),
-  //             ),
-  //           );
-  //           // Navigator.pop(context);
-  //         },
-  //         child: Padding(
-  //           padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-  //           child: commonDeviceView(
-  //             AppCommonIcon.approveIcon,
-  //             ApprovalsStrings.approve,
-  //             null,
-  //           ),
-  //         ),
-  //       ),
-  //       PopupMenuItem(
-  //         value: 3,
-  //         onTap: () {
-  //           commonDialogBox(
-  //             context: context,
-  //             child: SizedBox(
-  //               width: 560,
-  //               child: Padding(
-  //                 padding: const EdgeInsets.symmetric(
-  //                   vertical: 20,
-  //                   horizontal: 20,
-  //                 ),
-  //                 child: CourseApproveDialog(
-  //                   image: CommonImageAssets.courseDecline,
-  //                   title: CourseApproveDialogStrings.courseDeclined,
-  //                   subtitle: CourseApproveDialogStrings.courseDeclinedDes,
-  //                   buttonName: CourseApproveDialogStrings.goToCourse,
-  //                   onPressed: () {},
-  //                 ),
-  //               ),
-  //             ),
-  //           );
-  //         },
-  //         child: Padding(
-  //           padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-  //           child: commonDeviceView(
-  //             AppCommonIcon.declineIcon,
-  //             ApprovalsStrings.decline,
-  //             null,
-  //           ),
-  //         ),
-  //       ),
-  //       PopupMenuItem(
-  //         value: 4,
-  //         child: Padding(
-  //           padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-  //           child: commonDeviceView(
-  //             AppCommonIcon.deleteIcon,
-  //             ApprovalsStrings.delete,
-  //             null,
-  //           ),
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
 
-  // Widget editMenuButton(CourseModel course) {
-  //   bool isDarkMode = Get.find<ThemeController>().isDarkMode;
-  //   var mobileView = ResponsiveView.isMobile(context);
-  //   return PopupMenuButton(
-  //     color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.lightBgColor,
-  //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
-  //     child: mobileView
-  //         ? Container(
-  //             height: 32,
-  //             width: 32,
-  //             decoration: BoxDecoration(
-  //               color: Colors.transparent,
-  //
-  //               borderRadius: BorderRadius.circular(5),
-  //               border: Border.all(color: AppColors.lightBorderColor),
-  //             ),
-  //             child: Center(
-  //               child: SvgImageFromAsset(
-  //                 AppCommonIcon.moreIcon,
-  //                 colorFilter: ColorFilter.mode(
-  //                   AppColors.white,
-  //                   BlendMode.srcIn,
-  //                 ),
-  //               ),
-  //             ),
-  //           )
-  //         : commonPopTextView(AppCommonIcon.moreIcon),
-  //     padding: EdgeInsetsGeometry.zero,
-  //     menuPadding: EdgeInsetsGeometry.zero,
-  //
-  //     itemBuilder: (context) => [
-  //       PopupMenuItem(
-  //         value: 1,
-  //         onTap: () {
-  //           //print( course.name);
-  //         },
-  //         child: Padding(
-  //           padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-  //           child: commonDeviceView(
-  //             AppCommonIcon.editIcon,
-  //             CourseManagementStrings.edit,
-  //             null,
-  //           ),
-  //         ),
-  //       ),
-  //       PopupMenuItem(
-  //         value: 2,
-  //         onTap: () {
-  //           // Navigator.pop(context);
-  //         },
-  //         child: Padding(
-  //           padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-  //           child: commonDeviceView(
-  //             AppCommonIcon.showPasswordIcon,
-  //             CourseManagementStrings.view,
-  //             null,
-  //           ),
-  //         ),
-  //       ),
-  //
-  //       PopupMenuItem(
-  //         value: 3,
-  //         child: Padding(
-  //           padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-  //           child: commonDeviceView(
-  //             AppCommonIcon.deleteIcon,
-  //             ApprovalsStrings.delete,
-  //             null,
-  //           ),
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
 
   Widget horizontalDetailView() {
     return SingleChildScrollView(

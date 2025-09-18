@@ -122,7 +122,15 @@ class _CourseCategoryViewState extends State<CourseCategoryView> {
     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
     return PopupMenuButton(
       color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.lightBgColor,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(9),
+        side: BorderSide(
+          color: isDarkMode
+              ? AppColors.grey100Color
+              : AppColors.lightBorderColor,
+          width: 2,
+        ),
+      ),
       padding: EdgeInsetsGeometry.zero,
       menuPadding: EdgeInsetsGeometry.zero,
       position: PopupMenuPosition.under,
@@ -142,7 +150,7 @@ class _CourseCategoryViewState extends State<CourseCategoryView> {
         PopupMenuItem(
           value: 2,
           onTap: () {
-            context.go(
+            context.push(
               '${AppRouteName.courseCategoryView}/${AppRouteName.viewCourseCategory}',
             );
           },
@@ -218,6 +226,8 @@ class _CourseCategoryViewState extends State<CourseCategoryView> {
           data.name,
           color: isDarkMode ? AppColors.headingsLightColor : AppColors.black,
           size: 17,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
         Gap(12),
         CommonText.regular(

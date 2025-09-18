@@ -83,6 +83,7 @@ class _ReportsAnalysisViewState extends State<ReportsAnalysisView> {
                                           ? totalStudentDarkGradient()
                                           : totalStudentGradient(),
                                       mobileView: mobileView,
+                                      textColor: isDarkMode?AppColors.white:AppColors.headingsColor,
                                       margin: EdgeInsetsGeometry.only(
                                         right: mobileView ? 0 : 20,
                                         top: 20,
@@ -93,13 +94,15 @@ class _ReportsAnalysisViewState extends State<ReportsAnalysisView> {
                                     lg: 6,
                                     xs: 12,
                                     child: commonReportsCardView(
+                                      textColor: isDarkMode?AppColors.white:AppColors.headingsColor,
                                       isDarkMode: isDarkMode,
                                       data: controller
                                           .data
                                           .value
                                           .summary
                                           .totalRevenue,
-                                      name: ReportsAnalysis.totalRevenue,leading: '\$',
+                                      name: ReportsAnalysis.totalRevenue,
+                                      leading: '\$',
                                       gradient: isDarkMode
                                           ? totalRevenueDarkGradient()
                                           : totalRevenueGradient(),
@@ -132,6 +135,7 @@ class _ReportsAnalysisViewState extends State<ReportsAnalysisView> {
                                         right: mobileView ? 0 : 20,
                                         top: 20,
                                       ),
+                                      textColor: isDarkMode?AppColors.white:AppColors.headingsColor,
                                     ),
                                   ),
                                   ResponsiveGridCol(
@@ -145,6 +149,8 @@ class _ReportsAnalysisViewState extends State<ReportsAnalysisView> {
                                           .summary
                                           .activeInstructors,
                                       name: ReportsAnalysis.activeInstructor,
+                                      textColor: isDarkMode?AppColors.white:AppColors.headingsColor,
+
                                       gradient: isDarkMode
                                           ? activeInstructorDarkGradient()
                                           : activeInstructorGradient(),
@@ -167,6 +173,7 @@ class _ReportsAnalysisViewState extends State<ReportsAnalysisView> {
                                           .summary
                                           .newUsersToday,
                                       name: ReportsAnalysis.newUsersToday,
+                                      textColor: isDarkMode?AppColors.white:AppColors.headingsColor,
                                       gradient: isDarkMode
                                           ? newUsersDarkGradient()
                                           : newUsersGradient(),
@@ -182,6 +189,7 @@ class _ReportsAnalysisViewState extends State<ReportsAnalysisView> {
                                     xs: 12,
                                     child: commonReportsCardView(
                                       isDarkMode: isDarkMode,
+                                      textColor: isDarkMode?AppColors.white:AppColors.headingsColor,
                                       data: controller
                                           .data
                                           .value
@@ -362,9 +370,10 @@ class _ReportsAnalysisViewState extends State<ReportsAnalysisView> {
                                                       Row(
                                                         children: [
                                                           Container(
+                                                            width: 60,
                                                             padding:
                                                                 EdgeInsets.symmetric(
-                                                                  horizontal: 5,
+
                                                                   vertical: 3,
                                                                 ),
                                                             decoration: BoxDecoration(

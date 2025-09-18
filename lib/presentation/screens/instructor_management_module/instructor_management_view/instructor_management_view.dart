@@ -89,6 +89,7 @@ class _InstructorManagementViewState extends State<InstructorManagementView> {
                                       image: CommonImageAssets.inviteSent,
                                       title: InviteSendStrings.inviteSent,
                                       subtitle: InviteSendStrings.inviteSentDes,
+
                                       buttonBackgroundColor:
                                           AppColors.primary500,
                                       buttonName:
@@ -100,6 +101,7 @@ class _InstructorManagementViewState extends State<InstructorManagementView> {
                                         ).pop();
 
                                       },
+
                                     ),
                                   ),
                                 );

@@ -13,7 +13,7 @@ import '../../../../app/theme_controller.dart';
 import '../../../../common_widgets/view_common_widget/common_card_decoration.dart';
 import '../../../../common_widgets/widgets/common_cache_image.dart';
 import '../../../dashboard_module/dashboard/model/instructor_model.dart';
-import 'instructor_menu_button.dart';
+import '../../../dashboard_module/notification/widgets/notification_list_view.dart';
 
 class InstructorView extends StatefulWidget {
   final InstructorModel data;
@@ -95,7 +95,7 @@ class _InstructorViewState extends State<InstructorView> {
                       ),
                     ),
 
-                    InstructorMenuButton(
+                    InstructorPrimaryMenuButton(
                       instructorData: widget.data,
                       approveOnTap: widget.approveOnTap,
                       declinedOnTap: widget.declinedOnTap,
@@ -188,6 +188,74 @@ class _InstructorViewState extends State<InstructorView> {
           ),
         ],
       ),
+    );
+  }
+}
+class InstructorPrimaryMenuButton extends StatelessWidget {
+  final InstructorModel instructorData;
+  final void Function()? approveOnTap, declinedOnTap, deleteOnTap;
+  const InstructorPrimaryMenuButton({
+    super.key,
+    this.approveOnTap,
+    this.declinedOnTap,
+    required this.instructorData,
+    this.deleteOnTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    bool isDarkMode = Get.find<ThemeController>().isDarkMode;
+    return PopupMenuButton(
+      color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.lightBgColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(9),
+        side: BorderSide(
+          color: isDarkMode
+              ? AppColors.grey100Color
+              : AppColors.lightBorderColor,
+          width: 2,
+        ),
+      ),
+      child: commonPopTextView(AppCommonIcon.moreIcon),
+      position: PopupMenuPosition.under,
+      itemBuilder: (context) => [
+        PopupMenuItem(
+          value: 1,
+          onTap: approveOnTap,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+            child: commonDeviceView(
+              AppCommonIcon.approveIcon,
+              ApprovalsStrings.approve,
+              null,
+            ),
+          ),
+        ),
+        PopupMenuItem(
+          value: 2,
+          onTap: declinedOnTap,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+            child: commonDeviceView(
+              AppCommonIcon.declineIcon,
+              ApprovalsStrings.decline,
+              null,
+            ),
+          ),
+        ),
+        PopupMenuItem(
+          value: 3,
+          onTap: deleteOnTap,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+            child: commonDeviceView(
+              AppCommonIcon.deleteIcon,
+              ApprovalsStrings.delete,
+              null,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

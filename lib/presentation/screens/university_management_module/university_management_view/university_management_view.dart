@@ -219,7 +219,15 @@ class _UniversityManagementViewState extends State<UniversityManagementView> {
     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
     return PopupMenuButton(
       color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.lightBgColor,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(9),
+        side: BorderSide(
+          color: isDarkMode
+              ? AppColors.grey100Color
+              : AppColors.lightBorderColor,
+          width: 2,
+        ),
+      ),
       position: PopupMenuPosition.under,
       child: Container(
         height: 30,

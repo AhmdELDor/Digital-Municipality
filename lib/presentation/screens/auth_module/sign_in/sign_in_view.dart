@@ -92,21 +92,38 @@ class _SignInViewState extends State<SignInView> {
                   onChange: (String? value) {},
                 ),
                 Gap(15),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: InkWell(
-                    onTap: () {
-                      context.push(AppRouteName.forgotPasswordView);
-                    },
-                    child: CommonText.medium(
-                      SignInStrings.forGotPassword,
-                      size: 14,
-                      height: 1.0,
-                      letterSpacing: 0.0,
-                      textAlign: TextAlign.center,
-                      color: AppColors.error500,
+                Row(
+                  children: [
+                  mobileView?  Obx(
+                          () => SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: Checkbox(
+                          value: controller.isRememberMe.value,
+                          onChanged: (value) {
+                            controller.isRememberMe.value = value!;
+                          },
+                        ),
+                      ),
+                    ):SizedBox(),
+                    Gap(5),
+                    mobileView?  authSubTitleHeader(SignInStrings.rememberMe):SizedBox(),
+                    Spacer(),
+
+                    InkWell(
+                      onTap: () {
+                        context.push(AppRouteName.forgotPasswordView);
+                      },
+                      child: CommonText.medium(
+                        SignInStrings.forGotPassword,
+                        size: 14,
+                        height: 1.0,
+                        letterSpacing: 0.0,
+                        textAlign: TextAlign.center,
+                        color: AppColors.error500,
+                      ),
                     ),
-                  ),
+                  ],
                 ),
                 Gap(30),
                 Obx(() {
@@ -114,8 +131,8 @@ class _SignInViewState extends State<SignInView> {
                       ? const Center(child: CommonCircularLoader())
                       : PrimaryButton(
                           onPressed: () {
-                            controller.submit(context);
-                            //context.go(AppRouteName.dashboardView);
+                            //controller.submit(context);
+                            context.go(AppRouteName.dashboardView);
                           },
                           label: AppCommonStrings.btnSignIn,
                         );

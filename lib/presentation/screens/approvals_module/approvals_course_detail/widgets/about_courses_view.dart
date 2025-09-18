@@ -208,22 +208,19 @@ class _AboutCoursesViewState extends State<AboutCoursesView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CommonText.medium(CourseApprovalsDetailStrings.features, size: 17),
-          Gap(25),
+          Gap(15),
           Column(
             children: controller.data.value.courseFeatureList.map((data) {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 child: Row(
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: commonCacheImage(
-                        data.image,
-                        ImagePlaceHolder.imagePlaceHolderDark,
-                        height: 20,
-                        width: 20,
-                        fit: BoxFit.fill,
-                      ),
+                    commonCacheImage(
+                      data.image,
+                      ImagePlaceHolder.imagePlaceHolderDark,
+                      height: 20,
+                      width: 20,
+                      fit: BoxFit.fill,
                     ),
                     Gap(12),
                     CommonText.regular(
@@ -371,7 +368,7 @@ courseFeaturesView() {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           CommonText.medium(CourseApprovalsDetailStrings.features, size: 17),
-          Gap(25),
+          Gap(15),
           ListView.separated(
             itemCount: controller.data.value.courseFeatureList.length,
             shrinkWrap: true,

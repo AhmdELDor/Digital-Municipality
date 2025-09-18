@@ -9,6 +9,7 @@ import '../../../common_widgets/input_field/common_text_field.dart';
 import '../../../common_widgets/view_common_widget/custom_dropdown_button.dart';
 import '../../../common_widgets/widgets/button.dart';
 import '../../../common_widgets/widgets/common_divider.dart';
+import '../../../common_widgets/widgets/text.dart';
 import '../../../common_widgets/widgets/validations.dart';
 import '../controller/add_course_controller.dart';
 import 'basic_information_view.dart';
@@ -504,18 +505,52 @@ class _CourseCurriculumViewState extends State<CourseCurriculumView> {
   }
 
   Widget durationOfVideo() {
+    bool isDarkMode = Get.find<ThemeController>().isDarkMode;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        commonRequiredHeaderText(AddCoursesStrings.durationOfVideo),
+        commonRequiredHeaderText(AddCoursesStrings.uploadAVideo),
         Gap(10),
         CommonTextField(
-          hintText: AddCoursesStrings.enterDuration,
-          controller: controller.durationOfController,
+          hintText: AddCoursesStrings.select,
+          controller: controller.uploadAVideoController,
           textInputAction: TextInputAction.next,
           validator: (value) {
-            return validateEmptyValue(value, 'Duration is Required');
+            return validateEmptyValue(value, 'This Filed is Required');
           },
+          suffixIcon: Padding(
+            padding: const EdgeInsets.only(right: 12),
+            child: InkWell(
+              onTap: () {
+                controller.pickFileCommon(controller.uploadAVideoController);
+              },
+              child: Container(
+                width: 73,
+                height: 25,
+                decoration: BoxDecoration(
+                  color: isDarkMode
+                      ? AppColors.greyDarkColor
+                      : AppColors.lightBorderColor.withValues(alpha: 0.40),
+                  border: Border.all(
+                    color: isDarkMode
+                        ? AppColors.grey100Color
+                        : AppColors.lightBorderColor,
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Center(
+                  child: CommonText.medium(
+                    AddCoursesStrings.chooseFile,
+                    size: 12,
+                    color: isDarkMode
+                        ? AppColors.bodyTextDarkColor
+                        : AppColors.bodyTextColor,
+                  ),
+                ),
+              ),
+            ),
+          ),
         ),
       ],
     );

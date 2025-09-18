@@ -18,7 +18,7 @@ class _SideDrawerMenuState extends State<SideDrawerMenu> {
       decoration: BoxDecoration(
         color: isDarkMode ? AppColors.cardDarkBgColor : AppColors.white,
         border: Border(
-          right: BorderSide(color: AppColors.lightBorderColor, width: 1.5),
+          right: BorderSide(color: isDarkMode ? AppColors.grey100Color : AppColors.lightBorderColor, width: 1.5),
         ),
       ),
       child: SafeArea(

@@ -13,6 +13,11 @@ Widget commonCacheImage(
   BoxFit? fit,
   Color? color,
 }) {
+  if (url == null || url.isEmpty) {
+    // Fallback if url is null/empty
+    return placeholderWidget(placeHolder);
+  }
+
   return CachedNetworkImage(
     placeholder:
         (context, url) => Center(

@@ -34,7 +34,16 @@ class CourseApprovalsSecondMenuButton extends StatelessWidget {
       child: PopupMenuButton<int>(
         color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.lightBgColor,
         position: PopupMenuPosition.under,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(9),
+          side: BorderSide(
+            color: isDarkMode
+                ? AppColors.grey100Color
+                : AppColors.lightBorderColor,
+            width: 2,
+          ),
+        ),
+
         onSelected: (value) {
           // Use GetX navigation to avoid context errors
           if (value == 1) {
@@ -47,23 +56,23 @@ class CourseApprovalsSecondMenuButton extends StatelessWidget {
         },
         child: mobileView
             ? Container(
-          height: 32,
-          width: 32,
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(color: AppColors.lightBorderColor),
-          ),
-          child: Center(
-            child: SvgImageFromAsset(
-              AppCommonIcon.moreIcon,
-              colorFilter: const ColorFilter.mode(
-                AppColors.white,
-                BlendMode.srcIn,
-              ),
-            ),
-          ),
-        )
+                height: 32,
+                width: 32,
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  borderRadius: BorderRadius.circular(5),
+                  border: Border.all(color: AppColors.lightBorderColor),
+                ),
+                child: Center(
+                  child: SvgImageFromAsset(
+                    AppCommonIcon.moreIcon,
+                    colorFilter: const ColorFilter.mode(
+                      AppColors.white,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                ),
+              )
             : commonPopTextView(AppCommonIcon.moreIcon),
         padding: EdgeInsets.zero,
         menuPadding: EdgeInsets.zero,
@@ -72,21 +81,33 @@ class CourseApprovalsSecondMenuButton extends StatelessWidget {
             value: 1,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-              child: commonDeviceView(AppCommonIcon.editIcon, CourseManagementStrings.edit, null),
+              child: commonDeviceView(
+                AppCommonIcon.editIcon,
+                CourseManagementStrings.edit,
+                null,
+              ),
             ),
           ),
           PopupMenuItem<int>(
             value: 2,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-              child: commonDeviceView(AppCommonIcon.showPasswordIcon, CourseManagementStrings.view, null),
+              child: commonDeviceView(
+                AppCommonIcon.showPasswordIcon,
+                CourseManagementStrings.view,
+                null,
+              ),
             ),
           ),
           PopupMenuItem<int>(
             value: 3,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-              child: commonDeviceView(AppCommonIcon.deleteIcon, ApprovalsStrings.delete, null),
+              child: commonDeviceView(
+                AppCommonIcon.deleteIcon,
+                ApprovalsStrings.delete,
+                null,
+              ),
             ),
           ),
         ],
@@ -94,4 +115,3 @@ class CourseApprovalsSecondMenuButton extends StatelessWidget {
     );
   }
 }
-

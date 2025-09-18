@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import '../../../../../core/constants/app_colors.dart';
 import '../../../../../core/constants/app_strings.dart';
+import '../../../../../utils/extensions/responsive.dart';
 import '../../../../app/theme_controller.dart';
 import '../../../../common_widgets/common_text_view/auth_common_text.dart';
 import '../../../../common_widgets/input_field/common_text_field.dart';
@@ -26,6 +27,7 @@ class _AddPaymentMethodViewState extends State<AddPaymentMethodView> {
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
+    var mobileView = ResponsiveView.isMobile(context);
     return SingleChildScrollView(
       child: Form(
         key: controller.formKey,
@@ -134,7 +136,7 @@ class _AddPaymentMethodViewState extends State<AddPaymentMethodView> {
                               rootNavigator: true,
                             ).pop();
                           },
-                          label: FinanceManagementStrings.addPaymentMethod,
+                          label: mobileView?CourseCategoryStrings.add:FinanceManagementStrings.addPaymentMethod,
                           textSize: 16,
                           textWeight: FontWeight.w500,
                         ),

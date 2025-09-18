@@ -1,15 +1,15 @@
-import 'package:education_admin_portal/core/constants/app_assets.dart';
 import 'package:education_admin_portal/core/constants/app_colors.dart';
 import 'package:education_admin_portal/presentation/common_widgets/widgets/common_divider.dart';
-import 'package:education_admin_portal/presentation/common_widgets/widgets/image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+
 import '../../../../core/constants/app_strings.dart';
 import '../../../../utils/extensions/responsive.dart';
 import '../../../app/theme_controller.dart';
 import '../../../common_widgets/input_field/common_text_field.dart';
 import '../../../common_widgets/view_common_widget/common_circle_add_button.dart';
+import '../../../common_widgets/view_common_widget/common_delete_view.dart';
 import '../../../common_widgets/widgets/text.dart';
 import '../../../common_widgets/widgets/validations.dart';
 import '../controller/add_course_controller.dart';
@@ -167,7 +167,7 @@ class _ExtraInformationViewState extends State<ExtraInformationView> {
                               AddCoursesStrings.enterRequirements,
                               size: 15,
                             ),
-                            SvgImageFromAsset(AppCommonIcon.deleteIcon),
+                            CommonDeleteView(),
                           ],
                         ),
                       ),
@@ -312,7 +312,7 @@ class _ExtraInformationViewState extends State<ExtraInformationView> {
                   ),
                 ),
                 Gap(25),
-                SvgImageFromAsset(AppCommonIcon.deleteIcon),
+                CommonDeleteView(),
               ],
             ),
           ),
@@ -327,7 +327,7 @@ class _ExtraInformationViewState extends State<ExtraInformationView> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         CommonText.medium(title, size: 15),
-        SvgImageFromAsset(AppCommonIcon.deleteIcon),
+        CommonDeleteView()
       ],
     );
   }
@@ -414,7 +414,7 @@ class _ExtraInformationViewState extends State<ExtraInformationView> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             commonRequiredHeaderText(AddCoursesStrings.image),
-            mobileView?SvgImageFromAsset(AppCommonIcon.deleteIcon):SizedBox(),
+            mobileView?CommonDeleteView():SizedBox(),
           ],
         ),
         Gap(10),
@@ -473,7 +473,7 @@ class _ExtraInformationViewState extends State<ExtraInformationView> {
            mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             commonRequiredHeaderText(AddCoursesStrings.imageTwo),
-            mobileView?SvgImageFromAsset(AppCommonIcon.deleteIcon):SizedBox(),
+            mobileView?CommonDeleteView():SizedBox(),
           ],
         ),
         Gap(10),
@@ -542,7 +542,7 @@ class _ExtraInformationViewState extends State<ExtraInformationView> {
               ),
             ),
             Gap(mobileView?0:25),
-            mobileView?SizedBox():SvgImageFromAsset(AppCommonIcon.deleteIcon),
+            mobileView?SizedBox():CommonDeleteView(),
           ],
         ),
       ],
@@ -568,7 +568,7 @@ class _ExtraInformationViewState extends State<ExtraInformationView> {
               ),
             ),
             Gap(25),
-            SvgImageFromAsset(AppCommonIcon.deleteIcon),
+            CommonDeleteView(),
           ],
         ),
       ],

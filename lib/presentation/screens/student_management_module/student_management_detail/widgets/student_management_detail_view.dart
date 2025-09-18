@@ -314,7 +314,8 @@ Widget commonStatisticsView(String title, subtitle, bool mobileView) {
   return Padding(
     padding: EdgeInsets.symmetric(horizontal: mobileView ? 0 : 12),
     child: Container(
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+      //height: mobileView?117:null,
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(9),
         gradient: isDarkMode
@@ -348,7 +349,19 @@ Widget commonStatisticsView(String title, subtitle, bool mobileView) {
           width: 1,
         ),
       ),
-      child: Row(
+      child:mobileView?Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CommonText.regular(title, size: 14),
+          Gap(7),
+          CommonText.semiBold(
+            subtitle,
+            size: 20,
+            color: AppColors.darkPinkColor,
+          ),
+        ],
+      ): Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(child: CommonText.regular(title, size: 16)),
@@ -508,7 +521,15 @@ menuButton() {
   bool isDarkMode = Get.find<ThemeController>().isDarkMode;
   return PopupMenuButton(
     color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.lightBgColor,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(9),
+      side: BorderSide(
+        color: isDarkMode
+            ? AppColors.grey100Color
+            : AppColors.lightBorderColor,
+        width: 2,
+      ),
+    ),
     child: commonPopTextView(AppCommonIcon.moreIcon),
     position: PopupMenuPosition.under,
     itemBuilder: (context) => [

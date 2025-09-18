@@ -114,12 +114,49 @@ class _StudentManagementDetailViewState
                                   ),
                                   ResponsiveGridCol(
                                     lg: 3,
+                                    xs: 12,
                                     child: Padding(
                                       padding: EdgeInsets.only(
                                         right: mobileView ? 0 : 15,
                                         top: mobileView ? 25 : 0,
                                       ),
-                                      child: _buildStatisticsCard(mobileView),
+                                      child:mobileView?Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          CommonText.medium(
+                                            StudentManagementDetailStrings.statistics,
+                                            size: 16,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: commonStatisticsView(
+                                                mobileView? "Total \nCourses" :StudentManagementDetailStrings.totalCourses,
+                                                  controller.data.value.totalCourse.toString(),
+                                                  mobileView,
+                                                ),
+                                              ),
+                                              const Gap(15),
+                                              Expanded(
+                                                child: commonStatisticsView(
+                                                  StudentManagementDetailStrings.completedCourses,
+                                                  controller.data.value.completedCourse.toString(),
+                                                  mobileView,
+                                                ),
+                                              ),
+                                              const Gap(15),
+                                              Expanded(
+                                                child: commonStatisticsView(
+                                                  StudentManagementDetailStrings.ongoingCourses,
+                                                  controller.data.value.ongoingCourses.toString(),
+                                                  mobileView,
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                          
+                                        ],
+                                      ) :_buildStatisticsCard(mobileView),
                                     ),
                                   ),
                                   ResponsiveGridCol(lg: 3, child: SizedBox()),
@@ -360,7 +397,7 @@ class _StudentManagementDetailViewState
               horizontal: mobileView ? 0 : 12,
               vertical: mobileView ? 0 : 12,
             ),
-            child: CommonText.regular(
+            child: CommonText.medium(
               StudentManagementDetailStrings.pointsAndLLeaderBoard,
               size: 16,
             ),

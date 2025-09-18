@@ -405,28 +405,35 @@ class _ClassManagementViewState extends State<ClassManagementView> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CommonText.medium(
-                              date.day.toString(),
-                              size: 13,
-                              textAlign: TextAlign.left,
-                              color: isToday && isDarkMode
-                                  ? AppColors.headingsLightColor
-                                  : isDarkMode
-                                  ? AppColors.bodyTextDarkColor
-                                  : AppColors.headingsColor,
-                            ),
-                            mobileView
-                                ? SizedBox()
-                                : CommonText.semiBold(
-                                    'Today',
-                                    size: 13,
-                                    textAlign: TextAlign.left,
-                                    color: AppColors.lightPrimaryColor,
-                                  ),
-                          ],
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CommonText.medium(
+                                date.day.toString(),
+                                size: 13,
+                                textAlign: TextAlign.left,
+                                color: isToday && isDarkMode
+                                    ? AppColors.headingsLightColor
+                                    : isDarkMode
+                                    ? AppColors.bodyTextDarkColor
+                                    : AppColors.headingsColor,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              mobileView
+                                  ? SizedBox()
+                                  : CommonText.semiBold(
+                                      'Today',
+                                      size: 13,
+                                      textAlign: TextAlign.left,
+                                      color: AppColors.lightPrimaryColor,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                    ),
+                            ],
+                          ),
                         ),
                         Gap(10),
                         CommonText.medium(
@@ -438,6 +445,8 @@ class _ClassManagementViewState extends State<ClassManagementView> {
                               : isDarkMode
                               ? AppColors.bodyTextDarkColor
                               : AppColors.headingsColor,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),

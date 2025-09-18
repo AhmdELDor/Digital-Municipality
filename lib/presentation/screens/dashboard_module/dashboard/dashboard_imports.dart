@@ -13,6 +13,7 @@ import '../../../../core/constants/app_strings.dart';
 import '../../../../utils/extensions/responsive.dart';
 
 import '../../../app/theme_controller.dart';
+import '../../../common_widgets/input_field/common_search_field.dart';
 import '../../../common_widgets/view_common_widget/common_card_decoration.dart';
 import '../../../common_widgets/view_common_widget/custom_app_bar.dart';
 import '../../side_drawer_module/side_drawer_menu/side_drawer_imports.dart';

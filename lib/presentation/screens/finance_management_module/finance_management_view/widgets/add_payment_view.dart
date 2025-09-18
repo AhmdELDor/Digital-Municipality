@@ -214,7 +214,7 @@ class _AddPaymentViewState extends State<AddPaymentView> {
                             ),
                             Gap(10),
                             CommonTextField(
-                              hintText: FinanceManagementStrings.select,
+                              hintText: FinanceManagementStrings.enterUsedCoins,
                               controller: controller.coinsController,
                               textInputAction: TextInputAction.next,
                               keyboardType: TextInputType.number,

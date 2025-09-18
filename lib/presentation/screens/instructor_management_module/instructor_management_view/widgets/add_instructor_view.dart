@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../../../core/constants/app_colors.dart';
 import '../../../../../core/constants/app_strings.dart';
+import '../../../../../utils/extensions/responsive.dart';
 import '../../../../app/theme_controller.dart';
 import '../../../../common_widgets/common_text_view/auth_common_text.dart';
 import '../../../../common_widgets/input_field/common_email_field.dart';
@@ -149,6 +150,7 @@ class _InviteSentViewViewState extends State<CommonDialogView> {
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
+    var mobileView = ResponsiveView.isMobile(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: Column(
@@ -183,7 +185,7 @@ class _InviteSentViewViewState extends State<CommonDialogView> {
                   label: AppCommonStrings.btnCancel,
                   borderSide: BorderSide(color: AppColors.primary500),
                   textColor: AppColors.primary500,
-                  textSize: 18,
+                  textSize: mobileView?15:18,
                   textWeight: FontWeight.w600,
                 ),
               ),
@@ -193,7 +195,7 @@ class _InviteSentViewViewState extends State<CommonDialogView> {
                   onPressed: widget.onPressed,
                   label: widget.buttonName,
                   backgroundColor: widget.buttonBackgroundColor,
-                  textSize: 18,
+                  textSize: mobileView?15:18,
                   textWeight: FontWeight.w600,
                 ),
               ),

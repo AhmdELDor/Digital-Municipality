@@ -31,7 +31,7 @@ final TextEditingController sessionNoTwoController = TextEditingController();
 
   final TextEditingController srNoController = TextEditingController();
   final TextEditingController timeOfLectureController = TextEditingController();
-  final TextEditingController durationOfController = TextEditingController();
+  final TextEditingController uploadAVideoController = TextEditingController();
 
   final TextEditingController srNoSecondController = TextEditingController();
   final TextEditingController timeOfLectureSecondController = TextEditingController();
@@ -116,7 +116,7 @@ final TextEditingController sessionNoTwoController = TextEditingController();
 
     srNoController.text = 1.toString();
     timeOfLectureController.text = '10:00 AM';
-    durationOfController.text = '45 min';
+    uploadAVideoController.text = '45 min';
 
     srNoSecondController.text = 1.toString();
     timeOfLectureSecondController.text = '10:00 AM';

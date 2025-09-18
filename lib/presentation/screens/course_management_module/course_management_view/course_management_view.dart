@@ -244,8 +244,6 @@ class _CourseManagementViewState extends State<CourseManagementView> {
                       Expanded(child: createdByDropDown()),
                       Gap(20),
 
-
-
                       InkWell(
                         onTap: () {
                           controller.clearSelections();
@@ -274,14 +272,10 @@ class _CourseManagementViewState extends State<CourseManagementView> {
                 final course = controller.courseManagementList[index];
                 return CommonCourseView(
                   course: course,
-                  viewCourseOnTap: () {
-
-
-                  },
+                  viewCourseOnTap: () {},
                   declinedOnTap: () {},
-                  deleteOnTap: () {
+                  deleteOnTap: () {},
 
-                  },
                   showMenuButton: true,
                   editViewCourseOnTap: () {
                     context.push(
@@ -290,6 +284,8 @@ class _CourseManagementViewState extends State<CourseManagementView> {
                     );
                   },
                   differentView: true,
+                  showRate: true,
+
 
                   deleteCourseOnTap: () {
                     commonDialogBox(
@@ -326,8 +322,6 @@ class _CourseManagementViewState extends State<CourseManagementView> {
                     );
                   },
                   showSwitch: true,
-
-
                 );
 
                 //   InkWell(
@@ -757,7 +751,7 @@ class _CourseManagementViewState extends State<CourseManagementView> {
         onChanged: (val) {
           controller.selectedStatus.value = val ?? '';
         },
-       // validator: (val) => val == null || val.isEmpty ? "Status" : null,
+        // validator: (val) => val == null || val.isEmpty ? "Status" : null,
       ),
     );
   }

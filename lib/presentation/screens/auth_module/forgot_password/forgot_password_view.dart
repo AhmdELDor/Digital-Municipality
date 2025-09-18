@@ -11,7 +11,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
   ForgotPasswordController controller = Get.put(ForgotPasswordController());
   @override
   Widget build(BuildContext context) {
-    var mobileView = ResponsiveView.isMobile(context);
+   // var mobileView = ResponsiveView.isMobile(context);
     return Scaffold(
       appBar: CommonAppbar(),
       body: SafeArea(
@@ -24,13 +24,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
             Expanded(
               flex: 4,
               child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: mobileView ? 20 : 0,
-                     vertical: mobileView ? 20 : 70,
-                  ),
-                  child: forgotPasswordView(),
-                ),
+                child: forgotPasswordView(),
               ),
             ),
             authSpaceView(context),

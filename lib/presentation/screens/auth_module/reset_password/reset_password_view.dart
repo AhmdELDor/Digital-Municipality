@@ -99,7 +99,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                     controller.passwordController.text,
                   ),
                 ),
-                Gap(30),
+                Gap(35),
                 Obx(() {
                   return controller.isLoading.value
                       ? const Center(child: CommonCircularLoader())

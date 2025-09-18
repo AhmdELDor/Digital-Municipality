@@ -114,10 +114,7 @@ class _QuizMainViewState extends State<QuizMainView> {
                                                       Gap(20),
                                                       statusDropDown(),
                                                       Gap(20),
-        
-                                                      usersDropDown(),
-                                                      Gap(20),
-        
+
                                                       createdByDropDown(),
                                                       Gap(20),
                                                     ],
@@ -591,7 +588,15 @@ class _QuizMainViewState extends State<QuizMainView> {
     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
     return PopupMenuButton(
       color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.lightBgColor,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(9),
+        side: BorderSide(
+          color: isDarkMode
+              ? AppColors.grey100Color
+              : AppColors.lightBorderColor,
+          width: 2,
+        ),
+      ),
       position: PopupMenuPosition.under,
       padding: EdgeInsetsGeometry.zero,
       menuPadding: EdgeInsetsGeometry.zero,
@@ -749,20 +754,7 @@ class _QuizMainViewState extends State<QuizMainView> {
     );
   }
 
-  Widget usersDropDown() {
-    return Obx(
-      () => AlwaysDownDropdown<UserModel>(
-        hintText: "Select",
-        items: controller.data.value.usersList,
-        value: controller.createdBy.value,
-        onChanged: (val) {
-          controller.createdBy.value = val;
-        },
-        itemAsString: (item) => item.name,
-        //validator: (val) => val == null ? "Please select" : null,
-      ),
-    );
-  }
+
 
   Widget createdByDropDown() {
     return Obx(

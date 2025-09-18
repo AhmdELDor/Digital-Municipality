@@ -1,9 +1,11 @@
+import 'package:education_admin_portal/presentation/common_widgets/widgets/common_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_strings.dart';
+import '../../../common_widgets/common_text_view/auth_common_text.dart';
 import '../../../common_widgets/input_field/common_password_field.dart';
 import '../../../common_widgets/view_common_widget/common_dialog_box.dart';
 import '../../../common_widgets/widgets/button.dart';

@@ -31,7 +31,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.searchController,
     this.onSearchTap,
     this.searchFocusNode,
-    required this.drawerOnTap, this.showBackIcon,
+    required this.drawerOnTap,
+    this.showBackIcon,
   });
   final bool isDarkMode = Get.find<ThemeController>().isDarkMode;
 
@@ -41,6 +42,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     var mobileView = ResponsiveView.isMobile(context);
     return AppBar(
       elevation: 0,
+
       backgroundColor: Colors.transparent,
       automaticallyImplyLeading: false,
       systemOverlayStyle: SystemUiOverlayStyle(
@@ -108,16 +110,19 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               Gap(8),
               userDataView(),
               Gap(8),
-              MenuButton(image: SvgImageFromAsset(
-                AppCommonIcon.downArrowIcon,
-                height: 10,
-                width: 10,
-                colorFilter: ColorFilter.mode(
-                  isDarkMode ? AppColors.bodyTextDarkColor : AppColors.bodyTextColor,
-                  BlendMode.srcIn,
+              MenuButton(
+                image: SvgImageFromAsset(
+                  AppCommonIcon.downArrowIcon,
+                  height: 10,
+                  width: 10,
+                  colorFilter: ColorFilter.mode(
+                    isDarkMode
+                        ? AppColors.bodyTextDarkColor
+                        : AppColors.bodyTextColor,
+                    BlendMode.srcIn,
+                  ),
                 ),
-              ),),
-
+              ),
             ],
           ),
         ),
@@ -146,23 +151,24 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       child: Row(
         children: [
-          showBackIcon==true?BackIcon(
-            onPressed:() {
-             Navigator.pop(context);
-            },
-          ):
-          InkWell(
-            onTap: onTap,
-            child: SvgImageFromAsset(
-              AppCommonIcon.drawerIcon,
-              colorFilter: ColorFilter.mode(
-                isDarkMode ? AppColors.white : AppColors.headingsColor,
-                BlendMode.srcIn,
-              ),
-              height: 24,
-              width: 24,
-            ),
-          ),
+          showBackIcon == true
+              ? BackIcon(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                )
+              : InkWell(
+                  onTap: onTap,
+                  child: SvgImageFromAsset(
+                    AppCommonIcon.drawerIcon,
+                    colorFilter: ColorFilter.mode(
+                      isDarkMode ? AppColors.white : AppColors.headingsColor,
+                      BlendMode.srcIn,
+                    ),
+                    height: 24,
+                    width: 24,
+                  ),
+                ),
           Spacer(),
           addCourseButton(context),
           Gap(10),
@@ -170,12 +176,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           Gap(10),
           notificationView(context),
           Gap(10),
-          MenuButton(image:
-          SvgImageFromAsset(
-            CommonImageAssets.userProfileImg,
-            height: 32,
-            width: 32,
-          ),),
+          MenuButton(
+            image: SvgImageFromAsset(
+              CommonImageAssets.userProfileImg,
+              height: 32,
+              width: 32,
+            ),
+          ),
           // InkWell(
           //   onTap: () {
           //     context.push(AppRouteName.profileView);
@@ -198,11 +205,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: PrimaryButton(
         height: mobileView ? 32 : 40,
         onPressed: () {
-          context.push(AppRouteName.addCourseView,);
+          context.push(AppRouteName.addCourseView);
         },
         label: mobileView ? '' : DashboardViewStrings.newCourse,
         prefixIcon: Padding(
-          padding:  EdgeInsets.only(left: mobileView?5:0),
+          padding: EdgeInsets.only(left: mobileView ? 5 : 0),
           child: SvgImageFromAsset(AppCommonIcon.circleAddIcon),
         ),
         textSize: 14,
@@ -235,7 +242,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ? DashboardViewStrings.lightMode
             : DashboardViewStrings.darkMode,
         prefixIcon: Padding(
-          padding:  EdgeInsets.only(left: mobileView?5:0),
+          padding: EdgeInsets.only(left: mobileView ? 5 : 0),
           child: SvgImageFromAsset(
             isDarkMode ? AppCommonIcon.sunIcon : AppCommonIcon.moonIcon,
           ),
@@ -315,8 +322,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-
-
 class MenuButton extends StatefulWidget {
   final Widget image;
   const MenuButton({super.key, required this.image});
@@ -332,7 +337,15 @@ class _MenuButtonState extends State<MenuButton> {
 
     return PopupMenuButton(
       color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.lightBgColor,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(9),
+        side: BorderSide(
+          color: isDarkMode
+              ? AppColors.grey100Color
+              : AppColors.lightBorderColor,
+          width: 2,
+        ),
+      ),
       padding: EdgeInsetsGeometry.zero,
       menuPadding: EdgeInsetsGeometry.zero,
       position: PopupMenuPosition.under,
@@ -349,7 +362,6 @@ class _MenuButtonState extends State<MenuButton> {
               ProfileViewStrings.myProfile,
               null,
             ),
-
           ),
         ),
         PopupMenuItem(
@@ -357,16 +369,7 @@ class _MenuButtonState extends State<MenuButton> {
           onTap: () {
             commonDialogBox(
               context: context,
-              child: SizedBox(
-                width: 560,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 20,
-                    horizontal: 20,
-                  ),
-                  child: ChangePasswordView(),
-                ),
-              ),
+              child: SizedBox(width: 560, child: ChangePasswordView()),
             );
           },
           child: Padding(
@@ -376,7 +379,6 @@ class _MenuButtonState extends State<MenuButton> {
               ChangesPasswordStrings.changePassword,
               null,
             ),
-
           ),
         ),
         PopupMenuItem(
@@ -403,11 +405,10 @@ class _MenuButtonState extends State<MenuButton> {
               LogOutStrings.signOut,
               null,
             ),
-
           ),
         ),
       ],
-      child: widget.image
+      child: widget.image,
       // SvgImageFromAsset(
       //   AppCommonIcon.downArrowIcon,
       //   height: 10,

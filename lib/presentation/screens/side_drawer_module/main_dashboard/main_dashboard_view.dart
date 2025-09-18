@@ -11,9 +11,11 @@ class _MainDashboardViewState extends State<MainDashboardView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: Row(
         children: [
-          if (ResponsiveView.isDesktop(context))
+           ResponsiveView.isMobile(context)?
+             SizedBox():
             SizedBox(
                 width: 260,
                 height: MediaQuery.sizeOf(context).height,

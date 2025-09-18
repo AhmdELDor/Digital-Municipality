@@ -13,5 +13,6 @@ import '../../../common_widgets/view_common_widget/common_card_decoration.dart';
 import '../../../common_widgets/view_common_widget/common_circular_loader.dart';
 import '../../../common_widgets/widgets/button.dart';
 import '../../../common_widgets/widgets/image.dart';
+import '../../../common_widgets/widgets/text.dart';
 import 'controller/otp_verification_controller.dart';
 part 'otp_verification_view.dart';

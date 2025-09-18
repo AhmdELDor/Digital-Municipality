@@ -168,7 +168,6 @@ class _EditPersonalInformationState extends State<EditPersonalInformation> {
             ),
           ),
         ),
-        Gap(25),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
           child: Row(

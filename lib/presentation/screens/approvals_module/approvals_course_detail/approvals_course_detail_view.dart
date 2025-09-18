@@ -152,8 +152,8 @@ class _CourseApprovalsDetailViewState extends State<CourseApprovalsDetailView> {
       ),
       padding: EdgeInsets.zero,
       indicatorSize: TabBarIndicatorSize.tab,
-      isScrollable: true,
-      tabAlignment:TabAlignment.start ,
+      isScrollable:mobileView?true:false,
+      tabAlignment:mobileView?TabAlignment.start:null,
       tabs: [
         Tab(text: CourseApprovalsDetailStrings.aboutCourse),
         Tab(text: CourseApprovalsDetailStrings.curriculum),
@@ -392,7 +392,7 @@ class _CourseApprovalsDetailViewState extends State<CourseApprovalsDetailView> {
               children: [
                 Expanded(
                   child: CommonText.semiBold(
-                    controller.data.value.courseFees.toString(),
+                    '\$${controller.data.value.courseFees.toString()}',
                     size: 20,
                     color: AppColors.primary500,
                   ),
@@ -455,7 +455,7 @@ class _CourseApprovalsDetailViewState extends State<CourseApprovalsDetailView> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       CommonText.semiBold(
-                        controller.data.value.courseFees.toString(),
+                        '\$${controller.data.value.courseFees.toString()}',
                         size: 18,
                         color: AppColors.primary500,
                       ),

@@ -187,7 +187,7 @@ class _ViewCourseCategoryState extends State<ViewCourseCategory> {
         
                     InkWell(
                       onTap: () {
-                        context.go(AppRouteName.addCourseView);
+                        context.push(AppRouteName.addCourseView);
                       },
                       child: Container(
                         decoration: commonCardDecoration(7),

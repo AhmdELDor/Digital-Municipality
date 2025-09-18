@@ -81,9 +81,10 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
                                     child: dashboardOverView(
                                       title:
                                           FinanceManagementStrings.totalEarning,
+
                                       image: CommonImageAssets.totalEarning,
-                                      total: controller.data.value.totalEarning
-                                          .toString(),
+                                      total: '\$${controller.data.value.totalEarning
+                                          .toString()}',
                                       scholarship: '20%',
                                       margin: mobileView ? 0 : 12,
                                       gradient: isDarkMode
@@ -91,6 +92,7 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
                                           : totalStudentGradient,
                                       color: AppColors.pink600,
                                       context: context,
+
                                     ),
                                   ),
                                   ResponsiveGridCol(
@@ -118,8 +120,8 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
                                       title:
                                           FinanceManagementStrings.courseEarning,
                                       image: CommonImageAssets.totalCoursesLogo,
-                                      total: controller.data.value.courseEarning
-                                          .toString(),
+                                      total: '\$${controller.data.value.courseEarning
+                                          .toString()}',
                                       scholarship: '20%',
                                       margin: mobileView ? 0 : 12,
                                       gradient: isDarkMode
@@ -136,11 +138,11 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
                                       title: FinanceManagementStrings
                                           .instructorPayOut,
                                       image: CommonImageAssets.instructorPayOut,
-                                      total: controller
+                                      total: '\$${controller
                                           .data
                                           .value
                                           .instructorPayOut
-                                          .toString(),
+                                          .toString()}',
                                       scholarship: '35%',
                                       margin: 0,
                                       gradient: isDarkMode
@@ -975,7 +977,15 @@ class _FinanceManagementViewState extends State<FinanceManagementView> {
     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
     return PopupMenuButton(
       color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.lightBgColor,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(9),
+        side: BorderSide(
+          color: isDarkMode
+              ? AppColors.grey100Color
+              : AppColors.lightBorderColor,
+          width: 2,
+        ),
+      ),
       child: commonPopTextView(AppCommonIcon.moreIcon),
       position: PopupMenuPosition.under,
       itemBuilder: (context) => [

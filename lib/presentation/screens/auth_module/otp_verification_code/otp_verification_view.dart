@@ -94,6 +94,36 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
                  ),
                ),
                Gap(40),
+
+               Obx(() {
+                 return Row(
+                   mainAxisAlignment: MainAxisAlignment.center,
+                   children: [
+                     CommonText.medium(
+                       controller.second.value == 0
+                           ? OtpVerificationStrings.didNotReceiveCode
+                           : OtpVerificationStrings.didNotReceiveCode,
+                       size: 15,
+                     ),
+                     Gap(3),
+                     InkWell(
+                       onTap: () {
+                         controller.second.value == 0
+                             ? controller.resendCode(context)
+                             : null;
+                       },
+                       child: CommonText.medium(
+                         controller.second.value == 0
+                             ? OtpVerificationStrings.resend
+                             : "${controller.second.value}'s",
+                         size: 15,
+                         color: AppColors.primary500,
+                       ),
+                     ),
+                   ],
+                 );
+               }),
+               Gap(15),
                Obx(() {
                  return controller.isLoading.value
                      ? const Center(child: CommonCircularLoader())

@@ -14,10 +14,10 @@ class _AddQuizViewState extends State<AddQuizView> {
   @override
   void initState() {
     super.initState();
-    print("=====title======");
-    print(widget.title);
-    print(widget.quizData);
-    print(widget.testData);
+    // print("=====title======");
+    // print(widget.title);
+    // print(widget.quizData);
+    // print(widget.testData);
   }
   AddQuizController controller = Get.put((AddQuizController()));
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -79,9 +79,9 @@ class _AddQuizViewState extends State<AddQuizView> {
                       ),
                     ),
                   ),
-                  Gap(15),
+
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 15),
                     child: Obx(() {
                       return controller.selectedType.value ==
                               "Multiple Choice Question"
@@ -269,31 +269,7 @@ class _AddQuizViewState extends State<AddQuizView> {
 
                                         Spacer(),
 
-                                        Container(
-                                          height: 30,
-                                          width: 30,
-                                          decoration: BoxDecoration(
-                                            color: isDarkMode
-                                                ? AppColors.error500
-                                                : AppColors.error100,
-                                            borderRadius: BorderRadius.circular(
-                                              7,
-                                            ),
-                                          ),
-                                          child: Center(
-                                            child: SvgImageFromAsset(
-                                              AppCommonIcon.quizDeleteIcon,
-                                              height: 20,
-                                              width: 20,
-                                              colorFilter: ColorFilter.mode(
-                                                isDarkMode
-                                                    ? AppColors.white
-                                                    : AppColors.error500,
-                                                BlendMode.srcIn,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
+                                        CommonDeleteView()
                                       ],
                                     ),
                                   ),
@@ -578,6 +554,7 @@ class _AddQuizViewState extends State<AddQuizView> {
             hintText: AddQuizStrings.enterQuestions,
             controller: controller.enterQuestionsController,
             textInputAction: TextInputAction.next,
+            maxLines: 2,
             // validator: (value) {
             //   return validateEmptyValue(value, 'Quiz name is Required');
             // },
@@ -662,6 +639,18 @@ class _AddQuizViewState extends State<AddQuizView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          commonRequiredHeaderText(QuizStrings.question),
+          Gap(10),
+          CommonTextField(
+            hintText: AddQuizStrings.enterQuestions,
+            controller: controller.enterQuestionsController,
+            textInputAction: TextInputAction.next,
+            maxLines: 2,
+            // validator: (value) {
+            //   return validateEmptyValue(value, 'Quiz name is Required');
+            // },
+          ),
+          Gap(15),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -979,11 +968,7 @@ class _AddQuizViewState extends State<AddQuizView> {
 
             showDeleteIcon == false
                 ? SizedBox()
-                : SvgImageFromAsset(
-                    AppCommonIcon.quizDeleteIcon,
-                    height: 20,
-                    width: 20,
-                  ),
+                : CommonDeleteView(),
           ],
         ),
         Gap(10),
@@ -1421,6 +1406,18 @@ class _AddQuizViewState extends State<AddQuizView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        commonRequiredHeaderText(QuizStrings.question),
+        Gap(10),
+        CommonTextField(
+          hintText: AddQuizStrings.enterQuestions,
+          controller: controller.enterQuestionsController,
+          textInputAction: TextInputAction.next,
+          maxLines: 2,
+          // validator: (value) {
+          //   return validateEmptyValue(value, 'Quiz name is Required');
+          // },
+        ),
+        Gap(15),
         imageAView(),
         Gap(20),
         imageBView(),

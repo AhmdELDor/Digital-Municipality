@@ -27,6 +27,7 @@ Widget commonReportsCardView({
   required EdgeInsetsGeometry margin,
   String? leading,
   String? trailing,
+  required Color textColor,
 }) {
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
@@ -114,6 +115,7 @@ Widget commonReportsCardView({
                   CommonText.medium(
                     '${data.changePercent.toString()}%',
                     size: 14,
+                    color: textColor
                   ),
                 ],
               ),
@@ -274,10 +276,19 @@ Widget commonAverageView({required String title, required SummaryMetric data}) {
                 data.isPositive
                     ? AppCommonIcon.positiveIcon
                     : AppCommonIcon.negativeIcon,
+                colorFilter: ColorFilter.mode(AppColors.white,BlendMode.srcIn),
               ),
               Gap(5),
-              CommonText.medium('${data.changePercent.toString()}%', size: 14),
-              CommonText.medium(data.isPositive ? 'Higher' : 'Lower', size: 14),
+              CommonText.medium(
+                '${data.changePercent.toString()}%',
+                size: 14,
+                color: AppColors.white,
+              ),
+              CommonText.medium(
+                data.isPositive ? 'Higher' : 'Lower',
+                size: 14,
+                color: AppColors.white,
+              ),
             ],
           ),
         ),
@@ -369,6 +380,18 @@ Widget instructorPerformanceReport(InstructorModel data) {
             children: [
               leadingTitle(ReportsAnalysis.assignedCourses),
               trailingTitle(data.assignedCourses.toString()),
+            ],
+          ),
+        ),
+
+        CommonDivider(),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              leadingTitle(ReportsAnalysis.topCourseCompletionRated),
+              trailingTitle('87%'),
             ],
           ),
         ),

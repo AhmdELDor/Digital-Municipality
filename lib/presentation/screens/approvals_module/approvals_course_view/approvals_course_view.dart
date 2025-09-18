@@ -44,6 +44,15 @@ class _ApprovalsViewState extends State<ApprovalsView>
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          mobileView
+              ? Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+            child: CommonSearchField(
+              controller: controller.searchController,
+              hintText: DashboardViewStrings.searchAnything,
+            ),
+          )
+              : SizedBox(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Row(
@@ -424,9 +433,7 @@ class _ApprovalsViewState extends State<ApprovalsView>
                                 ),
                               );
                             },
-                            editViewCourseOnTap: () {
-
-                            },
+                            editViewCourseOnTap: () {},
                           ),
                         );
                       },
@@ -518,13 +525,15 @@ class _ApprovalsViewState extends State<ApprovalsView>
                                 },
                                 child: InstructorView(
                                   data: data,
+
                                   approveOnTap: () {
                                     commonDialogBox(
                                       context: context,
                                       child: SizedBox(
                                         width: 560,
                                         child: Padding(
-                                          padding: const EdgeInsets.symmetric(
+                                          padding:
+                                          const EdgeInsets.symmetric(
                                             vertical: 20,
                                             horizontal: 20,
                                           ),

@@ -54,9 +54,11 @@ notificationView(NotificationModel notification, BuildContext context) {
     mainAxisAlignment: MainAxisAlignment.start,
     children: [
       CircleAvatar(
-        radius:  3,
+        radius: 3,
         backgroundColor: notification.read == true
-            ?isDarkMode?AppColors.grey100Color:AppColors.headingsLightColor
+            ? isDarkMode
+                  ? AppColors.grey100Color
+                  : AppColors.headingsLightColor
             : AppColors.success500,
       ),
       Gap(12),
@@ -79,13 +81,19 @@ notificationView(NotificationModel notification, BuildContext context) {
       ),
       mobileView
           ? PopupMenuButton(
-
               color: isDarkMode
                   ? AppColors.mainDarkBgColor
                   : AppColors.lightBgColor,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(9),
-              ),position: PopupMenuPosition.under,
+                side: BorderSide(
+                  color: isDarkMode
+                      ? AppColors.grey100Color
+                      : AppColors.lightBorderColor,
+                  width: 2,
+                ),
+              ),
+              position: PopupMenuPosition.under,
               child: commonPopTextView(AppCommonIcon.moreIcon),
 
               itemBuilder: (context) => [
@@ -96,7 +104,7 @@ notificationView(NotificationModel notification, BuildContext context) {
                     child: commonDeviceView(
                       AppCommonIcon.likeIcon,
                       NotesListStrings.useful,
-                      null
+                      null,
                     ),
                   ),
                 ),
@@ -107,7 +115,7 @@ notificationView(NotificationModel notification, BuildContext context) {
                     child: commonDeviceView(
                       AppCommonIcon.disLikeIcon,
                       NotesListStrings.notUseful,
-                        null
+                      null,
                     ),
                   ),
                 ),
@@ -118,7 +126,7 @@ notificationView(NotificationModel notification, BuildContext context) {
                     child: commonDeviceView(
                       AppCommonIcon.deleteIcon,
                       NotesListStrings.delete,
-                     ColorFilter.mode( AppColors.error500, BlendMode.srcIn)
+                      ColorFilter.mode(AppColors.error500, BlendMode.srcIn),
                     ),
                   ),
                 ),
@@ -161,10 +169,14 @@ commonDeviceView(String image, title, ColorFilter? colorFilter) {
     children: [
       SvgImageFromAsset(
         image,
-        colorFilter: colorFilter??ColorFilter.mode(
-          isDarkMode ? AppColors.bodyTextDarkColor : AppColors.bodyTextColor,
-          BlendMode.srcIn,
-        ),
+        colorFilter:
+            colorFilter ??
+            ColorFilter.mode(
+              isDarkMode
+                  ? AppColors.bodyTextDarkColor
+                  : AppColors.bodyTextColor,
+              BlendMode.srcIn,
+            ),
       ),
       Gap(12),
       CommonText.regular(

@@ -58,7 +58,7 @@ class _ProfileViewState extends State<ProfileView> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Container(
-                    height: mobileView?null:140,
+                    height: mobileView ? null : 140,
                     width: double.infinity,
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                     decoration: BoxDecoration(
@@ -76,8 +76,8 @@ class _ProfileViewState extends State<ProfileView> {
                           child: commonCacheImage(
                             controller.data.value.userProfileImg,
                             ImagePlaceHolder.imagePlaceHolderLight,
-                            height: mobileView?64:100,
-                            width: mobileView?64:100,
+                            height: mobileView ? 64 : 100,
+                            width: mobileView ? 64 : 100,
                           ),
                         ),
                         Gap(15),
@@ -89,19 +89,19 @@ class _ProfileViewState extends State<ProfileView> {
                             children: [
                               CommonText.semiBold(
                                 '${controller.data.value.firstName}${controller.data.value.lastName}',
-                                size: mobileView?16:20,
+                                size: mobileView ? 16 : 20,
                                 color: AppColors.white,
                               ),
                               Gap(5),
                               CommonText.regular(
                                 'Super Admin',
-                                size: mobileView?14:15,
+                                size: mobileView ? 14 : 15,
                                 color: AppColors.white,
                               ),
                               Gap(5),
                               CommonText.regular(
                                 'Ahmedabad, India',
-                                size: mobileView?14:15,
+                                size: mobileView ? 14 : 15,
                                 color: AppColors.white,
                               ),
                             ],
@@ -143,7 +143,9 @@ class _ProfileViewState extends State<ProfileView> {
                   ),
                 ),
 
-               mobileView?deviceView(isDarkMode, mobileView): desktopView(isDarkMode, mobileView),
+                mobileView
+                    ? deviceView(isDarkMode, mobileView)
+                    : desktopView(isDarkMode, mobileView),
               ],
             ),
           ),
@@ -372,8 +374,10 @@ class _ProfileViewState extends State<ProfileView> {
               Gap(10),
               commonReportsCardView(
                 isDarkMode: isDarkMode,
+                textColor: AppColors.white,
                 data: controller.data.value.statistics.profileTotalRevenue,
                 name: ReportsAnalysis.totalRevenue,
+                leading: '\$',
                 gradient: isDarkMode
                     ? profileTotalRevenueDarkGradient()
                     : profileTotalRevenueGradient(),
@@ -390,6 +394,7 @@ class _ProfileViewState extends State<ProfileView> {
                 gradient: isDarkMode
                     ? profileTotalStudentsDarkGradient()
                     : profileTotalStudentsGradient(),
+                textColor: AppColors.white,
                 margin: EdgeInsetsGeometry.only(
                   right: mobileView ? 0 : 20,
                   top: 15,
@@ -404,6 +409,7 @@ class _ProfileViewState extends State<ProfileView> {
                     ? profileNewUsersDarkGradient()
                     : profileNewUsersGradient(),
                 mobileView: mobileView,
+                textColor: AppColors.white,
                 margin: EdgeInsetsGeometry.only(
                   right: mobileView ? 0 : 20,
                   top: 15,
@@ -437,6 +443,7 @@ class _ProfileViewState extends State<ProfileView> {
                     gradient: isDarkMode
                         ? profileTotalRevenueDarkGradient()
                         : profileTotalRevenueGradient(),
+                    textColor: AppColors.white,
                     margin: EdgeInsetsGeometry.only(
                       right: mobileView ? 0 : 20,
                       top: 17,
@@ -459,6 +466,7 @@ class _ProfileViewState extends State<ProfileView> {
                       top: 15,
                     ),
                     mobileView: mobileView,
+                    textColor: AppColors.headingsColor,
                   ),
                 ),
                 Gap(15),
@@ -466,6 +474,7 @@ class _ProfileViewState extends State<ProfileView> {
                   width: 250,
                   child: commonReportsCardView(
                     isDarkMode: isDarkMode,
+                    textColor: AppColors.headingsColor,
                     data: controller.data.value.statistics.profileNewUsersToday,
                     name: ReportsAnalysis.newUsersToday,
                     gradient: isDarkMode
@@ -544,7 +553,10 @@ class _ProfileViewState extends State<ProfileView> {
                 ),
                 CommonDivider(),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 20,
+                  ),
                   child: Column(
                     children: [
                       commonDeviceTitleAndSubtitleText(
@@ -591,20 +603,16 @@ class _ProfileViewState extends State<ProfileView> {
                     ],
                   ),
                 ),
-
               ],
             ),
           ),
         ),
 
-
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Container(
             decoration: BoxDecoration(
-              color: isDarkMode
-                  ? AppColors.mainDarkBgColor
-                  : AppColors.white,
+              color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.white,
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
                 color: isDarkMode
@@ -627,10 +635,7 @@ class _ProfileViewState extends State<ProfileView> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      CommonText.semiBold(
-                        ProfileViewStrings.address,
-                        size: 17,
-                      ),
+                      CommonText.semiBold(ProfileViewStrings.address, size: 17),
                       SizedBox(
                         width: 73,
                         child: PrimaryButton(
@@ -670,13 +675,15 @@ class _ProfileViewState extends State<ProfileView> {
                       commonDeviceTitleAndSubtitleText(
                         ProfileViewStrings.country,
                         controller.data.value.location.country,
-                      ), Gap(15),
+                      ),
+                      Gap(15),
                       CommonDivider(),
                       Gap(15),
                       commonDeviceTitleAndSubtitleText(
                         ProfileViewStrings.city,
                         controller.data.value.location.city,
-                      ), Gap(15),
+                      ),
+                      Gap(15),
                       CommonDivider(),
                       Gap(15),
                       commonDeviceTitleAndSubtitleText(
@@ -690,7 +697,6 @@ class _ProfileViewState extends State<ProfileView> {
             ),
           ),
         ),
-
       ],
     );
   }

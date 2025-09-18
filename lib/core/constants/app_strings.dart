@@ -82,7 +82,7 @@ class SignInStrings extends AppStrings {
 }
 
 class ForgotPasswordStrings extends AppStrings {
-  static const forgotPasswordTitle = "Forgot Password";
+  static const forgotPasswordTitle = "Forgot Password?";
   static const forgotPasswordDes = "Enter your email to reset your credentials";
   static const sendCode = "Send Code";
 }
@@ -349,6 +349,7 @@ class AddCoursesStrings extends AppStrings{
   static const String srNo = "Sr. no.";
   static const String titleOfLecture = "Title of Lecture";
   static const String durationOfVideo = "Duration of Video";
+  static const String uploadAVideo = "Upload a Video";
   static const String enterDuration = "Enter duration";
   static const String enterFeatureDescription = "Enter feature description";
   static const String addCourse = "Add Course";

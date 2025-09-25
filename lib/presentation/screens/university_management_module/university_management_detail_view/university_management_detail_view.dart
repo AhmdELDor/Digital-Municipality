@@ -204,7 +204,7 @@ class _UniversityManagementDetailViewState
                             },
                             child: CommonCourseView(
                               course: data,
-                              differentView: true,
+                              //differentView: true,
                               viewCourseOnTap: () {
                                 // context.go(
                                 //   '${AppRouteName.approvalsView}/${AppRouteName.courseApprovalsDetailView}',

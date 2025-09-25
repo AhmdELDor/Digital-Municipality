@@ -53,29 +53,32 @@ class _AddQuizViewState extends State<AddQuizView> {
                 children: [
                   Expanded(
                     child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 20,
-                              vertical: 20,
+                      child: Form(
+                        key: controller.formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                                vertical: 20,
+                              ),
+                              child: CommonText.medium(
+                                widget.testData != null
+                                    ? TestStrings.addTest
+                                    : widget.quizData != null
+                                    ? AddQuizStrings.addQuiz
+                                    : widget.title == 'Test'
+                                    ? TestStrings.addTest
+                                    : AddQuizStrings.addQuiz,
+                                size: 18,
+                              ),
                             ),
-                            child: CommonText.medium(
-                              widget.testData != null
-                                  ? TestStrings.addTest
-                                  : widget.quizData != null
-                                  ? AddQuizStrings.addQuiz
-                                  : widget.title == 'Test'
-                                  ? TestStrings.addTest
-                                  : AddQuizStrings.addQuiz,
-                              size: 18,
-                            ),
-                          ),
-                          CommonDivider(),
-                          Gap(20),
-                          deviceView(isDarkMode),
-                        ],
+                            CommonDivider(),
+                            Gap(20),
+                            deviceView(isDarkMode),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -111,7 +114,7 @@ class _AddQuizViewState extends State<AddQuizView> {
                                   child: PrimaryButton(
                                     height: 42,
                                     onPressed: () {
-                                      controller.saveAndNext();
+                                      controller.submit(context);
                                     },
                                     label: AddCoursesStrings.saveAndNext,
                                     textSize: 16,
@@ -144,7 +147,7 @@ class _AddQuizViewState extends State<AddQuizView> {
                                   child: PrimaryButton(
                                     height: 42,
                                     onPressed: () {
-                                      controller.saveAndNext();
+                                      controller.submit(context);
                                     },
                                     label: widget.testData != null
                                         ? TestStrings.createTest
@@ -574,9 +577,9 @@ class _AddQuizViewState extends State<AddQuizView> {
               Expanded(
                 child: Column(
                   children: [
-                    optionTile(0, AddQuizStrings.optionOne),
+                    optionTile(0, AddQuizStrings.optionOne,TextInputAction.next),
                     Gap(20),
-                    optionTile(2, AddQuizStrings.optionThree),
+                    optionTile(2, AddQuizStrings.optionThree,TextInputAction.next),
                   ],
                 ),
               ),
@@ -584,9 +587,9 @@ class _AddQuizViewState extends State<AddQuizView> {
               Expanded(
                 child: Column(
                   children: [
-                    optionTile(1, AddQuizStrings.optionTwo),
+                    optionTile(1, AddQuizStrings.optionTwo,TextInputAction.done),
                     Gap(20),
-                    optionTile(3, AddQuizStrings.optionFour),
+                    optionTile(3, AddQuizStrings.optionFour,TextInputAction.done),
                   ],
                 ),
               ),
@@ -618,7 +621,7 @@ class _AddQuizViewState extends State<AddQuizView> {
                 child: PrimaryButton(
                   height: 42,
                   onPressed: () {
-                    controller.saveAndNext();
+                    controller.submit(context);
                   },
                   label: AddCoursesStrings.saveAndNext,
                   textSize: 16,
@@ -732,7 +735,7 @@ class _AddQuizViewState extends State<AddQuizView> {
                 child: PrimaryButton(
                   height: 42,
                   onPressed: () {
-                    controller.saveAndNext();
+                    controller.submit(context);
                   },
 
                   label: widget.testData != null
@@ -742,13 +745,7 @@ class _AddQuizViewState extends State<AddQuizView> {
                       : widget.title == 'Test'
                       ? TestStrings.createTest
                       : QuizStrings.createQuiz,
-                  // label: widget.testData != null
-                  //     ? TestStrings.createTest
-                  //     : widget.quizData != null
-                  //     ? QuizStrings.createQuiz
-                  //     : widget.title == 'Quiz'
-                  //     ? QuizStrings.createQuiz
-                  //     : TestStrings.createTest,
+
                   textSize: 16,
                   textWeight: FontWeight.w500,
                 ),
@@ -760,11 +757,12 @@ class _AddQuizViewState extends State<AddQuizView> {
     );
   }
 
-  Widget optionTile(int index, String label) {
+  Widget optionTile(int index, String label,TextInputAction? textInputAction) {
     return commonOptionsView(
       title: label,
       hintText: "Enter $label",
       textController: controller.options[index],
+      textInputAction: textInputAction
     );
   }
 
@@ -958,6 +956,7 @@ class _AddQuizViewState extends State<AddQuizView> {
     // required void Function() downOnTap,
     // required void Function() upOnTap,
     bool showDeleteIcon = true,
+    TextInputAction? textInputAction
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -975,7 +974,7 @@ class _AddQuizViewState extends State<AddQuizView> {
         CommonTextField(
           hintText: hintText,
           controller: textController,
-          textInputAction: TextInputAction.next,
+          textInputAction:textInputAction?? TextInputAction.next,
         ),
       ],
     );
@@ -1324,20 +1323,23 @@ class _AddQuizViewState extends State<AddQuizView> {
                         child: commonRequiredHeaderText('Question Type'),
                       ),
                       Gap(15),
-                      Obx(
-                        () => AlwaysDownDropdown<String>(
-                          color: isDarkMode
-                              ? AppColors.greyDarkColor
-                              : AppColors.lightBorderColor,
-                          borderRadius: 6,
-                          hintText: "Select",
-                          items: controller.selectedTypeList,
-                          value: controller.selectedType.value.isEmpty
-                              ? null
-                              : controller.selectedType.value,
-                          onChanged: (val) {
-                            controller.selectedType.value = val ?? "";
-                          },
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Obx(
+                          () => AlwaysDownDropdown<String>(
+                            color: isDarkMode
+                                ? AppColors.greyDarkColor
+                                : AppColors.lightBorderColor,
+                            borderRadius: 6,
+                            hintText: "Select",
+                            items: controller.selectedTypeList,
+                            value: controller.selectedType.value.isEmpty
+                                ? null
+                                : controller.selectedType.value,
+                            onChanged: (val) {
+                              controller.selectedType.value = val ?? "";
+                            },
+                          ),
                         ),
                       ),
                       Gap(15),
@@ -1376,9 +1378,9 @@ class _AddQuizViewState extends State<AddQuizView> {
             controller: controller.enterQuestionsController,
             textInputAction: TextInputAction.next,
             maxLines: 2,
-            // validator: (value) {
-            //   return validateEmptyValue(value, 'Quiz name is Required');
-            // },
+            validator: (value) {
+              return validateEmptyValue(value, 'This Filed is Required');
+            },
           ),
           Gap(15),
           CommonText.medium(
@@ -1389,13 +1391,13 @@ class _AddQuizViewState extends State<AddQuizView> {
                 : AppColors.bodyTextColor,
           ),
           Gap(15),
-          optionTile(0, AddQuizStrings.optionOne),
+          optionTile(0, AddQuizStrings.optionOne,TextInputAction.next),
           Gap(20),
-          optionTile(1, AddQuizStrings.optionTwo),
+          optionTile(1, AddQuizStrings.optionTwo,TextInputAction.next),
           Gap(20),
-          optionTile(2, AddQuizStrings.optionThree),
+          optionTile(2, AddQuizStrings.optionThree,TextInputAction.next),
           Gap(20),
-          optionTile(3, AddQuizStrings.optionFour),
+          optionTile(3, AddQuizStrings.optionFour,TextInputAction.done),
           Gap(15),
         ],
       ),
@@ -1403,54 +1405,60 @@ class _AddQuizViewState extends State<AddQuizView> {
   }
 
   Widget deviceSingleQuestionsView(bool isDarkMode) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        commonRequiredHeaderText(QuizStrings.question),
-        Gap(10),
-        CommonTextField(
-          hintText: AddQuizStrings.enterQuestions,
-          controller: controller.enterQuestionsController,
-          textInputAction: TextInputAction.next,
-          maxLines: 2,
-          // validator: (value) {
-          //   return validateEmptyValue(value, 'Quiz name is Required');
-          // },
-        ),
-        Gap(15),
-        imageAView(),
-        Gap(20),
-        imageBView(),
-        Gap(20),
-        CommonText.medium(
-          AddQuizStrings.option,
-          size: 17,
-          color: isDarkMode
-              ? AppColors.bodyTextDarkColor
-              : AppColors.bodyTextColor,
-        ),
-        Gap(15),
-        commonOptionsView(
-          title: AddQuizStrings.optionOne,
-          hintText: AddQuizStrings.enterOptionOne,
-          textController: controller.singleQuestionOneController,
-          showDeleteIcon: false,
-        ),
-        CommonText.medium(
-          '',
-          size: 17,
-          color: isDarkMode
-              ? AppColors.bodyTextDarkColor
-              : AppColors.bodyTextColor,
-        ),
-        Gap(15),
-        commonOptionsView(
-          title: AddQuizStrings.optionTwo,
-          hintText: AddQuizStrings.enterOptionTwo,
-          textController: controller.singleQuestionTwoController,
-          showDeleteIcon: false,
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          commonRequiredHeaderText(QuizStrings.question),
+          Gap(10),
+          CommonTextField(
+            hintText: AddQuizStrings.enterQuestions,
+            controller: controller.enterQuestionsController,
+            textInputAction: TextInputAction.next,
+            maxLines: 2,
+            // validator: (value) {
+            //   return validateEmptyValue(value, 'Quiz name is Required');
+            // },
+          ),
+          Gap(15),
+          imageAView(),
+          Gap(20),
+          imageBView(),
+          Gap(20),
+          CommonText.medium(
+            AddQuizStrings.option,
+            size: 17,
+            color: isDarkMode
+                ? AppColors.bodyTextDarkColor
+                : AppColors.bodyTextColor,
+          ),
+          Gap(15),
+          commonOptionsView(
+            title: AddQuizStrings.optionOne,
+            hintText: AddQuizStrings.enterOptionOne,
+            textController: controller.singleQuestionOneController,
+            showDeleteIcon: false,
+            textInputAction: TextInputAction.next
+          ),
+          CommonText.medium(
+            '',
+            size: 17,
+            color: isDarkMode
+                ? AppColors.bodyTextDarkColor
+                : AppColors.bodyTextColor,
+          ),
+          //Gap(15),
+          commonOptionsView(
+            title: AddQuizStrings.optionTwo,
+            hintText: AddQuizStrings.enterOptionTwo,
+            textController: controller.singleQuestionTwoController,
+            showDeleteIcon: false,
+            textInputAction: TextInputAction.done
+          ),
+          Gap(15),
+        ],
+      ),
     );
   }
 }

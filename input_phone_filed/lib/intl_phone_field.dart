@@ -493,16 +493,20 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
                 //   const SizedBox(width: 4),
                 // ],
                 if (widget.showCountryFlag) ...[
-                  kIsWeb
-                      ?
-                  Image.asset(
-                          'packages/input_phone_filed/assets/flags/${_selectedCountry.code.toLowerCase()}.png',
-                    width: 32,
-                        )
-                      : Text(
-                    _selectedCountry.name.substring(0, 2).toUpperCase(),
-                         // style:  TextStyle(fontSize: 13,fontWeight: FontWeight.w400,color: Colors.red,),
-                        ),
+                  Text(
+                    _selectedCountry.dialCode,
+                    // style:  TextStyle(fontSize: 13,fontWeight: FontWeight.w400,color: Colors.red,),
+                  ),
+                  // kIsWeb
+                  //     ?
+                  // Image.asset(
+                  //         'packages/input_phone_filed/assets/flags/${_selectedCountry.code.toLowerCase()}.png',
+                  //   width: 32,
+                  //       )
+                  //     : Text(
+                  //   _selectedCountry.name.substring(0, 2).toUpperCase(),
+                  //        // style:  TextStyle(fontSize: 13,fontWeight: FontWeight.w400,color: Colors.red,),
+                  //       ),
                   const SizedBox(width: 8),
                   if (widget.enabled &&
                       widget.showDropdownIcon &&

@@ -7,209 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../app/theme_controller.dart';
 
-// class CustomDropdownFormField<T> extends StatelessWidget {
-//   final String? hintText;
-//   final List<T> items;
-//   final T? value;
-//   final String Function(T)? itemAsString;
-//   final void Function(T?) onChanged;
-//   final String? Function(T?)? validator;
-//   final double borderRadius;
-//   final bool isExpanded;
-//
-//   const CustomDropdownFormField({
-//     super.key,
-//     this.hintText,
-//     required this.items,
-//     required this.value,
-//     required this.onChanged,
-//     this.validator,
-//     this.itemAsString,
-//     this.borderRadius = 6,
-//     this.isExpanded = true,
-//   });
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
-//     return DropdownButtonFormField<T>(
-//       alignment: Alignment.bottomCenter,
-//       value: value,
-//       isExpanded: isExpanded,
-//
-//       icon: SvgImageFromAsset(
-//         AppCommonIcon.downArrowIcon,
-//         colorFilter: ColorFilter.mode(
-//           isDarkMode ? AppColors.bodyTextDarkColor : AppColors.bodyTextColor,
-//           BlendMode.srcIn,
-//         ),
-//       ),
-//       decoration: InputDecoration(
-//         filled: true,
-//         fillColor: isDarkMode
-//             ? AppColors.mainDarkBgColor
-//             : AppColors.lightBgColor,
-//         hintStyle: TextStyle(
-//           color: isDarkMode
-//               ? AppColors.bodyTextDarkColor
-//               : AppColors.bodyTextColor,
-//           fontSize: 14,
-//           fontWeight: FontWeight.w400,
-//         ),
-//         contentPadding: const EdgeInsets.symmetric(
-//           horizontal: 12,
-//           vertical: 12,
-//         ),
-//         border: OutlineInputBorder(
-//           borderRadius: BorderRadius.circular(borderRadius),
-//           borderSide: BorderSide(
-//             color: isDarkMode
-//                 ? AppColors.grey100Color
-//                 : AppColors.lightBorderColor,
-//             width: 1.5,
-//           ),
-//         ),
-//         enabledBorder: OutlineInputBorder(
-//           borderRadius: BorderRadius.circular(borderRadius),
-//           borderSide: BorderSide(
-//             color: isDarkMode
-//                 ? AppColors.grey100Color
-//                 : AppColors.lightBorderColor,
-//             width: 1.5,
-//           ),
-//         ),
-//         focusedBorder: OutlineInputBorder(
-//           borderRadius: BorderRadius.circular(borderRadius),
-//           borderSide: BorderSide(
-//             color: isDarkMode
-//                 ? AppColors.grey100Color
-//                 : AppColors.lightBorderColor,
-//             width: 1.5,
-//           ),
-//         ),
-//
-//         hintText: hintText,
-//       ),
-//       items: items.map((T item) {
-//         return DropdownMenuItem<T>(
-//           value: item,
-//           child: CommonText.regular(
-//             itemAsString != null ? itemAsString!(item) : item.toString(),
-//             size: 14,
-//             color: isDarkMode
-//                 ? AppColors.bodyTextDarkColor
-//                 : AppColors.bodyTextColor,
-//             fontWeight: FontWeight.w400,
-//           ),
-//         );
-//       }).toList(),
-//       onChanged: onChanged,
-//       validator: validator,menuMaxHeight: MediaQuery.of(context).size.height,
-//     );
-//   }
-// }
-//
-// class CustomCourseDropdownFormField<T> extends StatelessWidget {
-//   final String? hintText;
-//   final List<T> items;
-//   final T? value;
-//   final String Function(T)? itemAsString;
-//   final void Function(T?) onChanged;
-//   final String? Function(T?)? validator;
-//   final double borderRadius;
-//   final bool isExpanded;
-//
-//   const CustomCourseDropdownFormField({
-//     super.key,
-//     this.hintText,
-//     required this.items,
-//     required this.value,
-//     required this.onChanged,
-//     this.validator,
-//     this.itemAsString,
-//     this.borderRadius = 6,
-//     this.isExpanded = true,
-//   });
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
-//     return DropdownButtonFormField<T>(
-//       value: value,
-//       isExpanded: isExpanded,
-//       icon: SvgImageFromAsset(
-//         AppCommonIcon.downArrowIcon,
-//         colorFilter: ColorFilter.mode(
-//           isDarkMode ? AppColors.bodyTextDarkColor : AppColors.bodyTextColor,
-//           BlendMode.srcIn,
-//         ),
-//       ),
-//       decoration: InputDecoration(
-//         // filled: true,
-//         // fillColor: isDarkMode?AppColors.mainDarkBgColor:AppColors.lightBgColor,
-//         hintStyle: TextStyle(
-//           color: isDarkMode
-//               ? AppColors.bodyTextDarkColor
-//               : AppColors.bodyTextColor,
-//           fontSize: 14,
-//           fontWeight: FontWeight.w400,
-//         ),
-//         contentPadding: const EdgeInsets.symmetric(
-//           horizontal: 12,
-//           vertical: 12,
-//         ),
-//         border: OutlineInputBorder(
-//           borderRadius: BorderRadius.circular(6),
-//           borderSide: BorderSide(
-//             color: isDarkMode
-//                 ? AppColors.grey100Color
-//                 : AppColors.headingsLightColor,
-//             width: 1.5,
-//           ),
-//         ),
-//         enabledBorder: OutlineInputBorder(
-//           borderRadius: BorderRadius.circular(6),
-//           borderSide: BorderSide(
-//             color: isDarkMode
-//                 ? AppColors.grey100Color
-//                 : AppColors.headingsLightColor,
-//             width: 1.5,
-//           ),
-//         ),
-//         focusedBorder: OutlineInputBorder(
-//           borderRadius: BorderRadius.circular(6),
-//           borderSide: BorderSide(
-//             color: isDarkMode
-//                 ? AppColors.grey100Color
-//                 : AppColors.lightBorderColor,
-//             width: 1.5,
-//           ),
-//         ),
-//
-//         hintText: hintText,
-//       ),
-//       items: items.map((T item) {
-//         return DropdownMenuItem<T>(
-//           value: item,
-//           child: CommonText.regular(
-//             itemAsString != null ? itemAsString!(item) : item.toString(),
-//             size: 14,
-//             color: isDarkMode
-//                 ? AppColors.bodyTextDarkColor
-//                 : AppColors.bodyTextColor,
-//             fontWeight: FontWeight.w400,
-//           ),
-//         );
-//       }).toList(),
-//       onChanged: onChanged,
-//       validator: validator,
-//     );
-//   }
-// }
-
-
-
-
 class AlwaysDownDropdown<T> extends StatefulWidget {
   final List<T> items;
   final T? value;
@@ -218,7 +15,7 @@ class AlwaysDownDropdown<T> extends StatefulWidget {
   final void Function(T?) onChanged;
   final double borderRadius;
   final double? maxMenuHeight;
-final Color? color;
+  final Color? color;
   const AlwaysDownDropdown({
     super.key,
     required this.items,
@@ -227,7 +24,8 @@ final Color? color;
     this.hintText,
     this.itemAsString,
     this.borderRadius = 6,
-    this.maxMenuHeight, this.color,
+    this.maxMenuHeight,
+    this.color,
   });
 
   @override
@@ -269,63 +67,71 @@ class _AlwaysDownDropdownState<T> extends State<AlwaysDownDropdown<T>> {
         ? min(availableBelow, configuredMax)
         : min(max(screenHeight - 16.0, 0), configuredMax);
 
-    _overlayEntry = OverlayEntry(builder: (context) {
-      final bool isDarkMode = Get.find<ThemeController>().isDarkMode;
+    _overlayEntry = OverlayEntry(
+      builder: (context) {
+        final bool isDarkMode = Get.find<ThemeController>().isDarkMode;
 
-      return Positioned.fill(
-        child: GestureDetector(
-          // catch taps outside the menu to close it
-          behavior: HitTestBehavior.translucent,
-          onTap: _removeOverlay,
-          child: Stack(
-            children: [
-              // The follower will position itself relative to the CompositedTransformTarget
-              CompositedTransformFollower(
-                link: _layerLink,
-                showWhenUnlinked: false,
-                offset: Offset(0, size.height), // open below the field
-                child: Material(
-                  elevation: 4,
-                  borderRadius: BorderRadius.circular(widget.borderRadius),
-                  color: isDarkMode ? AppColors.mainDarkBgColor : AppColors.lightBgColor,
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxHeight: menuMaxHeight,
-                    ),
-                    child: SizedBox(
-                      width: size.width, // match width of the field
-                      child: ListView.builder(
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        itemCount: widget.items.length,
-                        itemBuilder: (context, index) {
-                          final item = widget.items[index];
-                          return InkWell(
-                            onTap: () {
-                              widget.onChanged(item);
-                              _removeOverlay();
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                              child: CommonText.regular(
-                                widget.itemAsString?.call(item) ?? item.toString(),
-                                size: 14,
-                                color: isDarkMode ? AppColors.bodyTextDarkColor : AppColors.bodyTextColor,
-                                fontWeight: FontWeight.w400,
+        return Positioned.fill(
+          child: GestureDetector(
+            // catch taps outside the menu to close it
+            behavior: HitTestBehavior.translucent,
+            onTap: _removeOverlay,
+            child: Stack(
+              children: [
+                // The follower will position itself relative to the CompositedTransformTarget
+                CompositedTransformFollower(
+                  link: _layerLink,
+                  showWhenUnlinked: false,
+                  offset: Offset(0, size.height), // open below the field
+                  child: Material(
+                    elevation: 4,
+                    borderRadius: BorderRadius.circular(widget.borderRadius),
+                    color: isDarkMode
+                        ? AppColors.mainDarkBgColor
+                        : AppColors.lightBgColor,
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(maxHeight: menuMaxHeight),
+                      child: SizedBox(
+                        width: size.width, // match width of the field
+                        child: ListView.builder(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          itemCount: widget.items.length,
+                          itemBuilder: (context, index) {
+                            final item = widget.items[index];
+                            return InkWell(
+                              onTap: () {
+                                widget.onChanged(item);
+                                _removeOverlay();
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 12,
+                                ),
+                                child: CommonText.regular(
+                                  widget.itemAsString?.call(item) ??
+                                      item.toString(),
+                                  size: 14,
+                                  color: isDarkMode
+                                      ? AppColors.bodyTextDarkColor
+                                      : AppColors.bodyTextColor,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
-                            ),
-                          );
-                        },
+                            );
+                          },
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
 
     overlay.insert(_overlayEntry!);
     setState(() => _isOpen = true);
@@ -346,7 +152,6 @@ class _AlwaysDownDropdownState<T> extends State<AlwaysDownDropdown<T>> {
     }
   }
 
-
   @override
   void dispose() {
     _overlayEntry?.remove();
@@ -354,12 +159,12 @@ class _AlwaysDownDropdownState<T> extends State<AlwaysDownDropdown<T>> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     final bool isDarkMode = Get.find<ThemeController>().isDarkMode;
     final displayText = widget.value != null
-        ? (widget.itemAsString?.call(widget.value as T) ?? widget.value.toString())
+        ? (widget.itemAsString?.call(widget.value as T) ??
+              widget.value.toString())
         : (widget.hintText ?? '');
 
     return CompositedTransformTarget(
@@ -369,11 +174,15 @@ class _AlwaysDownDropdownState<T> extends State<AlwaysDownDropdown<T>> {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
           decoration: BoxDecoration(
-            color: widget.color ?? (isDarkMode
-                ? AppColors.mainDarkBgColor
-                : AppColors.lightBgColor),
+            color:
+                widget.color ??
+                (isDarkMode
+                    ? AppColors.mainDarkBgColor
+                    : AppColors.lightBgColor),
             border: Border.all(
-              color: isDarkMode ? AppColors.grey100Color : AppColors.lightBorderColor,
+              color: isDarkMode
+                  ? AppColors.grey100Color
+                  : AppColors.lightBorderColor,
               width: 1.0,
             ),
             borderRadius: BorderRadius.circular(widget.borderRadius),
@@ -385,7 +194,9 @@ class _AlwaysDownDropdownState<T> extends State<AlwaysDownDropdown<T>> {
                 child: CommonText.regular(
                   displayText,
                   size: 14,
-                  color: isDarkMode ? AppColors.bodyTextDarkColor : AppColors.bodyTextColor,
+                  color: isDarkMode
+                      ? AppColors.bodyTextDarkColor
+                      : AppColors.bodyTextColor,
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -394,7 +205,9 @@ class _AlwaysDownDropdownState<T> extends State<AlwaysDownDropdown<T>> {
                 child: SvgImageFromAsset(
                   AppCommonIcon.downArrowIcon,
                   colorFilter: ColorFilter.mode(
-                    isDarkMode ? AppColors.bodyTextDarkColor : AppColors.bodyTextColor,
+                    isDarkMode
+                        ? AppColors.bodyTextDarkColor
+                        : AppColors.bodyTextColor,
                     BlendMode.srcIn,
                   ),
                 ),
@@ -406,6 +219,3 @@ class _AlwaysDownDropdownState<T> extends State<AlwaysDownDropdown<T>> {
     );
   }
 }
-
-
-

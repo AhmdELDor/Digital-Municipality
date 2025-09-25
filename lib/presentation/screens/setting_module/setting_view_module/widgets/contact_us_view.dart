@@ -178,16 +178,14 @@ class _ContactUsViewState extends State<ContactUsView> {
                       horizontal: 12,
                       vertical: 15,
                     ),
-                    child: Expanded(
-                      child: CommonText.regular(
-                        data.description,
-                        size: 16,
-                        color: isDarkMode
-                            ? AppColors.bodyTextDarkColor
-                            : AppColors.bodyTextColor,
-                        maxLines: 7,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                    child: CommonText.regular(
+                      data.description,
+                      size: 16,
+                      color: isDarkMode
+                          ? AppColors.bodyTextDarkColor
+                          : AppColors.bodyTextColor,
+                      maxLines: 7,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],

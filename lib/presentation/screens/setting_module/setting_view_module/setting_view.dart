@@ -170,10 +170,9 @@ class _SettingViewState extends State<SettingView>
               controller: tabController,
               isScrollable: true,
               indicatorSize: TabBarIndicatorSize.tab,
-              indicator: const BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(color: AppColors.primary500, width: 1),
-                ),
+              indicator:  BoxDecoration(
+                color: isDarkMode ? AppColors.cardDarkBg2Color : AppColors.primary50,
+                border: Border(bottom: BorderSide(color: AppColors.primary500)),
               ),
               tabAlignment: TabAlignment.start,
         

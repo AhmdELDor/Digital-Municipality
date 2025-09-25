@@ -27,170 +27,179 @@ class _StudentManagementViewState extends State<StudentManagementView> {
         },
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              mobileView
-                  ? Padding(
-                      padding: const EdgeInsets.only(
-                        left: 20,
-                        right: 20,
-                        top: 20,
-                      ),
-                      child: CommonSearchField(
-                        controller: controller.searchController,
-                        hintText: DashboardViewStrings.searchAnything,
-                      ),
-                    )
-                  : SizedBox(),
-        
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                child: CommonText.medium(
-                  StudentManagementStrings.studentManagement,
-                  size: 18,
-                ),
+        child: Column
+          (
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            mobileView
+                ? Padding(
+              padding: const EdgeInsets.only(
+                left: 20,
+                right: 20,
+                top: 20,
               ),
-        
-              CommonDivider(),
-             // Gap(20),
-              Obx(
-                () => Padding(
-                  padding: EdgeInsets.only(left: 20, top: 20),
-                  child: ResponsiveGridRow(
-                    children: List.generate(
-                      controller.studentManagementList.length,
-                      (index) {
-                        final data = controller.studentManagementList[index];
-                        return ResponsiveGridCol(
-                          lg: 4,
-                          child: Container(
-                            // padding: EdgeInsets.symmetric(
-                            //   horizontal: 12,
-                            //   vertical: 13,
-                            // ),
-                            margin: EdgeInsets.only(bottom: 20, right: 20),
-                            decoration: commonCardDecoration(12),
-                            child: Column(
-                              children: [
-        
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 15),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+              child: CommonSearchField(
+                controller: controller.searchController,
+                hintText: DashboardViewStrings.searchAnything,
+              ),
+            )
+                : SizedBox(),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+
+
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                      child: CommonText.medium(
+                        StudentManagementStrings.studentManagement,
+                        size: 18,
+                      ),
+                    ),
+
+                    CommonDivider(),
+                   // Gap(20),
+                    Obx(
+                      () => Padding(
+                        padding: EdgeInsets.only(left: 20, top: 20),
+                        child: ResponsiveGridRow(
+                          children: List.generate(
+                            controller.studentManagementList.length,
+                            (index) {
+                              final data = controller.studentManagementList[index];
+                              return ResponsiveGridCol(
+                                lg: 4,
+                                child: Container(
+                                  // padding: EdgeInsets.symmetric(
+                                  //   horizontal: 12,
+                                  //   vertical: 13,
+                                  // ),
+                                  margin: EdgeInsets.only(bottom: 20, right: 20),
+                                  decoration: commonCardDecoration(12),
+                                  child: Column(
                                     children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(
-                                          mobileView ? 50 : 72,
-                                        ),
-                                        child: commonCacheImage(
-                                          data.image,
-                                          ImagePlaceHolder.imagePlaceHolderDark,
-                                          height: mobileView ? 40 : 72,
-                                          width: mobileView ? 40 : 72,
-                                        ),
-                                      ),
-                                      Gap(12),
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 15),
+                                        child: Row(
                                           mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
                                           children: [
-                                            CommonText.medium(
-                                              data.name,
-                                              size: mobileView ? 15 : 16,
+                                            ClipRRect(
+                                              borderRadius: BorderRadius.circular(
+                                                mobileView ? 50 : 72,
+                                              ),
+                                              child: commonCacheImage(
+                                                data.image,
+                                                ImagePlaceHolder.imagePlaceHolderDark,
+                                                height: mobileView ? 40 : 72,
+                                                width: mobileView ? 40 : 72,
+                                              ),
                                             ),
-                                            Gap(3),
-                                            CommonText.regular(
-                                              data.email,
-                                              size: mobileView ? 12 : 16,
-                                              color: isDarkMode
-                                                  ? AppColors.bodyTextDarkColor
-                                                  : AppColors.bodyTextColor,
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
+                                            Gap(12),
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                children: [
+                                                  CommonText.medium(
+                                                    data.name,
+                                                    size: mobileView ? 15 : 16,
+                                                  ),
+                                                  Gap(3),
+                                                  CommonText.regular(
+                                                    data.email,
+                                                    size: mobileView ? 12 : 16,
+                                                    color: isDarkMode
+                                                        ? AppColors.bodyTextDarkColor
+                                                        : AppColors.bodyTextColor,
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow.ellipsis,
+                                                  ),
+                                                  Gap(3),
+                                                  CommonText.regular(
+                                                    data.phoneNo,
+                                                    size: mobileView ? 15 : 16,
+                                                    color: AppColors.greyTextColor,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                            Gap(3),
-                                            CommonText.regular(
-                                              data.phoneNo,
-                                              size: mobileView ? 15 : 16,
-                                              color: AppColors.greyTextColor,
-                                            ),
+                                            Gap(12),
+                                            mobileView ?commonSwitch(data):SizedBox(),
+                                            Gap(mobileView ?20:0),  menuButton(data,index),
                                           ],
                                         ),
                                       ),
-                                      Gap(12),
-                                      mobileView ?commonSwitch(data):SizedBox(),
-                                      Gap(mobileView ?20:0),  menuButton(data,index),
-                                    ],
-                                  ),
-                                ),
-        
-                                CommonDivider(height: 1.5),
-                                Gap(15),
-                                commonLeadingTrailingView(
-                                  StudentManagementStrings.totalCourseEnrolled,
-                                  '${data.totalEnrolledCourse.toString()} Questions',
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 15,
-                                  ),
-                                  child: CommonDivider(),
-                                ),
-        
-                                commonLeadingTrailingView(
-                                  StudentManagementStrings.totalCoinsEarned,
-                                  '${data.totalCoinsEarned.toString()} Attendees',
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 15,
-                                  ),
-                                  child: CommonDivider(),
-                                ),
-                                commonLeadingTrailingView(
-                                  StudentManagementStrings.leaderBoardPosition,
-                                  '#${data.leaderBoardPosition}',
-                                ),
-                                mobileView?SizedBox(): Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 15,
-                                  ),
-                                  child: CommonDivider(),
-                                ),
-                                Gap(mobileView?0:15),mobileView?SizedBox():
-                                Padding(
-                                  padding:  EdgeInsets.symmetric(horizontal: 15,),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      CommonText.regular(
-                                        StudentManagementStrings.status,
-                                        size: 15,
-                                        color: isDarkMode
-                                            ? AppColors.bodyTextDarkColor
-                                            : AppColors.bodyTextColor,
+
+                                      CommonDivider(height: 1.5),
+                                      Gap(15),
+                                      commonLeadingTrailingView(
+                                        StudentManagementStrings.totalCourseEnrolled,
+                                        '${data.totalEnrolledCourse.toString()} Questions',
                                       ),
-                                      commonSwitch(data),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 15,
+                                        ),
+                                        child: CommonDivider(),
+                                      ),
+
+                                      commonLeadingTrailingView(
+                                        StudentManagementStrings.totalCoinsEarned,
+                                        '${data.totalCoinsEarned.toString()} Attendees',
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 15,
+                                        ),
+                                        child: CommonDivider(),
+                                      ),
+                                      commonLeadingTrailingView(
+                                        StudentManagementStrings.leaderBoardPosition,
+                                        '#${data.leaderBoardPosition}',
+                                      ),
+                                      mobileView?SizedBox(): Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 15,
+                                        ),
+                                        child: CommonDivider(),
+                                      ),
+                                      Gap(mobileView?0:15),mobileView?SizedBox():
+                                      Padding(
+                                        padding:  EdgeInsets.symmetric(horizontal: 15,),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            CommonText.regular(
+                                              StudentManagementStrings.status,
+                                              size: 15,
+                                              color: isDarkMode
+                                                  ? AppColors.bodyTextDarkColor
+                                                  : AppColors.bodyTextColor,
+                                            ),
+                                            commonSwitch(data),
+                                          ],
+                                        ),
+                                      ),
+                                      Gap(mobileView?0:15)
                                     ],
                                   ),
                                 ),
-                                Gap(mobileView?0:15)
-                              ],
-                            ),
+                              );
+                            },
                           ),
-                        );
-                      },
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

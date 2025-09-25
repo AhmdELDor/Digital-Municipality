@@ -23,197 +23,205 @@ class _CourseManagementViewState extends State<CourseManagementView> {
           _scaffoldKey.currentState?.openDrawer();
         },
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            mobileView
-                ? Padding(
-                    padding: const EdgeInsets.only(
-                      left: 20,
-                      right: 20,
-                      top: 20,
-                    ),
-                    child: CommonSearchField(
-                      controller: controller.searchController,
-                      hintText: DashboardViewStrings.searchAnything,
-                    ),
-                  )
-                : SizedBox(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              child: Row(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          mobileView
+              ? Padding(
+            padding: const EdgeInsets.only(
+              left: 20,
+              right: 20,
+              top: 20,
+            ),
+            child: CommonSearchField(
+              controller: controller.searchController,
+              hintText: DashboardViewStrings.searchAnything,
+            ),
+          )
+              : SizedBox(),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: CommonText.medium(
-                      DashboardViewStrings.courseManagement,
-                      size: 18,
-                    ),
-                  ),
-                  mobileView
-                      ? Padding(
-                          padding: const EdgeInsets.only(right: 20),
-                          child: Obx(
-                            () => filterView(
-                              () {
-                                showBottomSheet(
-                                  enableDrag: false,
-                                  context: context,
-                                  builder: (context) {
-                                    return Container(
-                                      height: context.height,
-                                      padding: EdgeInsets.symmetric(
-                                        vertical: 25,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: isDarkMode
-                                            ? AppColors.mainDarkBgColor
-                                            : AppColors.white,
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.symmetric(
-                                              horizontal: 20,
-                                              vertical: 20,
-                                            ),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                CommonText.medium(
-                                                  ApprovalsStrings.filter,
-                                                  size: 16,
-                                                ),
-                                                commonCloseIcon(context),
-                                              ],
-                                            ),
-                                          ),
 
-                                          CommonDivider(),
-
-                                          Expanded(
-                                            child: SingleChildScrollView(
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                      vertical: 20,
-                                                      horizontal: 20,
-                                                    ),
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    usersDropDown(),
-                                                    Gap(20),
-
-                                                    createdByDropDown(),
-                                                    Gap(20),
-
-                                                    customDatePicker(
-                                                      controller.dateController,
-                                                    ),
-                                                    Gap(20),
-                                                    statusDropDown(),
-                                                    Gap(20),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                              vertical: 20,
-                                              horizontal: 20,
-                                            ),
-                                            child: Row(
-                                              children: [
-                                                Expanded(
-                                                  child: OutlineButton(
-                                                    height: 40,
-                                                    onPressed: () {
-                                                      controller
-                                                          .clearSelections();
-                                                    },
-                                                    label:
-                                                        ApprovalsStrings.clear,
-                                                    borderSide: BorderSide(
-                                                      color:
-                                                          AppColors.primary500,
-                                                    ),
-                                                    textColor:
-                                                        AppColors.primary500,
-                                                    textSize: 16,
-                                                    textWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                                Gap(20),
-                                                Expanded(
-                                                  child: PrimaryButton(
-                                                    height: 40,
-                                                    onPressed: () {
-                                                      Navigator.pop(context);
-                                                    },
-                                                    label: AppCommonStrings
-                                                        .btnApply,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
-                              controller.courseManagementList.length.toString(),
-                            ),
-                          ),
-                        )
-                      : SizedBox(),
-
-                  CommonCircleAddButton(),
-                  Gap(20),
-                  mobileView
-                      ? SizedBox()
-                      : Container(
-                          height: 36,
-                          width: 36,
-                          decoration: BoxDecoration(
-                            color: isDarkMode
-                                ? AppColors.error500
-                                : AppColors.error100,
-                            borderRadius: BorderRadius.circular(7),
-                          ),
-                          child: Center(
-                            child: SvgImageFromAsset(
-                              AppCommonIcon.deleteIcon,
-                              colorFilter: ColorFilter.mode(
-                                isDarkMode
-                                    ? AppColors.white
-                                    : AppColors.error500,
-                                BlendMode.srcIn,
-                              ),
-                            ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: CommonText.medium(
+                            DashboardViewStrings.courseManagement,
+                            size: 18,
                           ),
                         ),
+                        mobileView
+                            ? Padding(
+                                padding: const EdgeInsets.only(right: 20),
+                                child: Obx(
+                                  () => filterView(
+                                    () {
+                                      showBottomSheet(
+                                        enableDrag: false,
+                                        context: context,
+                                        builder: (context) {
+                                          return Container(
+                                            height: context.height,
+                                            padding: EdgeInsets.symmetric(
+                                              vertical: 25,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              color: isDarkMode
+                                                  ? AppColors.mainDarkBgColor
+                                                  : AppColors.white,
+                                            ),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                    horizontal: 20,
+                                                    vertical: 20,
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      CommonText.medium(
+                                                        ApprovalsStrings.filter,
+                                                        size: 16,
+                                                      ),
+                                                      commonCloseIcon(context),
+                                                    ],
+                                                  ),
+                                                ),
+
+                                                CommonDivider(),
+
+                                                Expanded(
+                                                  child: SingleChildScrollView(
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.symmetric(
+                                                            vertical: 20,
+                                                            horizontal: 20,
+                                                          ),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment.start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment.start,
+                                                        children: [
+                                                          usersDropDown(),
+                                                          Gap(20),
+
+                                                          createdByDropDown(),
+                                                          Gap(20),
+
+                                                          customDatePicker(
+                                                            controller.dateController,
+                                                          ),
+                                                          Gap(20),
+                                                          statusDropDown(),
+                                                          Gap(20),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.symmetric(
+                                                    vertical: 20,
+                                                    horizontal: 20,
+                                                  ),
+                                                  child: Row(
+                                                    children: [
+                                                      Expanded(
+                                                        child: OutlineButton(
+                                                          height: 40,
+                                                          onPressed: () {
+                                                            controller
+                                                                .clearSelections();
+                                                          },
+                                                          label:
+                                                              ApprovalsStrings.clear,
+                                                          borderSide: BorderSide(
+                                                            color:
+                                                                AppColors.primary500,
+                                                          ),
+                                                          textColor:
+                                                              AppColors.primary500,
+                                                          textSize: 16,
+                                                          textWeight: FontWeight.w500,
+                                                        ),
+                                                      ),
+                                                      Gap(20),
+                                                      Expanded(
+                                                        child: PrimaryButton(
+                                                          height: 40,
+                                                          onPressed: () {
+                                                            Navigator.pop(context);
+                                                          },
+                                                          label: AppCommonStrings
+                                                              .btnApply,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                    controller.courseManagementList.length.toString(),
+                                  ),
+                                ),
+                              )
+                            : SizedBox(),
+
+                        CommonCircleAddButton(),
+                        Gap(20),
+                        mobileView
+                            ? SizedBox()
+                            : Container(
+                                height: 36,
+                                width: 36,
+                                decoration: BoxDecoration(
+                                  color: isDarkMode
+                                      ? AppColors.error500
+                                      : AppColors.error100,
+                                  borderRadius: BorderRadius.circular(7),
+                                ),
+                                child: Center(
+                                  child: SvgImageFromAsset(
+                                    AppCommonIcon.deleteIcon,
+                                    colorFilter: ColorFilter.mode(
+                                      isDarkMode
+                                          ? AppColors.white
+                                          : AppColors.error500,
+                                      BlendMode.srcIn,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                      ],
+                    ),
+                  ),
+                  CommonDivider(),
+
+                  _courseApprovalView(),
                 ],
               ),
             ),
-            CommonDivider(),
-
-            _courseApprovalView(),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -275,7 +283,6 @@ class _CourseManagementViewState extends State<CourseManagementView> {
                   viewCourseOnTap: () {},
                   declinedOnTap: () {},
                   deleteOnTap: () {},
-
                   showMenuButton: true,
                   editViewCourseOnTap: () {
                     context.push(
@@ -283,8 +290,9 @@ class _CourseManagementViewState extends State<CourseManagementView> {
                       extra: {'data': course, 'title': 'view'},
                     );
                   },
-                  differentView: true,
+                  //differentView: true,
                   showRate: true,
+
 
 
                   deleteCourseOnTap: () {

@@ -35,7 +35,7 @@ Future<void> commonDialogBox({
 
 Widget commonCloseIcon(BuildContext context) {
   bool isDarkMode = Get.find<ThemeController>().isDarkMode;
-  return InkWell(
+  return GestureDetector(
     onTap: () {
       Navigator.pop(context);
     },
@@ -45,6 +45,8 @@ Widget commonCloseIcon(BuildContext context) {
         isDarkMode ? AppColors.bodyTextDarkColor : AppColors.bodyTextColor,
         BlendMode.srcIn,
       ),
+      height: 20,
+      width: 20,
     ),
   );
 }

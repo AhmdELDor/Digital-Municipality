@@ -15,7 +15,8 @@ import '../../../../common_widgets/widgets/validations.dart';
 import '../../../add_course_module/widgets/basic_information_view.dart';
 import '../controller/add_class_controller.dart';
 
-Widget classNameView() { AddClassController controller = Get.put(AddClassController());
+Widget classNameView() {
+  AddClassController controller = Get.put(AddClassController());
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -32,14 +33,16 @@ Widget classNameView() { AddClassController controller = Get.put(AddClassControl
     ],
   );
 }
-Widget selectCourseView() { AddClassController controller = Get.put(AddClassController());
+
+Widget selectCourseView() {
+  AddClassController controller = Get.put(AddClassController());
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       commonRequiredHeaderText(AddClassStrings.course),
       Gap(10),
       Obx(
-            () => AlwaysDownDropdown<String>(
+        () => AlwaysDownDropdown<String>(
           hintText: "Select",
           items: controller.categoryList,
           value: controller.selectedCategory.value.isEmpty
@@ -48,14 +51,16 @@ Widget selectCourseView() { AddClassController controller = Get.put(AddClassCont
           onChanged: (val) {
             controller.selectedCategory.value = val ?? '';
           },
-         // validator: (val) => val == null || val.isEmpty ? "Select" : null,
+          // validator: (val) => val == null || val.isEmpty ? "Select" : null,
         ),
       ),
     ],
   );
 }
+
 Widget selectDate() {
-  bool isDarkMode = Get.find<ThemeController>().isDarkMode; AddClassController controller = Get.put(AddClassController());
+  bool isDarkMode = Get.find<ThemeController>().isDarkMode;
+  AddClassController controller = Get.put(AddClassController());
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -69,9 +74,7 @@ Widget selectDate() {
           height: 16,
           width: 16,
           colorFilter: ColorFilter.mode(
-            isDarkMode
-                ? AppColors.bodyTextDarkColor
-                : AppColors.bodyTextColor,
+            isDarkMode ? AppColors.bodyTextDarkColor : AppColors.bodyTextColor,
             BlendMode.srcIn,
           ),
         ),
@@ -80,8 +83,10 @@ Widget selectDate() {
     ],
   );
 }
+
 Widget selectTime(BuildContext context) {
-  bool isDarkMode = Get.find<ThemeController>().isDarkMode; AddClassController controller = Get.put(AddClassController());
+  bool isDarkMode = Get.find<ThemeController>().isDarkMode;
+  AddClassController controller = Get.put(AddClassController());
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -111,8 +116,10 @@ Widget selectTime(BuildContext context) {
     ],
   );
 }
+
 Widget imageVideoView() {
-  bool isDarkMode = Get.find<ThemeController>().isDarkMode; AddClassController controller = Get.put(AddClassController());
+  bool isDarkMode = Get.find<ThemeController>().isDarkMode;
+  AddClassController controller = Get.put(AddClassController());
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -162,14 +169,16 @@ Widget imageVideoView() {
     ],
   );
 }
-Widget selectInstructorView() { AddClassController controller = Get.put(AddClassController());
+
+Widget selectInstructorView() {
+  AddClassController controller = Get.put(AddClassController());
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       commonRequiredHeaderText(AddCoursesStrings.instructor),
       Gap(10),
       Obx(
-            () => AlwaysDownDropdown<String>(
+        () => AlwaysDownDropdown<String>(
           hintText: AddCoursesStrings.selectInstructor,
           items: controller.usersList,
           value: controller.selectedUser.value.isEmpty
@@ -178,12 +187,13 @@ Widget selectInstructorView() { AddClassController controller = Get.put(AddClass
           onChanged: (val) {
             controller.selectedUser.value = val ?? '';
           },
-         // validator: (val) => val == null || val.isEmpty ? "Select instructor" : null,
+          // validator: (val) => val == null || val.isEmpty ? "Select instructor" : null,
         ),
       ),
     ],
   );
 }
+
 Widget descriptionController(BuildContext context) {
   AddClassController controller = Get.put(AddClassController());
   var mobileView = ResponsiveView.isMobile(context);
@@ -195,7 +205,7 @@ Widget descriptionController(BuildContext context) {
       CommonTextField(
         hintText: AddCoursesStrings.enterDescription,
         controller: controller.descriptionController,
-        maxLines:mobileView?3:1 ,
+        maxLines: mobileView ? 3 : 1,
       ),
     ],
   );

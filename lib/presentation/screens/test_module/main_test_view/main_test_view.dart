@@ -24,512 +24,521 @@ class _MainTestViewState extends State<MainTestView> {
         },
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              mobileView
-                  ? Padding(
-                      padding: const EdgeInsets.only(
-                        left: 20,
-                        right: 20,
-                        top: 20,
-                      ),
-                      child: CommonSearchField(
-                        controller: controller.searchController,
-                        hintText: DashboardViewStrings.searchAnything,
-                      ),
-                    )
-                  : SizedBox(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            mobileView
+                ? Padding(
+              padding: const EdgeInsets.only(
+                left: 20,
+                right: 20,
+                top: 20,
+              ),
+              child: CommonSearchField(
+                controller: controller.searchController,
+                hintText: DashboardViewStrings.searchAnything,
+              ),
+            )
+                : SizedBox(),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: CommonText.medium(TestStrings.test, size: 18),
-                    ),
-                    mobileView
-                        ? Padding(
-                            padding: const EdgeInsets.only(right: 20),
-                            child: Obx(
-                              () => filterView(
-                                () {
-                                  showBottomSheet(
-                                    enableDrag: false,
-                                    context: context,
-                                    builder: (context) {
-                                      return Container(
-                                        height: context.height,
-                                        padding: EdgeInsets.symmetric(
-                                          vertical: 25,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          color: isDarkMode
-                                              ? AppColors.mainDarkBgColor
-                                              : AppColors.white,
-                                        ),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
+
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: CommonText.medium(TestStrings.test, size: 18),
+                          ),
+                          mobileView
+                              ? Padding(
+                                  padding: const EdgeInsets.only(right: 20),
+                                  child: Obx(
+                                    () => filterView(
+                                      () {
+                                        showBottomSheet(
+                                          enableDrag: false,
+                                          context: context,
+                                          builder: (context) {
+                                            return Container(
+                                              height: context.height,
                                               padding: EdgeInsets.symmetric(
-                                                horizontal: 20,
-                                                vertical: 20,
+                                                vertical: 25,
                                               ),
-                                              child: Row(
+                                              decoration: BoxDecoration(
+                                                color: isDarkMode
+                                                    ? AppColors.mainDarkBgColor
+                                                    : AppColors.white,
+                                              ),
+                                              child: Column(
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
-                                                  CommonText.medium(
-                                                    ApprovalsStrings.filter,
-                                                    size: 16,
+                                                  Padding(
+                                                    padding: EdgeInsets.symmetric(
+                                                      horizontal: 20,
+                                                      vertical: 20,
+                                                    ),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        CommonText.medium(
+                                                          ApprovalsStrings.filter,
+                                                          size: 16,
+                                                        ),
+                                                        commonCloseIcon(context),
+                                                      ],
+                                                    ),
                                                   ),
-                                                  commonCloseIcon(context),
+
+                                                  CommonDivider(),
+
+                                                  Expanded(
+                                                    child: SingleChildScrollView(
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets.symmetric(
+                                                              vertical: 20,
+                                                              horizontal: 20,
+                                                            ),
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment.start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment.start,
+                                                          children: [
+                                                            coursesDropDown(),
+                                                            Gap(20),
+                                                            courseCategoryDropDown(),
+                                                            Gap(20),
+                                                            statusDropDown(),
+                                                            Gap(20),
+
+
+
+                                                            createdByDropDown(),
+                                                            Gap(20),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets.symmetric(
+                                                      vertical: 20,
+                                                      horizontal: 20,
+                                                    ),
+                                                    child: Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: OutlineButton(
+                                                            height: 40,
+                                                            onPressed: () {
+                                                              controller
+                                                                  .clearSelections();
+                                                            },
+                                                            label:
+                                                                ApprovalsStrings.clear,
+                                                            borderSide: BorderSide(
+                                                              color:
+                                                                  AppColors.primary500,
+                                                            ),
+                                                            textColor:
+                                                                AppColors.primary500,
+                                                            textSize: 16,
+                                                            textWeight: FontWeight.w500,
+                                                          ),
+                                                        ),
+                                                        Gap(20),
+                                                        Expanded(
+                                                          child: PrimaryButton(
+                                                            height: 40,
+                                                            onPressed: () {
+                                                              Navigator.pop(context);
+                                                            },
+                                                            label: AppCommonStrings
+                                                                .btnApply,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
                                                 ],
                                               ),
+                                            );
+                                          },
+                                        );
+                                      },
+                                      controller.data.value.testList.length.toString(),
+                                    ),
+                                  ),
+                                )
+                              : SizedBox(),
+
+                          CommonCircleAddButton(
+                            onTap: () {
+                              context.push(
+                                '${AppRouteName.quizView}/${AppRouteName.addQuiz}',
+                                  extra:{
+                                    'title':'Test'
+                                  }
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    CommonDivider(),
+
+                    mobileView
+                        ? SizedBox()
+                        : Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 20,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(child: coursesDropDown()),
+                                Gap(20),
+
+                                Expanded(child: courseCategoryDropDown()),
+                                Gap(20),
+                                Expanded(child: statusDropDown()),
+                                Gap(20),
+                                Expanded(child: createdByDropDown()),
+                                Gap(20),
+
+                                InkWell(
+                                  onTap: () {
+                                    controller.clearSelections();
+                                  },
+                                  child: CommonText.medium(
+                                    ApprovalsStrings.clearAll,
+                                    size: 14,
+                                    color: AppColors.error500,
+                                  ),
+                                ),
+                                Gap(20),
+                                CommonText.semiBold(
+                                  '${controller.data.value.testList.length.toString()} Results',
+                                  size: 15,
+                                  color: AppColors.primary500,
+                                ),
+                              ],
+                            ),
+                          ),
+
+                    Obx(
+                      () => Padding(
+                        padding: EdgeInsets.only(left: 20, top: mobileView ? 20 : 0),
+                        child: ResponsiveGridRow(
+                          children: List.generate(controller.data.value.testList.length, (
+                            index,
+                          ) {
+                            final data = controller.data.value.testList[index];
+                            return ResponsiveGridCol(
+                              lg: 4,
+                              xs: 12,
+                              child: Container(
+                                decoration: commonCardDecoration(12),
+                                margin: EdgeInsets.only(bottom: 20, right: 20),
+
+                                child: mobileView
+                                    ? Column(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 15,
+                                              vertical: 15,
                                             ),
-        
-                                            CommonDivider(),
-        
-                                            Expanded(
-                                              child: SingleChildScrollView(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.symmetric(
-                                                        vertical: 20,
-                                                        horizontal: 20,
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                ClipRRect(
+                                                  borderRadius: BorderRadius.circular(
+                                                    9,
+                                                  ),
+                                                  child: commonCacheImage(
+                                                    data.image,
+                                                    ImagePlaceHolder
+                                                        .imagePlaceHolderDark,
+                                                    height: 65,
+                                                    width: 65,
+                                                  ),
+                                                ),
+                                                Gap(12),
+                                                Expanded(
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      CommonText.medium(
+                                                        data.name,
+                                                        size: 14,
                                                       ),
+                                                      CommonText.regular(
+                                                        data.tag,
+                                                        size: 14,
+                                                        color: isDarkMode
+                                                            ? AppColors
+                                                                  .bodyTextDarkColor
+                                                            : AppColors.bodyTextColor,
+                                                        maxLines: 1,
+                                                          overflow: TextOverflow.ellipsis,
+                                                      ),
+                                                      CommonText.regular(
+                                                        data.course,
+                                                        size: 15,
+                                                        color: AppColors.greyTextColor,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(
+                                                    top: 5,
+                                                  ),
+                                                  child: commonSwitch(data),
+                                                ),
+                                                Gap(17),
+                                                menuButton(data, index),
+                                              ],
+                                            ),
+                                          ),
+                                          CommonDivider(),
+
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 15,
+                                              vertical: 15,
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                Expanded(
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
+                                                    children: [
+                                                      CommonText.regular(
+                                                        QuizStrings.totalQuestions,
+                                                        size: 14,
+                                                        color: isDarkMode
+                                                            ? AppColors
+                                                                  .bodyTextDarkColor
+                                                            : AppColors.bodyTextColor,
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow.ellipsis,
+                                                      ),
+                                                      Gap(3),
+                                                      CommonText.regular(
+                                                        '${data.totalQuestions.toString()} Questions',
+                                                        size: 14,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Gap(5),
+                                                Expanded(
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
+                                                    children: [
+                                                      CommonText.regular(
+                                                        QuizStrings.totalAttendees,
+                                                        size: 14,
+                                                        color: isDarkMode
+                                                            ? AppColors
+                                                                  .bodyTextDarkColor
+                                                            : AppColors.bodyTextColor,
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow.ellipsis,
+                                                      ),
+                                                      Gap(3),
+                                                      CommonText.regular(
+                                                        '${data.totalAttendees.toString()} Attendees',
+                                                        size: 14,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Gap(5),
+                                                Expanded(
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
+                                                    children: [
+                                                      CommonText.regular(
+                                                        QuizStrings.answerChangeable,
+                                                        size: 14,
+                                                        color: isDarkMode
+                                                            ? AppColors
+                                                                  .bodyTextDarkColor
+                                                            : AppColors.bodyTextColor,
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow.ellipsis,
+                                                      ),
+                                                      Gap(3),
+                                                      CommonText.regular(
+                                                        data.answerChangeable,
+                                                        size: 14,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    : Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 15,
+                                              vertical: 15,
+                                            ),
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                ClipRRect(
+                                                  borderRadius: BorderRadius.circular(
+                                                    9,
+                                                  ),
+                                                  child: commonCacheImage(
+                                                    data.image,
+                                                    ImagePlaceHolder
+                                                        .imagePlaceHolderDark,
+                                                    height: 75,
+                                                    width: 75,
+                                                  ),
+                                                ),
+                                                Gap(12),
+                                                Expanded(
                                                   child: Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.start,
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment.start,
                                                     children: [
-                                                      coursesDropDown(),
-                                                      Gap(20),
-                                                      courseCategoryDropDown(),
-                                                      Gap(20),
-                                                      statusDropDown(),
-                                                      Gap(20),
-        
-
-        
-                                                      createdByDropDown(),
-                                                      Gap(20),
+                                                      CommonText.medium(
+                                                        data.name,
+                                                        size: 16,
+                                                      ),
+                                                      Gap(5),
+                                                      CommonText.regular(
+                                                        data.tag,
+                                                        size: 16,
+                                                        color: isDarkMode
+                                                            ? AppColors
+                                                                  .bodyTextDarkColor
+                                                            : AppColors.bodyTextColor,
+                                                      ),
+                                                      Gap(5),
+                                                      CommonText.regular(
+                                                        data.course,
+                                                        size: 16,
+                                                        color: AppColors.greyTextColor,
+                                                      ),
                                                     ],
                                                   ),
                                                 ),
-                                              ),
+                                                menuButton(data, index),
+                                              ],
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.symmetric(
-                                                vertical: 20,
-                                                horizontal: 20,
-                                              ),
-                                              child: Row(
-                                                children: [
-                                                  Expanded(
-                                                    child: OutlineButton(
-                                                      height: 40,
-                                                      onPressed: () {
-                                                        controller
-                                                            .clearSelections();
-                                                      },
-                                                      label:
-                                                          ApprovalsStrings.clear,
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            AppColors.primary500,
-                                                      ),
-                                                      textColor:
-                                                          AppColors.primary500,
-                                                      textSize: 16,
-                                                      textWeight: FontWeight.w500,
-                                                    ),
-                                                  ),
-                                                  Gap(20),
-                                                  Expanded(
-                                                    child: PrimaryButton(
-                                                      height: 40,
-                                                      onPressed: () {
-                                                        Navigator.pop(context);
-                                                      },
-                                                      label: AppCommonStrings
-                                                          .btnApply,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
+                                          ),
+                                          CommonDivider(),
+
+                                          commonLeadingTrailingView(
+                                            QuizStrings.totalQuestions,
+                                            '${data.totalQuestions.toString()} Questions',
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 15,
                                             ),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                                controller.data.value.testList.length.toString(),
+                                            child: CommonDivider(),
+                                          ),
+
+                                          commonLeadingTrailingView(
+                                            QuizStrings.totalAttendees,
+                                            '${data.totalAttendees.toString()} Attendees',
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 15,
+                                            ),
+                                            child: CommonDivider(),
+                                          ),
+                                          commonLeadingTrailingView(
+                                            QuizStrings.answerChangeable,
+                                            data.answerChangeable,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 15,
+                                            ),
+                                            child: CommonDivider(),
+                                          ),
+
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 15,
+                                              vertical: 15,
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Expanded(
+                                                  child: CommonText.regular(
+                                                    TestStrings.testStatus,
+                                                    size: 15,
+                                                    color: isDarkMode
+                                                        ? AppColors.bodyTextDarkColor
+                                                        : AppColors.bodyTextColor,
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow.ellipsis,
+                                                  ),
+                                                ),
+                                                commonSwitch(data),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                               ),
-                            ),
-                          )
-                        : SizedBox(),
-        
-                    CommonCircleAddButton(
-                      onTap: () {
-                        context.push(
-                          '${AppRouteName.quizView}/${AppRouteName.addQuiz}',
-                            extra:{
-                              'title':'Test'
-                            }
-                        );
-                      },
+                            );
+                          }),
+                        ),
+                      ),
                     ),
                   ],
                 ),
               ),
-              CommonDivider(),
-        
-              mobileView
-                  ? SizedBox()
-                  : Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 20,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(child: coursesDropDown()),
-                          Gap(20),
-        
-                          Expanded(child: courseCategoryDropDown()),
-                          Gap(20),
-                          Expanded(child: statusDropDown()),
-                          Gap(20),
-                          Expanded(child: createdByDropDown()),
-                          Gap(20),
-        
-                          InkWell(
-                            onTap: () {
-                              controller.clearSelections();
-                            },
-                            child: CommonText.medium(
-                              ApprovalsStrings.clearAll,
-                              size: 14,
-                              color: AppColors.error500,
-                            ),
-                          ),
-                          Gap(20),
-                          CommonText.semiBold(
-                            '${controller.data.value.testList.length.toString()} Results',
-                            size: 15,
-                            color: AppColors.primary500,
-                          ),
-                        ],
-                      ),
-                    ),
-        
-              Obx(
-                () => Padding(
-                  padding: EdgeInsets.only(left: 20, top: mobileView ? 20 : 0),
-                  child: ResponsiveGridRow(
-                    children: List.generate(controller.data.value.testList.length, (
-                      index,
-                    ) {
-                      final data = controller.data.value.testList[index];
-                      return ResponsiveGridCol(
-                        lg: 4,
-                        xs: 12,
-                        child: Container(
-                          decoration: commonCardDecoration(12),
-                          margin: EdgeInsets.only(bottom: 20, right: 20),
-        
-                          child: mobileView
-                              ? Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 15,
-                                        vertical: 15,
-                                      ),
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          ClipRRect(
-                                            borderRadius: BorderRadius.circular(
-                                              9,
-                                            ),
-                                            child: commonCacheImage(
-                                              data.image,
-                                              ImagePlaceHolder
-                                                  .imagePlaceHolderDark,
-                                              height: 65,
-                                              width: 65,
-                                            ),
-                                          ),
-                                          Gap(12),
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                CommonText.medium(
-                                                  data.name,
-                                                  size: 14,
-                                                ),
-                                                CommonText.regular(
-                                                  data.tag,
-                                                  size: 14,
-                                                  color: isDarkMode
-                                                      ? AppColors
-                                                            .bodyTextDarkColor
-                                                      : AppColors.bodyTextColor,
-                                                  maxLines: 1,
-                                                    overflow: TextOverflow.ellipsis,
-                                                ),
-                                                CommonText.regular(
-                                                  data.course,
-                                                  size: 15,
-                                                  color: AppColors.greyTextColor,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                              top: 5,
-                                            ),
-                                            child: commonSwitch(data),
-                                          ),
-                                          Gap(17),
-                                          menuButton(data, index),
-                                        ],
-                                      ),
-                                    ),
-                                    CommonDivider(),
-        
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 15,
-                                        vertical: 15,
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                CommonText.regular(
-                                                  QuizStrings.totalQuestions,
-                                                  size: 14,
-                                                  color: isDarkMode
-                                                      ? AppColors
-                                                            .bodyTextDarkColor
-                                                      : AppColors.bodyTextColor,
-                                                  maxLines: 1,
-                                                  overflow: TextOverflow.ellipsis,
-                                                ),
-                                                Gap(3),
-                                                CommonText.regular(
-                                                  '${data.totalQuestions.toString()} Questions',
-                                                  size: 14,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Gap(5),
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                CommonText.regular(
-                                                  QuizStrings.totalAttendees,
-                                                  size: 14,
-                                                  color: isDarkMode
-                                                      ? AppColors
-                                                            .bodyTextDarkColor
-                                                      : AppColors.bodyTextColor,
-                                                  maxLines: 1,
-                                                  overflow: TextOverflow.ellipsis,
-                                                ),
-                                                Gap(3),
-                                                CommonText.regular(
-                                                  '${data.totalAttendees.toString()} Attendees',
-                                                  size: 14,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Gap(5),
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                CommonText.regular(
-                                                  QuizStrings.answerChangeable,
-                                                  size: 14,
-                                                  color: isDarkMode
-                                                      ? AppColors
-                                                            .bodyTextDarkColor
-                                                      : AppColors.bodyTextColor,
-                                                  maxLines: 1,
-                                                  overflow: TextOverflow.ellipsis,
-                                                ),
-                                                Gap(3),
-                                                CommonText.regular(
-                                                  data.answerChangeable,
-                                                  size: 14,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              : Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 15,
-                                        vertical: 15,
-                                      ),
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          ClipRRect(
-                                            borderRadius: BorderRadius.circular(
-                                              9,
-                                            ),
-                                            child: commonCacheImage(
-                                              data.image,
-                                              ImagePlaceHolder
-                                                  .imagePlaceHolderDark,
-                                              height: 75,
-                                              width: 75,
-                                            ),
-                                          ),
-                                          Gap(12),
-                                          Expanded(
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                CommonText.medium(
-                                                  data.name,
-                                                  size: 16,
-                                                ),
-                                                Gap(5),
-                                                CommonText.regular(
-                                                  data.tag,
-                                                  size: 16,
-                                                  color: isDarkMode
-                                                      ? AppColors
-                                                            .bodyTextDarkColor
-                                                      : AppColors.bodyTextColor,
-                                                ),
-                                                Gap(5),
-                                                CommonText.regular(
-                                                  data.course,
-                                                  size: 16,
-                                                  color: AppColors.greyTextColor,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          menuButton(data, index),
-                                        ],
-                                      ),
-                                    ),
-                                    CommonDivider(),
-        
-                                    commonLeadingTrailingView(
-                                      QuizStrings.totalQuestions,
-                                      '${data.totalQuestions.toString()} Questions',
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 15,
-                                      ),
-                                      child: CommonDivider(),
-                                    ),
-        
-                                    commonLeadingTrailingView(
-                                      QuizStrings.totalAttendees,
-                                      '${data.totalAttendees.toString()} Attendees',
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 15,
-                                      ),
-                                      child: CommonDivider(),
-                                    ),
-                                    commonLeadingTrailingView(
-                                      QuizStrings.answerChangeable,
-                                      data.answerChangeable,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 15,
-                                      ),
-                                      child: CommonDivider(),
-                                    ),
-        
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 15,
-                                        vertical: 15,
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Expanded(
-                                            child: CommonText.regular(
-                                              TestStrings.testStatus,
-                                              size: 15,
-                                              color: isDarkMode
-                                                  ? AppColors.bodyTextDarkColor
-                                                  : AppColors.bodyTextColor,
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                          ),
-                                          commonSwitch(data),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                        ),
-                      );
-                    }),
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

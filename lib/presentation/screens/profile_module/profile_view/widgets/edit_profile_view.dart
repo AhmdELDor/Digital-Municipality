@@ -96,9 +96,9 @@ class _EditProfileViewState extends State<EditProfileView> {
                                 () => AlwaysDownDropdown<String>(color: Colors.transparent,
                                   hintText: "Select",
                                   items: controller.countryList,
-                                  value: controller.selectedCountry.value,
+                                  value: controller.selectedCountry?.value,
                                   onChanged: (val) {
-                                    controller.selectedCountry.value = val!;
+                                    controller.selectedCountry?.value = val!;
                                   },
 
                                   // validator: (val) =>
@@ -121,9 +121,9 @@ class _EditProfileViewState extends State<EditProfileView> {
                                 () => AlwaysDownDropdown<String>(color: Colors.transparent,
                                   hintText: "Select",
                                   items: controller.cityList,
-                                  value: controller.selectedCity.value,
+                                  value: controller.selectedCity?.value,
                                   onChanged: (val) {
-                                    controller.selectedCity.value = val!;
+                                    controller.selectedCity?.value = val!;
                                   },
 
                                   // validator: (val) =>

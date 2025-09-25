@@ -194,6 +194,8 @@ class NotificationStrings extends AppStrings {
   static const String all = "All";
   static const String newText = "New";
   static const String unread = "Unread";
+  static const String deleteNotification = "Delete Notification";
+  static const String deleteNotificationDes = "Are you sure you want to delete this notification? This action can not be undone.";
 
 }
 class NotesListStrings extends AppStrings {

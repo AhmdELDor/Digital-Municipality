@@ -24,190 +24,198 @@ class _ClassManagementViewState extends State<ClassManagementView> {
         },
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              mobileView
-                  ? Padding(
-                      padding: const EdgeInsets.only(
-                        left: 20,
-                        right: 20,
-                        top: 20,
-                      ),
-                      child: CommonSearchField(
-                        controller: controller.searchController,
-                        hintText: DashboardViewStrings.searchAnything,
-                      ),
-                    )
-                  : SizedBox(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            mobileView
+                ? Padding(
+              padding: const EdgeInsets.only(
+                left: 20,
+                right: 20,
+                top: 20,
+              ),
+              child: CommonSearchField(
+                controller: controller.searchController,
+                hintText: DashboardViewStrings.searchAnything,
+              ),
+            )
+                : SizedBox(),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    commonHeaderText(
-                      title: DashboardViewStrings.classManagement,
+
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          commonHeaderText(
+                            title: DashboardViewStrings.classManagement,
+                          ),
+                          CommonCircleAddButton(
+                            onTap: () {
+                              context.go(
+                                '${AppRouteName.classManagementView}/${AppRouteName.addClassView}',
+
+                              );
+                            },
+                          )
+                        ],
+                      ),
                     ),
-                    CommonCircleAddButton(
-                      onTap: () {
-                        context.go(
-                          '${AppRouteName.classManagementView}/${AppRouteName.addClassView}',
-        
-                        );
-                      },
-                    )
+
+                    CommonDivider(),
+
+                    ResponsiveGridRow(
+                      children: [
+                        ResponsiveGridCol(
+                          lg: 3,
+                          xs: 12,
+                          child: Container(
+                            height: mobileView ? null : context.height,
+                            decoration: BoxDecoration(
+                              color: isDarkMode
+                                  ? AppColors.mainDarkBgColor
+                                  : AppColors.greyBgColor.withValues(alpha: 0.25),
+                              border: Border(
+                                right: BorderSide(
+                                  color: isDarkMode
+                                      ? AppColors.grey100Color
+                                      : AppColors.lightBorderColor,
+                                  width: 1.5,
+                                ),
+                              ),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 20,
+                                    vertical: 12,
+                                  ),
+                                  child: CommonText.medium(
+                                    ClassManagementStrings.upcomingClass,
+                                    size: 14,
+                                  ),
+                                ),
+
+                                mobileView ? SizedBox() : CommonDivider(height: 1.5),
+                                mobileView
+                                    ? SizedBox(
+                                        height: 140,
+                                        child: Obx(
+                                          () => ListView.builder(
+                                            itemCount:
+                                                controller.upComingClassicList.length,
+                                            // shrinkWrap: true,
+                                            // physics: NeverScrollableScrollPhysics(),
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 10,
+                                            ),
+                                            scrollDirection: Axis.horizontal,
+                                            itemBuilder: (context, index) {
+                                              final data =
+                                                  controller.upComingClassicList[index];
+                                              return _upcomingClassView(data);
+                                            },
+                                          ),
+                                        ),
+                                      )
+                                    : Expanded(
+                                        child: Obx(
+                                          () => ListView.builder(
+                                            itemCount:
+                                                controller.upComingClassicList.length,
+                                            // shrinkWrap: true,
+                                            // physics: NeverScrollableScrollPhysics(),
+                                            itemBuilder: (context, index) {
+                                              final data =
+                                                  controller.upComingClassicList[index];
+                                              return _upcomingClassView(data);
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        ResponsiveGridCol(
+                          lg: 9,
+                          xs: 12,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 20,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                _monthBackwardOrForwardButton(),
+                                Container(
+                                  height: context.height * 0.7,
+                                  padding: EdgeInsets.only(
+                                    left: mobileView ? 0 : 50,
+                                    right: mobileView ? 0 : 50,
+                                    bottom: mobileView ? 0 : 50,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: mobileView
+                                        ? Colors.transparent
+                                        : isDarkMode
+                                        ? AppColors.cardDarkBgColor
+                                        : AppColors.white,
+                                    borderRadius: BorderRadius.only(
+                                      bottomRight: Radius.circular(mobileView ? 0 : 20),
+                                      bottomLeft: Radius.circular(mobileView ? 0 : 20),
+                                    ),
+                                    border: mobileView
+                                        ? Border(
+                                            left: BorderSide(
+                                              color: isDarkMode
+                                                  ? AppColors.grey100Color
+                                                  : AppColors.lightBorderColor,
+                                              width: 1.5,
+                                            ),
+                                            bottom: BorderSide(
+                                              color: isDarkMode
+                                                  ? AppColors.grey100Color
+                                                  : AppColors.lightBorderColor,
+                                              width: 1.5,
+                                            ),
+                                            right: BorderSide(
+                                              color: isDarkMode
+                                                  ? AppColors.grey100Color
+                                                  : AppColors.lightBorderColor,
+                                              width: 1.5,
+                                            ),
+                                          )
+                                        : Border.all(
+                                            color: isDarkMode
+                                                ? AppColors.grey100Color
+                                                : AppColors.lightBorderColor,
+                                            width: 1.5,
+                                          ),
+                                  ),
+                                  child: Column(
+                                    children: [_weekNameView(), _calenderView()],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
-        
-              CommonDivider(),
-        
-              ResponsiveGridRow(
-                children: [
-                  ResponsiveGridCol(
-                    lg: 3,
-                    xs: 12,
-                    child: Container(
-                      height: mobileView ? null : context.height,
-                      decoration: BoxDecoration(
-                        color: isDarkMode
-                            ? AppColors.mainDarkBgColor
-                            : AppColors.greyBgColor.withValues(alpha: 0.25),
-                        border: Border(
-                          right: BorderSide(
-                            color: isDarkMode
-                                ? AppColors.grey100Color
-                                : AppColors.lightBorderColor,
-                            width: 1.5,
-                          ),
-                        ),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 20,
-                              vertical: 12,
-                            ),
-                            child: CommonText.medium(
-                              ClassManagementStrings.upcomingClass,
-                              size: 14,
-                            ),
-                          ),
-        
-                          mobileView ? SizedBox() : CommonDivider(height: 1.5),
-                          mobileView
-                              ? SizedBox(
-                                  height: 140,
-                                  child: Obx(
-                                    () => ListView.builder(
-                                      itemCount:
-                                          controller.upComingClassicList.length,
-                                      // shrinkWrap: true,
-                                      // physics: NeverScrollableScrollPhysics(),
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 10,
-                                      ),
-                                      scrollDirection: Axis.horizontal,
-                                      itemBuilder: (context, index) {
-                                        final data =
-                                            controller.upComingClassicList[index];
-                                        return _upcomingClassView(data);
-                                      },
-                                    ),
-                                  ),
-                                )
-                              : Expanded(
-                                  child: Obx(
-                                    () => ListView.builder(
-                                      itemCount:
-                                          controller.upComingClassicList.length,
-                                      // shrinkWrap: true,
-                                      // physics: NeverScrollableScrollPhysics(),
-                                      itemBuilder: (context, index) {
-                                        final data =
-                                            controller.upComingClassicList[index];
-                                        return _upcomingClassView(data);
-                                      },
-                                    ),
-                                  ),
-                                ),
-                        ],
-                      ),
-                    ),
-                  ),
-        
-                  ResponsiveGridCol(
-                    lg: 9,
-                    xs: 12,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 20,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _monthBackwardOrForwardButton(),
-                          Container(
-                            height: context.height * 0.7,
-                            padding: EdgeInsets.only(
-                              left: mobileView ? 0 : 50,
-                              right: mobileView ? 0 : 50,
-                              bottom: mobileView ? 0 : 50,
-                            ),
-                            decoration: BoxDecoration(
-                              color: mobileView
-                                  ? Colors.transparent
-                                  : isDarkMode
-                                  ? AppColors.cardDarkBgColor
-                                  : AppColors.white,
-                              borderRadius: BorderRadius.only(
-                                bottomRight: Radius.circular(mobileView ? 0 : 20),
-                                bottomLeft: Radius.circular(mobileView ? 0 : 20),
-                              ),
-                              border: mobileView
-                                  ? Border(
-                                      left: BorderSide(
-                                        color: isDarkMode
-                                            ? AppColors.grey100Color
-                                            : AppColors.lightBorderColor,
-                                        width: 1.5,
-                                      ),
-                                      bottom: BorderSide(
-                                        color: isDarkMode
-                                            ? AppColors.grey100Color
-                                            : AppColors.lightBorderColor,
-                                        width: 1.5,
-                                      ),
-                                      right: BorderSide(
-                                        color: isDarkMode
-                                            ? AppColors.grey100Color
-                                            : AppColors.lightBorderColor,
-                                        width: 1.5,
-                                      ),
-                                    )
-                                  : Border.all(
-                                      color: isDarkMode
-                                          ? AppColors.grey100Color
-                                          : AppColors.lightBorderColor,
-                                      width: 1.5,
-                                    ),
-                            ),
-                            child: Column(
-                              children: [_weekNameView(), _calenderView()],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

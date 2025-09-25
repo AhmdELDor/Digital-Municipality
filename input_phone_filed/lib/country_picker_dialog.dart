@@ -96,6 +96,8 @@ class _CountryPickerDialogState extends State<CountryPickerDialog> {
       ),
       backgroundColor: widget.style?.backgroundColor,
       child: Container(
+        width: 560,   // custom width
+        height: 500,
         padding: widget.style?.padding ?? const EdgeInsets.all(15),
         child: Column(
           children: <Widget>[

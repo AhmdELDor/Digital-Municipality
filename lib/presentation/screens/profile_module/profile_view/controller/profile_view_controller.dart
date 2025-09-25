@@ -39,19 +39,33 @@ class ProfileViewController extends GetxController {
       }
     }
   }
+  final Map<String, List<String>> countryCityMap = {
+    'India': ['Ahmedabad', 'Surat', 'Rajkot', 'Mumbai', 'Pune'],
+    'Australia': ['Sydney', 'Melbourne', 'Perth'],
+    'Japan': ['Tokyo', 'Osaka', 'Kyoto'],
+    'Russia': ['Moscow', 'Saint Petersburg'],
+    'China': ['Beijing', 'Shanghai', 'Guangzhou'],
+  };
 
   List<String> roleList = ['Super Admin', 'Admin'];
-  List<String> countryList = ['India', 'Australia', 'Japan', 'Russia', 'China'];
-  List<String> cityList = ['Ahmedabad', 'Surat', 'Rajkot', 'Mumbai', 'Pune'];
+
 
   final RxString selectedRole = 'Super Admin'.obs;
-  final RxString selectedCountry = ''.obs;
-  final RxString selectedCity = ''.obs;
+
 
   var pickedFileName = ''.obs;
   var pickedFilePath = ''.obs;
   Uint8List? pickedFileBytes;
+  RxList<String> countryList = <String>['India', 'Australia', 'Japan', 'Russia', 'China'].obs;
+  RxList<String> cityList = <String>[].obs;
 
+  RxString? selectedCountry = RxString('');
+  RxString? selectedCity = RxString('');
+
+  void updateCities(String country) {
+    cityList.value = countryCityMap[country] ?? [];
+    selectedCity?.value = ''; // reset when country changes
+  }
   Future<void> pickFileCommon(TextEditingController controller) async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,

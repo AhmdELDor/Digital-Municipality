@@ -1,3 +1,4 @@
+import 'package:education_admin_portal/presentation/app/app_route.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,7 +11,7 @@ import '../../quiz_main_view/model/quiz_model.dart';
 class AddQuizController extends GetxController {
   RxInt selectedIndex = 0.obs;
   var searchController = TextEditingController();
-
+  final formKey = GlobalKey<FormState>();
   final TextEditingController quizNameController = TextEditingController();
   final TextEditingController imageVideoController = TextEditingController();
   final TextEditingController questionsController = TextEditingController();
@@ -105,16 +106,28 @@ class AddQuizController extends GetxController {
   RxInt questionIndex = 1.obs;
 
 
+  Future<void> submit(BuildContext context) async {
+    final isValid = formKey.currentState!.validate();
+    Get.focusScope!.unfocus();
 
+    if (!isValid) return;
+
+
+    saveAndNext(context);
+    await Future.delayed(Duration(seconds: 1));
+
+    formKey.currentState!.save();
+
+
+
+    Navigator.pop(context);
+
+  }
   // 🔹 Save & Next
-  void saveAndNext() {
-    // You can save current question to a list or API here
-
-    // Next question number
+  void saveAndNext(BuildContext context) {
     questionIndex.value++;
-
-    // Reset fields for next question
     resetFields();
+
   }
 
   // 🔹 Reset all fields

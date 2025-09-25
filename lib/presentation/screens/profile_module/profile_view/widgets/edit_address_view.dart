@@ -45,7 +45,7 @@ class _EditAddressViewState extends State<EditAddressView> {
         CommonDivider(),
         Gap(20),
         SizedBox(
-          height: context.height * 0.4,
+          height: context.height * 0.3,
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -59,16 +59,16 @@ class _EditAddressViewState extends State<EditAddressView> {
                    Gap(10),
                    Obx(
                          () => AlwaysDownDropdown<String>(
-                           color: Colors.transparent,
-                       hintText: "Select",
+                       color: Colors.transparent,
+                       hintText: "Select Country",
                        items: controller.countryList,
-                       value: controller.selectedCountry.value,
+                       value: controller.selectedCountry?.value.isEmpty == true
+                           ? null
+                           : controller.selectedCountry?.value,
                        onChanged: (val) {
-                         controller.selectedCountry.value = val!;
+                         controller.selectedCountry?.value = val!;
+                         controller.updateCities(val!);
                        },
-
-                       // validator: (val) =>
-                       // val == null ? "Select" : null,
                      ),
                    ),
                    Gap(20),
@@ -76,15 +76,23 @@ class _EditAddressViewState extends State<EditAddressView> {
                    Gap(10),
                    Obx(
                          () => AlwaysDownDropdown<String>(
-                       hintText: "Select",
-                           color: Colors.transparent,
+
+                       color: Colors.transparent,
+                       hintText: controller.selectedCountry?.value.isEmpty == true
+                           ? "Select Country first"
+                           : "Select City",
                        items: controller.cityList,
-                       value: controller.selectedCity.value,
-                       onChanged: (val) {
-                         controller.selectedCity.value = val!;
-                       },
-                           // validator: (val) =>
-                       // val == null ? "Select" : null,
+                       value: controller.selectedCity?.value.isEmpty == true
+                           ? null
+                           : controller.selectedCity?.value,
+                             onChanged: (val) {
+                               if (controller.selectedCountry?.value.isNotEmpty == true) {
+                                 controller.selectedCity?.value = val!;
+                               }
+                             },
+
+
+
                      ),
                    ),
                    Gap(20),
@@ -125,7 +133,9 @@ class _EditAddressViewState extends State<EditAddressView> {
               Gap(15),
               Expanded(
                 child: PrimaryButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   label: UserManagementStrings.update,
                   textSize: 16,
                   textWeight: FontWeight.w500,

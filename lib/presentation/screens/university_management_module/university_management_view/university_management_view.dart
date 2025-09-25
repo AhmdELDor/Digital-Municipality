@@ -26,117 +26,125 @@ class _UniversityManagementViewState extends State<UniversityManagementView> {
         },
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              mobileView
-                  ? Padding(
-                      padding: const EdgeInsets.only(
-                        left: 20,
-                        right: 20,
-                        top: 20,
-                      ),
-                      child: CommonSearchField(
-                        controller: controller.searchController,
-                        hintText: DashboardViewStrings.searchAnything,
-                      ),
-                    )
-                  : SizedBox(),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 20,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            mobileView
+                ? Padding(
+              padding: const EdgeInsets.only(
+                left: 20,
+                right: 20,
+                top: 20,
+              ),
+              child: CommonSearchField(
+                controller: controller.searchController,
+                hintText: DashboardViewStrings.searchAnything,
+              ),
+            )
+                : SizedBox(),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
                   children: [
-                    commonHeaderText(
-                      title: UniversityViewStrings.universityManagement,
-                    ),
-                    CommonCircleAddButton(
-                      onTap: () {
-                        commonDialogBox(
-                          context: context,
-                          child: SizedBox(
-                            width: 560,
-                            child: AddUniversityView(
-                              title: UniversityViewStrings.addUniversity,
-                              nameController: controller.nameController,
-                              emailController: controller.emailController,
-                              formKey: controller.formKey,
-                              onPressed: () {
-                                final isValid = controller.formKey.currentState!
-                                    .validate();
-                                FocusScope.of(
-                                  context,
-                                ).unfocus(); // ✅ safer than Get.focusScope
 
-                                if (!isValid) return;
-
-                                controller.formKey.currentState!.save();
-                                // ✅ Close previous dialog safely
-                                Navigator.of(
-                                  context,
-                                  rootNavigator: true,
-                                ).pop();
-
-                                commonDialogBox(
-                                  context: context,
-                                  child: SizedBox(
-                                    width: 560,
-                                    child: CommonDialogView(
-                                      image: CommonImageAssets.inviteSent,
-                                      title: UniversityInviteSentStrings
-                                          .invitationSent,
-                                      subtitle: UniversityInviteSentStrings
-                                          .invitationSentDes,
-                                      buttonBackgroundColor:
-                                          AppColors.primary500,
-                                      buttonName:
-                                          InviteSendStrings.backToDashboard,
-                                      onPressed: () {
-                                        Navigator.of(
-                                          context,
-                                          rootNavigator: true,
-                                        ).pop();
-                                      },
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 20,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          commonHeaderText(
+                            title: UniversityViewStrings.universityManagement,
                           ),
-                        );
-                      },
+                          CommonCircleAddButton(
+                            onTap: () {
+                              commonDialogBox(
+                                context: context,
+                                child: SizedBox(
+                                  width: 560,
+                                  child: AddUniversityView(
+                                    title: UniversityViewStrings.addUniversity,
+                                    nameController: controller.nameController,
+                                    emailController: controller.emailController,
+                                    formKey: controller.formKey,
+                                    onPressed: () {
+                                      final isValid = controller.formKey.currentState!
+                                          .validate();
+                                      FocusScope.of(
+                                        context,
+                                      ).unfocus(); // ✅ safer than Get.focusScope
+
+                                      if (!isValid) return;
+
+                                      controller.formKey.currentState!.save();
+                                      // ✅ Close previous dialog safely
+                                      Navigator.of(
+                                        context,
+                                        rootNavigator: true,
+                                      ).pop();
+
+                                      commonDialogBox(
+                                        context: context,
+                                        child: SizedBox(
+                                          width: 560,
+                                          child: CommonDialogView(
+                                            image: CommonImageAssets.inviteSent,
+                                            title: UniversityInviteSentStrings
+                                                .invitationSent,
+                                            subtitle: UniversityInviteSentStrings
+                                                .invitationSentDes,
+                                            buttonBackgroundColor:
+                                                AppColors.primary500,
+                                            buttonName:
+                                                InviteSendStrings.backToDashboard,
+                                            onPressed: () {
+                                              Navigator.of(
+                                                context,
+                                                rootNavigator: true,
+                                              ).pop();
+                                            },
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    CommonDivider(),
+                    Gap(20),
+                    Obx(
+                      () => controller.universityList.isEmpty
+                          ? Center(child: CommonNoResultFound())
+                          : Padding(
+                              padding: EdgeInsets.only(left: 20),
+                              child: ResponsiveGridRow(
+                                children: List.generate(
+                                  controller.universityList.length,
+                                  (index) {
+                                    final data = controller.universityList[index];
+                                    return ResponsiveGridCol(
+                                      lg: 3,
+                                      xs: 12,
+                                      child: universityView(data, index),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
                     ),
                   ],
                 ),
               ),
-
-              CommonDivider(),
-              Gap(20),
-              Obx(
-                () => controller.universityList.isEmpty
-                    ? Center(child: CommonNoResultFound())
-                    : Padding(
-                        padding: EdgeInsets.only(left: 20),
-                        child: ResponsiveGridRow(
-                          children: List.generate(
-                            controller.universityList.length,
-                            (index) {
-                              final data = controller.universityList[index];
-                              return ResponsiveGridCol(
-                                lg: 3,
-                                xs: 12,
-                                child: universityView(data, index),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

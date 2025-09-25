@@ -53,10 +53,14 @@ class _SignInViewState extends State<SignInView> {
         ),
         Gap(30),
         Container(
-          decoration:mobileView?null: isDarkMode
+          decoration: mobileView
+              ? null
+              : isDarkMode
               ? AppCommonShadow.commonDarkBoxShadow
               : AppCommonShadow.commonBoxShadow,
-          padding: mobileView?null:const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+          padding: mobileView
+              ? null
+              : const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
           child: Form(
             key: controller.formKey,
             child: Column(
@@ -94,20 +98,24 @@ class _SignInViewState extends State<SignInView> {
                 Gap(15),
                 Row(
                   children: [
-                  mobileView?  Obx(
-                          () => SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: Checkbox(
-                          value: controller.isRememberMe.value,
-                          onChanged: (value) {
-                            controller.isRememberMe.value = value!;
-                          },
-                        ),
-                      ),
-                    ):SizedBox(),
+                    mobileView
+                        ? Obx(
+                            () => SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: Checkbox(
+                                value: controller.isRememberMe.value,
+                                onChanged: (value) {
+                                  controller.isRememberMe.value = value!;
+                                },
+                              ),
+                            ),
+                          )
+                        : SizedBox(),
                     Gap(5),
-                    mobileView?  authSubTitleHeader(SignInStrings.rememberMe):SizedBox(),
+                    mobileView
+                        ? authSubTitleHeader(SignInStrings.rememberMe)
+                        : SizedBox(),
                     Spacer(),
 
                     InkWell(
@@ -131,8 +139,8 @@ class _SignInViewState extends State<SignInView> {
                       ? const Center(child: CommonCircularLoader())
                       : PrimaryButton(
                           onPressed: () {
-                            //controller.submit(context);
-                            context.go(AppRouteName.dashboardView);
+                            controller.submit(context);
+                            //context.go(AppRouteName.dashboardView);
                           },
                           label: AppCommonStrings.btnSignIn,
                         );

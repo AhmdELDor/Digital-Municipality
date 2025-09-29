@@ -229,10 +229,12 @@ class _MainTestViewState extends State<MainTestView> {
                                   ),
                                 ),
                                 Gap(20),
-                                CommonText.semiBold(
-                                  '${controller.data.value.testList.length.toString()} Results',
-                                  size: 15,
-                                  color: AppColors.primary500,
+                                Obx(
+                                  () =>  CommonText.semiBold(
+                                    '${controller.data.value.testList.length.toString()} Results',
+                                    size: 15,
+                                    color: AppColors.primary500,
+                                  ),
                                 ),
                               ],
                             ),

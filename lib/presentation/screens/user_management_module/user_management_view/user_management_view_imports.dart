@@ -23,5 +23,3 @@ import '../../../common_widgets/widgets/text.dart';
 import '../../dashboard_module/notification/widgets/notification_list_view.dart';
 import '../../side_drawer_module/side_drawer_menu/side_drawer_imports.dart';
 import 'controller/user_management_controller.dart';
-
-part 'user_management_view.dart';

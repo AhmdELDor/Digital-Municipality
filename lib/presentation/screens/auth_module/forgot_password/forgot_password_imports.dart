@@ -1,3 +1,4 @@
+import 'package:education_admin_portal/presentation/common_widgets/input_field/common_mobile_field.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -8,7 +9,6 @@ import '../../../../core/constants/app_strings.dart';
 import '../../../../utils/extensions/responsive.dart';
 import '../../../app/theme_controller.dart';
 import '../../../common_widgets/common_text_view/auth_common_text.dart';
-import '../../../common_widgets/input_field/common_email_field.dart';
 import '../../../common_widgets/view_common_widget/common_app_bar.dart';
 import '../../../common_widgets/view_common_widget/common_card_decoration.dart';
 import '../../../common_widgets/view_common_widget/common_circular_loader.dart';

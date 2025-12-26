@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 abstract class Insets {
   static const double none = 0;
-  static const double xSmall = 4;
-  static const double small = 8;
-  static const double medium = 12;
-  static const double normal = 16;
-  static const double large = 20;
-  static const double xLarge = 24;
+  static const double xSmall = 2;
+  static const double small = 6;
+  static const double medium = 10;
+  static const double normal = 14;
+  static const double large = 16;
+  static const double xLarge = 20;
 }
 
 abstract class PaddingValue {
@@ -63,14 +63,14 @@ abstract class ShapeBorderRadius {
 }
 
 abstract class TextSize {
-  static const double heading = 20;
-  static const double appBarTitle = 18;
-  static const double appBarSubTitle = 14;
-  static const double title = 16;
-  static const double subTitle = 14;
-  static const double label = 14;
-  static const double content = 12;
-  static const double body = 10;
+  static const double heading = 16;
+  static const double appBarTitle = 15;
+  static const double appBarSubTitle = 12;
+  static const double title = 14;
+  static const double subTitle = 12;
+  static const double label = 12;
+  static const double content = 11;
+  static const double body = 9;
 }
 
 abstract class TextWeight {

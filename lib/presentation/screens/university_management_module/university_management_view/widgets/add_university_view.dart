@@ -1,3 +1,4 @@
+import 'package:education_admin_portal/presentation/common_widgets/input_field/common_mobile_field.dart';
 import 'package:education_admin_portal/presentation/common_widgets/widgets/common_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -5,7 +6,6 @@ import 'package:gap/gap.dart';
 import '../../../../../core/constants/app_colors.dart';
 import '../../../../../core/constants/app_strings.dart';
 import '../../../../common_widgets/common_text_view/auth_common_text.dart';
-import '../../../../common_widgets/input_field/common_email_field.dart';
 import '../../../../common_widgets/input_field/common_text_field.dart';
 import '../../../../common_widgets/view_common_widget/common_dialog_box.dart';
 import '../../../../common_widgets/widgets/button.dart';
@@ -75,13 +75,10 @@ class _AddUniversityViewState extends State<AddUniversityView> {
                 Gap(25),
                 authHeader(AppCommonStrings.email),
                 Gap(10),
-                CommonEmailField(
-                  labelText: AppCommonStrings.email,
-                  autofillHints: const [AutofillHints.email],
+                CommonMobileField(
                   controller: widget.emailController,
                   textInputAction: TextInputAction.done,
                   hintText: AddInstructorStrings.enterEmail,
-                  validator: validateEmail,
                 ),
 
                 Gap(40),

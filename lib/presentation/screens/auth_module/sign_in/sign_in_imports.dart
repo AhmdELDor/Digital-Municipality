@@ -11,7 +11,7 @@ import '../../../../core/constants/app_strings.dart';
 import '../../../app/app_route.dart';
 import '../../../app/theme_controller.dart';
 import '../../../common_widgets/common_text_view/auth_common_text.dart';
-import '../../../common_widgets/input_field/common_email_field.dart';
+import '../../../common_widgets/input_field/common_mobile_field.dart';
 import '../../../common_widgets/input_field/common_password_field.dart';
 import '../../../common_widgets/view_common_widget/common_card_decoration.dart';
 import '../../../common_widgets/view_common_widget/common_circular_loader.dart';

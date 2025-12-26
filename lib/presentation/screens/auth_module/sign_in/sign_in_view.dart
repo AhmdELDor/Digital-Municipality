@@ -8,7 +8,21 @@ class SignInView extends StatefulWidget {
 }
 
 class _SignInViewState extends State<SignInView> {
-  SignInController controller = Get.put(SignInController());
+  late final SignInController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    // Remove any existing controller instance to ensure fresh state
+    Get.delete<SignInController>(force: true);
+    controller = Get.put(SignInController());
+  }
+
+  @override
+  void dispose() {
+    Get.delete<SignInController>();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,15 +85,15 @@ class _SignInViewState extends State<SignInView> {
                 Gap(10),
                 authSubTitleHeader(SignInStrings.signInToYourAccountDes),
                 Gap(36),
-                authHeader(AppCommonStrings.email),
+                authHeader(SignInStrings.phoneNumber),
                 Gap(10),
-                CommonEmailField(
-                  labelText: AppCommonStrings.email,
-                  autofillHints: const [AutofillHints.email],
-                  controller: controller.emailController,
-                  focusNode: controller.emailFocus,
+                CommonMobileField(
+                  controller: controller.phoneController,
+                  focusNode: controller.phoneFocus,
                   textInputAction: TextInputAction.next,
-                  validator: validateEmail,
+                  onChanged: (phoneNumber) {
+                    controller.completePhoneNumber.value = phoneNumber.completeNumber;
+                  },
                 ),
 
                 Gap(25),
@@ -145,24 +159,6 @@ class _SignInViewState extends State<SignInView> {
                           label: AppCommonStrings.btnSignIn,
                         );
                 }),
-                Gap(25),
-                dividerWithText(),
-                Gap(25),
-                SocialButtonWithTitle(
-                  icon: AppCommonIcon.googleIcon,
-                  title: SignInStrings.loginWithGoogle,
-                  onPressed: () {},
-                ),
-                Gap(10),
-                SocialButtonWithTitle(
-                  icon: AppCommonIcon.appleIcon,
-                  title: SignInStrings.loginWithApple,
-                  colorFilter: ColorFilter.mode(
-                    isDarkMode ? AppColors.white : AppColors.black,
-                    BlendMode.srcIn,
-                  ),
-                  onPressed: () {},
-                ),
               ],
             ),
           ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 export 'common_drop_down.dart';
 export 'common_text_field.dart';
-export 'common_email_field.dart';
 export 'common_mobile_field.dart';
 export 'common_otp_field.dart';
 export 'common_password_field.dart';

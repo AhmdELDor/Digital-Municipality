@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:education_admin_portal/presentation/app/theme_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 
 import '../../../utils/helpers/connectivity_helper.dart';
@@ -53,6 +54,18 @@ class _EducationAdminPortalState extends State<EducationAdminPortal> {
   Widget build(BuildContext context) {
     return  MaterialApp.router(
       debugShowCheckedModeBanner: false,
+      
+      // Localization configuration
+      locale: const Locale('ar', ''), // Set Arabic as default
+      supportedLocales: const [
+        Locale('ar', ''), // Arabic
+        Locale('en', ''), // English
+      ],
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
 
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
@@ -62,7 +75,10 @@ class _EducationAdminPortalState extends State<EducationAdminPortal> {
       routerConfig: AppRoute.appRouter,
       builder: (context, child) {
         themeController.updateStatusBarColor(context);
-        return child!;
+        return Directionality(
+          textDirection: TextDirection.rtl, // Force RTL for Arabic
+          child: child!,
+        );
       },
     );
     // GetMaterialApp(

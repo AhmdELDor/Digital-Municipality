@@ -1,9 +1,14 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
+import '../../../../../core/constants/app_colors.dart';
 import '../../../../../core/constants/app_json_path.dart';
+import '../../../../../data/models/pagination_meta.dart';
+import '../../../../../data/models/user_api_model.dart';
+import '../../../../../data/repositories/user_repository.dart';
 import '../../../../../utils/extensions/json_helper.dart';
 import '../model/roles_model.dart';
 import '../model/users_model.dart';
@@ -12,14 +17,33 @@ class UserManagementController extends GetxController {
   var searchController = TextEditingController();
   RxList<UsersModel> usersList = <UsersModel>[].obs;
   RxList<RolesModel> rolesList = <RolesModel>[].obs;
+  
+  // User form controllers
   var nameController = TextEditingController();
-  var emailController = TextEditingController();
-  var imageController = TextEditingController();
+  var phoneController = TextEditingController();
+  var addressController = TextEditingController();
+  var passwordController = TextEditingController();
+  var passwordConfirmationController = TextEditingController();
+  
+  // Phone number state
+  final RxString completePhoneNumber = ''.obs;
+
+  // Repository
+  final UserRepository _userRepository = UserRepository();
+
+  // Loading and error states
+  final RxBool isLoading = false.obs;
+  final RxBool isLoadingMore = false.obs;
+  final RxString errorMessage = ''.obs;
+
+  // Pagination
+  Rx<PaginationMeta?> paginationMeta = Rx<PaginationMeta?>(null);
+  final RxInt currentPage = 1.obs;
 
   @override
   void onInit() {
     super.onInit();
-    fetchUsersData();
+    fetchUsersFromApi();
     fetchRolesData();
     for (var p in permissions) {
       permissionMatrix[p] = {
@@ -31,27 +55,162 @@ class UserManagementController extends GetxController {
     }
   }
 
+  // Backend role options
   final List<String> roleList = [
-    'Admin',
-    'Instructor',
-
+    'citizen',
+    'official',
+    'admin',
+    'superadmin',
   ];
-  final RxString selectedRole = ''.obs;
+  final RxString selectedRole = 'citizen'.obs;
 
-  void fetchUsersData() async {
-    usersList.clear();
+  // Fetch users from API
+  Future<void> fetchUsersFromApi({int page = 1}) async {
     try {
-      final data = await loadListFromAsset<UsersModel>(
-        AppJsonPath.userManagementData,
-        'users_list',
-        (json) => UsersModel.fromJson(json),
-      );
-      usersList.addAll(data);
-    } catch (e) {
-      if (kDebugMode) {
-        print('Error loading users_list: $e');
+      if (page == 1) {
+        isLoading.value = true;
+      } else {
+        isLoadingMore.value = true;
       }
+      errorMessage.value = '';
+
+      final response = await _userRepository.getUsers(page: page);
+      
+      if (page == 1) {
+        usersList.clear();
+      }
+      
+      final users = response.users.map((api) => UsersModel.fromApi(api)).toList();
+      usersList.addAll(users);
+      paginationMeta.value = response.meta;
+      currentPage.value = page;
+    } catch (e) {
+      errorMessage.value = e.toString();
+      _showError('فشل تحميل المستخدمين: ${e.toString()}');
+    } finally {
+      isLoading.value = false;
+      isLoadingMore.value = false;
     }
+  }
+
+  // Load next page
+  Future<void> loadNextPage() async {
+    if (paginationMeta.value != null && 
+        !paginationMeta.value!.isLastPage && 
+        !isLoadingMore.value) {
+      await fetchUsersFromApi(page: currentPage.value + 1);
+    }
+  }
+
+  // Load previous page
+  Future<void> loadPreviousPage() async {
+    if (paginationMeta.value != null && 
+        !paginationMeta.value!.isFirstPage && 
+        !isLoadingMore.value) {
+      await fetchUsersFromApi(page: currentPage.value - 1);
+    }
+  }
+
+  // Refresh users list
+  Future<void> refreshUsers() async {
+    await fetchUsersFromApi(page: 1);
+  }
+
+  // Create new user
+  Future<void> createUser() async {
+    try {
+      isLoading.value = true;
+      
+      final request = CreateUserRequest(
+        fullName: nameController.text.trim(),
+        phonenumber: completePhoneNumber.value,
+        role: selectedRole.value,
+        address: addressController.text.trim(),
+        password: passwordController.text,
+      );
+
+      await _userRepository.createUser(request);
+      
+      _showSuccess('تم إنشاء المستخدم بنجاح');
+      
+      // Clear form
+      clearForm();
+      
+      // Refresh list
+      await refreshUsers();
+    } catch (e) {
+      _showError('فشل إنشاء المستخدم: ${e.toString()}');
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  // Update user
+  Future<void> updateUser(String userId) async {
+    try {
+      isLoading.value = true;
+      
+      final request = UpdateUserRequest(
+        fullName: nameController.text.trim(),
+        phonenumber: completePhoneNumber.value,
+        role: selectedRole.value,
+        address: addressController.text.trim(),
+        password: passwordController.text.isEmpty ? null : passwordController.text,
+      );
+
+      await _userRepository.updateUser(userId, request);
+      
+      _showSuccess('تم تحديث المستخدم بنجاح');
+      
+      // Clear form
+      clearForm();
+      
+      // Refresh list
+      await refreshUsers();
+    } catch (e) {
+      _showError('فشل تحديث المستخدم: ${e.toString()}');
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  // Delete user
+  Future<void> deleteUser(String userId) async {
+    try {
+      isLoading.value = true;
+      
+      await _userRepository.deleteUser(userId);
+      
+      _showSuccess('تم حذف المستخدم بنجاح');
+      
+      // Refresh list
+      await refreshUsers();
+    } catch (e) {
+      _showError('فشل حذف المستخدم: ${e.toString()}');
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  // Load user data for editing
+  void loadUserForEdit(UsersModel user) {
+    nameController.text = user.name;
+    completePhoneNumber.value = user.phonenumber;
+    phoneController.text = user.phonenumber; // Display in field
+    addressController.text = user.address;
+    selectedRole.value = user.role;
+    // Password fields remain empty - only fill if changing password
+  }
+
+  // Clear form
+  void clearForm() {
+    nameController.clear();
+    phoneController.clear();
+    addressController.clear();
+    passwordController.clear();
+    passwordConfirmationController.clear();
+    completePhoneNumber.value = '';
+    selectedRole.value = 'citizen';
   }
 
   void fetchRolesData() async {
@@ -103,6 +262,29 @@ class UserManagementController extends GetxController {
         print("Picked file: ${pickedFileName.value}");
       }
     }
+  }
+
+  // Helper methods for showing messages
+  void _showSuccess(String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      backgroundColor: AppColors.success600,
+      textColor: AppColors.white,
+      fontSize: 16.0,
+    );
+  }
+
+  void _showError(String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      backgroundColor: AppColors.error500,
+      textColor: AppColors.white,
+      fontSize: 16.0,
+    );
   }
 
   final TextEditingController roleController = TextEditingController();

@@ -7,7 +7,6 @@ import '../../../../../core/constants/app_strings.dart';
 import '../../../../app/theme_controller.dart';
 import '../../../../common_widgets/common_text_view/auth_common_text.dart';
 import '../../../../common_widgets/input_field/common_date_picker.dart';
-import '../../../../common_widgets/input_field/common_email_field.dart';
 import '../../../../common_widgets/input_field/common_mobile_field.dart';
 import '../../../../common_widgets/input_field/common_text_field.dart';
 import '../../../../common_widgets/view_common_widget/common_dialog_box.dart';
@@ -132,13 +131,10 @@ class _EditPersonalInformationState extends State<EditPersonalInformation> {
                     Gap(20),
                     commonHeader(ProfileViewStrings.email),
                     Gap(10),
-                    CommonEmailField(
-                      labelText: AppCommonStrings.email,
-                      autofillHints: const [AutofillHints.email],
+                    CommonMobileField(
                       controller: controller.emailController,
                       textInputAction: TextInputAction.done,
                       hintText: AddInstructorStrings.enterEmail,
-                      validator: validateEmail,
                     ),
 
                     Gap(20),

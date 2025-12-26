@@ -16,17 +16,29 @@ import '../../../../common_widgets/widgets/common_divider.dart';
 import '../../../../common_widgets/widgets/text.dart';
 import '../../../../common_widgets/widgets/validations.dart';
 import '../controller/user_management_controller.dart';
+import '../model/users_model.dart';
 
-class AddUserView extends StatefulWidget {
-  const AddUserView({super.key});
+class EditUserView extends StatefulWidget {
+  final UsersModel user;
+  
+  const EditUserView({super.key, required this.user});
 
   @override
-  State<AddUserView> createState() => _AddUserViewState();
+  State<EditUserView> createState() => _EditUserViewState();
 }
 
-class _AddUserViewState extends State<AddUserView> {
-  UserManagementController controller = Get.put(UserManagementController());
+class _EditUserViewState extends State<EditUserView> {
+  late UserManagementController controller;
   final formKey = GlobalKey<FormState>();
+  
+  @override
+  void initState() {
+    super.initState();
+    controller = Get.find<UserManagementController>();
+    // Load user data for editing
+    controller.loadUserForEdit(widget.user);
+  }
+
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
@@ -53,7 +65,7 @@ class _AddUserViewState extends State<AddUserView> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CommonText.semiBold(
-                            UserManagementStrings.addUser,
+                            'تعديل المستخدم',
                             size: 18,
                           ),
                           commonCloseIcon(context),
@@ -135,19 +147,21 @@ class _AddUserViewState extends State<AddUserView> {
                           ),
 
                           Gap(25),
-                          // Password
-                          commonHeader(AppCommonStrings.password),
+                          // Password (Optional)
+                          CommonText.medium(
+                            'كلمة المرور (اختياري - اتركها فارغة إذا كنت لا تريد تغييرها)',
+                            size: 13,
+                            color: isDarkMode ? AppColors.bodyTextDarkColor : AppColors.bodyTextColor,
+                          ),
                           Gap(10),
                           CommonPasswordField(
-                            labelText: AppCommonStrings.password,
+                            labelText: 'كلمة المرور الجديدة',
                             controller: controller.passwordController,
                             textInputAction: TextInputAction.next,
-                            hintText: 'أدخل كلمة المرور',
+                            hintText: 'أدخل كلمة المرور الجديدة (اختياري)',
                             validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'كلمة المرور مطلوبة';
-                              }
-                              if (value.length < 8) {
+                              // Password is optional on update
+                              if (value != null && value.isNotEmpty && value.length < 8) {
                                 return 'كلمة المرور يجب أن تكون 8 أحرف على الأقل';
                               }
                               return null;
@@ -156,7 +170,7 @@ class _AddUserViewState extends State<AddUserView> {
                           ),
 
                           Gap(25),
-                          // Confirm Password
+                          // Confirm Password (Only if password entered)
                           commonHeader('تأكيد كلمة المرور'),
                           Gap(10),
                           CommonPasswordField(
@@ -165,11 +179,14 @@ class _AddUserViewState extends State<AddUserView> {
                             textInputAction: TextInputAction.done,
                             hintText: 'أدخل تأكيد كلمة المرور',
                             validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'تأكيد كلمة المرور مطلوب';
-                              }
-                              if (value != controller.passwordController.text) {
-                                return 'كلمة المرور غير متطابقة';
+                              // Only validate if password is entered
+                              if (controller.passwordController.text.isNotEmpty) {
+                                if (value == null || value.isEmpty) {
+                                  return 'تأكيد كلمة المرور مطلوب';
+                                }
+                                if (value != controller.passwordController.text) {
+                                  return 'كلمة المرور غير متطابقة';
+                                }
                               }
                               return null;
                             },
@@ -216,12 +233,12 @@ class _AddUserViewState extends State<AddUserView> {
 
                               formKey.currentState!.save();
 
-                              await controller.createUser();
+                              await controller.updateUser(widget.user.id);
                               if (!controller.isLoading.value) {
                                 Navigator.pop(context);
                               }
                             },
-                            label: UserManagementStrings.addUser,
+                            label: AppCommonStrings.btnUpdate,
                             textSize: 16,
                             textWeight: FontWeight.w500,
                           ),

@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:input_phone_filed/countries.dart';
 import 'package:input_phone_filed/country_picker_dialog.dart';
 import 'package:input_phone_filed/intl_phone_field.dart';
+import 'package:input_phone_filed/phone_number.dart';
 import '../../../core/constants/app_assets.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/themes/app_size.dart';
@@ -11,13 +13,23 @@ import '../widgets/image.dart';
 
 
 class CommonMobileField extends StatefulWidget {
-  // final FocusNode focusNode;
-  final String hintText;
+  final TextEditingController? controller;
+  final FocusNode? focusNode;
+  final String? hintText;
+  final TextInputAction? textInputAction;
+  final Function(PhoneNumber)? onChanged;
+  final String? initialCountryCode;
+  final String? languageCode;
 
   const CommonMobileField({
     super.key,
-    //required this.focusNode,
-    required this.hintText,
+    this.controller,
+    this.focusNode,
+    this.hintText,
+    this.textInputAction,
+    this.onChanged,
+    this.initialCountryCode,
+    this.languageCode,
   });
 
   @override
@@ -29,6 +41,8 @@ class _CommonMobileFieldState extends State<CommonMobileField> {
   Widget build(BuildContext context) {
     bool isDarkMode = Get.find<ThemeController>().isDarkMode;
     return IntlPhoneField(
+      controller: widget.controller,
+      focusNode: widget.focusNode,
       style: TextStyle(
         fontWeight: FontWeight.w600,
         fontSize: 14,
@@ -36,7 +50,6 @@ class _CommonMobileFieldState extends State<CommonMobileField> {
             ? AppColors.headingsLightColor
             : AppColors.headingsColor,
       ),
-      //focusNode: widget.focusNode,
       pickerDialogStyle: PickerDialogStyle(
         countryCodeStyle: TextStyle(
           color: isDarkMode?AppColors.white:AppColors.headingsColor,
@@ -50,7 +63,11 @@ class _CommonMobileFieldState extends State<CommonMobileField> {
 
       ),
 
-      textInputAction: TextInputAction.next,
+      textInputAction: widget.textInputAction ?? TextInputAction.next,
+      initialCountryCode: 'LB',
+      languageCode: widget.languageCode ?? "ar",
+      countries: countries.where((country) => country.code == 'LB').toList(), // Only Lebanon
+      showDropdownIcon: false, // Hide dropdown since only one country
       decoration: InputDecoration(
         counter: SizedBox(),
         focusedErrorBorder: OutlineInputBorder(
@@ -79,7 +96,7 @@ class _CommonMobileFieldState extends State<CommonMobileField> {
           color: Theme.of(context).colorScheme.error,
           fontWeight: FontWeight.w700,
         ),
-        hintText: widget.hintText,
+        hintText: widget.hintText ?? 'أدخل رقم هاتفك',
         hintStyle: TextStyle(
           color: Get.find<ThemeController>().isDarkMode
               ? AppColors.bodyTextDarkColor
@@ -88,8 +105,7 @@ class _CommonMobileFieldState extends State<CommonMobileField> {
           fontWeight: FontWeight.w400,
         ),
       ),
-      languageCode: "en",
-      onChanged: (phone) {
+      onChanged: widget.onChanged ?? (phone) {
         if (kDebugMode) {
           print(phone.completeNumber);
         }

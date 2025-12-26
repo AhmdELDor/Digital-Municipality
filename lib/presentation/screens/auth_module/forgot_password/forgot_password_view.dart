@@ -61,15 +61,15 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                 Gap(10),
                 authSubTitleHeader(ForgotPasswordStrings.forgotPasswordDes),
                 Gap(36),
-                authHeader(AppCommonStrings.email),
+                authHeader(SignInStrings.phoneNumber),
                 Gap(10),
-                CommonEmailField(
-                  labelText: AppCommonStrings.email,
-                  autofillHints: const [AutofillHints.email],
-                  controller: controller.emailController,
-                  focusNode: controller.emailFocus,
-                  textInputAction: TextInputAction.next,
-                  validator: validateEmail,
+                CommonMobileField(
+                  controller: controller.phoneController,
+                  focusNode: controller.phoneFocus,
+                  textInputAction: TextInputAction.done,
+                  onChanged: (phoneNumber) {
+                    controller.completePhoneNumber.value = phoneNumber.completeNumber;
+                  },
                 ),
 
                 Gap(35),

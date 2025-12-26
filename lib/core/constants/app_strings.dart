@@ -5,33 +5,34 @@ class AppStrings {
 }
 
 class AppCommonStrings extends AppStrings {
-  static const String btnNext = "Next";
-  static const String btnPrevious = "Previous";
-  static const String btnBack = "Back";
-  static const String btnDone = "Done";
-  static const String btnSave = "Save";
-  static const String btnUpdate = "Update";
-  static const String btnVerify = "Verify";
-  static const String btnGetStarted = "Get Started";
-  static const String btnSignIn = "Sign In";
-  static const String btnSignUp = "Sign Up";
-  static const String btnNo = "No";
-  static const String btnApply = "Apply";
-  static const String btnCancel = "Cancel";
-  static const String btnRemove = "remove";
-  static const String yesSignOut = "Yes Sign Out";
+  static const String btnNext = "التالي";
+  static const String btnPrevious = "السابق";
+  static const String btnBack = "رجوع";
+  static const String btnDone = "تم";
+  static const String btnSave = "حفظ";
+  static const String btnUpdate = "تحديث";
+  static const String btnVerify = "تحقق";
+  static const String btnGetStarted = "ابدأ الآن";
+  static const String btnSignIn = "تسجيل الدخول";
+  static const String btnSignUp = "إنشاء حساب";
+  static const String btnNo = "لا";
+  static const String btnApply = "تطبيق";
+  static const String btnCancel = "إلغاء";
+  static const String btnRemove = "إزالة";
+  static const String yesSignOut = "نعم، تسجيل الخروج";
   static const String areYouSureYouWantSignOut =
-      "Are you sure you want to sign out?";
-  static const String btnAdd = "Add";
-  static const String btnSkip = "Skip";
-  static const String btnContinue = "Continue";
-  static const String btnSendCode = "Send Code";
-  static const String btnBackToLogIn = "Back to Sign in";
+      "هل أنت متأكد من تسجيل الخروج؟";
+  static const String btnAdd = "إضافة";
+  static const String btnSkip = "تخطي";
+  static const String btnContinue = "متابعة";
+  static const String btnSendCode = "إرسال الرمز";
+  static const String btnBackToLogIn = "العودة لتسجيل الدخول";
 
-  static const String searchHint = "Search Food, Drink, Restaurant, etc.";
-  static const String viewAll = "View All";
-  static const email = "Email";
-  static const password = "Password";
+  static const String searchHint = "البحث...";
+  static const String viewAll = "عرض الكل";
+  static const email = "البريد الإلكتروني";
+  static const password = "كلمة المرور";
+  static const phoneNumber = "رقم الهاتف";
 }
 
 class PermissionStrings extends AppStrings {
@@ -65,54 +66,52 @@ class PermissionStrings extends AppStrings {
 
 class SignInStrings extends AppStrings {
   static const simplifyYourManagement =
-      "Simplify your\nmanagement with\nadmin portal";
+      "برنامج البلدية الرقمية";
   static const simplifyYourManagementDes =
-      "Hello! You're now in the Admin Portal. Take control and keep\neverything running smoothly.";
-  static const signInToYourAccount = "Sign in to Your Account";
+      "منصة كونترول للبرنامج البلدية الرقمية";
+  static const signInToYourAccount = "ادخل إلى المنصة عبر الملف الخاص بك";
   static const signInToYourAccountDes =
-      "Enter your credentials to Sign in successfully";
-  static const enterEmailId = "Enter email id";
-  static const enterPassword = "Enter password";
-  static const rememberMe = "Remember me";
-  static const forGotPassword = "Forgot password?";
-  static const or = "or";
-  static const loginWithGoogle = "Sign in with Google";
-  static const loginWithApple = "Sign in with Apple";
-  static const doNotHaveAnAccount = "Didn’t have account yet?";
+      "قم بإدخال رقم هاتفك وكلمة المرور للدخول";
+  static const phoneNumber = "رقم الهاتف";
+  static const enterPhoneNumber = "أدخل رقم هاتفك";
+  static const enterPassword = "أدخل كلمة المرور";
+  static const rememberMe = "تذكرني";
+  static const forGotPassword = "نسيت كلمة المرور؟";
+  static const doNotHaveAnAccount = "ليس لديك حساب بعد؟";
 }
 
 class ForgotPasswordStrings extends AppStrings {
-  static const forgotPasswordTitle = "Forgot Password?";
-  static const forgotPasswordDes = "Enter your email to reset your credentials";
-  static const sendCode = "Send Code";
+  static const forgotPasswordTitle = "نسيت كلمة المرور؟";
+  static const forgotPasswordDes = "أدخل رقم هاتفك لإعادة تعيين كلمة المرور";
+  static const sendCode = "إرسال الرمز";
 }
 
 class OtpVerificationStrings extends AppStrings {
-  static const otpVerifyTitle = "Verify Email";
+  static const otpVerifyTitle = "التحقق من الهاتف";
   static const otpVerifyDes =
-      "verify your email to continue to the admin portal ";
-  static const didNotReceiveCode = "Didn’t receive code?";
-  static const resend = "Resend";
-  static const String sendCodeReloadIn = "Send code reload in";
-  static const String verifyEmail = "Verify Email";
-  static const String otpSendSuccessfully = "Otp Send Successfully.. ";
+      "تحقق من رقم هاتفك للمتابعة إلى لوحة التحكم";
+  static const didNotReceiveCode = "لم تستلم الرمز؟";
+  static const resend = "إعادة الإرسال";
+  static const String sendCodeReloadIn = "إعادة إرسال الرمز في";
+  static const String verifyEmail = "تحقق من الهاتف";
+  static const String otpSendSuccessfully = "تم إرسال الرمز بنجاح";
 }
 
 class ResetPasswordStrings extends AppStrings {
-  static const resetYourPassword = "Reset Password";
+  static const resetYourPassword = "إعادة تعيين كلمة المرور";
   static const resetYourPasswordDes =
-      "Create a strong new password to continue to the portal";
-  static const newPassword = "New Password";
-  static const confirmPassword = "Confirm Password";
-  static const resetPassword = "Reset Password";
-  static const enterNewPassword = "Enter New password";
-  static const confirmNewPassword = "Confirm New Password";
+      "أنشئ كلمة مرور جديدة قوية للمتابعة إلى المنصة";
+  static const newPassword = "كلمة المرور الجديدة";
+  static const confirmPassword = "تأكيد كلمة المرور";
+  static const resetPassword = "إعادة تعيين كلمة المرور";
+  static const enterNewPassword = "أدخل كلمة المرور الجديدة";
+  static const confirmNewPassword = "تأكيد كلمة المرور الجديدة";
 }
 
 class ResetPasswordSuccessfullyStrings extends AppStrings {
-  static const passwordResetSuccessfully = "Password Reset Successfully!";
+  static const passwordResetSuccessfully = "تم إعادة تعيين كلمة المرور بنجاح!";
   static const passwordResetSuccessfullyDes =
-      "All set! your password has been reset successfully! Sign in \nto continue to the portal";
+      "تم إعداد كل شيء! تم إعادة تعيين كلمة المرور بنجاح! قم بتسجيل الدخول \nللمتابعة إلى المنصة";
 }
 
 

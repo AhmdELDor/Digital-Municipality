@@ -1,6 +1,7 @@
 import 'package:education_admin_portal/presentation/screens/quiz_module/quiz_main_view/model/quiz_model.dart';
 import 'package:education_admin_portal/presentation/screens/quiz_module/quiz_main_view/quiz_view_imports.dart';
 import 'package:education_admin_portal/presentation/screens/test_module/main_test_view/model/test_model.dart';
+import 'package:education_admin_portal/presentation/screens/user_management_module/user_management_view/user_management_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../screens/add_course_module/add_course_view_imports.dart';
@@ -13,7 +14,6 @@ import '../screens/auth_module/otp_verification_code/otp_verification_imports.da
 import '../screens/auth_module/reset_password/reset_password_view_imports.dart';
 import '../screens/auth_module/reset_password_successfully/reset_password_successfully_imports.dart';
 import '../screens/auth_module/sign_in/sign_in_imports.dart';
-import '../screens/certificate_management_module/certificate_management_view/certificate_management_view_imports.dart';
 import '../screens/class_management_module/add_class_view/add_class_view_imports.dart';
 import '../screens/class_management_module/class_management_view/class_management_view_imports.dart';
 import '../screens/class_management_module/today_class_view/today_class_view_imports.dart';
@@ -25,9 +25,6 @@ import '../screens/dashboard_module/dashboard/model/course_model.dart';
 import '../screens/dashboard_module/notes/notes_list_view_imports.dart';
 import '../screens/dashboard_module/notification/notification_view_imports.dart';
 import '../screens/finance_management_module/finance_management_view/finance_management_imports.dart';
-import '../screens/finance_management_module/finance_management_view/widgets/add_instructor_pay_out.dart';
-import '../screens/instructor_management_module/instructor_management_detail_view/instructor_management_detail_imports.dart';
-import '../screens/instructor_management_module/instructor_management_view/instructor_management_view_imports.dart';
 import '../screens/profile_module/profile_view/profile_view_imports.dart';
 import '../screens/quiz_module/add_quiz/add_quiz_imports.dart';
 import '../screens/quiz_module/leader_board/leader_board_imports.dart';
@@ -35,11 +32,7 @@ import '../screens/quiz_module/view_quiz/view_quiz_imports.dart';
 import '../screens/reports_analysis_module/reports_analysis_view/reports_analysis_imports.dart';
 import '../screens/setting_module/setting_view_module/setting_view_imports.dart';
 import '../screens/side_drawer_module/main_dashboard/main_dashboard_imports.dart';
-import '../screens/student_management_module/student_management_detail/student_management_detail_imports.dart';
-import '../screens/student_management_module/student_management_view/student_management_imports.dart';
 import '../screens/test_module/main_test_view/main_test_view_imports.dart';
-import '../screens/university_management_module/university_management_detail_view/university_management_detail_imports.dart';
-import '../screens/university_management_module/university_management_view/university_management_imports.dart';
 import '../screens/user_management_module/user_management_view/user_management_view_imports.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -49,6 +42,10 @@ class AppRoute {
     navigatorKey: _rootNavigatorKey,
     initialLocation: AppRouteName.signInView,
     routes: [
+      GoRoute(
+        path: '/',
+        redirect: (context, state) => AppRouteName.dashboardView,
+      ),
       GoRoute(
         path: AppRouteName.signInView,
         pageBuilder: (context, state) => NoTransitionPage(
@@ -160,31 +157,6 @@ class AppRoute {
             ],
           ),
           GoRoute(
-            path: AppRouteName.instructorManagementView,
-            pageBuilder: (context, state) =>
-                NoTransitionPage(child: InstructorManagementView()),
-            routes: [
-              GoRoute(
-                path: AppRouteName.instructorManagementDetailView,
-                pageBuilder: (context, state) =>
-                    NoTransitionPage(child: InstructorManagementDetailView()),
-              ),
-            ],
-          ),
-          GoRoute(
-            path: AppRouteName.universityManagementView,
-            pageBuilder: (context, state) =>
-                NoTransitionPage(child: UniversityManagementView()),
-            routes: [
-              GoRoute(
-                path: AppRouteName.universityManagementDetailView,
-                pageBuilder: (context, state) =>
-                    NoTransitionPage(child: UniversityManagementDetailView()),
-              ),
-            ],
-          ),
-
-          GoRoute(
             path: AppRouteName.courseCategoryView,
             pageBuilder: (context, state) =>
                 NoTransitionPage(child: CourseCategoryView()),
@@ -271,31 +243,7 @@ class AppRoute {
               // ),
             ],
           ),
-          GoRoute(
-            path: AppRouteName.studentManagementView,
-            pageBuilder: (context, state) =>
-                NoTransitionPage(child: StudentManagementView()),
-            routes: [
-              GoRoute(
-                path: AppRouteName.studentManagementDetailView,
-                pageBuilder: (context, state) =>
-                    NoTransitionPage(child: StudentManagementDetailView()),
-              ),
-            ],
-          ),
-          GoRoute(
-            path: AppRouteName.financeManagementView,
-            pageBuilder: (context, state) =>
-                NoTransitionPage(child: FinanceManagementView()),
-            routes: [
-              GoRoute(
-                path: AppRouteName.addInstructorPayOut,
-                pageBuilder: (context, state) =>
-                    NoTransitionPage(child: AddInstructorPayOut()),
-              ),
-            ],
-          ),
-          GoRoute(
+         GoRoute(
             path: AppRouteName.reportsAnalysisView,
             pageBuilder: (context, state) =>
                 NoTransitionPage(child: ReportsAnalysisView()),
@@ -306,11 +254,6 @@ class AppRoute {
               //       NoTransitionPage(child: AddInstructorPayOut()),
               // ),
             ],
-          ),
-          GoRoute(
-            path: AppRouteName.certificateManagementView,
-            pageBuilder: (context, state) =>
-                NoTransitionPage(child: CertificateManagementView()),
           ),
           GoRoute(
             path: AppRouteName.userManagementView,

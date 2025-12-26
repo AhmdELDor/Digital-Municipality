@@ -188,8 +188,8 @@ abstract class AppTheme {
     );
   }
 
-  static BottomAppBarTheme bottomAppBarTheme(ColorScheme colorScheme) {
-    return BottomAppBarTheme(color: colorScheme.onSurface, elevation: 8);
+  static BottomAppBarThemeData bottomAppBarTheme(ColorScheme colorScheme) {
+    return BottomAppBarThemeData(color: colorScheme.onSurface, elevation: 8);
   }
   static BottomNavigationBarThemeData bottomNavigationBarTheme(
     ColorScheme colorScheme,

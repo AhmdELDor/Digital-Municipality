@@ -66,16 +66,6 @@ class _ContactUsViewState extends State<ContactUsView> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(72),
-                          child: commonCacheImage(
-                            data.image,
-                            ImagePlaceHolder.imagePlaceHolderLight,
-                            height: 72,
-                            width: 72,
-                          ),
-                        ),
-                        Gap(15),
                         Expanded(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -84,7 +74,7 @@ class _ContactUsViewState extends State<ContactUsView> {
                               CommonText.medium(data.name, size: 16),
                               Gap(3),
                               CommonText.regular(
-                                data.email,
+                                data.name,
                                 size: 16,
                                 color: isDarkMode
                                     ? AppColors.bodyTextDarkColor
@@ -94,7 +84,7 @@ class _ContactUsViewState extends State<ContactUsView> {
                               ),
                               Gap(3),
                               CommonText.regular(
-                                data.mobileNo,
+                                data.phonenumber,
                                 size: 16,
                                 color: AppColors.greyTextColor,
                                 maxLines: 1,
@@ -179,7 +169,7 @@ class _ContactUsViewState extends State<ContactUsView> {
                       vertical: 15,
                     ),
                     child: CommonText.regular(
-                      data.description,
+                      data.address,
                       size: 16,
                       color: isDarkMode
                           ? AppColors.bodyTextDarkColor

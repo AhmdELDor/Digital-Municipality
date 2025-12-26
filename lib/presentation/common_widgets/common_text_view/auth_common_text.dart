@@ -115,7 +115,7 @@ Widget dividerWithText(){
       ),
       Gap(5),
       CommonText.medium(
-        SignInStrings.or,
+        SignInStrings.rememberMe,
         size: 17,
         height: 1.0,
         letterSpacing: 0.0,

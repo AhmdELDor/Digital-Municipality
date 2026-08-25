@@ -1,44 +1,40 @@
 import 'package:dio/dio.dart';
-import 'package:get/get.dart' as getx;
-import '../config/api_config.dart';
-import 'auth_storage_service.dart';
+import '../constants/api_constants.dart';
+import 'storage_service.dart';
 
 class ApiService {
-  static final ApiService _instance = ApiService._internal();
-  late Dio dio;
+  static ApiService? _instance;
+  late Dio _dio;
+  final StorageService _storageService;
 
-  factory ApiService() {
-    return _instance;
-  }
-
-  ApiService._internal() {
-    dio = Dio(
+  ApiService._(this._storageService) {
+    _dio = Dio(
       BaseOptions(
-        baseUrl: ApiConfig.baseUrl,
-        connectTimeout: ApiConfig.connectTimeout,
-        receiveTimeout: ApiConfig.receiveTimeout,
-        sendTimeout: ApiConfig.sendTimeout,
-        headers: ApiConfig.defaultHeaders,
+        baseUrl: ApiConstants.baseUrl,
+        connectTimeout: ApiConstants.connectTimeout,
+        receiveTimeout: ApiConstants.receiveTimeout,
+        headers: ApiConstants.headers,
       ),
     );
 
-    // Add interceptors
-    dio.interceptors.add(
+    _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
           // Add auth token to headers if available
-          final token = await AuthStorageService().getToken();
-          if (token != null) {
+          final token = _storageService.getAuthToken();
+          if (token != null && token.isNotEmpty) {
             options.headers['Authorization'] = 'Bearer $token';
           }
           return handler.next(options);
         },
-        onError: (DioException error, handler) async {
-          // Handle 401 Unauthorized - token expired
+        onResponse: (response, handler) {
+          return handler.next(response);
+        },
+        onError: (error, handler) async {
+          // Handle 401 Unauthorized - Token expired
           if (error.response?.statusCode == 401) {
-            await AuthStorageService().clearAuth();
-            // Navigate to sign-in page
-            getx.Get.offAllNamed('/sign-in');
+            await _storageService.clearSession();
+            // Navigate to login screen (will be handled by provider)
           }
           return handler.next(error);
         },
@@ -46,10 +42,26 @@ class ApiService {
     );
   }
 
+  static Future<ApiService> getInstance() async {
+    if (_instance == null) {
+      final storage = await StorageService.getInstance();
+      _instance = ApiService._(storage);
+    }
+    return _instance!;
+  }
+
   // GET request
-  Future<Response> get(String path, {Map<String, dynamic>? queryParameters}) async {
+  Future<Response> get(
+    String endpoint, {
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
     try {
-      final response = await dio.get(path, queryParameters: queryParameters);
+      final response = await _dio.get(
+        endpoint,
+        queryParameters: queryParameters,
+        options: options,
+      );
       return response;
     } on DioException catch (e) {
       throw _handleError(e);
@@ -57,9 +69,19 @@ class ApiService {
   }
 
   // POST request
-  Future<Response> post(String path, {dynamic data}) async {
+  Future<Response> post(
+    String endpoint, {
+    dynamic data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
     try {
-      final response = await dio.post(path, data: data);
+      final response = await _dio.post(
+        endpoint,
+        data: data,
+        queryParameters: queryParameters,
+        options: options,
+      );
       return response;
     } on DioException catch (e) {
       throw _handleError(e);
@@ -67,9 +89,39 @@ class ApiService {
   }
 
   // PUT request
-  Future<Response> put(String path, {dynamic data}) async {
+  Future<Response> put(
+    String endpoint, {
+    dynamic data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
     try {
-      final response = await dio.put(path, data: data);
+      final response = await _dio.put(
+        endpoint,
+        data: data,
+        queryParameters: queryParameters,
+        options: options,
+      );
+      return response;
+    } on DioException catch (e) {
+      throw _handleError(e);
+    }
+  }
+
+  // PATCH request
+  Future<Response> patch(
+    String endpoint, {
+    dynamic data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
+    try {
+      final response = await _dio.patch(
+        endpoint,
+        data: data,
+        queryParameters: queryParameters,
+        options: options,
+      );
       return response;
     } on DioException catch (e) {
       throw _handleError(e);
@@ -77,9 +129,62 @@ class ApiService {
   }
 
   // DELETE request
-  Future<Response> delete(String path, {dynamic data}) async {
+  Future<Response> delete(
+    String endpoint, {
+    dynamic data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
     try {
-      final response = await dio.delete(path, data: data);
+      final response = await _dio.delete(
+        endpoint,
+        data: data,
+        queryParameters: queryParameters,
+        options: options,
+      );
+      return response;
+    } on DioException catch (e) {
+      throw _handleError(e);
+    }
+  }
+
+  // Upload file
+  Future<Response> uploadFile(
+    String endpoint,
+    String filePath, {
+    String fileKey = 'file',
+    Map<String, dynamic>? additionalData,
+    ProgressCallback? onSendProgress,
+  }) async {
+    try {
+      final formData = FormData.fromMap({
+        fileKey: await MultipartFile.fromFile(filePath),
+        if (additionalData != null) ...additionalData,
+      });
+
+      final response = await _dio.post(
+        endpoint,
+        data: formData,
+        onSendProgress: onSendProgress,
+      );
+      return response;
+    } on DioException catch (e) {
+      throw _handleError(e);
+    }
+  }
+
+  // Upload with FormData
+  Future<Response> upload(
+    String endpoint,
+    FormData formData, {
+    ProgressCallback? onSendProgress,
+  }) async {
+    try {
+      final response = await _dio.post(
+        endpoint,
+        data: formData,
+        onSendProgress: onSendProgress,
+      );
       return response;
     } on DioException catch (e) {
       throw _handleError(e);
@@ -88,63 +193,73 @@ class ApiService {
 
   // Error handling
   String _handleError(DioException error) {
-    String errorMessage = '';
-    
+    String errorMessage = 'حدث خطأ غير متوقع';
+
     switch (error.type) {
       case DioExceptionType.connectionTimeout:
+        errorMessage = 'انتهت مهلة الاتصال بالخادم';
+        break;
       case DioExceptionType.sendTimeout:
+        errorMessage = 'انتهت مهلة إرسال البيانات';
+        break;
       case DioExceptionType.receiveTimeout:
-        errorMessage = 'انتهت مهلة الاتصال. يرجى المحاولة مرة أخرى';
+        errorMessage = 'انتهت مهلة استقبال البيانات';
         break;
       case DioExceptionType.badResponse:
-        errorMessage = _handleResponseError(error.response);
+        final statusCode = error.response?.statusCode;
+        final responseData = error.response?.data;
+
+        if (responseData is Map && responseData.containsKey('message')) {
+          errorMessage = responseData['message'];
+        } else {
+          switch (statusCode) {
+            case 400:
+              errorMessage = 'طلب غير صحيح';
+              break;
+            case 401:
+              errorMessage = 'غير مصرح لك بالوصول';
+              break;
+            case 403:
+              errorMessage = 'ممنوع الوصول';
+              break;
+            case 404:
+              errorMessage = 'المورد غير موجود';
+              break;
+            case 422:
+              errorMessage = 'بيانات غير صالحة';
+              break;
+            case 500:
+              errorMessage = 'خطأ في الخادم';
+              break;
+            default:
+              errorMessage = 'حدث خطأ في الخادم';
+          }
+        }
         break;
       case DioExceptionType.cancel:
         errorMessage = 'تم إلغاء الطلب';
         break;
       case DioExceptionType.connectionError:
-        errorMessage = 'خطأ في الاتصال. يرجى التحقق من الإنترنت';
+        errorMessage = 'فشل الاتصال بالإنترنت';
         break;
-      default:
-        errorMessage = 'حدث خطأ غير متوقع';
+      case DioExceptionType.badCertificate:
+        errorMessage = 'خطأ في شهادة الأمان';
+        break;
+      case DioExceptionType.unknown:
+        errorMessage = 'خطأ غير معروف';
+        break;
     }
-    
+
     return errorMessage;
   }
 
-  String _handleResponseError(Response? response) {
-    if (response == null) {
-      return 'لا يوجد رد من الخادم';
-    }
-
-    switch (response.statusCode) {
-      case 400:
-        return response.data['message'] ?? 'طلب غير صالح';
-      case 401:
-        return response.data['message'] ?? 'بيانات الاعتماد غير صالحة';
-      case 403:
-        return response.data['message'] ?? 'ممنوع الوصول';
-      case 404:
-        return 'المورد غير موجود';
-      case 422:
-        return _handleValidationError(response.data);
-      case 500:
-        return 'خطأ في الخادم. يرجى المحاولة لاحقاً';
-      default:
-        return response.data['message'] ?? 'حدث خطأ غير متوقع';
-    }
+  // Update auth token
+  void updateAuthToken(String token) {
+    _storageService.saveAuthToken(token);
   }
 
-  String _handleValidationError(dynamic data) {
-    if (data is Map && data.containsKey('errors')) {
-      final errors = data['errors'] as Map;
-      if (errors.isNotEmpty) {
-        final firstError = errors.values.first;
-        if (firstError is List && firstError.isNotEmpty) {
-          return firstError[0].toString();
-        }
-      }
-    }
-    return data['message'] ?? 'خطأ في التحقق من البيانات';
+  // Clear auth token
+  void clearAuthToken() {
+    _storageService.remove('auth_token');
   }
 }
